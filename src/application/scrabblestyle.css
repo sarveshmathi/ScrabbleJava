@@ -7,7 +7,6 @@
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 #playingpage{
-    -fx-background-image:url("scrabbleBoard.png");
     -fx-background-repeat: stretch;   
     -fx-background-size: 500 800;
     -fx-background-position: center center;

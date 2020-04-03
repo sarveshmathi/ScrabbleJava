@@ -3,6 +3,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
 public class Actualgame {
+	private BoardTile[] tiles;
 	private final Pane gameroot = new Pane();
 	private Board board = new Board();
 	private int tile_in_row = 15;
@@ -25,7 +26,8 @@ public class Actualgame {
 		rect.setId("Tiles");
 		lp.getOnDragDetected();
 		// Text text = new Text("hi");
-		gameroot.getChildren().addAll(lp);
+		gameroot.getChildren().addAll(lp, board);
+
 		// }
 		// }
 	}
