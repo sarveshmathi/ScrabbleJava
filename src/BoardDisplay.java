@@ -13,18 +13,26 @@ public class BoardDisplay extends Application {
 	public static final int TileSize = 100;
 	public static final int Width = 15;
 	public static final int Height = 15;// because we have 15 *15
-
+	
+	//Override the start() method.
 	@Override
 	public void start(Stage primaryStage) {
-		Button startbutton = new Button("Start");
-		startbutton.setOnAction(e -> {
+		Button startButton = new Button("Start");
+		
+		//Handle action events for "Start" button.
+		startButton.setOnAction(e -> {
 			Actualgame game = new Actualgame();
 			primaryStage.getScene().setRoot(game.getRootPane());
 		});
-		Button instructionbutton = new Button("How to Play?");
-		Button exitbutton = new Button("Exit");
-		exitbutton.setOnAction(e -> System.exit(0));
-		instructionbutton.setOnAction(new EventHandler<ActionEvent>() {
+		
+		Button instructionButton = new Button("How to Play?");
+		Button exitButton = new Button("Exit");
+		
+		//Handle action events for "Exit" button.
+		exitButton.setOnAction(e -> System.exit(0));
+		
+		//Handle action events for "How to Play?" button.
+		instructionButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				final Hyperlink hyperlink = new Hyperlink("https://scrabble.hasbro.com/en-us/rules");
@@ -34,18 +42,19 @@ public class BoardDisplay extends Application {
 			}
 		});
 		;
+		
 		VBox root = new VBox();
-		root.getChildren().add(startbutton);
-		root.getChildren().add(instructionbutton);
-		root.getChildren().add(exitbutton);
+		
+		//Add Start button, How to Play button and Exit button to the scene graph.
+		root.getChildren().addAll(startButton, instructionButton, exitButton);
 		root.setAlignment(Pos.CENTER);
-		startbutton.setAlignment(Pos.CENTER);
+		startButton.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(root, 500, 300);
 		root.setId("mainpage");
 		scene.getStylesheets().add("scrabblestyle.css");
 		primaryStage.setTitle("SCRABBLE");
-		primaryStage.show();
 		primaryStage.setScene(scene);
+		primaryStage.show();
 
 	}
 

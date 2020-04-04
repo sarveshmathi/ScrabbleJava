@@ -28,7 +28,6 @@ public class TileCreator {
 
 	}
 
-	@Override
 	public void start(Stage primaryStage) throws Exception {
 		// TODO Auto-generated method stub
 		TileCreator tc = new TileCreator();
