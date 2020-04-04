@@ -5,9 +5,24 @@ import javafx.scene.layout.*;
 import javafx.scene.control.*;
 import javafx.geometry.*;
 
+/**
+ * 
+ *This class deals with alert events such as when the user tries to
+ *close the program.
+ *@author Team 51
+ * 
+ */
+
 public class AlertBox {
 
 	private static boolean response;
+	
+	/**
+	 * The method that deals with alert events.
+	 * @param title - the title of the alert window.
+	 * @param message - the message displayed in the window.
+	 * @return response - the user's response: true or false
+	 */
 
 	public static boolean alert(String title, String message) {
 		Stage alertWindow = new Stage();
@@ -35,8 +50,8 @@ public class AlertBox {
 			alertWindow.close();
 		});
 
-		VBox layoutVBox = new VBox(20);
-		HBox layoutHBox = new HBox(20);
+		VBox layoutVBox = new VBox(20); //the final layout
+		HBox layoutHBox = new HBox(20); //the layout for Yes and No buttons
 		
 		layoutHBox.getChildren().addAll(buttonYes, buttonNo);
 		layoutHBox.setAlignment(Pos.CENTER);
