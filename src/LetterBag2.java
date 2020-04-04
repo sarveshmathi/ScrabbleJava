@@ -83,14 +83,24 @@ public class LetterBag2 {
 	 * @param noOfLetters
 	 * @return
 	 */
-	ArrayList<LetterTilePic> getLetters(int noOfLetters) {
-		ArrayList<LetterTilePic> output = new ArrayList<>();
+	public ArrayList<LetterTilePic> getLetters(int noOfLetters) {
+		ArrayList<LetterTilePic> output = new ArrayList<LetterTilePic>();
 		for (int i = 0; i < noOfLetters && lettersGivenCounter < 100; i++) {
 			output.add(letterTiles.get(lettersGivenCounter));
 			lettersGivenCounter++;
 		}
 		return output;
 	}
+
+	// public LetterTilePic deal() {
+
+	// LetterTilePic upnext = letter[0];// begins dealing the 1st card
+	// for (int i = 1; i < cardStorer.length; i++) {
+	// cardStorer[i - 1] = cardStorer[i];// moves every character up one place in
+	// the array
+	// }
+	// return upnext;
+	// }
 
 //	public static void main(String[] args) {
 //		LetterBag lb = new LetterBag();
