@@ -1,13 +1,13 @@
 
 import java.util.ArrayList;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.geometry.*;;
+import javafx.scene.shape.Rectangle;;
 
 public class Actualgame {
 	private BoardTile[] tiles;
@@ -57,6 +57,9 @@ public class Actualgame {
 
 	public Pane getRootPane() {
 		return gameroot;
+	}
+
+	public void addtorack() {
 	}
 
 }
