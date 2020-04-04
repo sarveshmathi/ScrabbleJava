@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;;
 
 public class Actualgame {
 	private BoardTile[] tiles;
-	private final BorderPane gameroot = new BorderPane();
+	private final BorderPane gameRoot = new BorderPane();
 	private Board board = new Board();
 	private int tile_in_row = 15;// board spaces per row
 	private int tile_in_col = 15;// board spaces per col
@@ -23,12 +23,12 @@ public class Actualgame {
 	private ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();;
 
 	/**
-	 * This gets the actual game screen when you click start running
-	 * 
+	 * This gets the actual game screen when you click start running.
+	 * @author Team 51
 	 */
 	public Actualgame() {
-		gameroot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
-		gameroot.setId("playingpage");
+		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
+		gameRoot.setId("playingpage");
 		LetterBag2 lb = new LetterBag2();
 		LetterTilePic lp;
 		// creates the user letter bar
@@ -49,14 +49,18 @@ public class Actualgame {
 		// lp.getOnDragDetected();// doesn't work but i meant for this to make the tiles
 		// draggable for user
 		bottomPane.getChildren().addAll(bottomBar, userBar);
-		gameroot.setCenter(board);// put the board in the middle
-		gameroot.setBottom(bottomPane);// put the letter rack in the bottom of screen
+		gameRoot.setCenter(board);// put the board in the middle
+		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
 		// gameroot.getChildren().addAll(board, bottomPane);// this gets these elements
 		// onto the screen(pane)
 	}
 
+	/**
+	 * This method gets the BorderPane layout- gameRoot 
+	 * @return
+	 */
 	public Pane getRootPane() {
-		return gameroot;
+		return gameRoot;
 	}
 
 	public void addtorack() {

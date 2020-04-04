@@ -9,6 +9,13 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * This class displays the initial menu and reacts to 
+ * user's button press.
+ * @author Team 51
+ *
+ */
+
 public class BoardDisplay extends Application {
 	public static final int TileSize = 100;
 	public static final int Width = 15;
