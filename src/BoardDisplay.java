@@ -74,6 +74,10 @@ public class BoardDisplay extends Application {
 		primaryStage.show();
 
 	}
+	
+	/**
+	 * This method deals with the event when the user closes the program.
+	 */
 
 	private void closeProgram() {
 		boolean userResponse;
@@ -83,6 +87,10 @@ public class BoardDisplay extends Application {
 		}
 	}
 
+	/**
+	 * This method launches the JavaFX program.
+	 * 
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}

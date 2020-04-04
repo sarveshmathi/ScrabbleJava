@@ -7,7 +7,7 @@ import javafx.scene.text.Text;
 /**
  * Represents one tile in the 15 x 15 board
  * 
- * @author sarvesh
+ * @author Team 51
  *
  */
 public class BoardTile extends Parent {
@@ -15,6 +15,11 @@ public class BoardTile extends Parent {
 	private String tileType; // none(N), double letter (DL), double word (DW), triple letter (TL), triple
 								// word (TW)
 
+	/**
+	 * This constructs objects of the type BoardTile
+	 * @param tileNumber - the positional number of tile
+	 * @param tileType - the property of tile
+	 */
 	public BoardTile(int tileNumber, String tileType) {
 		this.tileNumber = tileNumber;
 		this.tileType = tileType;
@@ -28,15 +33,27 @@ public class BoardTile extends Parent {
 			getChildren().add(new StackPane(border));
 		}
 	}
-
+	
+	/**
+	 * This method gets the tile number.
+	 * @return tileNumber - the positional number of tile
+	 */
 	public int getTileNumber() {
 		return tileNumber;
 	}
-
+	
+	/**
+	 * This method gets the tile type.
+	 * @return - the property of tile
+	 */
 	public String getTileType() {
 		return tileType;
 	}
-
+	
+	/**
+	 * This method sets the property of tile.
+	 * @param tileType - the property of tile
+	 */
 	public void setTileType(String tileType) {
 		this.tileType = tileType;
 	}

@@ -57,7 +57,7 @@ public class Actualgame {
 
 	/**
 	 * This method gets the BorderPane layout- gameRoot 
-	 * @return
+	 * @return gameRoot - the layout
 	 */
 	public Pane getRootPane() {
 		return gameRoot;

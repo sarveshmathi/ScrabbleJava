@@ -5,7 +5,7 @@ import org.jsoup.select.Elements;
 
 /**
  * This classes uses JSoup library to parse HTML from the official online Scrabble dictionary (https://scrabble.merriam.com)
- * @author sarvesh
+ * @author Team 51
  *
  */
 
@@ -14,7 +14,7 @@ public class OnlineDictionary {
 	/**
 	 * Returns true if input word is allowed according to official online Scrabble dictionary (https://scrabble.merriam.com). 
 	 * Uses JSoup library to parse HTML. Requires Internet connection.
-	 * @param word
+	 * @param word - the word
 	 * @return
 	 */
 	

@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 /**
  * Represents a 15 x 15 board
  * 
- * @author sarvesh
+ * @author Team 51
  *
  */
 public class Board extends Parent {
@@ -60,6 +60,9 @@ public class Board extends Parent {
 		}
 	}
 
+	/**
+	 * This method prints board on the console.
+	 */
 	public void printBoard() {
 		for (int i = 0; i < tiles.length; i++) {
 			BoardTile bt = tiles[i];
