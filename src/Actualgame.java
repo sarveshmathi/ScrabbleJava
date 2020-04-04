@@ -1,10 +1,14 @@
 
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Actualgame {
 	private BoardTile[] tiles;
-	private final Pane gameroot = new Pane();
+	private final BorderPane gameroot = new BorderPane();
 	private Board board = new Board();
 	private int tile_in_row = 15;// board spaces per row
 	private int tile_in_col = 15;// board spaces per col
@@ -25,8 +29,17 @@ public class Actualgame {
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		lp.getOnDragDetected();// doesn't work but i meant for this to make the tiles draggable for user
-		gameroot.getChildren().addAll(lp, board);// this gets these elements onto the screen(pane)
 
+		// creates the user letter bar
+		StackPane bottomPane = new StackPane();
+		Rectangle bottomBar = new Rectangle(420, 60);
+		bottomBar.setFill(Color.BLACK);
+		HBox userBar = new HBox(2);
+		bottomPane.getChildren().addAll(bottomBar, userBar, lp);
+		gameroot.setCenter(board);
+		gameroot.setBottom(bottomPane);
+		// gameroot.getChildren().addAll(board, bottomPane);// this gets these elements
+		// onto the screen(pane)
 	}
 
 	public Pane getRootPane() {
