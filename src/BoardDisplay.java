@@ -13,25 +13,35 @@ public class BoardDisplay extends Application {
 	public static final int TileSize = 100;
 	public static final int Width = 15;
 	public static final int Height = 15;// because we have 15 *15
-	
-	//Override the start() method.
+	Stage primaryStage;
+
+	// Override the start() method.
 	@Override
 	public void start(Stage primaryStage) {
+		this.primaryStage = primaryStage;
 		Button startButton = new Button("Start");
-		
-		//Handle action events for "Start" button.
+
+		// Handle action events for "Start" button.
 		startButton.setOnAction(e -> {
 			Actualgame game = new Actualgame();
 			primaryStage.getScene().setRoot(game.getRootPane());
 		});
-		
+
 		Button instructionButton = new Button("How to Play?");
 		Button exitButton = new Button("Exit");
-		
-		//Handle action events for "Exit" button.
-		exitButton.setOnAction(e -> System.exit(0));
-		
-		//Handle action events for "How to Play?" button.
+
+		// Handle action events for "Exit" button.
+		exitButton.setOnAction(e -> {
+			this.closeProgram();
+		});
+
+		primaryStage.setOnCloseRequest(e -> {
+			// Consumes the system close event
+			e.consume();
+			this.closeProgram();
+		});
+
+		// Handle action events for "How to Play?" button.
 		instructionButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -42,20 +52,28 @@ public class BoardDisplay extends Application {
 			}
 		});
 		;
-		
+
 		VBox root = new VBox();
-		
-		//Add Start button, How to Play button and Exit button to the scene graph.
+
+		// Add Start button, How to Play button and Exit button to the scene graph.
 		root.getChildren().addAll(startButton, instructionButton, exitButton);
 		root.setAlignment(Pos.CENTER);
 		startButton.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(root, 500, 300);
+		Scene scene = new Scene(root, 600, 600);
 		root.setId("mainpage");
 		scene.getStylesheets().add("scrabblestyle.css");
 		primaryStage.setTitle("SCRABBLE");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
+	}
+
+	private void closeProgram() {
+		boolean userResponse;
+		userResponse = AlertBox.alert("Alert", "Are you sure you want to close the program?");
+		if (userResponse) {
+			primaryStage.close();
+		}
 	}
 
 	public static void main(String[] args) {
