@@ -12,7 +12,7 @@ import org.jsoup.select.Elements;
 public class OnlineDictionary {
 	
 	/**
-	 * Returns true if input word is allowed according to official online Scrabble dictionary (https://scrabble.merriam.com). 
+	 * This method returns true if input word is allowed according to official online Scrabble dictionary (https://scrabble.merriam.com). 
 	 * Uses JSoup library to parse HTML. Requires Internet connection.
 	 * @param word - the word
 	 * @return

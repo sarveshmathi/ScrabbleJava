@@ -40,7 +40,7 @@ public class Board extends Parent {
 		ArrayList<Integer> tripleLetterTiles = new ArrayList<>(
 				Arrays.asList(20, 24, 76, 80, 84, 88, 136, 140, 144, 148, 200, 204));
 		ArrayList<Integer> doubleWordTiles = new ArrayList<>(
-				Arrays.asList(16, 28, 32, 42, 48, 56, 64, 70, 154, 160, 168, 176, 182, 208));
+				Arrays.asList(16, 28, 32, 42, 48, 56, 64, 70, 154, 160, 168, 176, 182,192,196,208));
 		ArrayList<Integer> doubleLetterTiles = new ArrayList<>(Arrays.asList(3, 11, 36, 38, 45, 52, 59, 92, 96, 98, 102,
 				108, 116, 122, 126, 128, 132, 165, 172, 179, 186, 188, 213, 221));
 		for (int i = 0; i < 225; i++) {
