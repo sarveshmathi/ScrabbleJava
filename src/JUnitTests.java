@@ -19,8 +19,13 @@ class JUnitTests {
 		assertEquals(7, lb.getLettersGivenCounter()); //check if letterCounter is working correctly
 	}
 	
+	/**
+	 * This test will check if the given words are in the official online dictionary. 
+	 * Will require an Internet connection and a few seconds to complete.
+	 * Make sure you have the jsoup library in your project
+	 */
 	@Test
-	public void testOnlineDictionaryClass() { //this test will take a few seconds to complete
+	public void testOnlineDictionaryClass() { 
 		OnlineDictionary od = new OnlineDictionary();
 		assertEquals(true, od.checkWord("hello")); //"hello" is an actual word in the dictionary
 		assertEquals(false, od.checkWord("sadhkajshdkasjh")); //"sadhkajshdkasjh" is not a word
