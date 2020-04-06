@@ -14,11 +14,13 @@ public class BoardTile extends Parent {
 	private int tileNumber; // from 0 to 224
 	private String tileType; // none(N), double letter (DL), double word (DW), triple letter (TL), triple
 								// word (TW)
+	private LetterTilePic holds;// this is the letter piece it will hold
 
 	/**
 	 * This constructs objects of the type BoardTile
+	 * 
 	 * @param tileNumber - the positional number of tile
-	 * @param tileType - the property of tile
+	 * @param tileType   - the property of tile
 	 */
 	public BoardTile(int tileNumber, String tileType) {
 		this.tileNumber = tileNumber;
@@ -33,25 +35,28 @@ public class BoardTile extends Parent {
 			getChildren().add(new StackPane(border));
 		}
 	}
-	
+
 	/**
 	 * This method gets the tile number.
+	 * 
 	 * @return tileNumber - the positional number of tile
 	 */
 	public int getTileNumber() {
 		return tileNumber;
 	}
-	
+
 	/**
 	 * This method gets the tile type.
+	 * 
 	 * @return - the property of tile
 	 */
 	public String getTileType() {
 		return tileType;
 	}
-	
+
 	/**
 	 * This method sets the property of tile.
+	 * 
 	 * @param tileType - the property of tile
 	 */
 	public void setTileType(String tileType) {

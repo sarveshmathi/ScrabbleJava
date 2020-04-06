@@ -7,7 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;;
+import javafx.scene.shape.Rectangle;
 
 public class Actualgame {
 	private BoardTile[] tiles;
@@ -24,6 +24,7 @@ public class Actualgame {
 
 	/**
 	 * This gets the actual game screen when you click start running.
+	 * 
 	 * @author Team 51
 	 */
 	public Actualgame() {
@@ -37,33 +38,26 @@ public class Actualgame {
 		bottomBar.setFill(Color.BLACK);
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
+		// distribute letters
 		rackletters = lb.getLetters(7);
 		for (LetterTilePic letter : rackletters) {
 			userBar.getChildren().add(letter);
-
 		}
-		// LetterTilePic lp = new LetterTilePic(LetterTilePic.Letters.A);// this is just
-		// a tester
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
-		// lp.getOnDragDetected();// doesn't work but i meant for this to make the tiles
-		// draggable for user
 		bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
-		// gameroot.getChildren().addAll(board, bottomPane);// this gets these elements
-		// onto the screen(pane)
+
 	}
 
 	/**
-	 * This method gets the BorderPane layout- gameRoot 
+	 * This method gets the BorderPane layout- gameRoot
+	 * 
 	 * @return gameRoot - the layout
 	 */
 	public Pane getRootPane() {
 		return gameRoot;
-	}
-
-	public void addtorack() {
 	}
 
 }
