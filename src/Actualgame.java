@@ -21,19 +21,19 @@ import javafx.scene.shape.Rectangle;
 public class Actualgame {
 	private AlertBox ab;
 	private BoardTile[] tiles;
-	private final BorderPane gameRoot = new BorderPane();
-	private Board board = new Board();
-	private int tile_in_row = 15;// board spaces per row
-	private int tile_in_col = 15;// board spaces per col
-	private int board_w = 800;// board size
-	private int board_h = 800;
-	private int tile_w = board_w / tile_in_row;
-	private int tile_h = board_h / tile_in_col;
-	private Rectangle border = new Rectangle(tile_w - 2, tile_h - 2);
-	private ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();
+	private final BorderPane gameRoot;
+	private Board board;
+	private int tile_in_row;
+	private int tile_in_col;
+	private int board_w;
+	private int board_h;
+	private int tile_w;
+	private int tile_h;
+	private Rectangle border;
+	private ArrayList<LetterTilePic> rackletters;
 	private LetterTilePic currentTile;
 	private BoardTile destinationspot;
-	DataFormat LetterTilePic = new DataFormat("some string that identifies your object");
+	DataFormat LetterTilePic;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -43,6 +43,19 @@ public class Actualgame {
 	 */
 	
 	public Actualgame() {
+		tile_in_row = 15;// board spaces per row
+		tile_in_col = 15;// board spaces per col
+		board_w = 800;// board size
+		board_h = 800;
+		
+		gameRoot = new BorderPane();
+		board = new Board();
+		tile_w = board_w / tile_in_row;
+		tile_h = board_h / tile_in_col;
+		border = new Rectangle(tile_w - 2, tile_h - 2);
+		rackletters = new ArrayList<LetterTilePic>();
+		LetterTilePic = new DataFormat("some string that identifies your object");
+		
 		this.ActualGame();
 	}
 	
@@ -151,6 +164,7 @@ public class Actualgame {
 		userResponse = AlertBox.alert("Alert", "Are you sure you want to reset the game?");
 		if (userResponse) {
 			this.ActualGame();
+			
 		}
 	}
 }
