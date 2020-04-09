@@ -1,7 +1,13 @@
 
 import java.util.ArrayList;
 
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -20,7 +26,7 @@ public class Actualgame {
 	private int tile_w = board_w / tile_in_row;
 	private int tile_h = board_h / tile_in_col;
 	private Rectangle border = new Rectangle(tile_w - 2, tile_h - 2);
-	private ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();;
+	private ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -39,16 +45,39 @@ public class Actualgame {
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
 		// distribute letters
+		bottomPane.getChildren().addAll(bottomBar, userBar);
 		rackletters = lb.getLetters(7);
 		for (LetterTilePic letter : rackletters) {
 			userBar.getChildren().add(letter);
+			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					/* drag was detected, start a drag-and-drop gesture */
+					/* allow any transfer mode */
+					Dragboard db = letter.startDragAndDrop(TransferMode.MOVE);
+					/* Put a string on a dragboard */
+					ClipboardContent content = new ClipboardContent();
+					content.putString(letter.toString());
+					db.setContent(content);
+					event.consume();
+				}
+			});
+			letter.setOnDragDone(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* the drag and drop gesture ended */
+					/* if the data was successfully moved, clear it */
+					if (event.getTransferMode() == TransferMode.MOVE) {
+						userBar.getChildren().remove(letter);
+					}
+					event.consume();
+				}
+			});
+
 		}
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
-		bottomPane.getChildren().addAll(bottomBar, userBar);
+		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
-
 	}
 
 	/**

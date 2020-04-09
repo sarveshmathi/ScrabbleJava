@@ -1,7 +1,13 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 
 /**
  * Represents a 15 x 15 board
@@ -10,7 +16,6 @@ import javafx.scene.Parent;
  *
  */
 public class Board extends Parent {
-
 	private BoardTile[] tiles;
 
 	public Board() {
@@ -23,6 +28,50 @@ public class Board extends Parent {
 			bt.setTranslateX(40 * (i % tile_in_row));
 			bt.setTranslateY(40 * (i / tile_in_row));
 			getChildren().add(bt);
+			bt.setOnDragDetected(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					/* drag was detected, start a drag-and-drop gesture */
+					/* allow any transfer mode */
+					Dragboard db = bt.startDragAndDrop(TransferMode.ANY);
+					/* Put a string on a dragboard */
+					ClipboardContent content = new ClipboardContent();
+					content.putString(bt.toString());
+					db.setContent(content);
+					event.consume();
+				}
+			});
+			bt.setOnDragOver(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* data is dragged over the target */
+					/*
+					 * accept it only if it is not dragged from the same node and if it isn't
+					 * holding a card
+					 */
+					if (event.getGestureSource() != bt && bt.getholds() == null) {
+						/* allow for both copying and moving, whatever user chooses */
+						event.acceptTransferModes(TransferMode.MOVE);
+						bt.displayHold();
+					}
+					event.consume();
+				}
+			});
+			bt.setOnDragDropped(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* data dropped */
+					/* if there is a string data on dragboard, read it and use it */
+					Dragboard db = event.getDragboard();
+					bt.holds = (LetterTilePic) event.getAcceptingObject();
+					boolean success = false;
+					if (bt.getholds() != null) {
+						success = true;
+					}
+					/*
+					 * let the source know whether the string was successfully transferred and used
+					 */
+					event.setDropCompleted(success);
+					event.consume();
+				}
+			});
 		}
 	}
 
@@ -40,7 +89,7 @@ public class Board extends Parent {
 		ArrayList<Integer> tripleLetterTiles = new ArrayList<>(
 				Arrays.asList(20, 24, 76, 80, 84, 88, 136, 140, 144, 148, 200, 204));
 		ArrayList<Integer> doubleWordTiles = new ArrayList<>(
-				Arrays.asList(16, 28, 32, 42, 48, 56, 64, 70, 154, 160, 168, 176, 182,192,196,208));
+				Arrays.asList(16, 28, 32, 42, 48, 56, 64, 70, 154, 160, 168, 176, 182, 192, 196, 208));
 		ArrayList<Integer> doubleLetterTiles = new ArrayList<>(Arrays.asList(3, 11, 36, 38, 45, 52, 59, 92, 96, 98, 102,
 				108, 116, 122, 126, 128, 132, 165, 172, 179, 186, 188, 213, 221));
 		for (int i = 0; i < 225; i++) {

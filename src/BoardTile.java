@@ -14,7 +14,7 @@ public class BoardTile extends Parent {
 	private int tileNumber; // from 0 to 224
 	private String tileType; // none(N), double letter (DL), double word (DW), triple letter (TL), triple
 								// word (TW)
-	private LetterTilePic holds;// this is the letter piece it will hold
+	public LetterTilePic holds;// this is the letter piece it will hold
 
 	/**
 	 * This constructs objects of the type BoardTile
@@ -25,6 +25,7 @@ public class BoardTile extends Parent {
 	public BoardTile(int tileNumber, String tileType) {
 		this.tileNumber = tileNumber;
 		this.tileType = tileType;
+		holds = null;
 		Rectangle border = new Rectangle(40, 40);
 		border.setFill(Color.BEIGE);
 		border.setStroke(Color.BLACK);
@@ -54,6 +55,10 @@ public class BoardTile extends Parent {
 		return tileType;
 	}
 
+	public LetterTilePic getholds() {
+		return holds;
+	}
+
 	/**
 	 * This method sets the property of tile.
 	 * 
@@ -61,6 +66,12 @@ public class BoardTile extends Parent {
 	 */
 	public void setTileType(String tileType) {
 		this.tileType = tileType;
+	}
+
+	public void displayHold() {
+		if (this.holds != null) {
+			getChildren().add(new StackPane(this.holds));
+		}
 	}
 
 }

@@ -5,6 +5,9 @@
  *
  */
 import javafx.scene.Parent;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -34,7 +37,7 @@ public class LetterTilePic extends Parent {
 	 * Initialized a LetterTile with given letter and value
 	 * 
 	 * @param letter - object of type Letters
-	 * @param value - points of each letter
+	 * @param value  - points of each letter
 	 */
 	public LetterTilePic(Letters letter) {
 		this.letter = letter;
@@ -50,21 +53,35 @@ public class LetterTilePic extends Parent {
 		// text2.setTextOrigin(VPos.BOTTOM);
 		getChildren().add(new StackPane(piece, text1));
 	}
-	
+
 	/**
 	 * This method casts objects of Letters to string.
+	 * 
 	 * @return - a string
 	 */
 	public String LettertoString() {
 		return letter.toString();
 	}
-	
+
 	/**
 	 * This method casts integer to string.
+	 * 
 	 * @return - a string
 	 */
 	public String PointtoString() {
 		return Integer.toString(points);
+	}
+
+	public void handle() {
+		/* drag was detected, start a drag-and-drop gesture */
+		/* allow any transfer mode */
+		Dragboard db = startDragAndDrop(TransferMode.ANY);
+
+		/* Put a string on a dragboard */
+		ClipboardContent content = new ClipboardContent();
+		content.putString(letter.toString());
+		db.setContent(content);
+
 	}
 
 }
