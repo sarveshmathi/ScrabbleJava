@@ -41,11 +41,11 @@ public class Actualgame {
 	 * @author Team 51
 	 *
 	 */
-	
+
 	public Actualgame() {
 		this.ActualGame();
 	}
-	
+
 	public void ActualGame() {
 		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
@@ -58,11 +58,11 @@ public class Actualgame {
 		bottomBar.setFill(Color.BLACK);
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
-		Button reset = new Button ("Reset");
-		VBox resetBox = new VBox (2);
+		Button reset = new Button("Reset");
+		VBox resetBox = new VBox(2);
 		resetBox.setAlignment(Pos.TOP_RIGHT);
 		resetBox.getChildren().add(reset);
-		
+
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
 		rackletters = lb.getLetters(7);
@@ -86,23 +86,6 @@ public class Actualgame {
 				}
 			});
 
-			board.setOnDragDropped(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					/* data dropped */
-					/* if there is a string data on dragboard, read it and use it */
-					Dragboard db = event.getDragboard();
-					board.getTile().holds = (LetterTilePic) event.getAcceptingObject();
-					boolean success = false;
-					if (board.getTile().holds != null) {
-						success = true;
-					}
-					/*
-					 * let the source know whether the string was successfully transferred and used
-					 */
-					event.setDropCompleted(success);
-					event.consume();
-				}
-			});
 			letter.setOnDragDone(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
 					/* the drag and drop gesture ended */
@@ -114,7 +97,7 @@ public class Actualgame {
 				}
 			});
 		}
-		
+
 		reset.setOnAction(e -> {
 			this.resetGame();
 		});
@@ -145,7 +128,7 @@ public class Actualgame {
 		// ab.alert("Error", "Spot taken.");
 		// }
 	}
-	
+
 	public void resetGame() {
 		boolean userResponse;
 		userResponse = AlertBox.alert("Alert", "Are you sure you want to reset the game?");

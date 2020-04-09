@@ -59,6 +59,7 @@ public class Board extends Parent {
 						success = true;
 						getChildren().add(bt.holds);
 						boardgen();
+						bt.setMouseTransparent(true);
 					}
 					/*
 					 * let the source know whether the string was successfully transferred and used
