@@ -81,7 +81,7 @@ public class BoardDisplay extends Application {
 
 	private void closeProgram() {
 		boolean userResponse;
-		userResponse = AlertBox.alert("Alert", "Are you sure you want to close the program?");
+		userResponse = AlertBox.alertWithUserAction("Alert", "Are you sure you want to close the program?");
 		if (userResponse) {
 			primaryStage.close();
 		}
