@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -13,6 +14,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
@@ -37,18 +39,30 @@ public class Actualgame {
 	 * This gets the actual game screen when you click start running.
 	 * 
 	 * @author Team 51
+	 *
 	 */
+	
 	public Actualgame() {
+		this.ActualGame();
+	}
+	
+	public void ActualGame() {
 		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
 		LetterBag2 lb = new LetterBag2();
 		LetterTilePic lp;
 		// creates the user letter bar
 		StackPane bottomPane = new StackPane();
+		StackPane topPane = new StackPane();
 		Rectangle bottomBar = new Rectangle(420, 60);
 		bottomBar.setFill(Color.BLACK);
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
+		Button reset = new Button ("Reset");
+		VBox resetBox = new VBox (2);
+		resetBox.setAlignment(Pos.TOP_RIGHT);
+		resetBox.getChildren().add(reset);
+		
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
 		rackletters = lb.getLetters(7);
@@ -100,13 +114,17 @@ public class Actualgame {
 				}
 			});
 		}
+		
+		reset.setOnAction(e -> {
+			this.resetGame();
+		});
 
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
-
+		gameRoot.setTop(resetBox);
 	}
 
 	/**
@@ -126,5 +144,13 @@ public class Actualgame {
 		// else {
 		// ab.alert("Error", "Spot taken.");
 		// }
+	}
+	
+	public void resetGame() {
+		boolean userResponse;
+		userResponse = AlertBox.alert("Alert", "Are you sure you want to reset the game?");
+		if (userResponse) {
+			this.ActualGame();
+		}
 	}
 }
