@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Actualgame {
+	private AlertBox ab;
 	private BoardTile[] tiles;
 	private final BorderPane gameRoot = new BorderPane();
 	private Board board = new Board();
@@ -27,6 +29,9 @@ public class Actualgame {
 	private int tile_h = board_h / tile_in_col;
 	private Rectangle border = new Rectangle(tile_w - 2, tile_h - 2);
 	private ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();
+	private LetterTilePic currentTile;
+	private BoardTile destinationspot;
+	DataFormat LetterTilePic = new DataFormat("some string that identifies your object");
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -49,15 +54,38 @@ public class Actualgame {
 		rackletters = lb.getLetters(7);
 		for (LetterTilePic letter : rackletters) {
 			userBar.getChildren().add(letter);
+			// letter.onMouseDragEnteredProperty();
 			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
 				public void handle(MouseEvent event) {
 					/* drag was detected, start a drag-and-drop gesture */
 					/* allow any transfer mode */
-					Dragboard db = letter.startDragAndDrop(TransferMode.MOVE);
+					currentTile = letter;
+					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
 					/* Put a string on a dragboard */
 					ClipboardContent content = new ClipboardContent();
 					content.putString(letter.toString());
+					content.put(LetterTilePic, currentTile);
+					// content.getFiles();
+					currentTile.getClass();
 					db.setContent(content);
+					event.consume();
+				}
+			});
+
+			board.setOnDragDropped(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* data dropped */
+					/* if there is a string data on dragboard, read it and use it */
+					Dragboard db = event.getDragboard();
+					board.getTile().holds = (LetterTilePic) event.getAcceptingObject();
+					boolean success = false;
+					if (board.getTile().holds != null) {
+						success = true;
+					}
+					/*
+					 * let the source know whether the string was successfully transferred and used
+					 */
+					event.setDropCompleted(success);
 					event.consume();
 				}
 			});
@@ -71,13 +99,14 @@ public class Actualgame {
 					event.consume();
 				}
 			});
-
 		}
+
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
+
 	}
 
 	/**
@@ -89,4 +118,13 @@ public class Actualgame {
 		return gameRoot;
 	}
 
+	public void moveTile(LetterTilePic lp) {
+		BoardTile bt = board.getTile();
+		if (bt.holds == null) {
+			bt.holds = lp;
+		}
+		// else {
+		// ab.alert("Error", "Spot taken.");
+		// }
+	}
 }

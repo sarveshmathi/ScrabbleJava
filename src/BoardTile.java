@@ -25,15 +25,19 @@ public class BoardTile extends Parent {
 	public BoardTile(int tileNumber, String tileType) {
 		this.tileNumber = tileNumber;
 		this.tileType = tileType;
-		holds = null;
+		// holds = null;
 		Rectangle border = new Rectangle(40, 40);
 		border.setFill(Color.BEIGE);
 		border.setStroke(Color.BLACK);
-		if (!tileType.equals("N")) {
-			Text text1 = new Text(getTileType());
-			getChildren().add(new StackPane(border, text1));
+		if (holds == null) {
+			if (!tileType.equals("N")) {
+				Text text1 = new Text(getTileType());
+				getChildren().add(new StackPane(border, text1));
+			} else {
+				getChildren().add(new StackPane(border));
+			}
 		} else {
-			getChildren().add(new StackPane(border));
+			getChildren().add(new StackPane(holds));
 		}
 	}
 

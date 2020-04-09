@@ -3,10 +3,9 @@ import java.util.Arrays;
 
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
-import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
 /**
@@ -17,6 +16,8 @@ import javafx.scene.input.TransferMode;
  */
 public class Board extends Parent {
 	private BoardTile[] tiles;
+	private BoardTile tile;
+	DataFormat LetterTilePic = new DataFormat("hello");
 
 	public Board() {
 		tiles = new BoardTile[225];
@@ -28,20 +29,9 @@ public class Board extends Parent {
 			bt.setTranslateX(40 * (i % tile_in_row));
 			bt.setTranslateY(40 * (i / tile_in_row));
 			getChildren().add(bt);
-			bt.setOnDragDetected(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					/* drag was detected, start a drag-and-drop gesture */
-					/* allow any transfer mode */
-					Dragboard db = bt.startDragAndDrop(TransferMode.ANY);
-					/* Put a string on a dragboard */
-					ClipboardContent content = new ClipboardContent();
-					content.putString(bt.toString());
-					db.setContent(content);
-					event.consume();
-				}
-			});
 			bt.setOnDragOver(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
+					System.out.println("test");
 					/* data is dragged over the target */
 					/*
 					 * accept it only if it is not dragged from the same node and if it isn't
@@ -60,10 +50,15 @@ public class Board extends Parent {
 					/* data dropped */
 					/* if there is a string data on dragboard, read it and use it */
 					Dragboard db = event.getDragboard();
-					bt.holds = (LetterTilePic) event.getAcceptingObject();
+					Object j = db.getContent(LetterTilePic);
+					bt.holds = (LetterTilePic) event.getGestureSource();
+					// bt.holds = (LetterTilePic) j;
+					// bt.holds = (LetterTilePic) event.getAcceptingObject();
 					boolean success = false;
 					if (bt.getholds() != null) {
 						success = true;
+						getChildren().add(bt.holds);
+						boardgen();
 					}
 					/*
 					 * let the source know whether the string was successfully transferred and used
@@ -127,8 +122,32 @@ public class Board extends Parent {
 		}
 	}
 
+	/**
+	 * this method only updates the board after each move (we should update scoring
+	 * here too maybe
+	 * 
+	 */
+	public void boardgen() {
+		// tiles = new BoardTile[225];
+		int tile_in_row = 15;
+		int tile_in_col = 15;
+		// setTileNumbersAndValues();
+		for (int i = 0; i < tiles.length; i++) {
+			BoardTile bt = tiles[i];
+			if (bt.holds != null) {
+				bt.displayHold();
+			}
+
+		}
+	}
+
 	public static void main(String[] args) {
 		Board b = new Board();
 		b.printBoard();
+
+	}
+
+	public BoardTile getTile() {
+		return tile;
 	}
 }
