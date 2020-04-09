@@ -161,10 +161,9 @@ public class Actualgame {
 	
 	public void resetGame() {
 		boolean userResponse;
-		userResponse = AlertBox.alert("Alert", "Are you sure you want to reset the game?");
-		if (userResponse) {
-			this.ActualGame();
-			
-		}
+		AlertBox.alertWithoutUserAction("Alert", "Are you sure you want to reset the game?");
+		//if (userResponse) {
+		//	this.ActualGame();	
+		//}
 	}
 }

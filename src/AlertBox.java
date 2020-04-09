@@ -18,13 +18,13 @@ public class AlertBox {
 	private static boolean response;
 	
 	/**
-	 * The method that deals with alert events.
+	 * A method that deals with alert events that requires Yes or No from the user.
 	 * @param title - the title of the alert window.
 	 * @param message - the message displayed in the window.
 	 * @return response - the user's response: true or false
 	 */
 
-	public static boolean alert(String title, String message) {
+	public static boolean alertWithUserAction(String title, String message) {
 		Stage alertWindow = new Stage();
 		alertWindow.setTitle(title);
 		alertWindow.setMinWidth(250);
@@ -33,7 +33,7 @@ public class AlertBox {
 		Label label = new Label(message);
 		Button buttonYes = new Button("Yes");
 		Button buttonNo = new Button("No");
-		Button cancelButton = new Button("Cancel");
+		Button buttonCancel = new Button("Cancel");
 
 		buttonYes.setOnAction(e -> {
 			response = true;
@@ -46,7 +46,7 @@ public class AlertBox {
 			alertWindow.close();
 		});
 
-		cancelButton.setOnAction(e -> {
+		buttonCancel.setOnAction(e -> {
 			alertWindow.close();
 		});
 
@@ -56,7 +56,7 @@ public class AlertBox {
 		layoutHBox.getChildren().addAll(buttonYes, buttonNo);
 		layoutHBox.setAlignment(Pos.CENTER);
 
-		layoutVBox.getChildren().addAll(label, layoutHBox, cancelButton);
+		layoutVBox.getChildren().addAll(label, layoutHBox, buttonCancel);
 		layoutVBox.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(layoutVBox, 300, 300);
@@ -64,5 +64,34 @@ public class AlertBox {
 		alertWindow.showAndWait();
 
 		return response;
+	}
+	
+	/**
+	 * A method that deals with alert events that does not require Yes or No from the user.
+	 * @param title - the title of the alert window.
+	 * @param message - the message displayed in the window.
+	 */
+	public static void alertWithoutUserAction (String title, String message) {
+		Stage alertWindow = new Stage();
+		alertWindow.setTitle(title);
+		alertWindow.setMinWidth(250);
+		alertWindow.initModality(Modality.APPLICATION_MODAL);// user must deal with this window first
+
+		Label label = new Label(message);
+		Button buttonCancel = new Button("Cancel");
+		
+		buttonCancel.setOnAction(e -> {
+			alertWindow.close();
+		});
+		
+		VBox layoutVBox = new VBox(20); //the final layout
+		
+		layoutVBox.getChildren().addAll(label, buttonCancel);
+		layoutVBox.setAlignment(Pos.CENTER);
+
+		Scene scene = new Scene(layoutVBox, 300, 300);
+		alertWindow.setScene(scene);
+		alertWindow.showAndWait();
+		
 	}
 }
