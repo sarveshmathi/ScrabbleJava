@@ -47,7 +47,7 @@ public class Actualgame {
 		tile_in_col = 15;// board spaces per col
 		board_w = 800;// board size
 		board_h = 800;
-		
+
 		gameRoot = new BorderPane();
 		board = new Board();
 		tile_w = board_w / tile_in_row;
@@ -55,7 +55,7 @@ public class Actualgame {
 		border = new Rectangle(tile_w - 2, tile_h - 2);
 		rackletters = new ArrayList<LetterTilePic>();
 		LetterTilePic = new DataFormat("some string that identifies your object");
-		
+
 		this.ActualGame();
 	}
 
@@ -146,7 +146,9 @@ public class Actualgame {
 		boolean userResponse;
 		userResponse = AlertBox.alertWithUserAction("Alert", "Are you sure you want to reset the game?");
 		if (userResponse) {
-			this.ActualGame();	
+			this.ActualGame();
+			board.newboard();
 		}
+
 	}
 }
