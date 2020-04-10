@@ -46,10 +46,12 @@ public class Actualgame {
 	RadioButton playerTwo;
 	ToggleGroup toggleGroup;
 	TextField inputWord;
-	Label confirmedWord;
+	Label enteredWord;
 	Label player;
 	Label scorePlayerOne;
 	Label scorePlayerTwo;
+	String confirmButton;
+	String word;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -76,10 +78,12 @@ public class Actualgame {
 		playerTwo = new RadioButton("Player Two");
 		toggleGroup = new ToggleGroup();
 		inputWord = new TextField();
-		confirmedWord = new Label();
+		enteredWord = new Label();
 		player = new Label();
 		scorePlayerOne = new Label("Score");
 		scorePlayerTwo = new Label("Score");
+		confirmButton = "";
+		word = "";
 
 		this.ActualGame();
 	}
@@ -118,12 +122,12 @@ public class Actualgame {
 
 		// This listens for change in radio buttons playerOne and playerTwo
 		toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
-				// Cast newVal to RadioButton.
-				RadioButton rb = (RadioButton) newVal;
+			// Cast newVal to RadioButton.
+			RadioButton rb = (RadioButton) newVal;
 
-				// Display the selection.
-				player.setText("Current player: " + rb.getText());
-			
+			// Display the selection.
+			player.setText("Current player: " + rb.getText());
+
 		});
 
 		playerOne.setSelected(true);
@@ -142,13 +146,13 @@ public class Actualgame {
 
 		HBox topPanel = new HBox(20);
 		topPanel.setAlignment(Pos.CENTER);
-		topPanel.getChildren().addAll(player, confirmedWord);
+		topPanel.getChildren().addAll(player, enteredWord);
 
 		inputWord.setTooltip(new Tooltip("For multiple words, separate them by a comma."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
-		
-		
-		//This changes the text in confirmWord button to "Confirm Words" if more than 1 words are entered
+
+		// This changes the text in confirmWord button to "Confirm Words" if more than 1
+		// words are entered
 		inputWord.textProperty().addListener((observable, oldValue, newValue) -> {
 			int count = 0;
 			for (int i = 0; i < newValue.length(); i++) {
@@ -158,11 +162,15 @@ public class Actualgame {
 			}
 			if (count > 0) {
 				confirmWord.setText("Confirm Words");
-			}else {
+				confirmButton = "Confirm Words";
+				word = "Words";
+			} else {
 				confirmWord.setText("Confirm Word");
+				confirmButton = "Confirm Word";
+				word = "Word";
 			}
 		});
-		
+
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
 		rackletters = lb.getLetters(7);
@@ -198,13 +206,34 @@ public class Actualgame {
 			});
 		}
 
+		/*
+		 * This is to fix a tile on the board once the user presses "Confirm Move" button.
+		 * 
+		 * 					!!NOT IMPLEMENTED. HAS AN EMPTY METHOD!!
+		 */
+		confirmMove.setOnAction(e -> {
+			this.confirmMove();
+		});
+		
+		/*
+		 * This reset the game.
+		 */
+
 		reset.setOnAction(e -> {
 			this.resetGame();
 		});
+		
+		/*
+		 * This confirms the word played by the user.
+		 */
 
 		confirmWord.setOnAction(e -> {
 			this.confirmWord();
 		});
+		
+		/*
+		 * This handles event when the user presses "Enter" on the text field.
+		 */
 
 		inputWord.setOnAction(e -> {
 			this.displayTextField();
@@ -240,6 +269,10 @@ public class Actualgame {
 		// }
 	}
 
+	public void confirmMove() {
+
+	}
+
 	public void resetGame() {
 		boolean userResponse;
 		userResponse = AlertBox.alertWithUserAction("Alert", "Are you sure you want to reset the game?");
@@ -251,8 +284,7 @@ public class Actualgame {
 
 	public void confirmWord() {
 
-		String playedWord = inputWord.getText();
-		confirmedWord.setText(" ");
+		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
 
 		if (playerOne.isSelected()) {
 			playerTwo.fire();
@@ -264,7 +296,12 @@ public class Actualgame {
 
 	public void displayTextField() {
 		String playedWord = inputWord.getText();
-		confirmedWord
-				.setText("Word(s) Played: " + playedWord + " | Press \"Confirm Word\" button to confirm the word.");
+		if (playedWord.equals("")){
+			enteredWord.setText("Enter a word.");
+		}
+		else {enteredWord.setText(
+				word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm the word.");
+		}
 	}
+
 }
