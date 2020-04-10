@@ -1,13 +1,15 @@
 
 import java.util.ArrayList;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
@@ -44,6 +46,9 @@ public class Actualgame {
 	ToggleGroup toggleGroup;
 	TextField inputWord;
 	Label confirmedWord;
+	Label player;
+	Label scorePlayerOne;
+	Label scorePlayerTwo;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -71,7 +76,9 @@ public class Actualgame {
 		toggleGroup = new ToggleGroup();
 		inputWord = new TextField();
 		confirmedWord = new Label();
-		
+		player = new Label();
+		scorePlayerOne = new Label("Score");
+		scorePlayerTwo = new Label("Score");
 
 		this.ActualGame();
 	}
@@ -104,12 +111,22 @@ public class Actualgame {
 		rightPanel.setAlignment(Pos.BOTTOM_CENTER);
 		rightPanel.getChildren().addAll(confirmMove, confirm);
 
-		playerOne.setSelected(true);
+		// Adding the radio buttons to a toggle group
 		playerOne.setToggleGroup(toggleGroup);
 		playerTwo.setToggleGroup(toggleGroup);
 
-		Label scorePlayerOne = new Label("Score");
-		Label scorePlayerTwo = new Label("Score");
+		// This listens for change in radio buttons playerOne and playerTwo
+		toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> changed, Toggle oldVal, Toggle newVal) {
+				// Cast newVal to RadioButton.
+				RadioButton rb = (RadioButton) newVal;
+
+				// Display the selection.
+				player.setText("Current player: " + rb.getText());
+			}
+		});
+
+		playerOne.setSelected(true);
 
 		HBox playerOnePanel = new HBox(10);
 		// playerOnePanel.setAlignment(Pos.TOP_LEFT);
@@ -123,6 +140,10 @@ public class Actualgame {
 		leftPanel.setAlignment(Pos.BOTTOM_CENTER);
 		leftPanel.getChildren().addAll(playerOnePanel, playerTwoPanel, reset);
 
+		HBox topPanel = new HBox(20);
+		topPanel.setAlignment(Pos.CENTER);
+		topPanel.getChildren().addAll(player, confirmedWord);
+		
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
 		rackletters = lb.getLetters(7);
@@ -166,6 +187,10 @@ public class Actualgame {
 			this.confirmWord();
 		});
 
+		inputWord.setOnAction(e -> {
+			this.displayTextField();
+		});
+
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -173,6 +198,7 @@ public class Actualgame {
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
 		gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
+		gameRoot.setTop(topPanel);
 		// gameRoot.setTop(topPanel);
 	}
 
@@ -205,43 +231,21 @@ public class Actualgame {
 	}
 
 	public void confirmWord() {
-		
-		String confirmedWord = inputWord.getText();
-		System.out.println(confirmedWord);
-		
-				
+
+		String playedWord = inputWord.getText();
+		confirmedWord.setText(" ");
+
 		if (playerOne.isSelected()) {
 			playerTwo.fire();
-		}else if (playerTwo.isSelected()) {
+		} else if (playerTwo.isSelected()) {
 			playerOne.fire();
 		}
 		
-		
-		
+	}
+
+	public void displayTextField() {
+		String playedWord = inputWord.getText();
+		confirmedWord.setText("Word: " + playedWord + " | Points: <Points>" +
+				" | Press \"Confirm Word\" button to confirm the word.");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
