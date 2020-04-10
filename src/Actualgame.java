@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
@@ -38,6 +39,11 @@ public class Actualgame {
 	private LetterTilePic currentTile;
 	private BoardTile destinationspot;
 	DataFormat LetterTilePic;
+	RadioButton playerOne;
+	RadioButton playerTwo;
+	ToggleGroup toggleGroup;
+	TextField inputWord;
+	Label confirmedWord;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -60,6 +66,13 @@ public class Actualgame {
 		rackletters = new ArrayList<LetterTilePic>();
 		LetterTilePic = new DataFormat("some string that identifies your object");
 
+		playerOne = new RadioButton("Player One");
+		playerTwo = new RadioButton("Player Two");
+		toggleGroup = new ToggleGroup();
+		inputWord = new TextField();
+		confirmedWord = new Label();
+		
+
 		this.ActualGame();
 	}
 
@@ -76,43 +89,39 @@ public class Actualgame {
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
 		Button reset = new Button("Reset");
-		//topPane.setAlignment(Pos.TOP_RIGHT);
-		//topPane.getChildren().add(reset);
-		
-		Button confirmMove = new Button ("Confirm Move");
-		Button confirmWord = new Button ("Confirm Word");
-		TextField inputWord = new TextField ();
+		// topPane.setAlignment(Pos.TOP_RIGHT);
+		// topPane.getChildren().add(reset);
+
+		Button confirmMove = new Button("Confirm Move");
+		Button confirmWord = new Button("Confirm Word");
 		inputWord.setPromptText("Input Your Word Here");
-		
+
 		VBox confirm = new VBox(5);
 		confirm.setAlignment(Pos.BOTTOM_CENTER);
 		confirm.getChildren().addAll(inputWord, confirmWord);
-		
+
 		VBox rightPanel = new VBox(20);
 		rightPanel.setAlignment(Pos.BOTTOM_CENTER);
 		rightPanel.getChildren().addAll(confirmMove, confirm);
-		
-		RadioButton playerOne = new RadioButton ("Player One");
-		RadioButton playerTwo = new RadioButton ("Player Two");
-		ToggleGroup tg = new ToggleGroup();
-		playerOne.setToggleGroup(tg);
-		playerTwo.setToggleGroup(tg);
-		
-		Label scorePlayerOne = new Label ("Score");
-		Label scorePlayerTwo = new Label ("Score");
-		
-		HBox playerOnePanel = new HBox (10);
-		//playerOnePanel.setAlignment(Pos.TOP_LEFT);
+
+		playerOne.setSelected(true);
+		playerOne.setToggleGroup(toggleGroup);
+		playerTwo.setToggleGroup(toggleGroup);
+
+		Label scorePlayerOne = new Label("Score");
+		Label scorePlayerTwo = new Label("Score");
+
+		HBox playerOnePanel = new HBox(10);
+		// playerOnePanel.setAlignment(Pos.TOP_LEFT);
 		playerOnePanel.getChildren().addAll(playerOne, scorePlayerOne);
-		
-		HBox playerTwoPanel = new HBox (10);
-		//playerTwoPanel.setAlignment(Pos.TOP_RIGHT);
+
+		HBox playerTwoPanel = new HBox(10);
+		// playerTwoPanel.setAlignment(Pos.TOP_RIGHT);
 		playerTwoPanel.getChildren().addAll(playerTwo, scorePlayerTwo);
-				
-		VBox leftPanel = new VBox (20);
+
+		VBox leftPanel = new VBox(20);
 		leftPanel.setAlignment(Pos.BOTTOM_CENTER);
-		leftPanel.getChildren().addAll (playerOnePanel, playerTwoPanel, reset);
-		
+		leftPanel.getChildren().addAll(playerOnePanel, playerTwoPanel, reset);
 
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -153,6 +162,10 @@ public class Actualgame {
 			this.resetGame();
 		});
 
+		confirmWord.setOnAction(e -> {
+			this.confirmWord();
+		});
+
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -160,7 +173,7 @@ public class Actualgame {
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
 		gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
-		//gameRoot.setTop(topPanel);
+		// gameRoot.setTop(topPanel);
 	}
 
 	/**
@@ -189,6 +202,46 @@ public class Actualgame {
 			this.ActualGame();
 			board.newboard();
 		}
+	}
 
+	public void confirmWord() {
+		
+		String confirmedWord = inputWord.getText();
+		System.out.println(confirmedWord);
+		
+				
+		if (playerOne.isSelected()) {
+			playerTwo.fire();
+		}else if (playerTwo.isSelected()) {
+			playerOne.fire();
+		}
+		
+		
+		
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
