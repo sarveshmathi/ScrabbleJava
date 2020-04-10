@@ -20,55 +20,7 @@ public class Board extends Parent {
 	DataFormat LetterTilePic = new DataFormat("hello");
 
 	public Board() {
-		tiles = new BoardTile[225];
-		int tile_in_row = 15;
-		int tile_in_col = 15;
-		setTileNumbersAndValues();
-		for (int i = 0; i < tiles.length; i++) {
-			BoardTile bt = tiles[i];
-			bt.setTranslateX(40 * (i % tile_in_row));
-			bt.setTranslateY(40 * (i / tile_in_row));
-			getChildren().add(bt);
-			bt.setOnDragOver(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					System.out.println("test");
-					/* data is dragged over the target */
-					/*
-					 * accept it only if it is not dragged from the same node and if it isn't
-					 * holding a card
-					 */
-					if (event.getGestureSource() != bt && bt.getholds() == null) {
-						/* allow for both copying and moving, whatever user chooses */
-						event.acceptTransferModes(TransferMode.MOVE);
-						bt.displayHold();
-					}
-					event.consume();
-				}
-			});
-			bt.setOnDragDropped(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					/* data dropped */
-					/* if there is a string data on dragboard, read it and use it */
-					Dragboard db = event.getDragboard();
-					Object j = db.getContent(LetterTilePic);
-					bt.holds = (LetterTilePic) event.getGestureSource();
-					// bt.holds = (LetterTilePic) j;
-					// bt.holds = (LetterTilePic) event.getAcceptingObject();
-					boolean success = false;
-					if (bt.getholds() != null) {
-						success = true;
-						getChildren().add(bt.holds);
-						boardgen();
-						bt.setMouseTransparent(true);
-					}
-					/*
-					 * let the source know whether the string was successfully transferred and used
-					 */
-					event.setDropCompleted(success);
-					event.consume();
-				}
-			});
-		}
+		newboard();
 	}
 
 	public BoardTile[] getTiles() {
@@ -152,6 +104,9 @@ public class Board extends Parent {
 		return tile;
 	}
 
+	/**
+	 * this method creates a new board display instance
+	 */
 	public void newboard() {
 		tiles = new BoardTile[225];
 		int tile_in_row = 15;
