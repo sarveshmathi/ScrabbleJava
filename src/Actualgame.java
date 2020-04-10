@@ -11,6 +11,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -116,14 +117,13 @@ public class Actualgame {
 		playerTwo.setToggleGroup(toggleGroup);
 
 		// This listens for change in radio buttons playerOne and playerTwo
-		toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-			public void changed(ObservableValue<? extends Toggle> changed, Toggle oldVal, Toggle newVal) {
+		toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
 				// Cast newVal to RadioButton.
 				RadioButton rb = (RadioButton) newVal;
 
 				// Display the selection.
 				player.setText("Current player: " + rb.getText());
-			}
+			
 		});
 
 		playerOne.setSelected(true);
@@ -143,6 +143,25 @@ public class Actualgame {
 		HBox topPanel = new HBox(20);
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player, confirmedWord);
+
+		inputWord.setTooltip(new Tooltip("For multiple words, separate them by a comma."));
+		confirmWord.setTooltip(new Tooltip("Press to confirm."));
+		
+		
+		//This changes the text in confirmWord button to "Confirm Words" if more than 1 words are entered
+		inputWord.textProperty().addListener((observable, oldValue, newValue) -> {
+			int count = 0;
+			for (int i = 0; i < newValue.length(); i++) {
+				if (newValue.charAt(i) == ',') {
+					count++;
+				}
+			}
+			if (count > 0) {
+				confirmWord.setText("Confirm Words");
+			}else {
+				confirmWord.setText("Confirm Word");
+			}
+		});
 		
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -240,12 +259,12 @@ public class Actualgame {
 		} else if (playerTwo.isSelected()) {
 			playerOne.fire();
 		}
-		
+
 	}
 
 	public void displayTextField() {
 		String playedWord = inputWord.getText();
-		confirmedWord.setText("Word: " + playedWord + " | Points: <Points>" +
-				" | Press \"Confirm Word\" button to confirm the word.");
+		confirmedWord
+				.setText("Word(s) Played: " + playedWord + " | Press \"Confirm Word\" button to confirm the word.");
 	}
 }
