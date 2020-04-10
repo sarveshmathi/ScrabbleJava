@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
@@ -72,9 +73,17 @@ public class Actualgame {
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
 		Button reset = new Button("Reset");
-		VBox resetBox = new VBox(2);
-		resetBox.setAlignment(Pos.TOP_RIGHT);
-		resetBox.getChildren().add(reset);
+		//VBox resetBox = new VBox(2);
+		topPane.setAlignment(Pos.TOP_RIGHT);
+		topPane.getChildren().add(reset);
+		
+		Button confirmMove = new Button ("Confirm Move");
+		Button confirmWord = new Button ("Confirm Word");
+		TextField inputWord = new TextField ();
+		inputWord.setPromptText("Input Your Word Here");
+		
+		VBox sidePanel = new VBox(10);
+		sidePanel.getChildren().addAll(confirmMove, inputWord, confirmWord);
 
 		// distribute letters
 		bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -120,7 +129,8 @@ public class Actualgame {
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
-		gameRoot.setTop(resetBox);
+		gameRoot.setTop(topPane);
+		gameRoot.setRight(sidePanel);
 	}
 
 	/**
