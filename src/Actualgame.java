@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
@@ -83,9 +84,13 @@ public class Actualgame {
 		TextField inputWord = new TextField ();
 		inputWord.setPromptText("Input Your Word Here");
 		
-		VBox sidePanel = new VBox(20);
-		sidePanel.setAlignment(Pos.BOTTOM_CENTER);
-		sidePanel.getChildren().addAll(confirmMove, inputWord, confirmWord);
+		VBox confirm = new VBox(5);
+		confirm.setAlignment(Pos.BOTTOM_CENTER);
+		confirm.getChildren().addAll(inputWord, confirmWord);
+		
+		VBox rightPanel = new VBox(20);
+		rightPanel.setAlignment(Pos.BOTTOM_CENTER);
+		rightPanel.getChildren().addAll(confirmMove, confirm);
 		
 		RadioButton playerOne = new RadioButton ("Player One");
 		RadioButton playerTwo = new RadioButton ("Player Two");
@@ -93,9 +98,20 @@ public class Actualgame {
 		playerOne.setToggleGroup(tg);
 		playerTwo.setToggleGroup(tg);
 		
+		Label scorePlayerOne = new Label ("Score");
+		Label scorePlayerTwo = new Label ("Score");
+		
+		HBox playerOnePanel = new HBox (10);
+		//playerOnePanel.setAlignment(Pos.TOP_LEFT);
+		playerOnePanel.getChildren().addAll(playerOne, scorePlayerOne);
+		
+		HBox playerTwoPanel = new HBox (10);
+		//playerTwoPanel.setAlignment(Pos.TOP_RIGHT);
+		playerTwoPanel.getChildren().addAll(playerTwo, scorePlayerTwo);
+				
 		VBox leftPanel = new VBox (20);
 		leftPanel.setAlignment(Pos.BOTTOM_CENTER);
-		leftPanel.getChildren().addAll (playerOne, playerTwo, reset);
+		leftPanel.getChildren().addAll (playerOnePanel, playerTwoPanel, reset);
 		
 
 		// distribute letters
@@ -143,7 +159,8 @@ public class Actualgame {
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
 		gameRoot.setLeft(leftPanel);
-		gameRoot.setRight(sidePanel);
+		gameRoot.setRight(rightPanel);
+		//gameRoot.setTop(topPanel);
 	}
 
 	/**
