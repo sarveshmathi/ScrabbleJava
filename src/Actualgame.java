@@ -104,17 +104,17 @@ public class Actualgame {
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
 
-		Button confirmMove = new Button("Confirm Move");
+		Button forfeitTurn = new Button("Forfeit Turn");
 		Button confirmWord = new Button("Confirm Word");
 		inputWord.setPromptText("Input Your Word Here");
 
-		VBox confirm = new VBox(5);
-		confirm.setAlignment(Pos.BOTTOM_CENTER);
-		confirm.getChildren().addAll(inputWord, confirmWord);
+		VBox confirmLayout = new VBox(5);
+		confirmLayout.setAlignment(Pos.BOTTOM_CENTER);
+		confirmLayout.getChildren().addAll(inputWord, confirmWord);
 
 		VBox rightPanel = new VBox(20);
 		rightPanel.setAlignment(Pos.BOTTOM_CENTER);
-		rightPanel.getChildren().addAll(confirmMove, confirm);
+		rightPanel.getChildren().addAll(forfeitTurn, confirmLayout);
 
 		// Adding the radio buttons to a toggle group
 		playerOne.setToggleGroup(toggleGroup);
@@ -147,11 +147,11 @@ public class Actualgame {
 		HBox topPanel = new HBox(20);
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player, enteredWord);
-		
+
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
-		confirmMove.setTooltip(new Tooltip ("Press to confirm."));
+		forfeitTurn.setTooltip(new Tooltip("Press to undo move."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
-		reset.setTooltip(new Tooltip ("Press to reset the game."));
+		reset.setTooltip(new Tooltip("Press to reset the game."));
 
 		// This changes the text in confirmWord button to "Confirm Words" if more than 1
 		// words are entered
@@ -209,14 +209,13 @@ public class Actualgame {
 		}
 
 		/*
-		 * This is to fix a tile on the board once the user presses "Confirm Move" button.
+		 * This is to let the player forfeit their turn.
 		 * 
-		 * 					!!NOT IMPLEMENTED. HAS AN EMPTY METHOD!!
 		 */
-		confirmMove.setOnAction(e -> {
-			this.confirmMove();
+		forfeitTurn.setOnAction(e -> {
+			this.forfeitTurn();
 		});
-		
+
 		/*
 		 * This reset the game.
 		 */
@@ -224,7 +223,7 @@ public class Actualgame {
 		reset.setOnAction(e -> {
 			this.resetGame();
 		});
-		
+
 		/*
 		 * This confirms the word played by the user.
 		 */
@@ -232,7 +231,7 @@ public class Actualgame {
 		confirmWord.setOnAction(e -> {
 			this.confirmWord();
 		});
-		
+
 		/*
 		 * This handles event when the user presses "Enter" on the text field.
 		 */
@@ -271,8 +270,21 @@ public class Actualgame {
 		// }
 	}
 
-	public void confirmMove() {
+	public void forfeitTurn() {
+		
+		RadioButton rb = (RadioButton) toggleGroup.getSelectedToggle();
+		String currentPlayer = rb.getText();
+		boolean userResponse;
+		userResponse = AlertBox.alertWithUserAction("Alert", currentPlayer + ", are you sure you want to forfeit your turn?");
+		if (userResponse) {
 
+			if (playerOne.isSelected()) {
+				playerTwo.fire();
+			} else if (playerTwo.isSelected()) {
+				playerOne.fire();
+			}
+
+		}
 	}
 
 	public void resetGame() {
@@ -298,11 +310,10 @@ public class Actualgame {
 
 	public void displayTextField() {
 		String playedWord = inputWord.getText();
-		if (playedWord.equals("")){
+		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
-		}
-		else {enteredWord.setText(
-				word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm.");
+		} else {
+			enteredWord.setText(word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm.");
 		}
 	}
 
