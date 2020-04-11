@@ -149,7 +149,7 @@ public class Actualgame {
 		topPanel.getChildren().addAll(player, enteredWord);
 
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
-		forfeitTurn.setTooltip(new Tooltip("Press to undo move."));
+		forfeitTurn.setTooltip(new Tooltip("Press to forfiet your turn."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
 		reset.setTooltip(new Tooltip("Press to reset the game."));
 
