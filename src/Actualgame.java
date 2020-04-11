@@ -208,6 +208,13 @@ public class Actualgame {
 				word = "Word";
 			}
 			
+			if (newValue.equals("")) {
+				enteredWord.setText("");
+			}
+			
+			if (oldValue.equals("") && !newValue.equals("")) {
+				enteredWord.setText("");
+			}
 		});
 
 		// distribute letters
