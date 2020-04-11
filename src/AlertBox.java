@@ -59,7 +59,7 @@ public class AlertBox {
 		layoutVBox.getChildren().addAll(label, layoutHBox, buttonCancel);
 		layoutVBox.setAlignment(Pos.CENTER);
 
-		Scene scene = new Scene(layoutVBox, 300, 300);
+		Scene scene = new Scene(layoutVBox, 350, 350);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
 
@@ -89,7 +89,7 @@ public class AlertBox {
 		layoutVBox.getChildren().addAll(label, buttonCancel);
 		layoutVBox.setAlignment(Pos.CENTER);
 
-		Scene scene = new Scene(layoutVBox, 300, 300);
+		Scene scene = new Scene(layoutVBox, 350, 350);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
 		

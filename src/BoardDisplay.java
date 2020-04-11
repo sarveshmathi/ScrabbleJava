@@ -66,7 +66,7 @@ public class BoardDisplay extends Application {
 		root.getChildren().addAll(startButton, instructionButton, exitButton);
 		root.setAlignment(Pos.CENTER);
 		startButton.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(root, 900, 700);
+		Scene scene = new Scene(root, 950, 750);
 		root.setId("mainpage");
 		scene.getStylesheets().add("scrabblestyle.css");
 		primaryStage.setTitle("SCRABBLE");

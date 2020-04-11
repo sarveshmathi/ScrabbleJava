@@ -2,6 +2,7 @@
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -15,7 +16,6 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -39,19 +39,20 @@ public class Actualgame {
 	private ArrayList<LetterTilePic> rackletters;
 	private LetterTilePic currentTile;
 	private BoardTile destinationspot;
-	DataFormat LetterTilePic;
-	RadioButton playerOne;
-	RadioButton playerTwo;
-	ToggleGroup toggleGroup;
-	TextField inputWord;
-	Label enteredWord;
-	Label player;
-	Label scorePlayerOne;
-	Label scorePlayerTwo;
-	String confirmButton;
-	String word;
-	Label playerOneLabel;
-	Label playerTwoLabel;
+	private DataFormat LetterTilePic;
+	private RadioButton playerOne;
+	private RadioButton playerTwo;
+	private ToggleGroup toggleGroup;
+	private TextField inputWord;
+	private Label enteredWord;
+	private Label player;
+	private Label scorePlayerOne;
+	private Label scorePlayerTwo;
+	private String confirmButton;
+	private String word;
+	private Label playerOneLabel;
+	private Label playerTwoLabel;
+	private Button howToPlay;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -84,6 +85,7 @@ public class Actualgame {
 		scorePlayerTwo = new Label("Score");
 		playerOneLabel = new Label ("Player One");
 		playerTwoLabel = new Label ("Player Two");
+		howToPlay = new Button ("How To Play");
 		
 		confirmButton = "";
 		word = "";
@@ -98,8 +100,7 @@ public class Actualgame {
 		LetterBag2 lb = new LetterBag2();
 		LetterTilePic lp;
 		// creates the user letter bar
-		StackPane bottomPane = new StackPane();
-		StackPane topPane = new StackPane();
+		StackPane bottomPanel = new StackPane();
 		Rectangle bottomBar = new Rectangle(420, 60);
 		bottomBar.setArcWidth(30.0); 
 	    bottomBar.setArcHeight(30.0); 
@@ -109,23 +110,40 @@ public class Actualgame {
 		Button reset = new Button("Reset");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
-
+		
 		Button forfeitTurn = new Button("Forfeit Turn");
 		Button confirmWord = new Button("Confirm Word");
+		confirmWord.requestFocus();
 		inputWord.setPromptText("Input Your Word Here");
+		
+		//Right Layout Starts
+		VBox howToPlayLayout = new VBox();
+		howToPlayLayout.setAlignment(Pos.TOP_CENTER);
+		howToPlayLayout.getChildren().add(howToPlay);
 
 		VBox confirmLayout = new VBox(5);
-		confirmLayout.setAlignment(Pos.BOTTOM_CENTER);
-		confirmLayout.getChildren().addAll(inputWord, confirmWord);
+		confirmLayout.setAlignment(Pos.CENTER);
+		confirmLayout.getChildren().addAll(enteredWord, inputWord, confirmWord);
+		
+		VBox forfeitResetLayout = new VBox(5);
+		forfeitResetLayout.setAlignment(Pos.CENTER);
+		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset);
+		
+		VBox bottomRightLayout = new VBox(20);
+		bottomRightLayout.setAlignment(Pos.BOTTOM_CENTER);
+		bottomRightLayout.getChildren().addAll(confirmLayout, forfeitResetLayout);
 
-		VBox rightPanel = new VBox(20);
-		rightPanel.setAlignment(Pos.BOTTOM_CENTER);
-		rightPanel.getChildren().addAll(forfeitTurn, confirmLayout, reset);
 
+		VBox rightPanel = new VBox(400);
+		rightPanel.setAlignment(Pos.TOP_LEFT);
+		rightPanel.getChildren().addAll(howToPlayLayout, bottomRightLayout);
+		//Right Layout Ends
+		
 		// Adding the radio buttons to a toggle group
 		playerOne.setToggleGroup(toggleGroup);
 		playerTwo.setToggleGroup(toggleGroup);
-
+		
+		
 		// This listens for change in radio buttons playerOne and playerTwo
 		toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
 			// Cast newVal to RadioButton.
@@ -135,40 +153,36 @@ public class Actualgame {
 			player.setText("Current player: " + rb.getText());
 
 		});
-
 		playerOne.setSelected(true);
-		playerOne.setOnMouseClicked(null);
 		
-		playerTwo.setOnMouseClicked(null);
 		
-		/*
-		HBox playerOnePanel = new HBox(10);
-		// playerOnePanel.setAlignment(Pos.TOP_LEFT);
-		playerOnePanel.getChildren().addAll(playerOne, scorePlayerOne);
-
-		HBox playerTwoPanel = new HBox(10);
-		// playerTwoPanel.setAlignment(Pos.TOP_RIGHT);
-		playerTwoPanel.getChildren().addAll(playerTwo, scorePlayerTwo);
-
-		VBox leftPanel = new VBox(20);
-		leftPanel.setAlignment(Pos.BOTTOM_CENTER);
-		leftPanel.getChildren().addAll( reset);
-		*/
+		//Left Layout Starts
+		HBox playerOnePanel = new HBox (10);
+		playerOnePanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
 		
-		HBox topLeftPanel = new HBox (10);
-		topLeftPanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
+		HBox playerTwoPanel = new HBox (10);
+		playerTwoPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
 		
-		HBox topRightPanel = new HBox (10);
-		topRightPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
+		VBox playerPanel = new VBox(20);
+		playerPanel.setAlignment(Pos.BOTTOM_CENTER);
+		playerPanel.getChildren().addAll(playerOnePanel, playerTwoPanel);
 		
-		AnchorPane topAnchorPane = new AnchorPane();
-		AnchorPane.setLeftAnchor(topLeftPanel, 10.0);
-		AnchorPane.setRightAnchor(topRightPanel, 10.0);
-		topAnchorPane.getChildren().addAll(topLeftPanel, topRightPanel);
+		Label mockLabel = new Label();
+		
+		VBox mockPanel = new VBox();
+		mockPanel.setAlignment(Pos.TOP_CENTER);
+		mockPanel.getChildren().add(mockLabel);
+		
+		
+		VBox leftPanel = new VBox (400);
+		leftPanel.setAlignment(Pos.CENTER);
+		leftPanel.getChildren().addAll(mockPanel, playerPanel);
+		//Left Layout Ends
+		
 		
 		StackPane topPanel = new StackPane();
-		//topPanel.setAlignment(Pos.CENTER);
-		topPanel.getChildren().addAll(player , topAnchorPane /*topRightPanel enteredWord*/);
+		topPanel.setAlignment(Pos.CENTER);
+		topPanel.getChildren().addAll(player);
 
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
 		forfeitTurn.setTooltip(new Tooltip("Press to forfiet your turn."));
@@ -193,10 +207,12 @@ public class Actualgame {
 				confirmButton = "Confirm Word";
 				word = "Word";
 			}
+			
 		});
 
 		// distribute letters
-		bottomPane.getChildren().addAll(bottomBar, userBar);
+		bottomPanel.setAlignment(Pos.CENTER);
+		bottomPanel.getChildren().addAll(bottomBar, userBar);
 		rackletters = lb.getLetters(7);
 		for (LetterTilePic letter : rackletters) {
 			userBar.getChildren().add(letter);
@@ -262,16 +278,18 @@ public class Actualgame {
 			this.displayTextField();
 		});
 		
-		playerOne.setOnAction(e -> {
-			
+		
+		howToPlay.setOnAction(e -> {
+			this.howToPlay();
 		});
 		
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
+		gameRoot.setPadding(new Insets(10, 10, 10, 10));
 		gameRoot.setCenter(board);// put the board in the middle
-		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
-		//gameRoot.setLeft(leftPanel);
+		gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of screen
+		gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
 		gameRoot.setTop(topPanel);
 		
@@ -339,8 +357,19 @@ public class Actualgame {
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
 		} else {
-			enteredWord.setText(word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm.");
+			enteredWord.setText("Press " + confirmButton + ".");
 		}
+	}
+	
+	public void howToPlay() {
+		AlertBox.alertWithoutUserAction("How To Play", "Player One goes first.\n\n"
+				+ "Drag and drop tiles to the board.\n\n"
+				+ "When you are finished, type the word in the text box.\n\n"
+				+ "If you made more than one word, separate them with comma.\n\n"
+				+ "Press Confirm Word/s button to play the word(s).\n\n"
+				+ "Confirm Word/s button automatically changes turn.\n\n"
+				+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
+				+ "Press Reset button to reset the game.");
 	}
 
 
