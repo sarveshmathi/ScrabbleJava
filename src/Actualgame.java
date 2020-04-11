@@ -101,7 +101,9 @@ public class Actualgame {
 		StackPane bottomPane = new StackPane();
 		StackPane topPane = new StackPane();
 		Rectangle bottomBar = new Rectangle(420, 60);
-		bottomBar.setFill(Color.BLACK);
+		bottomBar.setArcWidth(30.0); 
+	    bottomBar.setArcHeight(30.0); 
+		bottomBar.setFill(Color.SIENNA);
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
 		Button reset = new Button("Reset");
@@ -263,7 +265,7 @@ public class Actualgame {
 		playerOne.setOnAction(e -> {
 			
 		});
-
+		
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -272,7 +274,7 @@ public class Actualgame {
 		//gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
 		gameRoot.setTop(topPanel);
-		// gameRoot.setTop(topPanel);
+		
 	}
 
 	/**
