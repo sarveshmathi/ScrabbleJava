@@ -147,9 +147,11 @@ public class Actualgame {
 		HBox topPanel = new HBox(20);
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player, enteredWord);
-
-		inputWord.setTooltip(new Tooltip("For multiple words, separate them by a comma."));
+		
+		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
+		confirmMove.setTooltip(new Tooltip ("Press to confirm."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
+		reset.setTooltip(new Tooltip ("Press to reset the game."));
 
 		// This changes the text in confirmWord button to "Confirm Words" if more than 1
 		// words are entered
@@ -300,7 +302,7 @@ public class Actualgame {
 			enteredWord.setText("Enter a word.");
 		}
 		else {enteredWord.setText(
-				word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm the word.");
+				word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm.");
 		}
 	}
 
