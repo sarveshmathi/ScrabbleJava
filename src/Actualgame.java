@@ -1,15 +1,12 @@
 
 import java.util.ArrayList;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
 import javafx.scene.input.ClipboardContent;
@@ -18,6 +15,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -52,6 +50,8 @@ public class Actualgame {
 	Label scorePlayerTwo;
 	String confirmButton;
 	String word;
+	Label playerOneLabel;
+	Label playerTwoLabel;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -82,8 +82,12 @@ public class Actualgame {
 		player = new Label();
 		scorePlayerOne = new Label("Score");
 		scorePlayerTwo = new Label("Score");
+		playerOneLabel = new Label ("Player One");
+		playerTwoLabel = new Label ("Player Two");
+		
 		confirmButton = "";
 		word = "";
+		
 
 		this.ActualGame();
 	}
@@ -114,7 +118,7 @@ public class Actualgame {
 
 		VBox rightPanel = new VBox(20);
 		rightPanel.setAlignment(Pos.BOTTOM_CENTER);
-		rightPanel.getChildren().addAll(forfeitTurn, confirmLayout);
+		rightPanel.getChildren().addAll(forfeitTurn, confirmLayout, reset);
 
 		// Adding the radio buttons to a toggle group
 		playerOne.setToggleGroup(toggleGroup);
@@ -131,7 +135,11 @@ public class Actualgame {
 		});
 
 		playerOne.setSelected(true);
-
+		playerOne.setOnMouseClicked(null);
+		
+		playerTwo.setOnMouseClicked(null);
+		
+		/*
 		HBox playerOnePanel = new HBox(10);
 		// playerOnePanel.setAlignment(Pos.TOP_LEFT);
 		playerOnePanel.getChildren().addAll(playerOne, scorePlayerOne);
@@ -142,11 +150,23 @@ public class Actualgame {
 
 		VBox leftPanel = new VBox(20);
 		leftPanel.setAlignment(Pos.BOTTOM_CENTER);
-		leftPanel.getChildren().addAll(playerOnePanel, playerTwoPanel, reset);
-
-		HBox topPanel = new HBox(20);
-		topPanel.setAlignment(Pos.CENTER);
-		topPanel.getChildren().addAll(player, enteredWord);
+		leftPanel.getChildren().addAll( reset);
+		*/
+		
+		HBox topLeftPanel = new HBox (10);
+		topLeftPanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
+		
+		HBox topRightPanel = new HBox (10);
+		topRightPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
+		
+		AnchorPane topAnchorPane = new AnchorPane();
+		AnchorPane.setLeftAnchor(topLeftPanel, 10.0);
+		AnchorPane.setRightAnchor(topRightPanel, 10.0);
+		topAnchorPane.getChildren().addAll(topLeftPanel, topRightPanel);
+		
+		StackPane topPanel = new StackPane();
+		//topPanel.setAlignment(Pos.CENTER);
+		topPanel.getChildren().addAll(player , topAnchorPane /*topRightPanel enteredWord*/);
 
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
 		forfeitTurn.setTooltip(new Tooltip("Press to forfiet your turn."));
@@ -239,13 +259,17 @@ public class Actualgame {
 		inputWord.setOnAction(e -> {
 			this.displayTextField();
 		});
+		
+		playerOne.setOnAction(e -> {
+			
+		});
 
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setCenter(board);// put the board in the middle
 		gameRoot.setBottom(bottomPane);// put the letter rack in the bottom of screen
-		gameRoot.setLeft(leftPanel);
+		//gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
 		gameRoot.setTop(topPanel);
 		// gameRoot.setTop(topPanel);
@@ -316,5 +340,6 @@ public class Actualgame {
 			enteredWord.setText(word + " Played: " + playedWord + " | Press " + confirmButton + " button to confirm.");
 		}
 	}
+
 
 }
