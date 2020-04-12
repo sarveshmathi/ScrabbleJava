@@ -53,6 +53,9 @@ public class Actualgame {
 	private Label playerOneLabel;
 	private Label playerTwoLabel;
 	private Button howToPlay;
+	Button confirmWord;
+	Label lastPlayedWord;
+	String currentPlayer;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -86,6 +89,9 @@ public class Actualgame {
 		playerOneLabel = new Label ("Player One");
 		playerTwoLabel = new Label ("Player Two");
 		howToPlay = new Button ("How To Play");
+		confirmWord = new Button("Confirm Word");
+		lastPlayedWord = new Label();
+		currentPlayer = "";
 		
 		confirmButton = "";
 		word = "";
@@ -112,8 +118,6 @@ public class Actualgame {
 		// topPane.getChildren().add(reset);
 		
 		Button forfeitTurn = new Button("Forfeit Turn");
-		Button confirmWord = new Button("Confirm Word");
-		confirmWord.requestFocus();
 		inputWord.setPromptText("Input Your Word Here");
 		
 		//Right Layout Starts
@@ -148,9 +152,9 @@ public class Actualgame {
 		toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
 			// Cast newVal to RadioButton.
 			RadioButton rb = (RadioButton) newVal;
-
+			currentPlayer = rb.getText();
 			// Display the selection.
-			player.setText("Current player: " + rb.getText());
+			player.setText("Current player: " + currentPlayer);
 
 		});
 		playerOne.setSelected(true);
@@ -167,16 +171,16 @@ public class Actualgame {
 		playerPanel.setAlignment(Pos.BOTTOM_CENTER);
 		playerPanel.getChildren().addAll(playerOnePanel, playerTwoPanel);
 		
-		Label mockLabel = new Label();
 		
-		VBox mockPanel = new VBox();
-		mockPanel.setAlignment(Pos.TOP_CENTER);
-		mockPanel.getChildren().add(mockLabel);
+		
+		VBox lastPlayedWordPanel = new VBox();
+		lastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
+		lastPlayedWordPanel.getChildren().add(lastPlayedWord);
 		
 		
 		VBox leftPanel = new VBox (400);
 		leftPanel.setAlignment(Pos.CENTER);
-		leftPanel.getChildren().addAll(mockPanel, playerPanel);
+		leftPanel.getChildren().addAll(lastPlayedWordPanel, playerPanel);
 		//Left Layout Ends
 		
 		
@@ -325,8 +329,6 @@ public class Actualgame {
 
 	public void forfeitTurn() {
 		
-		RadioButton rb = (RadioButton) toggleGroup.getSelectedToggle();
-		String currentPlayer = rb.getText();
 		boolean userResponse;
 		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
 		if (userResponse) {
@@ -351,14 +353,35 @@ public class Actualgame {
 
 	public void confirmWord() {
 		String playedWord = inputWord.getText();
+		String wordToTest = "";
+		String tempWord = word;
 		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
 		inputWord.clear();
 		
+		String str = playedWord.toLowerCase();
+		boolean onlyEnglishAlphabet = true;
+		char[] charArray = str.toCharArray();
+	      for (int i = 0; i < charArray.length; i++) {
+	         char ch = charArray[i];
+	         if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
+	        	 onlyEnglishAlphabet = false;
+	         }
+	      
+	   }
 		
 		
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
-		}else {
+		}else if(!onlyEnglishAlphabet) {
+			enteredWord.setText("English alphabets only.");
+		} else //all filters passed
+			{
+			wordToTest = playedWord;
+			lastPlayedWord.setText("Last Played " + tempWord + ":\n" +
+					wordToTest + "\nBy: " + currentPlayer + "\n" );
+			
+			
+			
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
 			} else if (playerTwo.isSelected()) {
@@ -371,12 +394,27 @@ public class Actualgame {
 
 	public void displayTextField() {
 		String playedWord = inputWord.getText();
+		String str = playedWord.toLowerCase();
+		boolean onlyEnglishAlphabet = true;
+		char[] charArray = str.toCharArray();
+	      for (int i = 0; i < charArray.length; i++) {
+	         char ch = charArray[i];
+	         if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
+	        	 onlyEnglishAlphabet = false;
+	         }
+	      
+	   }
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
+		} else if(!onlyEnglishAlphabet) {
+			enteredWord.setText("English alphabets only.");
+			
+		
 		} else {
 			enteredWord.setText("Press " + confirmButton + ".");
 		}
 	}
+
 	
 	public void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play", "Player One goes first.\n\n"
