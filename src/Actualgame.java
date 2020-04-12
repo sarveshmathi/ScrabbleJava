@@ -86,16 +86,15 @@ public class Actualgame {
 		player = new Label();
 		scorePlayerOne = new Label("Score");
 		scorePlayerTwo = new Label("Score");
-		playerOneLabel = new Label ("Player One");
-		playerTwoLabel = new Label ("Player Two");
-		howToPlay = new Button ("How To Play");
+		playerOneLabel = new Label("Player One");
+		playerTwoLabel = new Label("Player Two");
+		howToPlay = new Button("How To Play");
 		confirmWord = new Button("Confirm Word");
 		lastPlayedWord = new Label();
 		currentPlayer = "";
-		
+
 		confirmButton = "";
 		word = "";
-		
 
 		this.ActualGame();
 	}
@@ -108,19 +107,19 @@ public class Actualgame {
 		// creates the user letter bar
 		StackPane bottomPanel = new StackPane();
 		Rectangle bottomBar = new Rectangle(420, 60);
-		bottomBar.setArcWidth(30.0); 
-	    bottomBar.setArcHeight(30.0); 
+		bottomBar.setArcWidth(30.0);
+		bottomBar.setArcHeight(30.0);
 		bottomBar.setFill(Color.SIENNA);
 		HBox userBar = new HBox(2);
 		userBar.setAlignment(Pos.CENTER);
 		Button reset = new Button("Reset");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
-		
+
 		Button forfeitTurn = new Button("Forfeit Turn");
-		inputWord.setPromptText("Input Your Word Here");
-		
-		//Right Layout Starts
+		inputWord.setPromptText("Player One's Input");
+
+		// Right Layout Starts
 		VBox howToPlayLayout = new VBox();
 		howToPlayLayout.setAlignment(Pos.TOP_CENTER);
 		howToPlayLayout.getChildren().add(howToPlay);
@@ -128,26 +127,24 @@ public class Actualgame {
 		VBox confirmLayout = new VBox(5);
 		confirmLayout.setAlignment(Pos.CENTER);
 		confirmLayout.getChildren().addAll(enteredWord, inputWord, confirmWord);
-		
+
 		VBox forfeitResetLayout = new VBox(5);
 		forfeitResetLayout.setAlignment(Pos.CENTER);
 		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset);
-		
+
 		VBox bottomRightLayout = new VBox(20);
 		bottomRightLayout.setAlignment(Pos.BOTTOM_CENTER);
 		bottomRightLayout.getChildren().addAll(confirmLayout, forfeitResetLayout);
 
-
 		VBox rightPanel = new VBox(400);
 		rightPanel.setAlignment(Pos.TOP_LEFT);
 		rightPanel.getChildren().addAll(howToPlayLayout, bottomRightLayout);
-		//Right Layout Ends
-		
+		// Right Layout Ends
+
 		// Adding the radio buttons to a toggle group
 		playerOne.setToggleGroup(toggleGroup);
 		playerTwo.setToggleGroup(toggleGroup);
-		
-		
+
 		// This listens for change in radio buttons playerOne and playerTwo
 		toggleGroup.selectedToggleProperty().addListener((observable, oldVal, newVal) -> {
 			// Cast newVal to RadioButton.
@@ -158,37 +155,32 @@ public class Actualgame {
 
 		});
 		playerOne.setSelected(true);
-		
-		
-		//Left Layout Starts
-		HBox playerOnePanel = new HBox (10);
+
+		// Left Layout Starts
+		HBox playerOnePanel = new HBox(10);
 		playerOnePanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
-		
-		HBox playerTwoPanel = new HBox (10);
+
+		HBox playerTwoPanel = new HBox(10);
 		playerTwoPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
-		
+
 		VBox playerPanel = new VBox(20);
 		playerPanel.setAlignment(Pos.BOTTOM_CENTER);
 		playerPanel.getChildren().addAll(playerOnePanel, playerTwoPanel);
-		
-		
-		
+
 		VBox lastPlayedWordPanel = new VBox();
 		lastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
 		lastPlayedWordPanel.getChildren().add(lastPlayedWord);
-		
-		
-		VBox leftPanel = new VBox (400);
+
+		VBox leftPanel = new VBox(400);
 		leftPanel.setAlignment(Pos.CENTER);
 		leftPanel.getChildren().addAll(lastPlayedWordPanel, playerPanel);
-		//Left Layout Ends
-		
-		
+		// Left Layout Ends
+
 		StackPane topPanel = new StackPane();
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player);
-		
-		//Tooltips
+
+		// Tooltips
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
 		forfeitTurn.setTooltip(new Tooltip("Press to forfiet your turn."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
@@ -213,11 +205,11 @@ public class Actualgame {
 				confirmButton = "Confirm Word";
 				word = "word";
 			}
-			
+
 			if (newValue.equals("")) {
 				enteredWord.setText("");
 			}
-			
+
 			if (oldValue.equals("") && !newValue.equals("")) {
 				enteredWord.setText("");
 			}
@@ -290,12 +282,11 @@ public class Actualgame {
 		inputWord.setOnAction(e -> {
 			this.displayTextField();
 		});
-		
-		
+
 		howToPlay.setOnAction(e -> {
 			this.howToPlay();
 		});
-		
+
 		Rectangle rect = new Rectangle(tile_w, tile_h);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
@@ -305,7 +296,7 @@ public class Actualgame {
 		gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
 		gameRoot.setTop(topPanel);
-		
+
 	}
 
 	/**
@@ -328,11 +319,18 @@ public class Actualgame {
 	}
 
 	public void forfeitTurn() {
-		
-		boolean userResponse;
-		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
-		if (userResponse) {
 
+		boolean userResponse;
+		String tempCurrentPlayer = "";
+		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
+		
+		if (currentPlayer.equals("Player One")) {
+			tempCurrentPlayer = "Player Two";
+		}else if (currentPlayer.equals("Player Two")) {
+			tempCurrentPlayer = "Player One";
+		}
+		if (userResponse) {
+			inputWord.setPromptText(tempCurrentPlayer + "'s Input");
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
 			} else if (playerTwo.isSelected()) {
@@ -355,40 +353,46 @@ public class Actualgame {
 		String playedWord = inputWord.getText();
 		String wordToTest = "";
 		String tempWord = word;
+		String tempCurrentPlayer = "";
+
 		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
 		inputWord.clear();
-		
+
 		String str = playedWord.toLowerCase();
 		boolean onlyEnglishAlphabet = true;
 		char[] charArray = str.toCharArray();
-	      for (int i = 0; i < charArray.length; i++) {
-	         char ch = charArray[i];
-	         if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
-	        	 onlyEnglishAlphabet = false;
-	         }
-	      
-	   }
+		for (int i = 0; i < charArray.length; i++) {
+			char ch = charArray[i];
+			if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
+				onlyEnglishAlphabet = false;
+			}
+
+		}
 		
-		
+		if (currentPlayer.equals("Player One")) {
+			tempCurrentPlayer = "Player Two";
+		}else if (currentPlayer.equals("Player Two")) {
+			tempCurrentPlayer = "Player One";
+		}
+
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
-		}else if(!onlyEnglishAlphabet) {
+		} else if (!onlyEnglishAlphabet) {
 			enteredWord.setText("English alphabets only.");
-		} else //all filters passed
-			{
+		} else // all filters passed
+		{
+
 			wordToTest = playedWord;
-			lastPlayedWord.setText("Last Played " + tempWord + ":\n" +
-					wordToTest + "\nBy: " + currentPlayer + "\n" );
-			
-			
-			
+			lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest + "\nBy: " + currentPlayer + "\n");
+			inputWord.setPromptText(tempCurrentPlayer + "'s Input");
+
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
 			} else if (playerTwo.isSelected()) {
 				playerOne.fire();
 			}
+			
 		}
-		
 
 	}
 
@@ -397,35 +401,32 @@ public class Actualgame {
 		String str = playedWord.toLowerCase();
 		boolean onlyEnglishAlphabet = true;
 		char[] charArray = str.toCharArray();
-	      for (int i = 0; i < charArray.length; i++) {
-	         char ch = charArray[i];
-	         if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
-	        	 onlyEnglishAlphabet = false;
-	         }
-	      
-	   }
+		for (int i = 0; i < charArray.length; i++) {
+			char ch = charArray[i];
+			if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
+				onlyEnglishAlphabet = false;
+			}
+
+		}
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
-		} else if(!onlyEnglishAlphabet) {
+		} else if (!onlyEnglishAlphabet) {
 			enteredWord.setText("English alphabets only.");
-			
-		
+
 		} else {
 			enteredWord.setText("Press " + confirmButton + ".");
 		}
 	}
 
-	
 	public void howToPlay() {
-		AlertBox.alertWithoutUserAction("How To Play", "Player One goes first.\n\n"
-				+ "Drag and drop tiles to the board.\n\n"
-				+ "When you are finished, type the word in the text box.\n\n"
-				+ "If you made more than one word, separate them with comma.\n\n"
-				+ "Press Confirm Word/s button to play the word(s).\n\n"
-				+ "Confirm Word/s button automatically changes turn.\n\n"
-				+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
-				+ "Press Reset button to reset the game.");
+		AlertBox.alertWithoutUserAction("How To Play",
+				"Player One goes first.\n\n" + "Drag and drop tiles to the board.\n\n"
+						+ "When you are finished, type the word in the text box.\n\n"
+						+ "If you made more than one word, separate them with comma.\n\n"
+						+ "Press Confirm Word/s button to play the word(s).\n\n"
+						+ "Confirm Word/s button automatically changes turn.\n\n"
+						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
+						+ "Press Reset button to reset the game.");
 	}
-
 
 }
