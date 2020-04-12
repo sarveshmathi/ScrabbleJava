@@ -175,10 +175,12 @@ public class Actualgame {
 		leftPanel.setAlignment(Pos.CENTER);
 		leftPanel.getChildren().addAll(lastPlayedWordPanel, playerPanel);
 		// Left Layout Ends
-
+		
+		//Top Layout Starts
 		StackPane topPanel = new StackPane();
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player);
+		//Top Layout Ends
 
 		// Tooltips
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
@@ -422,7 +424,7 @@ public class Actualgame {
 
 	public void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
-				"Player One goes first.\n\n" + "Drag and drop tiles to the board.\n\n"
+				"Player One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
 						+ "If you made more than one word, separate them with comma.\n\n"
 						+ "Press Confirm Word/s button to play the word(s).\n\n"
