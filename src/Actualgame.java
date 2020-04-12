@@ -346,6 +346,8 @@ public class Actualgame {
 		if (userResponse) {
 			this.ActualGame();
 			board.newboard();
+			inputWord.clear();
+			lastPlayedWord.setText("");
 		}
 	}
 
