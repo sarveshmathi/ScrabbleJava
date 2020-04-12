@@ -183,11 +183,13 @@ public class Actualgame {
 		StackPane topPanel = new StackPane();
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player);
-
+		
+		//Tooltips
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
 		forfeitTurn.setTooltip(new Tooltip("Press to forfiet your turn."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
 		reset.setTooltip(new Tooltip("Press to reset the game."));
+		howToPlay.setTooltip(new Tooltip("Press for \"how to\" guide."));
 
 		// This changes the text in confirmWord button to "Confirm Words" if more than 1
 		// words are entered
@@ -201,11 +203,11 @@ public class Actualgame {
 			if (count > 0) {
 				confirmWord.setText("Confirm Words");
 				confirmButton = "Confirm Words";
-				word = "Words";
+				word = "words";
 			} else {
 				confirmWord.setText("Confirm Word");
 				confirmButton = "Confirm Word";
-				word = "Word";
+				word = "word";
 			}
 			
 			if (newValue.equals("")) {
@@ -326,7 +328,7 @@ public class Actualgame {
 		RadioButton rb = (RadioButton) toggleGroup.getSelectedToggle();
 		String currentPlayer = rb.getText();
 		boolean userResponse;
-		userResponse = AlertBox.alertWithUserAction("Alert", currentPlayer + ", are you sure you want to forfeit your turn?");
+		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
 		if (userResponse) {
 
 			if (playerOne.isSelected()) {
@@ -340,7 +342,7 @@ public class Actualgame {
 
 	public void resetGame() {
 		boolean userResponse;
-		userResponse = AlertBox.alertWithUserAction("Alert", "Are you sure you want to reset the game?");
+		userResponse = AlertBox.alertWithUserAction("Reset Game", "Reset the game?");
 		if (userResponse) {
 			this.ActualGame();
 			board.newboard();
@@ -348,13 +350,17 @@ public class Actualgame {
 	}
 
 	public void confirmWord() {
-
+		String playedWord = inputWord.getText();
 		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
-
+		
 		if (playerOne.isSelected()) {
 			playerTwo.fire();
 		} else if (playerTwo.isSelected()) {
 			playerOne.fire();
+		}
+		
+		if (playedWord.equals("")) {
+			enteredWord.setText("Enter a word.");
 		}
 
 	}
