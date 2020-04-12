@@ -352,16 +352,20 @@ public class Actualgame {
 	public void confirmWord() {
 		String playedWord = inputWord.getText();
 		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
+		inputWord.clear();
 		
-		if (playerOne.isSelected()) {
-			playerTwo.fire();
-		} else if (playerTwo.isSelected()) {
-			playerOne.fire();
-		}
+		
 		
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
+		}else {
+			if (playerOne.isSelected()) {
+				playerTwo.fire();
+			} else if (playerTwo.isSelected()) {
+				playerOne.fire();
+			}
 		}
+		
 
 	}
 
