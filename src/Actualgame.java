@@ -117,7 +117,7 @@ public class Actualgame {
 		// topPane.getChildren().add(reset);
 
 		Button forfeitTurn = new Button("Forfeit Turn");
-		inputWord.setPromptText("Player One's Input");
+		inputWord.setPromptText("Player One's Turn");
 
 		// Right Layout Starts
 		VBox howToPlayLayout = new VBox();
@@ -324,15 +324,18 @@ public class Actualgame {
 
 		boolean userResponse;
 		String tempCurrentPlayer = "";
-		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
 		
 		if (currentPlayer.equals("Player One")) {
 			tempCurrentPlayer = "Player Two";
 		}else if (currentPlayer.equals("Player Two")) {
 			tempCurrentPlayer = "Player One";
 		}
+		
+		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
+		
+		
 		if (userResponse) {
-			inputWord.setPromptText(tempCurrentPlayer + "'s Input");
+			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
 			} else if (playerTwo.isSelected()) {
@@ -388,7 +391,7 @@ public class Actualgame {
 
 			wordToTest = playedWord;
 			lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest + "\nBy: " + currentPlayer + "\n");
-			inputWord.setPromptText(tempCurrentPlayer + "'s Input");
+			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
 
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
