@@ -156,6 +156,11 @@ public class Actualgame {
 			currentPlayer = rb.getText();
 			// Display the selection.
 			player.setText("Current player: " + currentPlayer);
+			if (playerOne.isSelected() == true) {
+				gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of screen
+			} else if (playerTwo.isSelected() == true) {
+				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
+			}
 
 		});
 		playerOne.setSelected(true);
@@ -220,8 +225,10 @@ public class Actualgame {
 				enteredWord.setText("");
 			}
 		});
-		makerack(bottomPanel, lb);
-		makerack(bottomPanel2, lb);
+
+		// this makes rack for each player
+		player1.rackletters = makerack(bottomPanel, lb);
+		player2.rackletters = makerack(bottomPanel2, lb);
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -263,7 +270,14 @@ public class Actualgame {
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setPadding(new Insets(10, 10, 10, 10));
 		gameRoot.setCenter(board);// put the board in the middle
-		gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of screen
+
+		if (playerOne.isSelected() == true) {
+			gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of screen
+		} else if (playerTwo.isSelected() == true) {
+			gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
+		}
+		// gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of
+		// screen
 		gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
 		gameRoot.setTop(topPanel);
