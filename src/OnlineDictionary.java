@@ -18,7 +18,7 @@ public class OnlineDictionary {
 	 * @return
 	 */
 	
-	public boolean checkWord(String word) {
+	public static boolean checkWord(String word) {
 		String url = "https://scrabble.merriam.com/finder/" + word; // the URL to check if a word is in the dictionary or not
 		try {
 			Document doc = Jsoup.connect(url).get();
