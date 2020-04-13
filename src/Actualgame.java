@@ -56,6 +56,8 @@ public class Actualgame {
 	Button confirmWord;
 	Label lastPlayedWord;
 	String currentPlayer;
+	String totalScorePlayerOne;
+	String totalScorePlayerTwo;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -84,14 +86,16 @@ public class Actualgame {
 		inputWord = new TextField();
 		enteredWord = new Label();
 		player = new Label();
-		scorePlayerOne = new Label("Score");
-		scorePlayerTwo = new Label("Score");
+		scorePlayerOne = new Label();
+		scorePlayerTwo = new Label();
 		playerOneLabel = new Label("Player One");
 		playerTwoLabel = new Label("Player Two");
 		howToPlay = new Button("How To Play");
 		confirmWord = new Button("Confirm Word");
 		lastPlayedWord = new Label();
 		currentPlayer = "";
+		totalScorePlayerOne = "0";
+		totalScorePlayerTwo = "0";
 
 		confirmButton = "";
 		word = "";
@@ -118,6 +122,8 @@ public class Actualgame {
 
 		Button forfeitTurn = new Button("Forfeit Turn");
 		inputWord.setPromptText("Player One's Turn");
+		scorePlayerOne.setText(totalScorePlayerOne);
+		scorePlayerTwo.setText(totalScorePlayerTwo);
 
 		// Right Layout Starts
 		VBox howToPlayLayout = new VBox();
@@ -388,10 +394,31 @@ public class Actualgame {
 			enteredWord.setText("English alphabets only.");
 		} else // all filters passed
 		{
-
+			
 			wordToTest = playedWord;
 			lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest + "\nBy: " + currentPlayer + "\n");
 			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
+			
+			//Test codes begin
+			
+			ArrayList<String> wordToTestArray = new ArrayList<String>();
+			wordToTestArray.add(wordToTest);
+			int score = Scoring.checkInput(wordToTestArray);
+			
+			if (score != -1) {
+				if (currentPlayer.equals("Player One")) {
+					int playerOneScore = Integer.parseInt(totalScorePlayerOne) + score;
+					scorePlayerOne.setText("" + playerOneScore);
+					totalScorePlayerOne = "" + playerOneScore;
+				} else if (currentPlayer.equals("Player Two")) {
+					int playerTwoScore = Integer.parseInt(totalScorePlayerTwo) + score;
+					scorePlayerTwo.setText("" + playerTwoScore);
+					totalScorePlayerTwo = "" + playerTwoScore;
+				}
+			}
+			
+			//Test codes end
+			
 
 			if (playerOne.isSelected()) {
 				playerTwo.fire();

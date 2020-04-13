@@ -15,19 +15,19 @@ public class Scoring {
 	 * invalid word in the Rejected (Incorrect word: word,-1"
 	 */
 
-	public static String checkInput(ArrayList<String> inputArray) {
+	public static int checkInput(ArrayList<String> inputArray) {
 		System.out.println("Checking words . . . ");
 		int totalScore = 0;
 		for (String word : inputArray) {
 			if (!OnlineDictionary.checkWord(word)) {
 				System.out.println("Check complete");
-				return ("Rejected (Incorrect word: " + word + "),-1");
+				return -1;
 			} else {
 				totalScore += wordPoints(word);
 			}
 		}
 		System.out.println("Check complete");
-		return "Accepted," + totalScore;
+		return totalScore;
 	}
 	
 /**
