@@ -3,9 +3,11 @@ import java.util.Arrays;
 
 import javafx.event.EventHandler;
 import javafx.scene.Parent;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.DataFormat;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
 /**
@@ -147,7 +149,25 @@ public class Board extends Parent {
 						success = true;
 						getChildren().add(bt.holds);
 						boardgen();
-						bt.setMouseTransparent(true);
+						// bt.setMouseTransparent(true);
+					}
+					if (bt.holds != null) {
+						bt.setOnDragDetected(new EventHandler<MouseEvent>() {
+							public void handle(MouseEvent event) {
+								/* drag was detected, start a drag-and-drop gesture */
+								/* allow any transfer mode */
+								Dragboard db = bt.holds.startDragAndDrop(TransferMode.MOVE);
+								/* Put a string on a dragboard */
+								ClipboardContent content = new ClipboardContent();
+								// content.putString(letter.toString());
+								content.put(LetterTilePic, bt.holds);
+								// content.getFiles();
+								// currentTile.getClass();
+								db.setContent(content);
+								bt.holds = null;
+								event.consume();
+							}
+						});
 					}
 					/*
 					 * let the source know whether the string was successfully transferred and used
