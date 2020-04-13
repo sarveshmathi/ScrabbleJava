@@ -221,7 +221,7 @@ public class Actualgame {
 			}
 		});
 		makerack(bottomPanel, lb);
-
+		makerack(bottomPanel2, lb);
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -437,7 +437,7 @@ public class Actualgame {
 	/**
 	 * this method makes a letter rack
 	 */
-	public void makerack(StackPane bottomPanel, LetterBag2 lb) {
+	public ArrayList<LetterTilePic> makerack(StackPane bottomPanel, LetterBag2 lb) {
 		Rectangle bottomBar = new Rectangle(420, 60);
 		bottomBar.setArcWidth(30.0);
 		bottomBar.setArcHeight(30.0);
@@ -513,7 +513,7 @@ public class Actualgame {
 				event.consume();
 			}
 		});
-
+		return rackletters;
 	}
 
 }
