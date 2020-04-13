@@ -113,6 +113,7 @@ public class Actualgame {
 		LetterTilePic lp;
 		// creates the user letter bar
 		StackPane bottomPanel = new StackPane();
+		StackPane bottomPanel2 = new StackPane();// for user 2
 		Button reset = new Button("Reset");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
@@ -462,6 +463,7 @@ public class Actualgame {
 					// content.getFiles();
 					currentTile.getClass();
 					db.setContent(content);
+					userBar.getChildren().remove(letter);
 					event.consume();
 				}
 			});
@@ -471,12 +473,47 @@ public class Actualgame {
 					/* the drag and drop gesture ended */
 					/* if the data was successfully moved, clear it */
 					if (event.getTransferMode() == TransferMode.MOVE) {
-						userBar.getChildren().remove(letter);
+						// userBar.getChildren().remove(letter);
 					}
 					event.consume();
 				}
 			});
 		}
+		userBar.setOnDragOver(new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				System.out.println("test1");
+				/* data is dragged over the target */
+				/*
+				 * accept it only if it is not dragged from the same node and if it isn't
+				 * holding a card
+				 */
+				if (event.getGestureSource() != userBar) {
+					/* allow for both copying and moving, whatever user chooses */
+					event.acceptTransferModes(TransferMode.MOVE);
+				}
+				event.consume();
+			}
+		});
+		userBar.setOnDragDropped(new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				/* data dropped */
+				/* if there is a string data on dragboard, read it and use it */
+				Dragboard db = event.getDragboard();
+				Object j = db.getContent(LetterTilePic);
+				// bt.holds = (LetterTilePic) event.getGestureSource();
+				boolean success = false;
+				if (userBar.getChildren().size() <= 7) {
+					success = true;
+					userBar.getChildren().add((LetterTilePic) event.getGestureSource());
+				}
+				/*
+				 * let the source know whether the string was successfully transferred and used
+				 */
+				event.setDropCompleted(success);
+				event.consume();
+			}
+		});
+
 	}
 
 }
