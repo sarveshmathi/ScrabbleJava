@@ -7,7 +7,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class TileCreator {
-	private LetterTile letter;
 	private Image image;
 	private Rectangle rect;
 	private Scene s;
