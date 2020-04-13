@@ -14,8 +14,8 @@ public class OnlineDictionary {
 	/**
 	 * This method returns true if input word is allowed according to official online Scrabble dictionary (https://scrabble.merriam.com). 
 	 * Uses JSoup library to parse HTML. Requires Internet connection.
-	 * @param word - the word
-	 * @return
+	 * @param word the word to check
+	 * @return true if word accepted and false if word rejected
 	 */
 	
 	public static boolean checkWord(String word) {

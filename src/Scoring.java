@@ -9,11 +9,10 @@ import java.util.ArrayList;
 public class Scoring {
 	
 	/**
-	 * This method takes an ArrayList of words and returns the total score if the words are acceptable
-	 * in the format "Accepted,score" or if there is an invalid word it returns a string in the 
-	 * format Rejected (Incorrect word: word,-1"
+	 * This method takes an ArrayList of words and returns the total score if the words are acceptable or -1
 	 * @param inputArray
-	 * @return
+	 * @return String in the format "Accepted,score" or if there is an 
+	 * invalid word in the Rejected (Incorrect word: word,-1"
 	 */
 
 	public static String checkInput(ArrayList<String> inputArray) {
@@ -32,9 +31,9 @@ public class Scoring {
 	}
 	
 /**
- * Calculates the total points for an accepted word and returns an integer
+ * Calculates the total points for an accepted word 
  * @param word
- * @return
+ * @return total points for a word
  */
 	private static int wordPoints(String word) {
 		int wordPoints = 0;
