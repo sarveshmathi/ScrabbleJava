@@ -34,7 +34,6 @@ public class LetterTilePic extends Parent implements Serializable {
 			this.quantity = quantity;
 			// TODO Auto-generated constructor stub
 		}
-		
 
 	}
 
