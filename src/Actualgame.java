@@ -396,8 +396,9 @@ public class Actualgame {
 		{
 			
 			wordToTest = playedWord;
-			lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest + "\nBy: " + currentPlayer + "\n");
-			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
+			String status = "";
+			String points = "";
+			
 			
 			//Test codes begin
 			
@@ -406,18 +407,31 @@ public class Actualgame {
 			int score = Scoring.checkInput(wordToTestArray);
 			
 			if (score != -1) {
+				status = "Accepted";
+				points = "" + score;
 				if (currentPlayer.equals("Player One")) {
 					int playerOneScore = Integer.parseInt(totalScorePlayerOne) + score;
 					scorePlayerOne.setText("" + playerOneScore);
+					
 					totalScorePlayerOne = "" + playerOneScore;
 				} else if (currentPlayer.equals("Player Two")) {
 					int playerTwoScore = Integer.parseInt(totalScorePlayerTwo) + score;
 					scorePlayerTwo.setText("" + playerTwoScore);
 					totalScorePlayerTwo = "" + playerTwoScore;
 				}
+			} else {
+				status = "Denied";
+				points = "0";
 			}
 			
 			//Test codes end
+			
+			lastPlayedWord.setText("Last played " + tempWord 
+					+ ":\n" + wordToTest.toUpperCase()
+					+ "\nBy: " + currentPlayer 
+					+ "\nStatus: " + status
+					+ "\nPoints: " + points);
+			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
 			
 
 			if (playerOne.isSelected()) {
