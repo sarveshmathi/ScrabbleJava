@@ -17,7 +17,7 @@ import javafx.scene.input.TransferMode;
 
 public class Player extends Parent {
 	private int number; // player 0 or 1
-	private String name; // player name
+	// private String name; // player name
 	private int score;
 	public ArrayList<LetterTilePic> rackletters;
 
@@ -27,9 +27,8 @@ public class Player extends Parent {
 	 * @param number - the player's number
 	 * @param name   - the player's name
 	 */
-	public Player(int number, String name) {
+	public Player(int number) {
 		this.number = number;
-		this.name = name;
 		this.score = 0;
 	}
 

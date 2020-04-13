@@ -58,6 +58,8 @@ public class Actualgame {
 	String currentPlayer;
 	String totalScorePlayerOne;
 	String totalScorePlayerTwo;
+	private Player player1;
+	private Player player2;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -99,7 +101,8 @@ public class Actualgame {
 
 		confirmButton = "";
 		word = "";
-
+		player1 = new Player(1);
+		player2 = new Player(2);
 		this.ActualGame();
 	}
 
@@ -181,12 +184,12 @@ public class Actualgame {
 		leftPanel.setAlignment(Pos.CENTER);
 		leftPanel.getChildren().addAll(lastPlayedWordPanel, playerPanel);
 		// Left Layout Ends
-		
-		//Top Layout Starts
+
+		// Top Layout Starts
 		StackPane topPanel = new StackPane();
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player);
-		//Top Layout Ends
+		// Top Layout Ends
 
 		// Tooltips
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
@@ -330,16 +333,15 @@ public class Actualgame {
 
 		boolean userResponse;
 		String tempCurrentPlayer = "";
-		
+
 		if (currentPlayer.equals("Player One")) {
 			tempCurrentPlayer = "Player Two";
-		}else if (currentPlayer.equals("Player Two")) {
+		} else if (currentPlayer.equals("Player Two")) {
 			tempCurrentPlayer = "Player One";
 		}
-		
+
 		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
-		
-		
+
 		if (userResponse) {
 			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
 			if (playerOne.isSelected()) {
@@ -381,10 +383,10 @@ public class Actualgame {
 			}
 
 		}
-		
+
 		if (currentPlayer.equals("Player One")) {
 			tempCurrentPlayer = "Player Two";
-		}else if (currentPlayer.equals("Player Two")) {
+		} else if (currentPlayer.equals("Player Two")) {
 			tempCurrentPlayer = "Player One";
 		}
 
@@ -394,25 +396,24 @@ public class Actualgame {
 			enteredWord.setText("English alphabets only.");
 		} else // all filters passed
 		{
-			
+
 			wordToTest = playedWord;
 			String status = "";
 			String points = "";
-			
-			
-			//Test codes begin
-			
+
+			// Test codes begin
+
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
 			int score = Scoring.checkInput(wordToTestArray);
-			
+
 			if (score != -1) {
 				status = "Accepted";
 				points = "" + score;
 				if (currentPlayer.equals("Player One")) {
 					int playerOneScore = Integer.parseInt(totalScorePlayerOne) + score;
 					scorePlayerOne.setText("" + playerOneScore);
-					
+
 					totalScorePlayerOne = "" + playerOneScore;
 				} else if (currentPlayer.equals("Player Two")) {
 					int playerTwoScore = Integer.parseInt(totalScorePlayerTwo) + score;
@@ -423,23 +424,19 @@ public class Actualgame {
 				status = "Denied";
 				points = "0";
 			}
-			
-			//Test codes end
-			
-			lastPlayedWord.setText("Last played " + tempWord 
-					+ ":\n" + wordToTest.toUpperCase()
-					+ "\nBy: " + currentPlayer 
-					+ "\nStatus: " + status
-					+ "\nPoints: " + points);
+
+			// Test codes end
+
+			lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest.toUpperCase() + "\nBy: "
+					+ currentPlayer + "\nStatus: " + status + "\nPoints: " + points);
 			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
-			
 
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
 			} else if (playerTwo.isSelected()) {
 				playerOne.fire();
 			}
-			
+
 		}
 
 	}
