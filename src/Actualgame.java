@@ -113,12 +113,6 @@ public class Actualgame {
 		LetterTilePic lp;
 		// creates the user letter bar
 		StackPane bottomPanel = new StackPane();
-		Rectangle bottomBar = new Rectangle(420, 60);
-		bottomBar.setArcWidth(30.0);
-		bottomBar.setArcHeight(30.0);
-		bottomBar.setFill(Color.SIENNA);
-		HBox userBar = new HBox(2);
-		userBar.setAlignment(Pos.CENTER);
 		Button reset = new Button("Reset");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
@@ -225,42 +219,7 @@ public class Actualgame {
 				enteredWord.setText("");
 			}
 		});
-
-		// distribute letters
-		bottomPanel.setAlignment(Pos.CENTER);
-		bottomPanel.getChildren().addAll(bottomBar, userBar);
-		rackletters = lb.getLetters(7);
-		for (LetterTilePic letter : rackletters) {
-			userBar.getChildren().add(letter);
-			// letter.onMouseDragEnteredProperty();
-			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					/* drag was detected, start a drag-and-drop gesture */
-					/* allow any transfer mode */
-					currentTile = letter;
-					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
-					/* Put a string on a dragboard */
-					ClipboardContent content = new ClipboardContent();
-					content.putString(letter.toString());
-					content.put(LetterTilePic, currentTile);
-					// content.getFiles();
-					currentTile.getClass();
-					db.setContent(content);
-					event.consume();
-				}
-			});
-
-			letter.setOnDragDone(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					/* the drag and drop gesture ended */
-					/* if the data was successfully moved, clear it */
-					if (event.getTransferMode() == TransferMode.MOVE) {
-						userBar.getChildren().remove(letter);
-					}
-					event.consume();
-				}
-			});
-		}
+		makerack(bottomPanel, lb);
 
 		/*
 		 * This is to let the player forfeit their turn.
@@ -472,6 +431,52 @@ public class Actualgame {
 						+ "Confirm Word/s button automatically changes turn.\n\n"
 						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
 						+ "Press Reset button to reset the game.");
+	}
+
+	/**
+	 * this method makes a letter rack
+	 */
+	public void makerack(StackPane bottomPanel, LetterBag2 lb) {
+		Rectangle bottomBar = new Rectangle(420, 60);
+		bottomBar.setArcWidth(30.0);
+		bottomBar.setArcHeight(30.0);
+		bottomBar.setFill(Color.SIENNA);
+		HBox userBar = new HBox(2);
+		userBar.setAlignment(Pos.CENTER);
+		bottomPanel.setAlignment(Pos.CENTER);
+		bottomPanel.getChildren().addAll(bottomBar, userBar);
+		rackletters = lb.getLetters(7);
+		for (LetterTilePic letter : rackletters) {
+			userBar.getChildren().add(letter);
+			// letter.onMouseDragEnteredProperty();
+			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					/* drag was detected, start a drag-and-drop gesture */
+					/* allow any transfer mode */
+					currentTile = letter;
+					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
+					/* Put a string on a dragboard */
+					ClipboardContent content = new ClipboardContent();
+					content.putString(letter.toString());
+					content.put(LetterTilePic, currentTile);
+					// content.getFiles();
+					currentTile.getClass();
+					db.setContent(content);
+					event.consume();
+				}
+			});
+
+			letter.setOnDragDone(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* the drag and drop gesture ended */
+					/* if the data was successfully moved, clear it */
+					if (event.getTransferMode() == TransferMode.MOVE) {
+						userBar.getChildren().remove(letter);
+					}
+					event.consume();
+				}
+			});
+		}
 	}
 
 }
