@@ -387,9 +387,15 @@ public class Actualgame {
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
 			int score = Scoring.checkInput(wordToTestArray);
-			// tester for player1
-			scoring.checkInputboard(wordToTestArray, board, player1);
-			System.out.println(player1.score);
+			// tester for player1 and player 2 correctly
+			if (playerOne.isSelected()) {
+				scoring.checkInputboard(wordToTestArray, board, player1);
+				System.out.println(player1.score);
+			}
+			if (playerTwo.isSelected()) {
+				scoring.checkInputboard(wordToTestArray, board, player2);
+				System.out.println(player2.score);
+			}
 			if (score != -1) {
 				status = "Accepted";
 				points = "" + score;
