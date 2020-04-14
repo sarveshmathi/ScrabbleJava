@@ -62,20 +62,20 @@ public class Board extends Parent {
 	/**
 	 * This method prints board on the console.
 	 */
-	public void printBoard() {
-		for (int i = 0; i < tiles.length; i++) {
-			BoardTile bt = tiles[i];
-			if (i % 15 == 0) {
-				System.out.println();
-			}
-			if (!bt.getTileType().equals("N")) {
-				System.out.format("%7s", tiles[i].getTileType());
-			} else {
-				System.out.format("%7s", tiles[i].getTileNumber());
-			}
-
-		}
-	}
+//	public void printBoard() {
+//		for (int i = 0; i < tiles.length; i++) {
+//			BoardTile bt = tiles[i];
+//			if (i % 15 == 0) {
+//				System.out.println();
+//			}
+//			if (!bt.getTileType().equals("N")) {
+//				System.out.format("%7s", tiles[i].getTileType());
+//			} else {
+//				System.out.format("%7s", tiles[i].getTileNumber());
+//			}
+//
+//		}
+//	}
 
 	/**
 	 * this method only updates the board after each move (we should update scoring
@@ -96,11 +96,6 @@ public class Board extends Parent {
 		}
 	}
 
-	public static void main(String[] args) {
-		Board b = new Board();
-		b.printBoard();
-
-	}
 
 	public BoardTile getTile() {
 		return tile;

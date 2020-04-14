@@ -34,7 +34,6 @@ public class Player extends Parent {
 
 	public void turn() {
 		ArrayList<LetterTilePic> currentletters;
-
 	}
 
 	public void genrack(LetterBag2 lb) {

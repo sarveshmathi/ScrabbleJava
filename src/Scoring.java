@@ -13,8 +13,7 @@ public class Scoring {
 	 * words are acceptable or -1
 	 * 
 	 * @param inputArray
-	 * @return String in the format "Accepted,score" or if there is an invalid word
-	 *         in the Rejected (Incorrect word: word,-1"
+	 * @return returns total score or -1 
 	 */
 
 	public static int checkInput(ArrayList<String> inputArray) {
@@ -22,13 +21,13 @@ public class Scoring {
 		int totalScore = 0;
 		for (String word : inputArray) {
 			if (!OnlineDictionary.checkWord(word)) {
-				System.out.println("Check complete");
+				System.out.println("Checking words complete");
 				return -1;
 			} else {
 				totalScore += wordPoints(word);
 			}
 		}
-		System.out.println("Check complete");
+		System.out.println("Checking words  complete");
 		return totalScore;
 	}
 

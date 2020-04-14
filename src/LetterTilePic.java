@@ -1,11 +1,4 @@
-
-/**
- * Represents a standard letter tile
- * @author sarvesh
- *
- */
 import java.io.Serializable;
-
 import javafx.scene.Parent;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -15,10 +8,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
+/**
+ * Represents a standard letter tile
+ * @author Team 51
+ *
+ */
+
 public class LetterTilePic extends Parent implements Serializable {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 
 	public enum Letters {

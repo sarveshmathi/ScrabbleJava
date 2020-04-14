@@ -33,8 +33,39 @@ class JUnitTests {
 		ArrayList<String> words = new ArrayList<String>();
 		words.add("hello");
 		words.add("bye");
-		assertEquals("Accepted,16", Scoring.checkInput(words));
+		assertEquals(16, Scoring.checkInput(words));
 	}
+	
+	/**
+	 * This test randomly check if a letter's point and quantity are correct
+	 */
+	@Test
+	public void testLetterPointsAndQuanity() {
+		int sLetterPoints = LetterTilePic.Letters.valueOf("S").points;
+		assertEquals(1,sLetterPoints);
+		int sLetterQuantity = LetterTilePic.Letters.valueOf("S").quantity;
+		assertEquals(4,sLetterQuantity);
+		int zLetterPoints = LetterTilePic.Letters.valueOf("Z").points;
+		assertEquals(10,zLetterPoints);
+		int zLetterQuantity = LetterTilePic.Letters.valueOf("Z").quantity;
+		assertEquals(1,zLetterQuantity);
+	}
+	
+	/**
+	 * This test checks if the the right number of letters are returned from the letter bag when asked for 
+	 * and the bag counter is keeping track of the total number of letters remaining.
+	 */
+	@Test
+	public void testGetLetters() {
+		LetterBag2 lb = new LetterBag2();
+		ArrayList<LetterTilePic> ltp1 = lb.getLetters(7);
+		assertEquals(7, ltp1.size()); //checks if 7 letters were returned
+		ArrayList<LetterTilePic> ltp2 = lb.getLetters(3);
+		assertEquals(10, lb.getLettersGivenCounter()); //checks if counter knows that 10 letters were given in total
+		
+	}
+	
+	
 	
 	
 	
