@@ -126,7 +126,7 @@ public class Actualgame {
 
 		// Right Layout Starts
 		VBox howToPlayLayout = new VBox();
-		howToPlayLayout.setAlignment(Pos.TOP_CENTER);
+		howToPlayLayout.setAlignment(Pos.CENTER);
 		howToPlayLayout.getChildren().add(howToPlay);
 
 		VBox confirmLayout = new VBox(5);
@@ -138,11 +138,11 @@ public class Actualgame {
 		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset, refill);
 
 		VBox bottomRightLayout = new VBox(20);
-		bottomRightLayout.setAlignment(Pos.BOTTOM_CENTER);
+		bottomRightLayout.setAlignment(Pos.CENTER);
 		bottomRightLayout.getChildren().addAll(confirmLayout, forfeitResetLayout);
 
 		VBox rightPanel = new VBox(400);
-		rightPanel.setAlignment(Pos.TOP_LEFT);
+		rightPanel.setAlignment(Pos.CENTER);
 		rightPanel.getChildren().addAll(howToPlayLayout, bottomRightLayout);
 		// Right Layout Ends
 
@@ -191,6 +191,10 @@ public class Actualgame {
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player);
 		// Top Layout Ends
+		
+		// Bottom layout
+		bottomPanel.setAlignment(Pos.CENTER);
+		bottomPanel2.setAlignment(Pos.CENTER);
 
 		// Tooltips
 		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
@@ -230,6 +234,7 @@ public class Actualgame {
 		// this makes rack for each player
 		player1.rackletters = makerack(bottomPanel, lb);
 		player2.rackletters = makerack(bottomPanel2, lb);
+		
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -239,7 +244,7 @@ public class Actualgame {
 		});
 
 		/*
-		 * This reset the game.
+		 * This resets the game.
 		 */
 
 		reset.setOnAction(e -> {
@@ -340,7 +345,7 @@ public class Actualgame {
 	}
 
 	public void confirmWord() {
-		String playedWord = inputWord.getText();
+		String playedWord = inputWord.getText().trim();
 		String wordToTest = "";
 		String tempWord = word;
 		String tempCurrentPlayer = "";
@@ -483,6 +488,8 @@ public class Actualgame {
 					db.setContent(content);
 					userBar.getChildren().remove(letter);
 					rackletters.remove(letter);
+					
+					
 					event.consume();
 					System.out.println("i'm being touched");
 				}
