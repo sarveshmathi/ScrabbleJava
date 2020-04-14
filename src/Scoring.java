@@ -98,7 +98,13 @@ public class Scoring {
 						// if you found the word
 						if (isWordPresent(board2d, word, row, col, 0, 1) != 0
 								|| isWordPresent(board2d, word, row, col, 0, -1) != 0) {
-							turnpoints = isWordPresent(board2d, word, row, col, 0, 1);
+							// see which is the non zero one
+							if (isWordPresent(board2d, word, row, col, 0, 1) != 0) {
+								turnpoints = isWordPresent(board2d, word, row, col, 0, 1);
+							}
+							if (isWordPresent(board2d, word, row, col, 1, 0) != 0) {
+								turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
+							}
 							present = true;
 							break outer;
 						}
@@ -107,7 +113,13 @@ public class Scoring {
 						// if you found the word
 						if (isWordPresent(board2d, word, row, col, 1, 0) != 0
 								|| isWordPresent(board2d, word, row, col, -1, 0) != 0) {
-							turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
+
+							if (isWordPresent(board2d, word, row, col, 1, 0) != 0) {
+								turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
+							}
+							if (isWordPresent(board2d, word, row, col, -1, 0) != 0) {
+								turnpoints = isWordPresent(board2d, word, row, col, -1, 0);
+							}
 							present = true;
 							break outer;
 						}
