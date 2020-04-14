@@ -386,7 +386,7 @@ public class Actualgame {
 
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
-			int score = Scoring.checkInput(wordToTestArray);
+			// int score = Scoring.checkInput(wordToTestArray);
 			// tester for player1 and player 2 correctly
 			if (playerOne.isSelected()) {
 				scoring.checkInputboard(wordToTestArray, board, player1);
@@ -396,23 +396,33 @@ public class Actualgame {
 				scoring.checkInputboard(wordToTestArray, board, player2);
 				System.out.println(player2.score);
 			}
-			if (score != -1) {
-				status = "Accepted";
-				points = "" + score;
-				if (currentPlayer.equals("Player One")) {
-					int playerOneScore = Integer.parseInt(totalScorePlayerOne) + score;
-					scorePlayerOne.setText("" + playerOneScore);
 
-					totalScorePlayerOne = "" + playerOneScore;
-				} else if (currentPlayer.equals("Player Two")) {
-					int playerTwoScore = Integer.parseInt(totalScorePlayerTwo) + score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
-				}
+			if (currentPlayer.equals("Player One")) {
+				int playerOneScore = player1.score;
+				scorePlayerOne.setText("" + playerOneScore);
+
+				totalScorePlayerOne = "" + playerOneScore;
+			} else if (currentPlayer.equals("Player Two")) {
+				int playerTwoScore = player2.score;
+				scorePlayerTwo.setText("" + playerTwoScore);
+				totalScorePlayerTwo = "" + playerTwoScore;
 			} else {
 				status = "Denied";
 				points = "0";
 			}
+
+			/**
+			 * if (score != -1) { status = "Accepted"; points = "" + score; if
+			 * (currentPlayer.equals("Player One")) { int playerOneScore =
+			 * Integer.parseInt(totalScorePlayerOne) + score; scorePlayerOne.setText("" +
+			 * playerOneScore);
+			 * 
+			 * totalScorePlayerOne = "" + playerOneScore; } else if
+			 * (currentPlayer.equals("Player Two")) { int playerTwoScore =
+			 * Integer.parseInt(totalScorePlayerTwo) + score; scorePlayerTwo.setText("" +
+			 * playerTwoScore); totalScorePlayerTwo = "" + playerTwoScore; } } else { status
+			 * = "Denied"; points = "0"; }
+			 */
 
 			// Test codes end
 
