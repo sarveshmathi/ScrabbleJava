@@ -106,6 +106,14 @@ public class Board extends Parent {
 		return tile;
 	}
 
+	public void turnoffdrag() {
+		for (BoardTile t : tiles) {
+			if (t.holds != null) {
+				t.setMouseTransparent(true);
+			}
+		}
+	}
+
 	/**
 	 * this method creates a new board display instance
 	 */

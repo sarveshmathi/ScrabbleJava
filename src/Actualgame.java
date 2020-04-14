@@ -161,7 +161,7 @@ public class Actualgame {
 			} else if (playerTwo.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
 			}
-
+			board.turnoffdrag();
 		});
 		playerOne.setSelected(true);
 
