@@ -1,4 +1,7 @@
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -6,6 +9,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -24,9 +29,9 @@ public class BoardDisplay extends Application {
 
 	// Override the start() method.
 	@Override
-	public void start(Stage primaryStage) {
+	public void start(Stage primaryStage) throws FileNotFoundException {
 		this.primaryStage = primaryStage;
-		Button startButton = new Button("Start");
+		Button startButton = new Button();
 
 		// Handle action events for "Start" button.
 		startButton.setOnAction(e -> {
@@ -41,6 +46,8 @@ public class BoardDisplay extends Application {
 		exitButton.setOnAction(e -> {
 			this.closeProgram();
 		});
+		
+		
 
 		primaryStage.setOnCloseRequest(e -> {
 			// Consumes the system close event
@@ -66,7 +73,7 @@ public class BoardDisplay extends Application {
 		root.getChildren().addAll(startButton, instructionButton, exitButton);
 		root.setAlignment(Pos.CENTER);
 		startButton.setAlignment(Pos.CENTER);
-		Scene scene = new Scene(root, 950, 750);
+		Scene scene = new Scene(root, 1200, 800);
 		root.setId("mainpage");
 		scene.getStylesheets().add("scrabblestyle.css");
 		primaryStage.setTitle("SCRABBLE");
