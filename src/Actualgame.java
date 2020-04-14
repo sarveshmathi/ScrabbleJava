@@ -487,8 +487,8 @@ public class Actualgame {
 				public void handle(DragEvent event) {
 					/* the drag and drop gesture ended */
 					/* if the data was successfully moved, clear it */
-					if (event.getTransferMode() == TransferMode.MOVE) {
-						// userBar.getChildren().remove(letter);
+					if (event.getTransferMode() != TransferMode.MOVE) {
+						userBar.getChildren().add(letter);
 					}
 					event.consume();
 				}
@@ -496,7 +496,7 @@ public class Actualgame {
 		}
 		userBar.setOnDragOver(new EventHandler<DragEvent>() {
 			public void handle(DragEvent event) {
-				//System.out.println("test1");
+				// System.out.println("test1");
 				/* data is dragged over the target */
 				/*
 				 * accept it only if it is not dragged from the same node and if it isn't
