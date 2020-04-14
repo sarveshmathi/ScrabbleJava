@@ -115,6 +115,7 @@ public class Actualgame {
 		StackPane bottomPanel = new StackPane();
 		StackPane bottomPanel2 = new StackPane();// for user 2
 		Button reset = new Button("Reset");
+		Button refill = new Button("Refill");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
 
@@ -134,7 +135,7 @@ public class Actualgame {
 
 		VBox forfeitResetLayout = new VBox(5);
 		forfeitResetLayout.setAlignment(Pos.CENTER);
-		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset);
+		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset, refill);
 
 		VBox bottomRightLayout = new VBox(20);
 		bottomRightLayout.setAlignment(Pos.BOTTOM_CENTER);
