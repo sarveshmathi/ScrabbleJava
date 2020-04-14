@@ -96,7 +96,6 @@ public class Board extends Parent {
 		}
 	}
 
-
 	public BoardTile getTile() {
 		return tile;
 	}
@@ -145,7 +144,6 @@ public class Board extends Parent {
 					Dragboard db = event.getDragboard();
 					Object j = db.getContent(LetterTilePic);
 					bt.holds = (LetterTilePic) event.getGestureSource();
-					// bt.holds = (LetterTilePic) j;
 					// bt.holds = (LetterTilePic) event.getAcceptingObject();
 					boolean success = false;
 					if (bt.getholds() != null) {
@@ -154,29 +152,30 @@ public class Board extends Parent {
 						boardgen();
 						// bt.setMouseTransparent(true);
 					}
-					if (bt.holds != null) {
-						bt.setOnDragDetected(new EventHandler<MouseEvent>() {
-							public void handle(MouseEvent event) {
-								/* drag was detected, start a drag-and-drop gesture */
-								/* allow any transfer mode */
-								Dragboard db = bt.holds.startDragAndDrop(TransferMode.MOVE);
-								/* Put a string on a dragboard */
-								ClipboardContent content = new ClipboardContent();
-								// content.putString(letter.toString());
-								content.put(LetterTilePic, bt.holds);
-								db.setContent(content);
-								bt.holds = null;
-								event.consume();
-							}
-						});
-					}
-					/*
-					 * let the source know whether the string was successfully transferred and used
-					 */
 					event.setDropCompleted(success);
 					event.consume();
 				}
 			});
+			if (bt.holds != null) {
+				bt.setOnDragDetected(new EventHandler<MouseEvent>() {
+					public void handle(MouseEvent event) {
+						/* drag was detected, start a drag-and-drop gesture */
+						/* allow any transfer mode */
+						Dragboard db = bt.holds.startDragAndDrop(TransferMode.MOVE);
+						/* Put a string on a dragboard */
+						ClipboardContent content = new ClipboardContent();
+						// content.putString(letter.toString());
+						content.put(LetterTilePic, bt.holds);
+						db.setContent(content);
+						bt.holds = null;
+						event.consume();
+					}
+				});
+			}
+			/*
+			 * let the source know whether the string was successfully transferred and used
+			 */
+
 		}
 	}
 }
