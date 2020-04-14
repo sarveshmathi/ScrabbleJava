@@ -157,7 +157,7 @@ public class Scoring {
 		}
 	}
 
-	/** inner method to help find words in any direction */
+	/** inner method to help find words in any direction(repeated method) */
 	private int isWordPresent(BoardTile[][] board2d, String word, int row, int col, int rowIncrement,
 			int colIncrement) {
 		int turnPoints = 0;
