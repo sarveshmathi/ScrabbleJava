@@ -60,6 +60,7 @@ public class Actualgame {
 	String totalScorePlayerTwo;
 	private Player player1;
 	private Player player2;
+	private Scoring scoring;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -98,7 +99,7 @@ public class Actualgame {
 		currentPlayer = "";
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
-
+		scoring = new Scoring();
 		confirmButton = "";
 		word = "";
 		player1 = new Player(1);
@@ -191,7 +192,7 @@ public class Actualgame {
 		topPanel.setAlignment(Pos.CENTER);
 		topPanel.getChildren().addAll(player);
 		// Top Layout Ends
-		
+
 		// Bottom layout
 		bottomPanel.setAlignment(Pos.CENTER);
 		bottomPanel2.setAlignment(Pos.CENTER);
@@ -234,7 +235,7 @@ public class Actualgame {
 		// this makes rack for each player
 		player1.rackletters = makerack(bottomPanel, lb);
 		player2.rackletters = makerack(bottomPanel2, lb);
-		
+
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -386,7 +387,9 @@ public class Actualgame {
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
 			int score = Scoring.checkInput(wordToTestArray);
-
+			// tester for player1
+			scoring.checkInputboard(wordToTestArray, board, player1);
+			System.out.println(player1.score);
 			if (score != -1) {
 				status = "Accepted";
 				points = "" + score;
@@ -488,8 +491,7 @@ public class Actualgame {
 					db.setContent(content);
 					userBar.getChildren().remove(letter);
 					rackletters.remove(letter);
-					
-					
+
 					event.consume();
 					System.out.println("i'm being touched");
 				}

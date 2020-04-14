@@ -71,7 +71,7 @@ public class Scoring {
 				// totalScore += wordPoints(word);
 			}
 		}
-		System.out.println("Checking words  complete");
+		System.out.println("Checking words complete");
 	}
 
 	public void wordptb(String word, Board board, Player player) {
@@ -83,52 +83,52 @@ public class Scoring {
 		BoardTile[][] board2d = new BoardTile[15][15];
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				board2d[i][j] = board.getTiles()[(j * 10) + i];
+				board2d[i][j] = board.getTiles()[(j * 15) + i];
 			}
 		}
-
 		outer: for (int row = 0; row < board2d.length; row++) {
 			for (int col = 0; col < board2d[row].length; col++) {
-				String tile_letter = board2d[row][col].holds.letter.toString();
-				String word_letter_0 = Character.toString(word.charAt(0)).toUpperCase();
-				if (tile_letter.equals(word_letter_0)) {
-					// we found the 1st character
-					// SEARCH HORIZONTAL LEFT RIGHT
-					// this is going to look horizontally
-					// if you found the word
-					if (isWordPresent(board2d, word, row, col, 0, 1) != 0
-							|| isWordPresent(board2d, word, row, col, 0, -1) != 0) {
-						turnpoints = isWordPresent(board2d, word, row, col, 0, 1);
-						present = true;
-						break outer;
-					}
+				if (board2d[row][col].holds != null) {
+					String tile_letter = board2d[row][col].holds.letter.toString();
+					String word_letter_0 = Character.toString(word.charAt(0)).toUpperCase();
+					if (tile_letter.equals(word_letter_0)) {
+						// we found the 1st character
+						// SEARCH HORIZONTAL LEFT RIGHT
+						// this is going to look horizontally
+						// if you found the word
+						if (isWordPresent(board2d, word, row, col, 0, 1) != 0
+								|| isWordPresent(board2d, word, row, col, 0, -1) != 0) {
+							turnpoints = isWordPresent(board2d, word, row, col, 0, 1);
+							present = true;
+							break outer;
+						}
 
-					// SEARCH VERTICAL both ways
-					// if you found the word
-					if (isWordPresent(board2d, word, row, col, 1, 0) != 0
-							|| isWordPresent(board2d, word, row, col, -1, 0) != 0) {
-						turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
-						present = true;
-						break outer;
-					}
+						// SEARCH VERTICAL both ways
+						// if you found the word
+						if (isWordPresent(board2d, word, row, col, 1, 0) != 0
+								|| isWordPresent(board2d, word, row, col, -1, 0) != 0) {
+							turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
+							present = true;
+							break outer;
+						}
 
+					}
 				}
 			}
 		}
 		// this checks if it was made by at least 1 new letter
 		if (mouseon == true) {
 			// takes into account triple of double word scores
-			player.score += turnpoints * (3 ^ TWcounter) * (2 * DWcounter);
+			player.score += (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
 		} else {
 			player.score += 0;
 		}
-
 	}
 
 	/** gets points per letter */
 	private int pointcal(BoardTile bt) {
 		// check if it is a new letter by seeing the mouse
-		if (bt.isMouseTransparent()) {
+		if (bt.isMouseTransparent() != true) {
 			mouseon = true;
 		}
 		int points = 0;
@@ -166,15 +166,17 @@ public class Scoring {
 		boolean allcharfound = true;
 		for (int charIndex = 0; charIndex < word.length(); charIndex++) {
 			// checks if it would be out of bounds or if they aren't equal
-			if (searchrow < 0 || searchcol < 0 || searchrow >= board2d.length || searchcol >= board2d[searchrow].length
-					|| board2d[searchrow][searchcol].holds.letter.toString() != Character
-							.toString(word.charAt(charIndex)).toUpperCase()) {
+			if (board2d[searchrow][searchcol].holds == null || searchrow < 0 || searchcol < 0
+					|| searchrow >= board2d.length || searchcol >= board2d[searchrow].length
+					|| !board2d[searchrow][searchcol].holds.letter.toString()
+							.equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
 				allcharfound = false;
 				turnPoints = 0; // erase any points that may have been added
+				return turnPoints;
 			}
+			turnPoints += pointcal(board2d[searchrow][searchcol]);// get the points
 			searchcol += colIncrement;
 			searchrow += rowIncrement;
-			turnPoints += pointcal(board2d[searchrow][searchcol]);// get the points
 		}
 		return turnPoints;
 	}
