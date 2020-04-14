@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 import javafx.scene.Parent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -10,7 +12,11 @@ import javafx.scene.text.Text;
  * @author Team 51
  *
  */
-public class BoardTile extends Parent {
+public class BoardTile extends Parent implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int tileNumber; // from 0 to 224
 	private String tileType; // none(N), double letter (DL), double word (DW), triple letter (TL), triple
 								// word (TW)

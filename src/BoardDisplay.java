@@ -10,8 +10,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * This class displays the initial menu and reacts to 
- * user's button press.
+ * This class displays the initial menu and reacts to user's button press.
+ * 
  * @author Team 51
  *
  */
@@ -74,7 +74,7 @@ public class BoardDisplay extends Application {
 		primaryStage.show();
 
 	}
-	
+
 	/**
 	 * This method deals with the event when the user closes the program.
 	 */

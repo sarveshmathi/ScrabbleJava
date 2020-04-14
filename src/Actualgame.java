@@ -469,6 +469,9 @@ public class Actualgame {
 				public void handle(MouseEvent event) {
 					/* drag was detected, start a drag-and-drop gesture */
 					/* allow any transfer mode */
+					if (letter.isin != null) {
+						letter.isin.holds = null;
+					}
 					currentTile = letter;
 					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
 					/* Put a string on a dragboard */
@@ -479,7 +482,9 @@ public class Actualgame {
 					currentTile.getClass();
 					db.setContent(content);
 					userBar.getChildren().remove(letter);
+					rackletters.remove(letter);
 					event.consume();
+					System.out.println("i'm being touched");
 				}
 			});
 
@@ -489,6 +494,7 @@ public class Actualgame {
 					/* if the data was successfully moved, clear it */
 					if (event.getTransferMode() != TransferMode.MOVE) {
 						userBar.getChildren().add(letter);
+						rackletters.add(letter);
 					}
 					event.consume();
 				}

@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -17,6 +18,9 @@ import javafx.scene.input.TransferMode;
  *
  */
 public class Board extends Parent {
+	/**
+	 * 
+	 */
 	private BoardTile[] tiles;
 	private BoardTile tile;
 	DataFormat LetterTilePic = new DataFormat("hello");
@@ -144,12 +148,19 @@ public class Board extends Parent {
 					Dragboard db = event.getDragboard();
 					Object j = db.getContent(LetterTilePic);
 					bt.holds = (LetterTilePic) event.getGestureSource();
+					bt.holds.isin = bt;
+					for (BoardTile t : tiles) {
+						if (t.holds == bt.holds && bt != t) {
+							t.holds = null;
+						}
+					}
 					// bt.holds = (LetterTilePic) event.getAcceptingObject();
 					boolean success = false;
 					if (bt.getholds() != null) {
 						success = true;
 						getChildren().add(bt.holds);
-						boardgen();
+						bt.displayHold();
+						// boardgen();
 						// bt.setMouseTransparent(true);
 					}
 					event.setDropCompleted(success);
@@ -157,7 +168,7 @@ public class Board extends Parent {
 				}
 			});
 			if (bt.holds != null) {
-				bt.setOnDragDetected(new EventHandler<MouseEvent>() {
+				bt.holds.setOnDragDetected(new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent event) {
 						/* drag was detected, start a drag-and-drop gesture */
 						/* allow any transfer mode */
@@ -167,10 +178,23 @@ public class Board extends Parent {
 						// content.putString(letter.toString());
 						content.put(LetterTilePic, bt.holds);
 						db.setContent(content);
+						System.out.println("I'm busy");
 						bt.holds = null;
 						event.consume();
 					}
 				});
+
+				bt.setOnDragDone(new EventHandler<DragEvent>() {
+					public void handle(DragEvent event) {
+						/* the drag and drop gesture ended */
+						/* if the data was successfully moved, clear it */
+						if (event.getTransferMode() == TransferMode.MOVE) {
+							bt.holds = null;
+						}
+						event.consume();
+					}
+				});
+
 			}
 			/*
 			 * let the source know whether the string was successfully transferred and used

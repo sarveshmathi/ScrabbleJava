@@ -1,4 +1,5 @@
 import java.io.Serializable;
+
 import javafx.scene.Parent;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
@@ -10,6 +11,7 @@ import javafx.scene.text.Text;
 
 /**
  * Represents a standard letter tile
+ * 
  * @author Team 51
  *
  */
@@ -37,6 +39,7 @@ public class LetterTilePic extends Parent implements Serializable {
 	public final Letters letter;
 	public int quantity;
 	public int points;
+	public BoardTile isin;
 
 	/**
 	 * Initialized a LetterTile with given letter and value
