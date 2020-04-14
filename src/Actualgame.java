@@ -239,7 +239,7 @@ public class Actualgame {
 		});
 
 		/*
-		 * This reset the game.
+		 * This resets the game.
 		 */
 
 		reset.setOnAction(e -> {

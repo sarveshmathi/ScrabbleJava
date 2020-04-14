@@ -1,9 +1,9 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 #mainpage{
-    -fx-background-image:url("scrabbleimage.png");
+    -fx-background-image:url("scrabble.png");
     -fx-background-repeat: stretch;   
-    -fx-background-size: 500 300;
-    -fx-background-position: center center;
+    -fx-background-size: 900 200;
+    -fx-background-position: center top;
     -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
 }
 #playingpage{
