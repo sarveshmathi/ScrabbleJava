@@ -169,8 +169,6 @@ public class Board extends Parent {
 								ClipboardContent content = new ClipboardContent();
 								// content.putString(letter.toString());
 								content.put(LetterTilePic, bt.holds);
-								// content.getFiles();
-								// currentTile.getClass();
 								db.setContent(content);
 								bt.holds = null;
 								event.consume();
