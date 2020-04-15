@@ -383,22 +383,38 @@ public class Actualgame {
 			String points = "";
 
 			// Test codes begin
-
+			
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
 			// int score = Scoring.checkInput(wordToTestArray);
 			// tester for player1 and player 2 correctly
+			
 			if (playerOne.isSelected()) {
-				scoring.checkInputboard(wordToTestArray, board, player1);
+				int currentScore = scoring.checkInputboard(wordToTestArray, board, player1);
+				if (currentScore != -1) {
+					status = "Accepted";
+					points = "" + currentScore;
+				} else {
+					status = "Denied";
+					points = "0";
+				}
 				System.out.println(player1.score);
 			}
 			if (playerTwo.isSelected()) {
-				scoring.checkInputboard(wordToTestArray, board, player2);
+				int currentScore = scoring.checkInputboard(wordToTestArray, board, player2);
+				if (currentScore != -1) {
+					status = "Accepted";
+					points = "" + currentScore;
+				} else {
+					status = "Denied";
+					points = "0";
+				}
 				System.out.println(player2.score);
 			}
 
 			if (currentPlayer.equals("Player One")) {
 				int playerOneScore = player1.score;
+				
 				scorePlayerOne.setText("" + playerOneScore);
 
 				totalScorePlayerOne = "" + playerOneScore;
@@ -406,10 +422,8 @@ public class Actualgame {
 				int playerTwoScore = player2.score;
 				scorePlayerTwo.setText("" + playerTwoScore);
 				totalScorePlayerTwo = "" + playerTwoScore;
-			} else {
-				status = "Denied";
-				points = "0";
-			}
+			} 
+			
 
 			/**
 			 * if (score != -1) { status = "Accepted"; points = "" + score; if

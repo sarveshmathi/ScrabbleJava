@@ -60,18 +60,21 @@ public class Scoring {
 //		
 //	}
 	/** fix player points based on accepted word) */
-	public void checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
+	public int checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
 		System.out.println("Checking words . . . ");
+		int totalScore = 0;
 		for (String word : inputArray) {
 			if (!OnlineDictionary.checkWord(word)) {
 				System.out.println("Checking words complete");
 				player.score += 0;
+				return -1;
 			} else {
 				wordptb(word, board, player);
-				// totalScore += wordPoints(word);
+				totalScore += wordPoints(word);
 			}
 		}
 		System.out.println("Checking words complete");
+		return totalScore;
 	}
 
 	public void wordptb(String word, Board board, Player player) {
