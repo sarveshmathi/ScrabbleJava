@@ -64,29 +64,32 @@ public class Scoring {
 		System.out.println("Checking words . . . ");
 		int totalScore = 0;
 		for (String word : inputArray) {
-			
-				int tempTotalScore = wordptb(word, board, player);
-				if (tempTotalScore == 0) {
-					AlertBox.alertWithoutUserAction("Words Mismatch",
-							"The word that you typed is different from the word you played.");
-					// if (response) {
-					totalScore = -2;
-					// } else {
-					// totalScore = -2;
-					// }
-				} else {
-					if (!OnlineDictionary.checkWord(word)) {
-						System.out.println("Checking words complete");
-						AlertBox.alertWithoutUserAction("Incorrect Word", word + " is not a valid word in Scrabble Dictionary.");
-						player.score += tempTotalScore;
-						totalScore = -1;}
-					
-					else {totalScore = tempTotalScore;
-					board.turnoffdrag();
-					}
+
+			int tempTotalScore = wordptb(word, board, player);
+			if (tempTotalScore == 0) {
+				AlertBox.alertWithoutUserAction("Words Mismatch",
+						"The word that you typed is different from the word you played.");
+				// if (response) {
+				totalScore = -2;
+				// } else {
+				// totalScore = -2;
+				// }
+			} else {
+				if (!OnlineDictionary.checkWord(word)) {
+					System.out.println("Checking words complete");
+					AlertBox.alertWithoutUserAction("Incorrect Word",
+							word + " is not a valid word in Scrabble Dictionary.");
+					player.score += tempTotalScore;
+					totalScore = -1;
 				}
 
-			//}
+				else {
+					totalScore = tempTotalScore;
+					board.turnoffdrag();
+				}
+			}
+
+			// }
 		}
 		System.out.println("Checking words complete");
 		return totalScore;
@@ -99,9 +102,11 @@ public class Scoring {
 		int turnpoints = 0;
 		boolean present = false;
 		BoardTile[][] board2d = new BoardTile[15][15];
+		int x = 0;
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				board2d[i][j] = board.getTiles()[(j * 15) + i];
+				board2d[i][j] = board.getTiles()[x];
+				x++;
 			}
 		}
 		outer: for (int row = 0; row < board2d.length; row++) {
