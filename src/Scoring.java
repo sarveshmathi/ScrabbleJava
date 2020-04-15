@@ -156,7 +156,6 @@ public class Scoring {
 		} else {
 			player.score += 0;
 		}
-		System.out.println(turnpoints);
 		return turnpoints;
 	}
 
