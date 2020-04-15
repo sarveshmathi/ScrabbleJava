@@ -420,7 +420,7 @@ public class Actualgame {
 
 				} else {
 					status = "Accepted";
-					points = "" + currentScore;
+					points = "" + player1.score;
 
 					int playerOneScore = player1.score;
 					scorePlayerOne.setText("" + playerOneScore);
@@ -455,7 +455,7 @@ public class Actualgame {
 					this.showStatus(wordToTest, status, points);
 				} else {
 					status = "Accepted";
-					points = "" + currentScore;
+					points = "" + player2.score;
 
 					int playerTwoScore = player2.score;
 					scorePlayerTwo.setText("" + playerTwoScore);
