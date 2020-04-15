@@ -67,6 +67,7 @@ public class Scoring {
 		for (String word : inputArray) {
 			if (!OnlineDictionary.checkWord(word)) {
 				System.out.println("Checking words complete");
+				AlertBox.alertWithoutUserAction("Incorrect Word", word + " is not a valid word in Scrabble Dictionary.");
 				player.score += 0;
 				totalScore = -1;
 			} else {
