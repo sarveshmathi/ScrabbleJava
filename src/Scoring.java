@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Carries out scoring for the game
- * 
+ *
  * @author Team 51
  *
  */
@@ -15,7 +15,7 @@ public class Scoring {
 	/**
 	 * This method takes an ArrayList of words and returns the total score if the
 	 * words are acceptable or -1
-	 * 
+	 *
 	 * @param inputArray
 	 * @return returns total score or -1
 	 */
@@ -37,7 +37,7 @@ public class Scoring {
 
 	/**
 	 * Calculates the total points for an accepted word
-	 * 
+	 *
 	 * @param word
 	 * @return total points for a word
 	 */
@@ -57,7 +57,7 @@ public class Scoring {
 //		words.add("bye");
 //		words.add("z");
 //		System.out.println(Scoring.checkInput(words));
-//		
+//
 //	}
 	/** fix player points based on accepted word) */
 	public int checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
@@ -71,9 +71,9 @@ public class Scoring {
 			} else {
 				int tempTotalScore = wordptb(word, board, player);
 				if (tempTotalScore == 0) {
-					boolean response = AlertBox.alertWithUserAction("Words Mismatch", 
+					boolean response = AlertBox.alertWithUserAction("Words Mismatch",
 							"The word that you typed is different from the word you played."
-							+ "\nDo you wish to proceed?");
+									+ "\nDo you wish to proceed?");
 					if (response) {
 					totalScore = -1;
 					} else {
@@ -82,7 +82,7 @@ public class Scoring {
 				} else {
 					totalScore = tempTotalScore;
 				}
-				
+
 			}
 		}
 		System.out.println("Checking words complete");
@@ -117,8 +117,8 @@ public class Scoring {
 							if (isWordPresent(board2d, word, row, col, 0, 1) != 0) {
 								turnpoints = isWordPresent(board2d, word, row, col, 0, 1);
 							}
-							if (isWordPresent(board2d, word, row, col, 1, 0) != 0) {
-								turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
+							if (isWordPresent(board2d, word, row, col, 0, -1) != 0) {
+								turnpoints = isWordPresent(board2d, word, row, col, 0, -1);
 							}
 							present = true;
 							break outer;
