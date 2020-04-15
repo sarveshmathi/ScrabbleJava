@@ -51,7 +51,6 @@ public class Scoring {
 		return wordPoints;
 	}
 
-
 //	public static void main(String[] args) {
 //		ArrayList<String> words = new ArrayList<String>();
 //		words.add("hello");
@@ -73,15 +72,15 @@ public class Scoring {
 				int tempTotalScore = wordptb(word, board, player);
 				if (tempTotalScore == 0) {
 					AlertBox.alertWithoutUserAction("Words Mismatch",
-							"The word that you typed is different from the word you played."
-									);
-					//if (response) {
+							"The word that you typed is different from the word you played.");
+					// if (response) {
 					totalScore = -2;
-					//} else {
-					//	totalScore = -2;
-					//}
+					// } else {
+					// totalScore = -2;
+					// }
 				} else {
 					totalScore = tempTotalScore;
+					board.turnoffdrag();
 				}
 
 			}

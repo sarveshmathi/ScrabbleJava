@@ -163,7 +163,7 @@ public class Actualgame {
 			} else if (playerTwo.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
 			}
-			board.turnoffdrag();
+			// board.turnoffdrag();
 		});
 		playerOne.setSelected(true);
 
@@ -399,7 +399,7 @@ public class Actualgame {
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
-					
+
 					int playerOneScore = player1.score;
 					scorePlayerOne.setText("" + playerOneScore);
 					totalScorePlayerOne = "" + playerOneScore;
@@ -436,7 +436,6 @@ public class Actualgame {
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
-					
 
 					int playerTwoScore = player2.score;
 					scorePlayerTwo.setText("" + playerTwoScore);
@@ -537,9 +536,8 @@ public class Actualgame {
 
 	public void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
-				
-						"IMPORTANT: Only correct vocabulary will be considered."
-						+ "Player One goes first.\n\n" 
+
+				"IMPORTANT: Only correct vocabulary will be considered." + "Player One goes first.\n\n"
 						+ "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
 						+ "If you made more than one word, separate them with comma.\n\n"
