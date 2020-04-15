@@ -346,14 +346,14 @@ public class Actualgame {
 			player2.score = 0;
 			scorePlayerOne.setText("0");
 			scorePlayerTwo.setText("0");
-			
+
 		}
 	}
 
 	public void confirmWord() {
 		String playedWord = inputWord.getText().trim();
 		String wordToTest = "";
-		
+
 		String tempCurrentPlayer = "";
 
 		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
@@ -388,101 +388,98 @@ public class Actualgame {
 			String points = "";
 
 			// Test codes begin
-			
+
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
 			// int score = Scoring.checkInput(wordToTestArray);
 			// tester for player1 and player 2 correctly
-			
+
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.checkInputboard(wordToTestArray, board, player1);
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
 					
+					AlertBox.alertWithoutUserAction("Incorrect Word", wordToTest + " is not a real word.");
 					int playerOneScore = player1.score;
 					scorePlayerOne.setText("" + playerOneScore);
 					totalScorePlayerOne = "" + playerOneScore;
-					
+
 					this.showStatus(wordToTest, status, points);
-					
+
 					playerTwo.fire();
-					
+
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";
-					
+
 					int playerOneScore = player1.score;
 					scorePlayerOne.setText("" + playerOneScore);
 					totalScorePlayerOne = "" + playerOneScore;
-					
-					this.showStatus(wordToTest, status, points);	
-					
+
+					this.showStatus(wordToTest, status, points);
+
 				} else {
 					status = "Accepted";
 					points = "" + currentScore;
-					
+
 					int playerOneScore = player1.score;
 					scorePlayerOne.setText("" + playerOneScore);
 					totalScorePlayerOne = "" + playerOneScore;
-					
+
 					this.showStatus(wordToTest, status, points);
 					playerTwo.fire();
-					
+
 				}
 				System.out.println(player1.score);
-			}
-			else if (playerTwo.isSelected()) {
+			} else if (playerTwo.isSelected()) {
 				int currentScore = scoring.checkInputboard(wordToTestArray, board, player2);
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
-					
+					AlertBox.alertWithoutUserAction("Incorrect Word", wordToTest + " is not a real word.");
+
 					int playerTwoScore = player2.score;
 					scorePlayerTwo.setText("" + playerTwoScore);
 					totalScorePlayerTwo = "" + playerTwoScore;
-					
+
 					this.showStatus(wordToTest, status, points);
-					
+
 					playerOne.fire();
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";
-					
+
 					int playerTwoScore = player2.score;
 					scorePlayerTwo.setText("" + playerTwoScore);
 					totalScorePlayerTwo = "" + playerTwoScore;
-					
+
 					this.showStatus(wordToTest, status, points);
 				} else {
 					status = "Accepted";
 					points = "" + currentScore;
-					
+
 					int playerTwoScore = player2.score;
 					scorePlayerTwo.setText("" + playerTwoScore);
 					totalScorePlayerTwo = "" + playerTwoScore;
-					
+
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();
-					
+
 				}
 				System.out.println(player2.score);
 			}
 
 			/*
-			if (currentPlayer.equals("Player One")) {
-				int playerOneScore = player1.score;
-				
-				scorePlayerOne.setText("" + playerOneScore);
-
-				totalScorePlayerOne = "" + playerOneScore;
-			} else if (currentPlayer.equals("Player Two")) {
-				int playerTwoScore = player2.score;
-				scorePlayerTwo.setText("" + playerTwoScore);
-				totalScorePlayerTwo = "" + playerTwoScore;
-			} 
-			*/
-			
+			 * if (currentPlayer.equals("Player One")) { int playerOneScore = player1.score;
+			 * 
+			 * scorePlayerOne.setText("" + playerOneScore);
+			 * 
+			 * totalScorePlayerOne = "" + playerOneScore; } else if
+			 * (currentPlayer.equals("Player Two")) { int playerTwoScore = player2.score;
+			 * scorePlayerTwo.setText("" + playerTwoScore); totalScorePlayerTwo = "" +
+			 * playerTwoScore; }
+			 */
 
 			/**
 			 * if (score != -1) { status = "Accepted"; points = "" + score; if
@@ -499,26 +496,22 @@ public class Actualgame {
 
 			// Test codes end
 
-			
 			inputWord.setPromptText(currentPlayer + "'s Turn");
 
 			/*
-			if (playerOne.isSelected()) {
-				playerTwo.fire();
-			} else if (playerTwo.isSelected()) {
-				playerOne.fire();
-			}
-			*/
+			 * if (playerOne.isSelected()) { playerTwo.fire(); } else if
+			 * (playerTwo.isSelected()) { playerOne.fire(); }
+			 */
 
 		}
 
 	}
-	
+
 	public void showStatus(String wordToTest, String status, String points) {
 		String tempWord = word;
-		lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest.toUpperCase() + "\nBy: "
-				+ currentPlayer + "\nStatus: " + status + "\nPoints: " + points);
-		
+		lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest.toUpperCase() + "\nBy: " + currentPlayer
+				+ "\nStatus: " + status + "\nPoints: " + points);
+
 	}
 
 	public void displayTextField() {
@@ -545,7 +538,10 @@ public class Actualgame {
 
 	public void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
-				"Player One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
+				
+						"IMPORTANT: Only correct vocabulary will be considered."
+						+ "Player One goes first.\n\n" 
+						+ "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
 						+ "If you made more than one word, separate them with comma.\n\n"
 						+ "Press Confirm Word/s button to play the word(s).\n\n"
