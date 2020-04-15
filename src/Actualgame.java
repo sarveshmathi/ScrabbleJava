@@ -400,7 +400,6 @@ public class Actualgame {
 					status = "Incorrect Word";
 					points = "0";
 					
-					AlertBox.alertWithoutUserAction("Incorrect Word", wordToTest + " is not a real word.");
 					int playerOneScore = player1.score;
 					scorePlayerOne.setText("" + playerOneScore);
 					totalScorePlayerOne = "" + playerOneScore;
@@ -437,7 +436,7 @@ public class Actualgame {
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
-					AlertBox.alertWithoutUserAction("Incorrect Word", wordToTest + " is not a real word.");
+					
 
 					int playerTwoScore = player2.score;
 					scorePlayerTwo.setText("" + playerTwoScore);
