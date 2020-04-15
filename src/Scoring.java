@@ -71,7 +71,12 @@ public class Scoring {
 			} else {
 				int tempTotalScore = wordptb(word, board, player);
 				if (tempTotalScore == 0) {
+					boolean response = AlertBox.alertWithUserAction("Words Mismatch", 
+							"The word that you typed is different from the word you played."
+							+ "\nDo you wish to proceed?");
+					if (response) {
 					totalScore = -1;
+					}
 				} else {
 					totalScore = tempTotalScore;
 				}
