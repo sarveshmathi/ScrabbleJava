@@ -79,7 +79,7 @@ public class Scoring {
 					System.out.println("Checking words complete");
 					AlertBox.alertWithoutUserAction("Incorrect Word",
 							word + " is not a valid word in Scrabble Dictionary.");
-					player.score += tempTotalScore;
+					player.score -= tempTotalScore;
 					totalScore = -1;
 				}
 
