@@ -45,8 +45,22 @@ public class BoardDisplay extends Application {
 			primaryStage.getScene().setRoot(game.getRootPane());
 		});
 
-		Button instructionButton = new Button("How to Play?");
-		Button exitButton = new Button("Exit");
+		Button instructionButton = new Button();
+		FileInputStream howToPlayPath = new FileInputStream ("howtoplay.png");
+		Image howToPlay = new Image (howToPlayPath, 550, 300, true, true);
+		ImageView ivHowToPlay = new ImageView (howToPlay);
+		instructionButton.setGraphic(ivHowToPlay);
+		instructionButton.getStyleClass().remove("button");
+		
+		
+		
+		Button exitButton = new Button();
+		
+		FileInputStream exitPath = new FileInputStream ("exit.png");
+		Image exit = new Image (exitPath, 200, 80, true, true);
+		ImageView ivExit = new ImageView (exit);
+		exitButton.setGraphic(ivExit);
+		exitButton.getStyleClass().remove("button");
 
 		// Handle action events for "Exit" button.
 		exitButton.setOnAction(e -> {
@@ -73,7 +87,7 @@ public class BoardDisplay extends Application {
 		});
 		;
 
-		VBox root = new VBox();
+		VBox root = new VBox(30);
 
 		// Add Start button, How to Play button and Exit button to the scene graph.
 		root.getChildren().addAll(startButton, instructionButton, exitButton);
