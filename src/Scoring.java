@@ -69,15 +69,20 @@ public class Scoring {
 				player.score += 0;
 				return -1;
 			} else {
-				wordptb(word, board, player);
-				totalScore += wordPoints(word);
+				int tempTotalScore = wordptb(word, board, player);
+				if (tempTotalScore == 0) {
+					totalScore = -1;
+				} else {
+					totalScore = tempTotalScore;
+				}
+				
 			}
 		}
 		System.out.println("Checking words complete");
 		return totalScore;
 	}
 
-	public void wordptb(String word, Board board, Player player) {
+	public int wordptb(String word, Board board, Player player) {
 		TWcounter = 0;// reset
 		DWcounter = 0;// reset
 		mouseon = false;// reset
@@ -138,6 +143,7 @@ public class Scoring {
 		} else {
 			player.score += 0;
 		}
+		return turnpoints;
 	}
 
 	/** gets points per letter */

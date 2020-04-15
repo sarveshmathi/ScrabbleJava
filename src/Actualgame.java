@@ -342,6 +342,7 @@ public class Actualgame {
 			board.newboard();
 			inputWord.clear();
 			lastPlayedWord.setText("");
+			
 		}
 	}
 
