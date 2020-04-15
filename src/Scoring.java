@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /**
  * Carries out scoring for the game
- * 
+ *
  * @author Team 51
  *
  */
@@ -15,7 +15,7 @@ public class Scoring {
 	/**
 	 * This method takes an ArrayList of words and returns the total score if the
 	 * words are acceptable or -1
-	 * 
+	 *
 	 * @param inputArray
 	 * @return returns total score or -1
 	 */
@@ -37,7 +37,7 @@ public class Scoring {
 
 	/**
 	 * Calculates the total points for an accepted word
-	 * 
+	 *
 	 * @param word
 	 * @return total points for a word
 	 */
@@ -51,6 +51,15 @@ public class Scoring {
 		return wordPoints;
 	}
 
+
+//	public static void main(String[] args) {
+//		ArrayList<String> words = new ArrayList<String>();
+//		words.add("hello");
+//		words.add("bye");
+//		words.add("z");
+//		System.out.println(Scoring.checkInput(words));
+//
+//	}
 	/** fix player points based on accepted word) */
 	public int checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
 		System.out.println("Checking words . . . ");
@@ -67,7 +76,9 @@ public class Scoring {
 							"The word that you typed is different from the word you played."
 									+ "\nDo you wish to proceed?");
 					if (response) {
-						totalScore = -1;
+					totalScore = -1;
+					} else {
+						totalScore = -2;
 					}
 				} else {
 					totalScore = tempTotalScore;
