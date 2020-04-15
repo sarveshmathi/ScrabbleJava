@@ -37,7 +37,7 @@ public class Scoring {
 
 	/**
 	 * Calculates the total points for an accepted word
-	 *
+	 * 
 	 * @param word
 	 * @return total points for a word
 	 */
