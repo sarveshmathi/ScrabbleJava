@@ -33,12 +33,12 @@ public class BoardDisplay extends Application {
 		this.primaryStage = primaryStage;
 		Button startButton = new Button();
 
-		FileInputStream playPath = new FileInputStream ("play.png");
-		Image play = new Image (playPath, 300, 150, true, true);
-		ImageView ivPlay = new ImageView (play);
+		FileInputStream playPath = new FileInputStream("play.png");
+		Image play = new Image(playPath, 300, 150, true, true);
+		ImageView ivPlay = new ImageView(play);
 		startButton.setGraphic(ivPlay);
 		startButton.getStyleClass().remove("button");
-		
+
 		// Handle action events for "Start" button.
 		startButton.setOnAction(e -> {
 			Actualgame game = new Actualgame();
@@ -46,19 +46,17 @@ public class BoardDisplay extends Application {
 		});
 
 		Button instructionButton = new Button();
-		FileInputStream howToPlayPath = new FileInputStream ("howtoplay.png");
-		Image howToPlay = new Image (howToPlayPath, 550, 300, true, true);
-		ImageView ivHowToPlay = new ImageView (howToPlay);
+		FileInputStream howToPlayPath = new FileInputStream("howtoplay.png");
+		Image howToPlay = new Image(howToPlayPath, 550, 300, true, true);
+		ImageView ivHowToPlay = new ImageView(howToPlay);
 		instructionButton.setGraphic(ivHowToPlay);
 		instructionButton.getStyleClass().remove("button");
-		
-		
-		
+
 		Button exitButton = new Button();
-		
-		FileInputStream exitPath = new FileInputStream ("exit.png");
-		Image exit = new Image (exitPath, 200, 80, true, true);
-		ImageView ivExit = new ImageView (exit);
+
+		FileInputStream exitPath = new FileInputStream("exit.png");
+		Image exit = new Image(exitPath, 200, 80, true, true);
+		ImageView ivExit = new ImageView(exit);
 		exitButton.setGraphic(ivExit);
 		exitButton.getStyleClass().remove("button");
 
@@ -66,8 +64,6 @@ public class BoardDisplay extends Application {
 		exitButton.setOnAction(e -> {
 			this.closeProgram();
 		});
-		
-		
 
 		primaryStage.setOnCloseRequest(e -> {
 			// Consumes the system close event

@@ -411,6 +411,20 @@ public class Actualgame {
 				points = "0";
 			}
 
+			// status = "Accepted"; points = "" + score;
+			if (currentPlayer.equals("Player One")) {
+				int playerOneScore = player1.score;
+				scorePlayerOne.setText("" + player1.score);
+				totalScorePlayerOne = "" + playerOneScore;
+			} else if (currentPlayer.equals("Player Two")) {
+				int playerTwoScore = player2.score;
+				scorePlayerTwo.setText("" + playerTwoScore);
+				totalScorePlayerTwo = "" + playerTwoScore;
+			} else {
+				status = "Denied";
+				points = "0";
+			}
+
 			/**
 			 * if (score != -1) { status = "Accepted"; points = "" + score; if
 			 * (currentPlayer.equals("Player One")) { int playerOneScore =
