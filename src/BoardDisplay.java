@@ -33,6 +33,12 @@ public class BoardDisplay extends Application {
 		this.primaryStage = primaryStage;
 		Button startButton = new Button();
 
+		FileInputStream playPath = new FileInputStream ("play.png");
+		Image play = new Image (playPath, 300, 150, true, true);
+		ImageView ivPlay = new ImageView (play);
+		startButton.setGraphic(ivPlay);
+		startButton.getStyleClass().remove("button");
+		
 		// Handle action events for "Start" button.
 		startButton.setOnAction(e -> {
 			Actualgame game = new Actualgame();
