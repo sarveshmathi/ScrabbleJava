@@ -67,7 +67,7 @@ public class Scoring {
 			if (!OnlineDictionary.checkWord(word)) {
 				System.out.println("Checking words complete");
 				player.score += 0;
-				return -1;
+				totalScore = -1;
 			} else {
 				int tempTotalScore = wordptb(word, board, player);
 				if (tempTotalScore == 0) {
