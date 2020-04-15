@@ -51,14 +51,6 @@ public class Scoring {
 		return wordPoints;
 	}
 
-//	public static void main(String[] args) {
-//		ArrayList<String> words = new ArrayList<String>();
-//		words.add("hello");
-//		words.add("bye");
-//		words.add("z");
-//		System.out.println(Scoring.checkInput(words));
-//		
-//	}
 	/** fix player points based on accepted word) */
 	public int checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
 		System.out.println("Checking words . . . ");
