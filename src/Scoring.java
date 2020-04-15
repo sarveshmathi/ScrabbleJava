@@ -168,7 +168,7 @@ public class Scoring {
 		int points = 0;
 		if (bt.getTileType().equals("TL")) {
 			points = 3 * (bt.holds.letter.points);
-		} else if (bt.getTileType().equals("DL") || bt.getTileType().equals("C")) {
+		} else if (bt.getTileType().equals("DL")) {
 			points = 2 * (bt.holds.letter.points);
 		} else if (bt.getTileType().equals("TW")) {
 			points = bt.holds.letter.points;
@@ -176,6 +176,8 @@ public class Scoring {
 		} else if (bt.getTileType().equals("DW")) {
 			incrementwordspecial(bt);
 			points = bt.holds.letter.points;
+		} else if (bt.getTileType().equals("C")) {
+			points = 2 * (bt.holds.letter.points);
 		} else {
 			points = bt.holds.letter.points;
 		}
