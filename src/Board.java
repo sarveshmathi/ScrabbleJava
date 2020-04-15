@@ -133,10 +133,12 @@ public class Board extends Parent {
 					 * accept it only if it is not dragged from the same node and if it isn't
 					 * holding a card
 					 */
-					if (event.getGestureSource() != bt && bt.getholds() == null && !isboardempty()) {
-						/* allow for both copying and moving, whatever user chooses */
-						event.acceptTransferModes(TransferMode.MOVE);
-						bt.displayHold();
+					if (!isboardempty()) {
+						if (event.getGestureSource() != bt && bt.getholds() == null) {
+							/* allow for both copying and moving, whatever user chooses */
+							event.acceptTransferModes(TransferMode.MOVE);
+							bt.displayHold();
+						}
 					} else if (isboardempty()) {
 						if (bt.getTileType().equals("C")) {
 							event.acceptTransferModes(TransferMode.MOVE);
@@ -210,10 +212,10 @@ public class Board extends Parent {
 
 	/** checks to see if the board is empty */
 	public boolean isboardempty() {
-		boolean val = false;
+		boolean val = true;
 		for (BoardTile bt : tiles) {
-			if (bt.holds == null) {
-				val = true;
+			if (bt.holds != null) {
+				val = false;
 			}
 		}
 		return val;

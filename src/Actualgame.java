@@ -636,4 +636,12 @@ public class Actualgame {
 		return rackletters;
 	}
 
+	public void refillcheck(Player player, LetterBag2 lb) {
+		ArrayList<BoardTile> potential;
+		if (player.rackletters.size() < 7) {
+			int num = 7 - player.rackletters.size();
+			// potential = lb.getLetters(num);
+		}
+	}
+
 }
