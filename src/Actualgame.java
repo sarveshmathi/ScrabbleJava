@@ -342,6 +342,10 @@ public class Actualgame {
 			board.newboard();
 			inputWord.clear();
 			lastPlayedWord.setText("");
+			player1.score = 0;
+			player2.score = 0;
+			scorePlayerOne.setText("0");
+			scorePlayerTwo.setText("0");
 			
 		}
 	}
