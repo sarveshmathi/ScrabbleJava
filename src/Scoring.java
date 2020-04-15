@@ -64,12 +64,7 @@ public class Scoring {
 		System.out.println("Checking words . . . ");
 		int totalScore = 0;
 		for (String word : inputArray) {
-			if (!OnlineDictionary.checkWord(word)) {
-				System.out.println("Checking words complete");
-				AlertBox.alertWithoutUserAction("Incorrect Word", word + " is not a valid word in Scrabble Dictionary.");
-				player.score += 0;
-				totalScore = -1;
-			} else {
+			
 				int tempTotalScore = wordptb(word, board, player);
 				if (tempTotalScore == 0) {
 					AlertBox.alertWithoutUserAction("Words Mismatch",
@@ -80,11 +75,18 @@ public class Scoring {
 					// totalScore = -2;
 					// }
 				} else {
-					totalScore = tempTotalScore;
+					if (!OnlineDictionary.checkWord(word)) {
+						System.out.println("Checking words complete");
+						AlertBox.alertWithoutUserAction("Incorrect Word", word + " is not a valid word in Scrabble Dictionary.");
+						player.score += tempTotalScore;
+						totalScore = -1;}
+					
+					else {totalScore = tempTotalScore;
 					board.turnoffdrag();
+					}
 				}
 
-			}
+			//}
 		}
 		System.out.println("Checking words complete");
 		return totalScore;
