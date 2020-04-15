@@ -396,23 +396,32 @@ public class Actualgame {
 			
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.checkInputboard(wordToTestArray, board, player1);
-				if (currentScore != -1) {
-					status = "Accepted";
-					points = "" + currentScore;
-				} else {
+				if (currentScore == -1) {
 					status = "Denied";
 					points = "0";
+					this.fireRadioButtons();
+				} else if (currentScore == -2) {
+					status = "Not Confirmed";
+					points = "0";
+				} else {
+					status = "Accepted";
+					points = "" + currentScore;
+					this.fireRadioButtons();
 				}
-				System.out.println(player1.score);
 			}
 			if (playerTwo.isSelected()) {
 				int currentScore = scoring.checkInputboard(wordToTestArray, board, player2);
-				if (currentScore != -1) {
-					status = "Accepted";
-					points = "" + currentScore;
-				} else {
+				if (currentScore == -1) {
 					status = "Denied";
 					points = "0";
+					this.fireRadioButtons();
+				} else if (currentScore == -2) {
+					status = "Not Confirmed";
+					points = "0";
+				} else {
+					status = "Accepted";
+					points = "" + currentScore;
+					this.fireRadioButtons();
 				}
 				System.out.println(player2.score);
 			}
@@ -449,14 +458,18 @@ public class Actualgame {
 					+ currentPlayer + "\nStatus: " + status + "\nPoints: " + points);
 			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
 
-			if (playerOne.isSelected()) {
-				playerTwo.fire();
-			} else if (playerTwo.isSelected()) {
-				playerOne.fire();
-			}
+			
 
 		}
 
+	}
+	
+	public void fireRadioButtons() {
+		if (playerOne.isSelected()) {
+			playerTwo.fire();
+		} else if (playerTwo.isSelected()) {
+			playerOne.fire();
+		}
 	}
 
 	public void displayTextField() {

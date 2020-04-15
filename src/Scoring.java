@@ -76,6 +76,8 @@ public class Scoring {
 							+ "\nDo you wish to proceed?");
 					if (response) {
 					totalScore = -1;
+					} else {
+						totalScore = -2;
 					}
 				} else {
 					totalScore = tempTotalScore;
