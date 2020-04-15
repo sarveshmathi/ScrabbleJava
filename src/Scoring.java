@@ -168,7 +168,7 @@ public class Scoring {
 		int points = 0;
 		if (bt.getTileType().equals("TL")) {
 			points = 3 * (bt.holds.letter.points);
-		} else if (bt.getTileType().equals("DL")) {
+		} else if (bt.getTileType().equals("DL") || bt.getTileType().equals("C")) {
 			points = 2 * (bt.holds.letter.points);
 		} else if (bt.getTileType().equals("TW")) {
 			points = bt.holds.letter.points;
