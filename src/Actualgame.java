@@ -200,7 +200,7 @@ public class Actualgame {
 		bottomPanel2.setAlignment(Pos.CENTER);
 
 		// Tooltips
-		inputWord.setTooltip(new Tooltip("Separate multiple words by comma."));
+		inputWord.setTooltip(new Tooltip("Enter the word that you played here."));
 		forfeitTurn.setTooltip(new Tooltip("Press to forfiet your turn."));
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
 		reset.setTooltip(new Tooltip("Press to reset the game."));
@@ -544,9 +544,8 @@ public class Actualgame {
 				"IMPORTANT: Only correct vocabulary will be considered." + "Player One goes first.\n\n"
 						+ "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
-						+ "If you made more than one word, separate them with comma.\n\n"
-						+ "Press Confirm Word/s button to play the word(s).\n\n"
-						+ "Confirm Word/s button automatically changes turn.\n\n"
+						+ "Press Confirm Word button to play the word.\n\n"
+						+ "Confirm Word button automatically changes turn.\n\n"
 						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
 						+ "Press Reset button to reset the game.");
 	}
