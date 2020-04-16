@@ -251,7 +251,7 @@ public class Actualgame {
 			if (board.checktogether() == true) {
 				this.confirmWord();
 			} else {
-				AlertBox.alertWithoutUserAction("Tiles not together", "The tiles aren't together");
+				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.");
 			}
 
 			// this.confirmWord();
