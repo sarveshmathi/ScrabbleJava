@@ -220,4 +220,74 @@ public class Board extends Parent {
 		}
 		return val;
 	}
+
+	public BoardTile[][] turnto2d() {
+		BoardTile[][] board2d = new BoardTile[15][15];
+		int x = 0;
+		for (int i = 0; i < 15; i++) {
+			for (int j = 0; j < 15; j++) {
+				board2d[i][j] = tiles[x];
+				x++;
+			}
+		}
+		return board2d;
+	}
+
+//checks if the tiles are together 
+	public boolean checktogether() {
+		boolean boo = true;
+		int i = 0; // index
+		ArrayList<Integer> tilelist = new ArrayList<Integer>();
+		for (BoardTile bt : tiles) {
+			if (!bt.isMouseTransparent() && bt.getholds() != null) {
+				tilelist.add(bt.getTileNumber());
+				System.out.println(bt.getTileNumber());
+			}
+		}
+		int[] tileno = new int[tilelist.size()];
+		for (Integer j : tilelist) {
+			tileno[i] = j;
+			i++;
+		}
+		for (int k = 0; k < tileno.length; k++) {
+			if (k < tileno.length - 1) {
+				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
+				if (dif % 15 != 0) {
+					if (dif != 1) {
+						// if you are at leftmost
+						if (i == 0) {
+							if (tiles[i + 1].holds == null) {
+								boo = false;
+							}
+						}
+						// if you are at rightmost
+						else if (i == (tiles.length - 1)) {
+							if (tiles[i - 1].holds == null) {
+								boo = false;
+							}
+
+						} else {
+							if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) {
+								boo = false;
+							}
+						}
+
+					}
+					boo = false;
+					System.out.println("I got here");
+				} /*
+					 * else if (dif != 1) { // if you are at leftmost if (i == 0) { if (tiles[i +
+					 * 1].holds == null) { boo = false; } } // if you are at rightmost else if (i ==
+					 * (tiles.length - 1)) { if (tiles[i - 1].holds == null) { boo = false; }
+					 * 
+					 * } else { if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) { boo
+					 * = false; } }
+					 * 
+					 * } }
+					 */
+
+			}
+		}
+		return boo;
+	}
 }

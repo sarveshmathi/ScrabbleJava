@@ -49,7 +49,7 @@ public class Actualgame {
 	private Label scorePlayerOne;
 	private Label scorePlayerTwo;
 	private String confirmButton;
-	//private String word;
+	// private String word;
 	private Label playerOneLabel;
 	private Label playerTwoLabel;
 	private Button howToPlay;
@@ -101,7 +101,7 @@ public class Actualgame {
 		totalScorePlayerTwo = "0";
 		scoring = new Scoring();
 		confirmButton = "";
-	//	word = "";
+		// word = "";
 		player1 = new Player(1);
 		player2 = new Player(2);
 		this.ActualGame();
@@ -205,36 +205,22 @@ public class Actualgame {
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
 		reset.setTooltip(new Tooltip("Press to reset the game."));
 		howToPlay.setTooltip(new Tooltip("Press for \"how to\" guide."));
-		
+
 		/*
-		// This changes the text in confirmWord button to "Confirm Words" if more than 1
-		// words are entered
-		inputWord.textProperty().addListener((observable, oldValue, newValue) -> {
-			int count = 0;
-			for (int i = 0; i < newValue.length(); i++) {
-				if (newValue.charAt(i) == ',') {
-					count++;
-				}
-			}
-			if (count > 0) {
-				confirmWord.setText("Confirm Words");
-				confirmButton = "Confirm Words";
-				word = "words";
-			} else {
-				confirmWord.setText("Confirm Word");
-				confirmButton = "Confirm Word";
-				word = "word";
-			}
-
-			if (newValue.equals("")) {
-				enteredWord.setText("");
-			}
-
-			if (oldValue.equals("") && !newValue.equals("")) {
-				enteredWord.setText("");
-			}
-		});
-		*/
+		 * // This changes the text in confirmWord button to "Confirm Words" if more
+		 * than 1 // words are entered inputWord.textProperty().addListener((observable,
+		 * oldValue, newValue) -> { int count = 0; for (int i = 0; i <
+		 * newValue.length(); i++) { if (newValue.charAt(i) == ',') { count++; } } if
+		 * (count > 0) { confirmWord.setText("Confirm Words"); confirmButton =
+		 * "Confirm Words"; word = "words"; } else {
+		 * confirmWord.setText("Confirm Word"); confirmButton = "Confirm Word"; word =
+		 * "word"; }
+		 * 
+		 * if (newValue.equals("")) { enteredWord.setText(""); }
+		 * 
+		 * if (oldValue.equals("") && !newValue.equals("")) { enteredWord.setText(""); }
+		 * });
+		 */
 
 		// this makes rack for each player
 		// player1.rackletters = makerack(bottomPanel, lb);
@@ -262,7 +248,13 @@ public class Actualgame {
 		 */
 
 		confirmWord.setOnAction(e -> {
-			this.confirmWord();
+			if (board.checktogether() == true) {
+				this.confirmWord();
+			} else {
+				AlertBox.alertWithoutUserAction("Tiles not together", "The tiles aren't together");
+			}
+
+			// this.confirmWord();
 		});
 
 		/*
