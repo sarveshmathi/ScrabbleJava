@@ -49,7 +49,7 @@ public class Actualgame {
 	private Label scorePlayerOne;
 	private Label scorePlayerTwo;
 	private String confirmButton;
-	private String word;
+	//private String word;
 	private Label playerOneLabel;
 	private Label playerTwoLabel;
 	private Button howToPlay;
@@ -101,7 +101,7 @@ public class Actualgame {
 		totalScorePlayerTwo = "0";
 		scoring = new Scoring();
 		confirmButton = "";
-		word = "";
+	//	word = "";
 		player1 = new Player(1);
 		player2 = new Player(2);
 		this.ActualGame();
@@ -205,7 +205,8 @@ public class Actualgame {
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
 		reset.setTooltip(new Tooltip("Press to reset the game."));
 		howToPlay.setTooltip(new Tooltip("Press for \"how to\" guide."));
-
+		
+		/*
 		// This changes the text in confirmWord button to "Confirm Words" if more than 1
 		// words are entered
 		inputWord.textProperty().addListener((observable, oldValue, newValue) -> {
@@ -233,6 +234,7 @@ public class Actualgame {
 				enteredWord.setText("");
 			}
 		});
+		*/
 
 		// this makes rack for each player
 		// player1.rackletters = makerack(bottomPanel, lb);
@@ -367,7 +369,7 @@ public class Actualgame {
 		char[] charArray = str.toCharArray();
 		for (int i = 0; i < charArray.length; i++) {
 			char ch = charArray[i];
-			if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
+			if (!(ch >= 'a' && ch <= 'z' || ch == ' ')) {
 				onlyEnglishAlphabet = false;
 			}
 
@@ -509,8 +511,7 @@ public class Actualgame {
 	}
 
 	public void showStatus(String wordToTest, String status, String points) {
-		String tempWord = word;
-		lastPlayedWord.setText("Last played " + tempWord + ":\n" + wordToTest.toUpperCase() + "\nBy: " + currentPlayer
+		lastPlayedWord.setText("Last played word:\n" + wordToTest.toUpperCase() + "\nBy: " + currentPlayer
 				+ "\nStatus: " + status + "\nPoints: " + points);
 
 	}
@@ -522,7 +523,7 @@ public class Actualgame {
 		char[] charArray = str.toCharArray();
 		for (int i = 0; i < charArray.length; i++) {
 			char ch = charArray[i];
-			if (!(ch >= 'a' && ch <= 'z' || ch == ',' || ch == ' ')) {
+			if (!(ch >= 'a' && ch <= 'z' || ch == ' ')) {
 				onlyEnglishAlphabet = false;
 			}
 
