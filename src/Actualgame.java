@@ -163,6 +163,8 @@ public class Actualgame {
 			} else if (playerTwo.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
 			}
+			rackcheck(player1, lb, bottomPanel);
+			rackcheck(player2, lb, bottomPanel2);
 			// board.turnoffdrag();
 		});
 		playerOne.setSelected(true);
@@ -233,9 +235,10 @@ public class Actualgame {
 		});
 
 		// this makes rack for each player
-		player1.rackletters = makerack(bottomPanel, lb);
-		player2.rackletters = makerack(bottomPanel2, lb);
-
+		// player1.rackletters = makerack(bottomPanel, lb);
+		// player2.rackletters = makerack(bottomPanel2, lb);
+		rackcheck(player1, lb, bottomPanel);
+		rackcheck(player2, lb, bottomPanel2);
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -548,7 +551,7 @@ public class Actualgame {
 	}
 
 	/**
-	 * this method makes a letter rack
+	 * this method makes a new letter rack
 	 */
 	public ArrayList<LetterTilePic> makerack(StackPane bottomPanel, LetterBag2 lb) {
 		Rectangle bottomBar = new Rectangle(420, 60);
@@ -600,6 +603,7 @@ public class Actualgame {
 			});
 		}
 		userBar.setOnDragOver(new EventHandler<DragEvent>() {
+
 			public void handle(DragEvent event) {
 				// System.out.println("test1");
 				/* data is dragged over the target */
@@ -635,13 +639,114 @@ public class Actualgame {
 		});
 		return rackletters;
 	}
+	/* will create and refill player racks */
 
-	public void refillcheck(Player player, LetterBag2 lb) {
-		ArrayList<BoardTile> potential;
-		if (player.rackletters.size() < 7) {
-			int num = 7 - player.rackletters.size();
-			// potential = lb.getLetters(num);
+	public void rackcheck(Player player, LetterBag2 lb, StackPane bottomPanel) {
+		int num = 0;
+		ArrayList<LetterTilePic> potential;
+		if (player.rackletters.isEmpty()) {
+			num = 7;
+			potential = lb.getLetters(num);
+			for (LetterTilePic lp : potential) {
+				player.rackletters.add(lp);
+			}
+		} else if (player.rackletters.size() < 7) {
+			num = 7 - player.rackletters.size();
+			potential = lb.getLetters(num);
+			for (LetterTilePic lp : potential) {
+				player.rackletters.add(lp);
+			}
 		}
+		rackpicture(bottomPanel, player.rackletters);
+
+	}
+
+	/** makes the images for the rack tiles */
+	public void rackpicture(StackPane bottomPanel, ArrayList<LetterTilePic> rackletters) {
+		Rectangle bottomBar = new Rectangle(420, 60);
+		bottomBar.setArcWidth(30.0);
+		bottomBar.setArcHeight(30.0);
+		bottomBar.setFill(Color.SIENNA);
+		HBox userBar = new HBox(2);
+		userBar.setAlignment(Pos.CENTER);
+		bottomPanel.setAlignment(Pos.CENTER);
+		bottomPanel.getChildren().addAll(bottomBar, userBar);
+		for (LetterTilePic letter : rackletters) {
+			if (!userBar.getChildrenUnmodifiable().contains(letter)) {
+				userBar.getChildren().add(letter);
+			}
+			// letter.onMouseDragEnteredProperty();
+			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					/* drag was detected, start a drag-and-drop gesture */
+					/* allow any transfer mode */
+					if (letter.isin != null) {
+						letter.isin.holds = null;
+					}
+					currentTile = letter;
+					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
+					/* Put a string on a dragboard */
+					ClipboardContent content = new ClipboardContent();
+					content.putString(letter.toString());
+					content.put(LetterTilePic, currentTile);
+					// content.getFiles();
+					currentTile.getClass();
+					db.setContent(content);
+					userBar.getChildren().remove(letter);
+					rackletters.remove(letter);
+
+					event.consume();
+					System.out.println("i'm being touched");
+				}
+			});
+
+			letter.setOnDragDone(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* the drag and drop gesture ended */
+					/* if the data was successfully moved, clear it */
+					if (event.getTransferMode() != TransferMode.MOVE) {
+						userBar.getChildren().add(letter);
+						rackletters.add(letter);
+					}
+					event.consume();
+				}
+			});
+		}
+		userBar.setOnDragOver(new EventHandler<DragEvent>() {
+
+			public void handle(DragEvent event) {
+				// System.out.println("test1");
+				/* data is dragged over the target */
+				/*
+				 * accept it only if it is not dragged from the same node and if it isn't
+				 * holding a card
+				 */
+				if (event.getGestureSource() != userBar) {
+					/* allow for both copying and moving, whatever user chooses */
+					event.acceptTransferModes(TransferMode.MOVE);
+				}
+				event.consume();
+			}
+		});
+		userBar.setOnDragDropped(new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				/* data dropped */
+				/* if there is a string data on dragboard, read it and use it */
+				Dragboard db = event.getDragboard();
+				Object j = db.getContent(LetterTilePic);
+				// bt.holds = (LetterTilePic) event.getGestureSource();
+				boolean success = false;
+				if (userBar.getChildren().size() <= 7) {
+					success = true;
+					userBar.getChildren().add((LetterTilePic) event.getGestureSource());
+				}
+				/*
+				 * let the source know whether the string was successfully transferred and used
+				 */
+				event.setDropCompleted(success);
+				event.consume();
+			}
+		});
 	}
 
 }

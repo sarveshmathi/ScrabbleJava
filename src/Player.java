@@ -19,7 +19,7 @@ public class Player extends Parent {
 	private int number; // player 0 or 1
 	// private String name; // player name
 	public int score;
-	public ArrayList<LetterTilePic> rackletters;
+	public ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();
 
 	/**
 	 * This constructs an object of the type Player.
