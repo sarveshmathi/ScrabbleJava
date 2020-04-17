@@ -323,7 +323,7 @@ public class Actualgame {
 
 	public void forfeitTurn() {
 
-		boolean userResponse;
+		boolean response;
 		String tempCurrentPlayer = "";
 
 		if (currentPlayer.equals("Player One")) {
@@ -332,9 +332,9 @@ public class Actualgame {
 			tempCurrentPlayer = "Player One";
 		}
 
-		userResponse = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
+		response = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
 
-		if (userResponse) {
+		if (response) {
 			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
 			if (playerOne.isSelected()) {
 				playerTwo.fire();
@@ -346,9 +346,9 @@ public class Actualgame {
 	}
 
 	public void resetGame() {
-		boolean userResponse;
-		userResponse = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
-		if (userResponse) {
+		boolean response;
+		response = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
+		if (response) {
 			this.ActualGame();
 			board.newboard();
 			inputWord.clear();
