@@ -94,4 +94,80 @@ public class AlertBox {
 		alertWindow.showAndWait();
 		
 	}
+	
+	public static boolean winnerAlert(String scorePlayerOne, String scorePlayerTwo) {
+		int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
+		int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
+		
+		
+		Stage alertWindow = new Stage();
+		alertWindow.setTitle("Final Scores");
+		alertWindow.setMinWidth(250);
+		alertWindow.initModality(Modality.APPLICATION_MODAL);// user must deal with this window first
+		
+		Label winner = new Label();
+		Label playerOne = new Label("Player One: ");
+		Label playerTwo = new Label("Player Two: ");
+		Label playerOneScore  = new Label(scorePlayerOne);
+		Label playerTwoScore = new Label(scorePlayerTwo);
+		Button buttonPlayAgain = new Button ("Play Again");
+		Button buttonQuitGame = new Button ("Quit Game");
+		Button buttonCancel = new Button("Cancel");
+		
+		if (finalScorePlayerOne > finalScorePlayerTwo) {
+			winner.setText ("Player One wins!");
+		} else if(finalScorePlayerTwo > finalScorePlayerOne) {
+			winner.setText("Player Two wins!");
+		} else {
+			winner.setText ("The game is draw.");
+		}
+		
+		HBox winnerLayout = new HBox();
+		winnerLayout.setAlignment(Pos.CENTER);
+		winnerLayout.getChildren().add(winner);
+		
+		HBox playerOneLayout = new HBox (10);
+		playerOneLayout.getChildren().addAll(playerOne, playerOneScore);
+		
+		HBox playerTwoLayout = new HBox (10);
+		playerTwoLayout.getChildren().addAll(playerTwo, playerTwoScore);
+		
+		VBox playersLayout = new VBox (10);
+		playersLayout.setAlignment(Pos.CENTER);
+		playersLayout.getChildren().addAll(playerOneLayout, playerTwoLayout);
+		
+		HBox playQuitLayout = new HBox(10);
+		playQuitLayout.setAlignment(Pos.CENTER);
+		playQuitLayout.getChildren().addAll(buttonPlayAgain, buttonQuitGame);
+		
+		HBox cancelLayout = new HBox();
+		cancelLayout.setAlignment(Pos.CENTER);
+		cancelLayout.getChildren().add(buttonCancel);
+		
+		VBox buttonsLayout = new VBox (10);
+		buttonsLayout.setAlignment(Pos.CENTER);
+		buttonsLayout.getChildren().addAll(playQuitLayout, cancelLayout);
+		
+		buttonPlayAgain.setOnAction(e -> {
+			response = true;
+			alertWindow.close();
+		});
+		
+		buttonQuitGame.setOnAction( e -> {
+			System.exit(0);
+		});
+		
+		buttonCancel.setOnAction(e -> {
+			alertWindow.close();
+		});
+		
+		VBox finalLayout = new VBox (50);
+		finalLayout.getChildren().addAll(winnerLayout, playersLayout, buttonsLayout);
+		
+		Scene scene = new Scene (finalLayout, 350, 350);
+		alertWindow.setScene(scene);
+		alertWindow.showAndWait();
+		
+		return response;
+	}
 }

@@ -116,7 +116,8 @@ public class Actualgame {
 		StackPane bottomPanel = new StackPane();
 		StackPane bottomPanel2 = new StackPane();// for user 2
 		Button reset = new Button("Reset");
-		Button refill = new Button("Refill");
+		//reset.setId("fontStyle");
+		Button endGame = new Button("End Game");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
 
@@ -136,7 +137,7 @@ public class Actualgame {
 
 		VBox forfeitResetLayout = new VBox(5);
 		forfeitResetLayout.setAlignment(Pos.CENTER);
-		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset, refill);
+		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset, endGame);
 
 		VBox bottomRightLayout = new VBox(20);
 		bottomRightLayout.setAlignment(Pos.CENTER);
@@ -267,6 +268,10 @@ public class Actualgame {
 
 		howToPlay.setOnAction(e -> {
 			this.howToPlay();
+		});
+		
+		endGame.setOnAction(e -> {
+			this.endGame();
 		});
 
 		Rectangle rect = new Rectangle(tile_w, tile_h);
@@ -533,11 +538,12 @@ public class Actualgame {
 	public void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
 
-				"IMPORTANT: Only correct vocabulary will be considered." + "Player One goes first.\n\n"
+				"Player One goes first.\n\n"
 						+ "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
 						+ "Press Confirm Word button to play the word.\n\n"
 						+ "Confirm Word button automatically changes turn.\n\n"
+						+ "Players decide to end the game at any moment by clicking \"End Game\" button."
 						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
 						+ "Press Reset button to reset the game.");
 	}
@@ -739,6 +745,23 @@ public class Actualgame {
 				event.consume();
 			}
 		});
+	}
+	
+	public void endGame() {
+		boolean response = AlertBox.alertWithUserAction("End Game", "End the game now?");
+		if (response) {
+			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
+			if (nextResponse) {
+				this.ActualGame();
+				board.newboard();
+				inputWord.clear();
+				lastPlayedWord.setText("");
+				player1.score = 0;
+				player2.score = 0;
+				scorePlayerOne.setText("0");
+				scorePlayerTwo.setText("0");
+			}
+		}
 	}
 
 }
