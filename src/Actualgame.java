@@ -348,6 +348,8 @@ public class Actualgame {
 			player2.score = 0;
 			scorePlayerOne.setText("0");
 			scorePlayerTwo.setText("0");
+			totalScorePlayerOne = "0";
+			totalScorePlayerTwo = "0";
 
 		}
 	}
@@ -752,6 +754,7 @@ public class Actualgame {
 		if (response) {
 			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
 			if (nextResponse) {
+				
 				this.ActualGame();
 				board.newboard();
 				inputWord.clear();
@@ -760,6 +763,9 @@ public class Actualgame {
 				player2.score = 0;
 				scorePlayerOne.setText("0");
 				scorePlayerTwo.setText("0");
+				totalScorePlayerOne = "0";
+				totalScorePlayerTwo = "0";
+				
 			}
 		}
 	}

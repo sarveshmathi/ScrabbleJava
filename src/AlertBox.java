@@ -112,7 +112,7 @@ public class AlertBox {
 		Label playerTwoScore = new Label(scorePlayerTwo);
 		Button buttonPlayAgain = new Button ("Play Again");
 		Button buttonQuitGame = new Button ("Quit Game");
-		Button buttonCancel = new Button("Cancel");
+		
 		
 		if (finalScorePlayerOne > finalScorePlayerTwo) {
 			winner.setText ("Player One wins!");
@@ -140,13 +140,6 @@ public class AlertBox {
 		playQuitLayout.setAlignment(Pos.CENTER);
 		playQuitLayout.getChildren().addAll(buttonPlayAgain, buttonQuitGame);
 		
-		HBox cancelLayout = new HBox();
-		cancelLayout.setAlignment(Pos.CENTER);
-		cancelLayout.getChildren().add(buttonCancel);
-		
-		VBox buttonsLayout = new VBox (10);
-		buttonsLayout.setAlignment(Pos.CENTER);
-		buttonsLayout.getChildren().addAll(playQuitLayout, cancelLayout);
 		
 		buttonPlayAgain.setOnAction(e -> {
 			response = true;
@@ -157,12 +150,9 @@ public class AlertBox {
 			System.exit(0);
 		});
 		
-		buttonCancel.setOnAction(e -> {
-			alertWindow.close();
-		});
 		
 		VBox finalLayout = new VBox (50);
-		finalLayout.getChildren().addAll(winnerLayout, playersLayout, buttonsLayout);
+		finalLayout.getChildren().addAll(winnerLayout, playersLayout, playQuitLayout);
 		
 		Scene scene = new Scene (finalLayout, 350, 350);
 		alertWindow.setScene(scene);
