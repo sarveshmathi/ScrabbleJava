@@ -89,7 +89,7 @@ public class AlertBox {
 		layoutVBox.getChildren().addAll(label, buttonCancel);
 		layoutVBox.setAlignment(Pos.CENTER);
 
-		Scene scene = new Scene(layoutVBox, 350, 350);
+		Scene scene = new Scene(layoutVBox, 440, 325);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
 		
@@ -119,7 +119,7 @@ public class AlertBox {
 		} else if(finalScorePlayerTwo > finalScorePlayerOne) {
 			winner.setText("Player Two wins!");
 		} else {
-			winner.setText ("The game is draw.");
+			winner.setText ("Tie!");
 		}
 		
 		
