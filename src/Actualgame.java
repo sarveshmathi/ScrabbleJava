@@ -110,20 +110,20 @@ public class Actualgame {
 		lb = new LetterBag2();
 		bottomPanel = new StackPane();
 		bottomPanel2 = new StackPane();
-		
+
 		this.ActualGame();
 	}
 
 	public void ActualGame() {
 		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
-		//LetterBag2 lb = new LetterBag2();
+		// LetterBag2 lb = new LetterBag2();
 		LetterTilePic lp;
 		// creates the user letter bar
-		//StackPane bottomPanel = new StackPane();
-		//StackPane bottomPanel2 = new StackPane();// for user 2
+		// StackPane bottomPanel = new StackPane();
+		// StackPane bottomPanel2 = new StackPane();// for user 2
 		Button reset = new Button("Reset");
-		//reset.setId("fontStyle");
+		// reset.setId("fontStyle");
 		Button endGame = new Button("End Game");
 		// topPane.setAlignment(Pos.TOP_RIGHT);
 		// topPane.getChildren().add(reset);
@@ -168,8 +168,10 @@ public class Actualgame {
 			player.setText("Current player: " + currentPlayer);
 			if (playerOne.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of screen
+				board.removetiles();
 			} else if (playerTwo.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
+				board.removetiles();
 			}
 			rackcheck(player1, lb, bottomPanel);
 			rackcheck(player2, lb, bottomPanel2);
@@ -276,7 +278,7 @@ public class Actualgame {
 		howToPlay.setOnAction(e -> {
 			this.howToPlay();
 		});
-		
+
 		endGame.setOnAction(e -> {
 			this.endGame();
 		});
@@ -551,8 +553,7 @@ public class Actualgame {
 	public void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
 
-				"Player One goes first.\n\n"
-						+ "Drag and drop tiles on the board.\n\n"
+				"Player One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
 						+ "Press Confirm Word button to play the word.\n\n"
 						+ "Confirm Word button automatically changes turn.\n\n"
@@ -759,13 +760,13 @@ public class Actualgame {
 			}
 		});
 	}
-	
+
 	public void endGame() {
 		boolean response = AlertBox.alertWithUserAction("End Game", "End the game now?");
 		if (response) {
 			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
 			if (nextResponse) {
-				
+
 				this.ActualGame();
 				board.newboard();
 				inputWord.clear();
@@ -776,7 +777,7 @@ public class Actualgame {
 				scorePlayerTwo.setText("0");
 				totalScorePlayerOne = "0";
 				totalScorePlayerTwo = "0";
-				
+
 			}
 		}
 	}

@@ -285,4 +285,12 @@ public class Board extends Parent {
 		}
 		return boo;
 	}
+
+	public void removetiles() {
+		for (BoardTile bt : tiles) {
+			if (bt.holds == null && getChildrenUnmodifiable().contains(bt.holds)) {
+				getChildren().remove(bt.holds);
+			}
+		}
+	}
 }
