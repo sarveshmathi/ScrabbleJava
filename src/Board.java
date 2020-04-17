@@ -258,33 +258,28 @@ public class Board extends Parent {
 						if (i == 0) {
 							if (tiles[i + 1].holds == null) {
 								boo = false;
+								break;
 							}
 						}
 						// if you are at rightmost
 						else if (i == (tiles.length - 1)) {
 							if (tiles[i - 1].holds == null) {
 								boo = false;
+								break;
 							}
 
 						} else {
 							if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) {
 								boo = false;
+								break;
 							}
 						}
 
+					} else if (dif == 1) {
+						boo = true;
 					}
-					boo = false;
-					System.out.println("I got here");
-				} /*
-					 * else if (dif != 1) { // if you are at leftmost if (i == 0) { if (tiles[i +
-					 * 1].holds == null) { boo = false; } } // if you are at rightmost else if (i ==
-					 * (tiles.length - 1)) { if (tiles[i - 1].holds == null) { boo = false; }
-					 * 
-					 * } else { if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) { boo
-					 * = false; } }
-					 * 
-					 * } }
-					 */
+
+				}
 
 			}
 		}
