@@ -11,11 +11,13 @@ import java.util.Collections;
 
 public class LetterBag2 {
 	private ArrayList<LetterTilePic> letterTiles = new ArrayList<LetterTilePic>();
-	private int lettersGivenCounter; // Keeps track of how many letters are given out in a game, also the position in bag								
+	private int lettersGivenCounter; // Keeps track of how many letters are given out in a game, also the position in
+										// bag
 	private LetterTilePic lp;
 
 	public LetterBag2() {
-		//this loop goes over the enum and puts the correct quanity of each letter into the bag
+		// this loop goes over the enum and puts the correct quanity of each letter into
+		// the bag
 		for (LetterTilePic.Letters letters : LetterTilePic.Letters.values()) {
 			int lettersPutCounter = 0;
 			while (lettersPutCounter < letters.quantity) {
@@ -49,11 +51,18 @@ public class LetterBag2 {
 	 */
 	public ArrayList<LetterTilePic> getLetters(int noOfLetters) {
 		ArrayList<LetterTilePic> output = new ArrayList<LetterTilePic>();
-		for (int i = 0; i < noOfLetters && lettersGivenCounter < 100; i++) {
+		for (int i = 0; i < noOfLetters && lettersGivenCounter < 98; i++) {
 			output.add(letterTiles.get(lettersGivenCounter));
 			lettersGivenCounter++;
 		}
 		return output;
+	}
+
+	public void resetrack(Player player) {
+		for (LetterTilePic lp : player.rackletters) {
+			player.rackletters.remove(lp);
+			letterTiles.add(lp);
+		}
 	}
 
 	// public LetterTilePic deal() {

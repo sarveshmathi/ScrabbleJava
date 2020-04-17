@@ -168,10 +168,10 @@ public class Actualgame {
 			player.setText("Current player: " + currentPlayer);
 			if (playerOne.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of screen
-				board.removetiles();
+
 			} else if (playerTwo.isSelected() == true) {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
-				board.removetiles();
+
 			}
 			rackcheck(player1, lb, bottomPanel);
 			rackcheck(player2, lb, bottomPanel2);
@@ -359,14 +359,15 @@ public class Actualgame {
 			scorePlayerTwo.setText("0");
 			totalScorePlayerOne = "0";
 			totalScorePlayerTwo = "0";
-			player1.rackletters.clear();
-			player2.rackletters.clear();
+			// player1.rackletters.clear();
+			// player2.rackletters.clear();
+			lb.resetrack(player1);
+			lb.resetrack(player1);
 			rackcheck(player1, lb, bottomPanel);
 			rackcheck(player2, lb, bottomPanel2);
 
 		}
 	}
-	
 
 	public void confirmWord() {
 		String playedWord = inputWord.getText().trim();
@@ -769,6 +770,14 @@ public class Actualgame {
 			if (nextResponse) {
 				this.resetGame();
 
+			}
+		}
+	}
+
+	public void removetiles() {
+		for (BoardTile bt : tiles) {
+			if (bt.holds == null && board.getChildrenUnmodifiable().contains(bt.holds)) {
+				gameRoot.getChildren().remove(bt.holds);
 			}
 		}
 	}
