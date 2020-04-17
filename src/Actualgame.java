@@ -61,6 +61,9 @@ public class Actualgame {
 	private Player player1;
 	private Player player2;
 	private Scoring scoring;
+	LetterBag2 lb;
+	StackPane bottomPanel;
+	StackPane bottomPanel2;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -104,17 +107,21 @@ public class Actualgame {
 		// word = "";
 		player1 = new Player(1);
 		player2 = new Player(2);
+		lb = new LetterBag2();
+		bottomPanel = new StackPane();
+		bottomPanel2 = new StackPane();
+		
 		this.ActualGame();
 	}
 
 	public void ActualGame() {
 		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
-		LetterBag2 lb = new LetterBag2();
+		//LetterBag2 lb = new LetterBag2();
 		LetterTilePic lp;
 		// creates the user letter bar
-		StackPane bottomPanel = new StackPane();
-		StackPane bottomPanel2 = new StackPane();// for user 2
+		//StackPane bottomPanel = new StackPane();
+		//StackPane bottomPanel2 = new StackPane();// for user 2
 		Button reset = new Button("Reset");
 		//reset.setId("fontStyle");
 		Button endGame = new Button("End Game");
@@ -350,6 +357,10 @@ public class Actualgame {
 			scorePlayerTwo.setText("0");
 			totalScorePlayerOne = "0";
 			totalScorePlayerTwo = "0";
+			player1.rackletters.clear();
+			player2.rackletters.clear();
+			rackcheck(player1, lb, bottomPanel);
+			rackcheck(player2, lb, bottomPanel2);
 
 		}
 	}
