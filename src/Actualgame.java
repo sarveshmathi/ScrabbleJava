@@ -83,7 +83,7 @@ public class Actualgame {
 		tile_w = board_w / tile_in_row;
 		tile_h = board_h / tile_in_col;
 		border = new Rectangle(tile_w - 2, tile_h - 2);
-		rackletters = new ArrayList<LetterTilePic>();
+		
 		LetterTilePic = new DataFormat("some string that identifies your object");
 
 		playerOne = new RadioButton("Player One");
@@ -104,17 +104,20 @@ public class Actualgame {
 		totalScorePlayerTwo = "0";
 		scoring = new Scoring();
 		confirmButton = "";
-		// word = "";
-		player1 = new Player(1);
-		player2 = new Player(2);
-		lb = new LetterBag2();
-		bottomPanel = new StackPane();
-		bottomPanel2 = new StackPane();
+		
+		
 
 		this.ActualGame();
 	}
 
 	public void ActualGame() {
+		player1 = new Player(1);
+		player2 = new Player(2);
+		lb = new LetterBag2();
+		bottomPanel = new StackPane();
+		bottomPanel2 = new StackPane();
+		rackletters = new ArrayList<LetterTilePic>();
+		
 		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
 		// LetterBag2 lb = new LetterBag2();
@@ -359,13 +362,7 @@ public class Actualgame {
 			scorePlayerTwo.setText("0");
 			totalScorePlayerOne = "0";
 			totalScorePlayerTwo = "0";
-			// player1.rackletters.clear();
-			// player2.rackletters.clear();
-			lb.resetrack(player1);
-			lb.resetrack(player1);
-			rackcheck(player1, lb, bottomPanel);
-			rackcheck(player2, lb, bottomPanel2);
-
+			 
 		}
 	}
 

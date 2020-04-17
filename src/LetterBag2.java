@@ -10,10 +10,10 @@ import java.util.Collections;
  */
 
 public class LetterBag2 {
-	private ArrayList<LetterTilePic> letterTiles = new ArrayList<LetterTilePic>();
+	public ArrayList<LetterTilePic> letterTiles = new ArrayList<LetterTilePic>();
 	private int lettersGivenCounter; // Keeps track of how many letters are given out in a game, also the position in
 										// bag
-	private LetterTilePic lp;
+	public LetterTilePic lp;
 
 	public LetterBag2() {
 		// this loop goes over the enum and puts the correct quanity of each letter into

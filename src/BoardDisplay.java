@@ -55,8 +55,6 @@ public class BoardDisplay extends Application {
 		instructionButton.setGraphic(ivHowToPlay);
 		instructionButton.getStyleClass().remove("button");
 		
-		
-		
 		Button exitButton = new Button();
 		
 		FileInputStream exitPath = new FileInputStream ("exit.png");
