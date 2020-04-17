@@ -49,6 +49,7 @@ public class AlertBox {
 		});
 
 		buttonCancel.setOnAction(e -> {
+			response = false;
 			alertWindow.close();
 		});
 
@@ -85,6 +86,7 @@ public class AlertBox {
 		Button buttonCancel = new Button("Cancel");
 
 		buttonCancel.setOnAction(e -> {
+			response = false;
 			alertWindow.close();
 		});
 
