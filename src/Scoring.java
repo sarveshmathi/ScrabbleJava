@@ -79,7 +79,7 @@ public class Scoring {
 					System.out.println("Checking words complete");
 					AlertBox.alertWithoutUserAction("Incorrect Word",
 							word.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-					player.score -= player.score;
+					player.score -= tempTotalScore;
 					totalScore = -1;
 				}
 
@@ -152,10 +152,13 @@ public class Scoring {
 		// this checks if it was made by at least 1 new letter
 		if (mouseon == true) {
 			// takes into account triple of double word scores
-			player.score += (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
+			turnpoints = (int) (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
+			player.score += turnpoints;
 		} else {
 			player.score += 0;
 		}
+		System.out.println("Turnpoints: " + turnpoints);
+		System.out.println("points before anything: " + player.score);
 		return turnpoints;
 	}
 
