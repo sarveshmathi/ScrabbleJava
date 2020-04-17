@@ -122,19 +122,23 @@ public class AlertBox {
 			winner.setText ("The game is draw.");
 		}
 		
-		HBox winnerLayout = new HBox();
-		winnerLayout.setAlignment(Pos.CENTER);
-		winnerLayout.getChildren().add(winner);
+		
 		
 		HBox playerOneLayout = new HBox (10);
+		playerOneLayout.setAlignment(Pos.CENTER);
 		playerOneLayout.getChildren().addAll(playerOne, playerOneScore);
 		
 		HBox playerTwoLayout = new HBox (10);
+		playerTwoLayout.setAlignment(Pos.CENTER);
 		playerTwoLayout.getChildren().addAll(playerTwo, playerTwoScore);
 		
-		VBox playersLayout = new VBox (10);
+		VBox playersLayout = new VBox (5);
 		playersLayout.setAlignment(Pos.CENTER);
 		playersLayout.getChildren().addAll(playerOneLayout, playerTwoLayout);
+		
+		VBox winnerPlayersLayout = new VBox (15);
+		winnerPlayersLayout.setAlignment(Pos.CENTER);
+		winnerPlayersLayout.getChildren().addAll(winner, playersLayout);
 		
 		HBox playQuitLayout = new HBox(10);
 		playQuitLayout.setAlignment(Pos.CENTER);
@@ -152,9 +156,10 @@ public class AlertBox {
 		
 		
 		VBox finalLayout = new VBox (50);
-		finalLayout.getChildren().addAll(winnerLayout, playersLayout, playQuitLayout);
+		finalLayout.setAlignment(Pos.CENTER);
+		finalLayout.getChildren().addAll(winnerPlayersLayout, playQuitLayout);
 		
-		Scene scene = new Scene (finalLayout, 350, 350);
+		Scene scene = new Scene (finalLayout, 350, 250);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
 		
