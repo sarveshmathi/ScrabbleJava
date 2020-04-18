@@ -152,11 +152,20 @@ public class AlertBox {
 		});
 
 		buttonQuitGame.setOnAction(e -> {
+			response = false;
 			boolean nextResponse = AlertBox.alertWithUserAction("Exit", "Exit Scrabble");
 			if (nextResponse) {
 				System.exit(0);
 			}
 		});
+		
+		alertWindow.setOnCloseRequest(e -> {
+			// Consumes the system close event
+			e.consume();
+			alertWithoutUserAction("Play Again or Quit", "Please click \"Play Again\" or \"Quit Game\".");
+			
+		});
+
 
 		VBox finalLayout = new VBox(50);
 		finalLayout.setAlignment(Pos.CENTER);

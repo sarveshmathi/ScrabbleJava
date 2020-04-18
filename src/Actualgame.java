@@ -765,7 +765,16 @@ public class Actualgame {
 		if (response) {
 			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
 			if (nextResponse) {
-				this.resetGame();
+				this.ActualGame();
+				board.newboard();
+				inputWord.clear();
+				lastPlayedWord.setText("");
+				player1.score = 0;
+				player2.score = 0;
+				scorePlayerOne.setText("0");
+				scorePlayerTwo.setText("0");
+				totalScorePlayerOne = "0";
+				totalScorePlayerTwo = "0";
 
 			}
 		}
