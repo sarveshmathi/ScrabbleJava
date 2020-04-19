@@ -25,46 +25,46 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Actualgame {
-	private AlertBox ab;
-	private BoardTile[] tiles;
-	private final BorderPane gameRoot;
-	private Board board;
+	
+	private String totalScorePlayerOne;
+	private String totalScorePlayerTwo;
+	private String confirmButton;
+	private String currentPlayer;
+	
 	private int tile_in_row;
 	private int tile_in_col;
-	private int board_w;
-	private int board_h;
-	private int tile_w;
-	private int tile_h;
+	private int board_width;
+	private int board_height;
+	private int tile_width;
+	private int tile_height;
+	
 	private Rectangle border;
-	private ArrayList<LetterTilePic> rackletters;
-	private LetterTilePic currentTile;
-	private BoardTile destinationspot;
-	private DataFormat LetterTilePic;
+	
+	private final BorderPane gameRoot;
+	private StackPane bottomPanel;
+	private StackPane bottomPanel2;
+	
 	private RadioButton playerOne;
 	private RadioButton playerTwo;
 	private ToggleGroup toggleGroup;
-	private TextField inputWord;
 	private Label enteredWord;
 	private Label player;
 	private Label scorePlayerOne;
 	private Label scorePlayerTwo;
-	private String confirmButton;
-	// private String word;
-	private Label playerOneLabel;
-	private Label playerTwoLabel;
-	private Button howToPlay;
-	Button confirmWord;
-	Label lastPlayedWord;
-	String currentPlayer;
-	String totalScorePlayerOne;
-	String totalScorePlayerTwo;
+	private Label lastPlayedWord;
+	private TextField inputWord;
+	
+	private BoardTile[] tiles;
+	private Board board;
+	private ArrayList<LetterTilePic> rackletters;
+	private LetterTilePic currentTile;
+	private BoardTile destinationspot;
+	private DataFormat LetterTilePic;
 	private Player player1;
 	private Player player2;
 	private Scoring scoring;
-	LetterBag2 lb;
-	StackPane bottomPanel;
-	StackPane bottomPanel2;
-
+	private LetterBag2 lb;
+	
 	/**
 	 * This gets the actual game screen when you click start running.
 	 * 
@@ -75,42 +75,44 @@ public class Actualgame {
 	public Actualgame() {
 		tile_in_row = 15;// board spaces per row
 		tile_in_col = 15;// board spaces per col
-		board_w = 800;// board size
-		board_h = 800;
+		board_width = 800;// board size
+		board_height = 800;
 
 		gameRoot = new BorderPane();
 		board = new Board();
-		tile_w = board_w / tile_in_row;
-		tile_h = board_h / tile_in_col;
-		border = new Rectangle(tile_w - 2, tile_h - 2);
+		tile_width = board_width / tile_in_row;
+		tile_height = board_height / tile_in_col;
+		border = new Rectangle(tile_width - 2, tile_height - 2);
 		
 		LetterTilePic = new DataFormat("some string that identifies your object");
-
-		playerOne = new RadioButton("Player One");
-		playerTwo = new RadioButton("Player Two");
+		playerOne = new RadioButton();
+		playerTwo = new RadioButton();
 		toggleGroup = new ToggleGroup();
 		inputWord = new TextField();
 		enteredWord = new Label();
 		player = new Label();
 		scorePlayerOne = new Label();
 		scorePlayerTwo = new Label();
-		playerOneLabel = new Label("Player One");
-		playerTwoLabel = new Label("Player Two");
-		howToPlay = new Button("How To Play");
-		confirmWord = new Button("Confirm Word");
 		lastPlayedWord = new Label();
 		currentPlayer = "";
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
 		scoring = new Scoring();
 		confirmButton = "";
-		
-		
 
-		this.ActualGame();
+		this.buildLayout();
 	}
 
-	public void ActualGame() {
+	public void buildLayout() {
+		LetterTilePic lp;
+		Button reset = new Button("Reset");
+		Button endGame = new Button("End Game");
+		Button forfeitTurn = new Button("Forfeit Turn");
+		Button howToPlay = new Button("How To Play");
+		Button confirmWord = new Button("Confirm Word");
+		Label playerOneLabel = new Label("Player One");
+		Label playerTwoLabel = new Label("Player Two");
+		
 		player1 = new Player(1);
 		player2 = new Player(2);
 		lb = new LetterBag2();
@@ -118,20 +120,9 @@ public class Actualgame {
 		bottomPanel2 = new StackPane();
 		rackletters = new ArrayList<LetterTilePic>();
 		
-		gameRoot.setPrefSize(board_w, board_h);// size of the Pane which ends up being the board
+		gameRoot.setPrefSize(board_width, board_height);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
-		// LetterBag2 lb = new LetterBag2();
-		LetterTilePic lp;
-		// creates the user letter bar
-		// StackPane bottomPanel = new StackPane();
-		// StackPane bottomPanel2 = new StackPane();// for user 2
-		Button reset = new Button("Reset");
-		// reset.setId("fontStyle");
-		Button endGame = new Button("End Game");
-		// topPane.setAlignment(Pos.TOP_RIGHT);
-		// topPane.getChildren().add(reset);
-
-		Button forfeitTurn = new Button("Forfeit Turn");
+		
 		inputWord.setPromptText("Player One's Turn");
 		scorePlayerOne.setText(totalScorePlayerOne);
 		scorePlayerTwo.setText(totalScorePlayerTwo);
@@ -286,7 +277,7 @@ public class Actualgame {
 			this.endGame();
 		});
 
-		Rectangle rect = new Rectangle(tile_w, tile_h);
+		Rectangle rect = new Rectangle(tile_width, tile_height);
 		rect.setId("Tiles");// used for css maybe later haven't set up much there yet
 		// bottomPane.getChildren().addAll(bottomBar, userBar);
 		gameRoot.setPadding(new Insets(10, 10, 10, 10));
@@ -352,7 +343,7 @@ public class Actualgame {
 		boolean response;
 		response = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
 		if (response) {
-			this.ActualGame();
+			this.buildLayout();
 			board.newboard();
 			inputWord.clear();
 			lastPlayedWord.setText("");
@@ -757,7 +748,7 @@ public class Actualgame {
 		if (response) {
 			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
 			if (nextResponse) {
-				this.ActualGame();
+				this.buildLayout();
 				board.newboard();
 				inputWord.clear();
 				lastPlayedWord.setText("");
