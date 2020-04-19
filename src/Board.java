@@ -289,16 +289,13 @@ public class Board extends Parent {
 
 	public void removetiles() {
 		for (BoardTile bt : tiles) {
-			if (bt.getTileType() == "C") {
-				if (!bt.holds.isMouseTransparent() && bt.holds != null) {
-					System.out.println("yes null");
-					bt.remove();
-					bt.holds = null;
-				}
-				System.out.println(bt.getChildrenUnmodifiable().toString());
+			if (bt.holds != null && !bt.holds.isMouseTransparent()) {
+				System.out.println("yes null");
+				bt.remove();
+				bt.holds = null;
 			}
+			System.out.println(bt.getChildrenUnmodifiable().toString());
 		}
-
 	}
 
 }
