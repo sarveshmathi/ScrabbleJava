@@ -477,96 +477,7 @@ public class Actualgame {
 	public void howToPlay() {
 		AlertBox.howToPlay();
 	}
-
-	/**
-	 * this method makes a new letter rack
-	 */
-	public ArrayList<LetterTilePic> makerack(StackPane bottomPanel, LetterBag2 lb) {
-		Rectangle bottomBar = new Rectangle(420, 60);
-		bottomBar.setArcWidth(30.0);
-		bottomBar.setArcHeight(30.0);
-		bottomBar.setFill(Color.SIENNA);
-		HBox userBar = new HBox(2);
-		userBar.setAlignment(Pos.CENTER);
-		bottomPanel.setAlignment(Pos.CENTER);
-		bottomPanel.getChildren().addAll(bottomBar, userBar);
-		rackletters = lb.getLetters(7);
-		for (LetterTilePic letter : rackletters) {
-			userBar.getChildren().add(letter);
-			// letter.onMouseDragEnteredProperty();
-			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					/* drag was detected, start a drag-and-drop gesture */
-					/* allow any transfer mode */
-					if (letter.isin != null) {
-						letter.isin.holds = null;
-					}
-					currentTile = letter;
-					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
-					/* Put a string on a dragboard */
-					ClipboardContent content = new ClipboardContent();
-					content.putString(letter.toString());
-					content.put(LetterTilePic, currentTile);
-					// content.getFiles();
-					currentTile.getClass();
-					db.setContent(content);
-					userBar.getChildren().remove(letter);
-					rackletters.remove(letter);
-
-					event.consume();
-					System.out.println("i'm being touched");
-				}
-			});
-
-			letter.setOnDragDone(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					/* the drag and drop gesture ended */
-					/* if the data was successfully moved, clear it */
-					if (event.getTransferMode() != TransferMode.MOVE) {
-						userBar.getChildren().add(letter);
-						rackletters.add(letter);
-					}
-					event.consume();
-				}
-			});
-		}
-		userBar.setOnDragOver(new EventHandler<DragEvent>() {
-
-			public void handle(DragEvent event) {
-				// System.out.println("test1");
-				/* data is dragged over the target */
-				/*
-				 * accept it only if it is not dragged from the same node and if it isn't
-				 * holding a card
-				 */
-				if (event.getGestureSource() != userBar) {
-					/* allow for both copying and moving, whatever user chooses */
-					event.acceptTransferModes(TransferMode.MOVE);
-				}
-				event.consume();
-			}
-		});
-		userBar.setOnDragDropped(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				/* data dropped */
-				/* if there is a string data on dragboard, read it and use it */
-				Dragboard db = event.getDragboard();
-				Object j = db.getContent(LetterTilePic);
-				// bt.holds = (LetterTilePic) event.getGestureSource();
-				boolean success = false;
-				if (userBar.getChildren().size() <= 7) {
-					success = true;
-					userBar.getChildren().add((LetterTilePic) event.getGestureSource());
-				}
-				/*
-				 * let the source know whether the string was successfully transferred and used
-				 */
-				event.setDropCompleted(success);
-				event.consume();
-			}
-		});
-		return rackletters;
-	}
+	
 	/* will create and refill player racks */
 
 	public void rackcheck(Player player, LetterBag2 lb, StackPane bottomPanel) {
@@ -586,7 +497,6 @@ public class Actualgame {
 			}
 		}
 		rackpicture(bottomPanel, player.rackletters);
-
 	}
 
 	/** makes the images for the rack tiles */
