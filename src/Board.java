@@ -107,7 +107,8 @@ public class Board extends Parent {
 	public void turnoffdrag() {
 		for (BoardTile t : tiles) {
 			if (t.holds != null) {
-				t.setMouseTransparent(true);
+				t.holds.setMouseTransparent(true);
+				// t.setMouseTransparent(true);
 			}
 		}
 	}
@@ -288,9 +289,16 @@ public class Board extends Parent {
 
 	public void removetiles() {
 		for (BoardTile bt : tiles) {
-			if (bt.holds == null && getChildrenUnmodifiable().contains(bt.holds)) {
-				getChildren().remove(bt.holds);
+			if (bt.getTileType() == "C") {
+				if (!bt.holds.isMouseTransparent() && bt.holds != null) {
+					System.out.println("yes null");
+					bt.remove();
+					bt.holds = null;
+				}
+				System.out.println(bt.getChildrenUnmodifiable().toString());
 			}
 		}
+
 	}
+
 }

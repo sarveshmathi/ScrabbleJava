@@ -59,7 +59,9 @@ public class LetterTilePic extends Parent implements Serializable {
 		text1.setWrappingWidth(6);
 		text2.setWrappingWidth(7);
 		// text2.setTextOrigin(VPos.BOTTOM);
-		getChildren().add(new StackPane(piece, text1));
+		StackPane st = new StackPane(piece, text1);
+		getChildren().add(st);
+		// getChildren().add(new StackPane(piece, text1));
 	}
 
 	/**

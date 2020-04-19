@@ -80,8 +80,17 @@ public class BoardTile extends Parent implements Serializable {
 
 	public void displayHold() {
 		if (this.holds != null) {
-			getChildren().add(new StackPane(this.holds));
+			StackPane sp = new StackPane(this.holds);
+			sp.setId("holdpic");
+			getChildren().add(sp);
+			// getChildren().add(new StackPane(this.holds));
 		}
+	}
+
+	public void remove() {
+		getChildren().remove(1);
+		// getChildren().remove(this.holdpic);
+
 	}
 
 }

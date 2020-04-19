@@ -145,13 +145,14 @@ public class Actualgame {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
 
 			}
+			board.removetiles();
 			rackcheck(player1, lb, bottomPanel);
 			rackcheck(player2, lb, bottomPanel2);
 			// board.turnoffdrag();
 		});
-		//Select Player One to start off with
+		// Select Player One to start off with
 		playerOne.setSelected(true);
-		
+
 		// Right Layout Starts
 		VBox howToPlayLayout = new VBox();
 		howToPlayLayout.setAlignment(Pos.CENTER);
@@ -212,11 +213,10 @@ public class Actualgame {
 		howToPlay.setTooltip(new Tooltip("Press for \"how to\" guide."));
 		endGame.setTooltip(new Tooltip("Press to end current game."));
 
-
 		// this makes rack for each player
 		rackcheck(player1, lb, bottomPanel);
 		rackcheck(player2, lb, bottomPanel2);
-		
+
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -369,7 +369,7 @@ public class Actualgame {
 
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
-		
+
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.checkInputboard(wordToTestArray, board, player1);
 				if (currentScore == -1) {
@@ -478,7 +478,7 @@ public class Actualgame {
 	public void howToPlay() {
 		AlertBox.howToPlay();
 	}
-	
+
 	/* will create and refill player racks */
 
 	public void rackcheck(Player player, LetterBag2 lb, StackPane bottomPanel) {
@@ -554,7 +554,7 @@ public class Actualgame {
 		userBar.setOnDragOver(new EventHandler<DragEvent>() {
 
 			public void handle(DragEvent event) {
-				
+
 				/* data is dragged over the target */
 				/*
 				 * accept it only if it is not dragged from the same node and if it isn't
