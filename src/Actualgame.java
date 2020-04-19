@@ -210,6 +210,7 @@ public class Actualgame {
 		confirmWord.setTooltip(new Tooltip("Press to confirm."));
 		reset.setTooltip(new Tooltip("Press to reset the game."));
 		howToPlay.setTooltip(new Tooltip("Press for \"how to\" guide."));
+		endGame.setTooltip(new Tooltip("Press to end current game."));
 
 
 		// this makes rack for each player
