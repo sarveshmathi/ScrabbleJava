@@ -338,7 +338,6 @@ public class Actualgame {
 			scorePlayerTwo.setText("0");
 			totalScorePlayerOne = "0";
 			totalScorePlayerTwo = "0";
-
 		}
 	}
 
@@ -359,7 +358,6 @@ public class Actualgame {
 			if (!(ch >= 'a' && ch <= 'z' || ch == ' ')) {
 				onlyEnglishAlphabet = false;
 			}
-
 		}
 
 		if (currentPlayer.equals("Player One")) {
@@ -367,25 +365,19 @@ public class Actualgame {
 		} else if (currentPlayer.equals("Player Two")) {
 			tempCurrentPlayer = "Player One";
 		}
-
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
 		} else if (!onlyEnglishAlphabet) {
 			enteredWord.setText("English alphabets only.");
 		} else // all filters passed
 		{
-
 			wordToTest = playedWord;
 			String status = "";
 			String points = "";
 
-			// Test codes begin
-
 			ArrayList<String> wordToTestArray = new ArrayList<String>();
 			wordToTestArray.add(wordToTest);
-			// int score = Scoring.checkInput(wordToTestArray);
-			// tester for player1 and player 2 correctly
-
+		
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.checkInputboard(wordToTestArray, board, player1);
 				if (currentScore == -1) {
@@ -455,44 +447,10 @@ public class Actualgame {
 
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();
-
 				}
 				System.out.println(player2.score);
 			}
-
-			/*
-			 * if (currentPlayer.equals("Player One")) { int playerOneScore = player1.score;
-			 * 
-			 * scorePlayerOne.setText("" + playerOneScore);
-			 * 
-			 * totalScorePlayerOne = "" + playerOneScore; } else if
-			 * (currentPlayer.equals("Player Two")) { int playerTwoScore = player2.score;
-			 * scorePlayerTwo.setText("" + playerTwoScore); totalScorePlayerTwo = "" +
-			 * playerTwoScore; }
-			 */
-
-			/**
-			 * if (score != -1) { status = "Accepted"; points = "" + score; if
-			 * (currentPlayer.equals("Player One")) { int playerOneScore =
-			 * Integer.parseInt(totalScorePlayerOne) + score; scorePlayerOne.setText("" +
-			 * playerOneScore);
-			 * 
-			 * totalScorePlayerOne = "" + playerOneScore; } else if
-			 * (currentPlayer.equals("Player Two")) { int playerTwoScore =
-			 * Integer.parseInt(totalScorePlayerTwo) + score; scorePlayerTwo.setText("" +
-			 * playerTwoScore); totalScorePlayerTwo = "" + playerTwoScore; } } else { status
-			 * = "Denied"; points = "0"; }
-			 */
-
-			// Test codes end
-
 			inputWord.setPromptText(currentPlayer + "'s Turn");
-
-			/*
-			 * if (playerOne.isSelected()) { playerTwo.fire(); } else if
-			 * (playerTwo.isSelected()) { playerOne.fire(); }
-			 */
-
 		}
 
 	}
@@ -694,7 +652,7 @@ public class Actualgame {
 		userBar.setOnDragOver(new EventHandler<DragEvent>() {
 
 			public void handle(DragEvent event) {
-				// System.out.println("test1");
+				
 				/* data is dragged over the target */
 				/*
 				 * accept it only if it is not dragged from the same node and if it isn't
