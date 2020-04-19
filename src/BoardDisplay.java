@@ -80,9 +80,10 @@ public class BoardDisplay extends Application {
 		instructionButton.setOnAction( e->
 		{
 			{
-				final Hyperlink hyperlink = new Hyperlink("https://scrabble.hasbro.com/en-us/rules");
-				getHostServices().showDocument(hyperlink.getText());
-				// TODO Auto-generated method stub
+				AlertBox.howToPlay();
+				//final Hyperlink hyperlink = new Hyperlink("https://scrabble.hasbro.com/en-us/rules");
+				//getHostServices().showDocument(hyperlink.getText());
+				
 
 			}
 		});

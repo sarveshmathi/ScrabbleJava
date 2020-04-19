@@ -177,4 +177,17 @@ public class AlertBox {
 
 		return response;
 	}
+	
+	public static void howToPlay() {
+		AlertBox.alertWithoutUserAction("How To Play",
+
+				"Player One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
+						+ "When you are finished, type the word in the text box.\n\n"
+						+ "Press Confirm Word button to play the word.\n\n"
+						+ "Confirm Word button automatically changes turn.\n\n"
+						+ "Tiles of an incorrect word remain on the board.\n\n"
+						+ "Players decide to end the game at any moment by clicking \"End Game\" button.\n\n"
+						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
+						+ "Press Reset button to reset the game.");
+	}
 }
