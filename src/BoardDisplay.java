@@ -79,11 +79,9 @@ public class BoardDisplay extends Application {
 		// Handle action events for "How to Play?" button.
 		instructionButton.setOnAction( e->
 		{
-			{	
-				Actualgame game = new Actualgame();
-				game.howToPlay();
-				//final Hyperlink hyperlink = new Hyperlink("https://scrabble.hasbro.com/en-us/rules");
-				//getHostServices().showDocument(hyperlink.getText());
+			{
+				final Hyperlink hyperlink = new Hyperlink("https://scrabble.hasbro.com/en-us/rules");
+				getHostServices().showDocument(hyperlink.getText());
 				// TODO Auto-generated method stub
 
 			}
