@@ -25,25 +25,25 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Actualgame {
-	
+
 	private String totalScorePlayerOne;
 	private String totalScorePlayerTwo;
 	private String confirmButton;
 	private String currentPlayer;
-	
+
 	private int tile_in_row;
 	private int tile_in_col;
 	private int board_width;
 	private int board_height;
 	private int tile_width;
 	private int tile_height;
-	
+
 	private Rectangle border;
-	
+
 	private final BorderPane gameRoot;
 	private StackPane bottomPanel;
 	private StackPane bottomPanel2;
-	
+
 	private RadioButton playerOne;
 	private RadioButton playerTwo;
 	private ToggleGroup toggleGroup;
@@ -53,7 +53,7 @@ public class Actualgame {
 	private Label scorePlayerTwo;
 	private Label lastPlayedWord;
 	private TextField inputWord;
-	
+
 	private BoardTile[] tiles;
 	private Board board;
 	private ArrayList<LetterTilePic> rackletters;
@@ -64,7 +64,7 @@ public class Actualgame {
 	private Player player2;
 	private Scoring scoring;
 	private LetterBag2 lb;
-	
+
 	/**
 	 * This gets the actual game screen when you click start running.
 	 * 
@@ -83,10 +83,10 @@ public class Actualgame {
 		tile_width = board_width / tile_in_row;
 		tile_height = board_height / tile_in_col;
 		border = new Rectangle(tile_width - 2, tile_height - 2);
-		
+
 		LetterTilePic = new DataFormat("some string that identifies your object");
-		playerOne = new RadioButton();
-		playerTwo = new RadioButton();
+		playerOne = new RadioButton("Player One");
+		playerTwo = new RadioButton("Player Two");
 		toggleGroup = new ToggleGroup();
 		inputWord = new TextField();
 		enteredWord = new Label();
@@ -112,42 +112,20 @@ public class Actualgame {
 		Button confirmWord = new Button("Confirm Word");
 		Label playerOneLabel = new Label("Player One");
 		Label playerTwoLabel = new Label("Player Two");
-		
+
 		player1 = new Player(1);
 		player2 = new Player(2);
 		lb = new LetterBag2();
 		bottomPanel = new StackPane();
 		bottomPanel2 = new StackPane();
 		rackletters = new ArrayList<LetterTilePic>();
-		
+
 		gameRoot.setPrefSize(board_width, board_height);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
-		
+
 		inputWord.setPromptText("Player One's Turn");
 		scorePlayerOne.setText(totalScorePlayerOne);
 		scorePlayerTwo.setText(totalScorePlayerTwo);
-
-		// Right Layout Starts
-		VBox howToPlayLayout = new VBox();
-		howToPlayLayout.setAlignment(Pos.CENTER);
-		howToPlayLayout.getChildren().add(howToPlay);
-
-		VBox confirmLayout = new VBox(5);
-		confirmLayout.setAlignment(Pos.CENTER);
-		confirmLayout.getChildren().addAll(enteredWord, inputWord, confirmWord);
-
-		VBox forfeitResetLayout = new VBox(5);
-		forfeitResetLayout.setAlignment(Pos.CENTER);
-		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset, endGame);
-
-		VBox bottomRightLayout = new VBox(20);
-		bottomRightLayout.setAlignment(Pos.CENTER);
-		bottomRightLayout.getChildren().addAll(confirmLayout, forfeitResetLayout);
-
-		VBox rightPanel = new VBox(400);
-		rightPanel.setAlignment(Pos.CENTER);
-		rightPanel.getChildren().addAll(howToPlayLayout, bottomRightLayout);
-		// Right Layout Ends
 
 		// Adding the radio buttons to a toggle group
 		playerOne.setToggleGroup(toggleGroup);
@@ -171,7 +149,30 @@ public class Actualgame {
 			rackcheck(player2, lb, bottomPanel2);
 			// board.turnoffdrag();
 		});
+		//Select Player One to start off with
 		playerOne.setSelected(true);
+		
+		// Right Layout Starts
+		VBox howToPlayLayout = new VBox();
+		howToPlayLayout.setAlignment(Pos.CENTER);
+		howToPlayLayout.getChildren().add(howToPlay);
+
+		VBox confirmLayout = new VBox(5);
+		confirmLayout.setAlignment(Pos.CENTER);
+		confirmLayout.getChildren().addAll(enteredWord, inputWord, confirmWord);
+
+		VBox forfeitResetLayout = new VBox(5);
+		forfeitResetLayout.setAlignment(Pos.CENTER);
+		forfeitResetLayout.getChildren().addAll(forfeitTurn, reset, endGame);
+
+		VBox bottomRightLayout = new VBox(20);
+		bottomRightLayout.setAlignment(Pos.CENTER);
+		bottomRightLayout.getChildren().addAll(confirmLayout, forfeitResetLayout);
+
+		VBox rightPanel = new VBox(400);
+		rightPanel.setAlignment(Pos.CENTER);
+		rightPanel.getChildren().addAll(howToPlayLayout, bottomRightLayout);
+		// Right Layout Ends
 
 		// Left Layout Starts
 		HBox playerOnePanel = new HBox(10);
@@ -210,27 +211,11 @@ public class Actualgame {
 		reset.setTooltip(new Tooltip("Press to reset the game."));
 		howToPlay.setTooltip(new Tooltip("Press for \"how to\" guide."));
 
-		/*
-		 * // This changes the text in confirmWord button to "Confirm Words" if more
-		 * than 1 // words are entered inputWord.textProperty().addListener((observable,
-		 * oldValue, newValue) -> { int count = 0; for (int i = 0; i <
-		 * newValue.length(); i++) { if (newValue.charAt(i) == ',') { count++; } } if
-		 * (count > 0) { confirmWord.setText("Confirm Words"); confirmButton =
-		 * "Confirm Words"; word = "words"; } else {
-		 * confirmWord.setText("Confirm Word"); confirmButton = "Confirm Word"; word =
-		 * "word"; }
-		 * 
-		 * if (newValue.equals("")) { enteredWord.setText(""); }
-		 * 
-		 * if (oldValue.equals("") && !newValue.equals("")) { enteredWord.setText(""); }
-		 * });
-		 */
 
 		// this makes rack for each player
-		// player1.rackletters = makerack(bottomPanel, lb);
-		// player2.rackletters = makerack(bottomPanel2, lb);
 		rackcheck(player1, lb, bottomPanel);
 		rackcheck(player2, lb, bottomPanel2);
+		
 		/*
 		 * This is to let the player forfeit their turn.
 		 * 
@@ -353,7 +338,7 @@ public class Actualgame {
 			scorePlayerTwo.setText("0");
 			totalScorePlayerOne = "0";
 			totalScorePlayerTwo = "0";
-			 
+
 		}
 	}
 
