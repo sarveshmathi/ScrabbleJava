@@ -301,7 +301,6 @@ public class Actualgame {
 	}
 
 	public void forfeitTurn() {
-
 		boolean response;
 		String tempCurrentPlayer = "";
 
@@ -320,7 +319,6 @@ public class Actualgame {
 			} else if (playerTwo.isSelected()) {
 				playerOne.fire();
 			}
-
 		}
 	}
 
@@ -345,8 +343,6 @@ public class Actualgame {
 		String playedWord = inputWord.getText().trim();
 		String wordToTest = "";
 
-		String tempCurrentPlayer = "";
-
 		enteredWord.setText(""); // to clear the text shown for previous player before turn changes
 		inputWord.clear();
 
@@ -360,11 +356,6 @@ public class Actualgame {
 			}
 		}
 
-		if (currentPlayer.equals("Player One")) {
-			tempCurrentPlayer = "Player Two";
-		} else if (currentPlayer.equals("Player Two")) {
-			tempCurrentPlayer = "Player One";
-		}
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
 		} else if (!onlyEnglishAlphabet) {
