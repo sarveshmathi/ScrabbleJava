@@ -11,6 +11,8 @@ Make sure you add the right VM arguments to run the main method found in BoardDi
 
 2. Download jsoup from [here](https://jsoup.org/download) and drag the jar into your project, adding it to your classpath. 
 
+3. You might have to copy the .png files from the project folder into the src folder to run the program.
+
 Once you've followed these steps you should be able to run the project from BoardDisplay class, 
 which should bring up the game window. 
 
