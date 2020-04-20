@@ -238,7 +238,7 @@ public class Actualgame {
 		 */
 
 		confirmWord.setOnAction(e -> {
-			if (board.checktogether() == true) {
+			if (board.checktogether2() == true) {
 				this.confirmWord();
 			} else {
 				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.");
@@ -384,7 +384,6 @@ public class Actualgame {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					
 
 				} else {
 					status = "Accepted";
@@ -589,7 +588,7 @@ public class Actualgame {
 			}
 		}
 	}
-	
+
 	public void resetSequence() {
 		this.buildLayout();
 		board.newboard();

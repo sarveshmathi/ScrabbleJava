@@ -255,14 +255,15 @@ public class Board extends Parent {
 				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
 				if (dif % 15 != 0) {
 					if (dif != 1) {
-						// if you are at leftmost
+						System.out.println(i);
+						// if you are at top right corner check down and to right
 						if (i == 0) {
-							if (tiles[i + 1].holds == null) {
+							if (tiles[i + 1].holds == null && tiles[i + 15].holds == null) {
 								boo = false;
 								break;
 							}
 						}
-						// if you are at rightmost
+						// if you are at rightmost check
 						else if (i == (tiles.length - 1)) {
 							if (tiles[i - 1].holds == null) {
 								boo = false;
@@ -270,19 +271,132 @@ public class Board extends Parent {
 							}
 
 						}
-						// check bottom
-						else if (tiles[i - 15].holds == null) {
-							boo = false;
-							break;
-						}
-
 						// check top
-						else if (tiles[i + 15].holds == null) {
+
+						else if (i >= 209) {
+							if (tiles[i - 15].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+
+						// check bottom
+						// if you are not at the right or left extreme
+						else if (i <= 14 && i != 0) {
+							if (tiles[i + 15].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+
+						else if (tiles[i + 1].holds == null && tiles[i - 1].holds == null && tiles[i + 15].holds == null
+								&& tiles[i - 15].holds == null) {
 							boo = false;
 							break;
 						}
 
-						else if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) {
+					} else if (dif == 1) {
+						boo = true;
+					}
+
+				}
+
+			}
+		}
+		return boo;
+	}
+
+	// checks if the tiles are together
+	public boolean checktogether2() {
+		boolean boo = true;
+		int i = 0; // index
+		int[] toprow = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+		int[] bottomrow = { 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223 };
+		int[] rightrow = { 29, 44, 59, 74, 89, 104, 119, 134, 149, 164, 179, 194, 209 };
+		int[] leftrow = { 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195 };
+		ArrayList<Integer> tilelist = new ArrayList<Integer>();
+		for (BoardTile bt : tiles) {
+			if (bt.getholds() != null && !bt.holds.isMouseTransparent()) {
+				tilelist.add(bt.getTileNumber());
+				System.out.println(bt.getTileNumber());
+			}
+		}
+		int[] tileno = new int[tilelist.size()];
+		for (Integer j : tilelist) {
+			tileno[i] = j;
+			i++;
+		}
+		for (int k = 0; k < tileno.length; k++) {
+			if (k < tileno.length - 1) {
+				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
+				if (dif % 15 != 0) {
+					if (dif != 1) {
+						System.out.println(tileno[k]);
+						// top left corner
+						if (k == 0) {
+							if (tiles[tileno[k] + 1].holds == null && tiles[tileno[k] + 15].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// top right corner
+						else if (tileno[k] == 14) {
+							if (tiles[tileno[k] - 1].holds == null && tiles[tileno[k] - 15].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// if you are at bottom right corner
+						else if (tileno[k] == (tiles.length - 1)) {
+							if (tiles[tileno[k] - 1].holds == null && tiles[tileno[k] - 15].holds == null) {
+								boo = false;
+								break;
+							}
+
+						}
+						// if you are at bottom left corner
+
+						else if (tileno[k] == 210) {
+							if (tiles[k - 15].holds == null && tiles[k + 1].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// in top row
+						else if (isinlist(toprow, tileno[k]) == true) {
+							if (tiles[tileno[k] + 15].holds == null && tiles[tileno[k] + 1].holds == null
+									&& tiles[tileno[k] - 1].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// in bottom row
+						else if (isinlist(bottomrow, tileno[k]) == true) {
+							if (tiles[tileno[k] - 15].holds == null && tiles[tileno[k] + 1].holds == null
+									&& tiles[tileno[k] - 1].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// in right row
+						else if (isinlist(rightrow, tileno[k]) == true) {
+							if (tiles[tileno[k] + 15].holds == null && tiles[tileno[k] - 15].holds == null
+									&& tiles[tileno[k] - 1].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// in right row
+						else if (isinlist(leftrow, tileno[k]) == true) {
+							if (tiles[tileno[k] + 15].holds == null && tiles[tileno[k] - 15].holds == null
+									&& tiles[tileno[k] + 1].holds == null) {
+								boo = false;
+								break;
+							}
+						}
+						// if it has 4 neighbors
+						else if (tiles[tileno[k] + 1].holds == null && tiles[tileno[k] - 1].holds == null
+								&& tiles[tileno[k] + 15].holds == null && tiles[tileno[k] - 15].holds == null) {
 							boo = false;
 							break;
 						}
@@ -307,6 +421,17 @@ public class Board extends Parent {
 			}
 			System.out.println(bt.getChildrenUnmodifiable().toString());
 		}
+	}
+
+	public boolean isinlist(int[] list, int no) {
+		boolean bool = false;
+		for (int i = 0; i < list.length; i++) {
+			if (no == list[i]) {
+				bool = true;
+				break;
+			}
+		}
+		return bool;
 	}
 
 }
