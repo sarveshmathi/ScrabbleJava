@@ -240,7 +240,7 @@ public class Board extends Parent {
 		int i = 0; // index
 		ArrayList<Integer> tilelist = new ArrayList<Integer>();
 		for (BoardTile bt : tiles) {
-			if (!bt.isMouseTransparent() && bt.getholds() != null) {
+			if (bt.getholds() != null && !bt.holds.isMouseTransparent()) {
 				tilelist.add(bt.getTileNumber());
 				System.out.println(bt.getTileNumber());
 			}
@@ -269,11 +269,22 @@ public class Board extends Parent {
 								break;
 							}
 
-						} else {
-							if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) {
-								boo = false;
-								break;
-							}
+						}
+						// check bottom
+						else if (tiles[i - 15].holds == null) {
+							boo = false;
+							break;
+						}
+
+						// check top
+						else if (tiles[i + 15].holds == null) {
+							boo = false;
+							break;
+						}
+
+						else if (tiles[i + 1].holds == null && tiles[i - 1].holds == null) {
+							boo = false;
+							break;
 						}
 
 					} else if (dif == 1) {
