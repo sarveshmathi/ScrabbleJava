@@ -1,0 +1,14 @@
+Our project is a two-player Scrabble game with GUI. We adopted the official rules from 
+here (https://scrabble.hasbro.com/en-us/rules), but slightly modified it to reduce the project
+complexity. 
+
+Game play instructions are provided once you start the game. 
+
+To build the GUI we used JavaFX. 
+
+Work breakdown summary: 
+
+Lourdes M Torrejon - Learning JavaFX, building the display board, writing the game play logic
+Aayush Rijal - Learning JavaFX, writing game play logic, UI modifications, cleaning up code 
+Sarvesh Mathi - Base game logic, online dictionary checking using jsoup
+
