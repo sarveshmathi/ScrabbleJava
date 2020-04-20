@@ -79,7 +79,8 @@ public class Scoring {
 			}
 
 			else if (tempTotalScore == -888) {
-				AlertBox.alertWithoutUserAction("Current Tile Not Used", "A new word made must use at least a tile from existing board.");
+				AlertBox.alertWithoutUserAction("Current Tile Not Used",
+						"A new word made must use at least a tile from existing board.");
 				// if (response) {
 				totalScore = -888;
 				// } else {
@@ -244,6 +245,8 @@ public class Scoring {
 				allcharfound = false;
 				TWcounter = 0;// reset counters
 				DWcounter = 0;// reset counters
+				mouseon = false;// checks if the word is made by at least 1 new piece
+				mouseoff = false; // at least one letter has to be on board already
 				turnPoints = 0; // erase any points that may have been added
 				return turnPoints;
 			} else {
