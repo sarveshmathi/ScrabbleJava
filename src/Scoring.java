@@ -79,7 +79,7 @@ public class Scoring {
 			}
 
 			else if (tempTotalScore == -888) {
-				AlertBox.alertWithoutUserAction("Words not using tiles", "Must use tile from board");
+				AlertBox.alertWithoutUserAction("Current Tile Not Used", "A new word made must use at least a tile from existing board.");
 				// if (response) {
 				totalScore = -888;
 				// } else {

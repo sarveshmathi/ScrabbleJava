@@ -97,7 +97,7 @@ public class Actualgame {
 		currentPlayer = "";
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
-		scoring = new Scoring();
+		
 		confirmButton = "";
 
 		this.buildLayout();
@@ -112,7 +112,8 @@ public class Actualgame {
 		Button confirmWord = new Button("Confirm Word");
 		Label playerOneLabel = new Label("Player One");
 		Label playerTwoLabel = new Label("Player Two");
-
+		
+		scoring = new Scoring();
 		player1 = new Player(1);
 		player2 = new Player(2);
 		lb = new LetterBag2();
