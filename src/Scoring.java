@@ -11,6 +11,8 @@ public class Scoring {
 	int TWcounter = 0;// number of TW
 	int DWcounter = 0;// number of DW
 	boolean mouseon = false;// checks if the word is made by at least 1 new piece
+	boolean mouseoff = false; // at least one letter has to be on board already
+	int countercall = 0;
 
 	/**
 	 * This method takes an ArrayList of words and returns the total score if the
@@ -74,7 +76,18 @@ public class Scoring {
 				// } else {
 				// totalScore = -2;
 				// }
-			} else {
+			}
+
+			else if (tempTotalScore == -888) {
+				AlertBox.alertWithoutUserAction("Words not using tiles", "Must use tile from board");
+				// if (response) {
+				totalScore = -888;
+				// } else {
+				// totalScore = -2;
+				// }
+			}
+
+			else {
 				if (!OnlineDictionary.checkWord(word)) {
 					System.out.println("Checking words complete");
 					AlertBox.alertWithoutUserAction("Incorrect Word",
@@ -86,6 +99,7 @@ public class Scoring {
 				else {
 					totalScore = tempTotalScore;
 					board.turnoffdrag();
+					countercall++;
 				}
 			}
 
@@ -98,9 +112,16 @@ public class Scoring {
 	public int wordptb(String word, Board board, Player player) {
 		// TWcounter = 0;// reset
 		// DWcounter = 0;// reset
+		boolean firstturn = false;
 		mouseon = false;// reset
+		mouseoff = false;// reset
 		int turnpoints = 0;
 		boolean present = false;
+
+		if (board.isboardempty() == true) {
+			firstturn = true;
+		}
+
 		BoardTile[][] board2d = new BoardTile[15][15];
 		int x = 0;
 		for (int i = 0; i < 15; i++) {
@@ -150,10 +171,17 @@ public class Scoring {
 			}
 		}
 		// this checks if it was made by at least 1 new letter
-		if (mouseon == true) {
+		if (mouseon == true && mouseoff == true && firstturn == false) {
 			// takes into account triple of double word scores
 			turnpoints = (int) (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
 			player.score += turnpoints;
+		} else if (mouseon == true && mouseoff == false && countercall == 0) {
+			turnpoints = (int) (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
+			player.score += turnpoints;
+		} else if (mouseon == true && mouseoff == false && countercall != 0) {
+			player.score += 0;
+			turnpoints = -888;// false value used for detecting that they didn;t use tile on board
+			// alert user must use tile on board
 		} else {
 			player.score += 0;
 		}
@@ -167,6 +195,9 @@ public class Scoring {
 		// check if it is a new letter by seeing the mouse
 		if (bt.isMouseTransparent() != true) {
 			mouseon = true;
+		}
+		if (bt.isMouseTransparent() == true) {
+			mouseoff = true;
 		}
 		int points = 0;
 		if (bt.getTileType().equals("TL")) {

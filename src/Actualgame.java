@@ -385,7 +385,21 @@ public class Actualgame {
 
 					this.showStatus(wordToTest, status, points);
 
-				} else {
+				}
+
+				else if (currentScore == -888) {
+					status = "Words placement error";
+					points = "0";
+
+					int playerOneScore = player1.score;
+					scorePlayerOne.setText("" + playerOneScore);
+					totalScorePlayerOne = "" + playerOneScore;
+
+					this.showStatus(wordToTest, status, points);
+
+				}
+
+				else {
 					status = "Accepted";
 					points = "" + currentScore;
 
