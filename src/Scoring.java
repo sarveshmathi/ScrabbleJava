@@ -171,6 +171,7 @@ public class Scoring {
 			}
 		}
 		// this checks if it was made by at least 1 new letter
+		System.out.println(mouseoff);
 		if (mouseon == true && mouseoff == true && firstturn == false) {
 			// takes into account triple of double word scores
 			turnpoints = (int) (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
@@ -193,10 +194,10 @@ public class Scoring {
 	/** gets points per letter */
 	public int pointcal(BoardTile bt) {
 		// check if it is a new letter by seeing the mouse
-		if (bt.isMouseTransparent() != true) {
+		if (bt.holds.isMouseTransparent() != true) {
 			mouseon = true;
 		}
-		if (bt.isMouseTransparent() == true) {
+		if (bt.holds.isMouseTransparent() == true) {
 			mouseoff = true;
 		}
 		int points = 0;
