@@ -327,16 +327,7 @@ public class Actualgame {
 		boolean response;
 		response = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
 		if (response) {
-			this.buildLayout();
-			board.newboard();
-			inputWord.clear();
-			lastPlayedWord.setText("");
-			player1.score = 0;
-			player2.score = 0;
-			scorePlayerOne.setText("0");
-			scorePlayerTwo.setText("0");
-			totalScorePlayerOne = "0";
-			totalScorePlayerTwo = "0";
+			this.resetSequence();
 		}
 	}
 
@@ -393,6 +384,7 @@ public class Actualgame {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
+					
 
 				} else {
 					status = "Accepted";
@@ -593,19 +585,22 @@ public class Actualgame {
 		if (response) {
 			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
 			if (nextResponse) {
-				this.buildLayout();
-				board.newboard();
-				inputWord.clear();
-				lastPlayedWord.setText("");
-				player1.score = 0;
-				player2.score = 0;
-				scorePlayerOne.setText("0");
-				scorePlayerTwo.setText("0");
-				totalScorePlayerOne = "0";
-				totalScorePlayerTwo = "0";
-
+				this.resetSequence();
 			}
 		}
+	}
+	
+	public void resetSequence() {
+		this.buildLayout();
+		board.newboard();
+		inputWord.clear();
+		lastPlayedWord.setText("");
+		player1.score = 0;
+		player2.score = 0;
+		scorePlayerOne.setText("0");
+		scorePlayerTwo.setText("0");
+		totalScorePlayerOne = "0";
+		totalScorePlayerTwo = "0";
 	}
 
 	public void removetiles() {
