@@ -1,6 +1,7 @@
 import java.io.Serializable;
 
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.input.ClipboardContent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -58,9 +59,10 @@ public class LetterTilePic extends Parent implements Serializable {
 		Text text2 = new Text(PointtoString());
 		text1.setWrappingWidth(6);
 		text2.setWrappingWidth(7);
-
+		Label label = new Label(LettertoString() + "\n" + PointtoString());
 		// text2.setTextOrigin(VPos.BOTTOM);
-		StackPane st = new StackPane(piece, text1);
+		StackPane st = new StackPane(piece, label);
+		// StackPane st = new StackPane(piece, text1);
 		getChildren().add(st);
 		// getChildren().add(new StackPane(piece, text1));
 	}
