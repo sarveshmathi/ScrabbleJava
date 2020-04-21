@@ -88,7 +88,8 @@ public class BoardTile extends Parent implements Serializable {
 	}
 
 	public void remove() {
-		getChildren().remove(1);
+		getChildren().remove(1, getChildren().size());
+		// getChildren().remove(1);
 		// getChildren().remove(this.holdpic);
 
 	}
