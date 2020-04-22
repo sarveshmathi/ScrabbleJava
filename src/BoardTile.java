@@ -20,7 +20,7 @@ public class BoardTile extends Parent implements Serializable {
 	private int tileNumber; // from 0 to 224
 	private String tileType; // none(N), double letter (DL), double word (DW), triple letter (TL), triple
 								// word (TW)
-	public LetterTilePic holds;// this is the letter piece it will hold
+	public LetterTilePicture holds;// this is the letter piece it will hold
 
 	/**
 	 * This constructs objects of the type BoardTile
@@ -65,7 +65,7 @@ public class BoardTile extends Parent implements Serializable {
 		return tileType;
 	}
 
-	public LetterTilePic getholds() {
+	public LetterTilePicture getholds() {
 		return holds;
 	}
 

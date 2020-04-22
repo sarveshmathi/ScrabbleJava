@@ -157,8 +157,8 @@ public class Board extends Parent {
 					/* if there is a string data on dragboard, read it and use it */
 					Dragboard dragBoard = event.getDragboard();
 					Object object = dragBoard.getContent(LetterTilePic);
-					boardTile.holds = (LetterTilePic) event.getGestureSource();
-					boardTile.holds.isin = boardTile;
+					boardTile.holds = (LetterTilePicture) event.getGestureSource();
+					boardTile.holds.isInBoardTile = boardTile;
 					for (BoardTile aBoardTile : tiles) {
 						if (aBoardTile.holds == boardTile.holds && boardTile != aBoardTile) {
 							aBoardTile.holds = null;

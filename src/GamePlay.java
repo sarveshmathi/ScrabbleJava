@@ -56,8 +56,8 @@ public class GamePlay {
 
 	private BoardTile[] tiles;
 	private Board board;
-	private ArrayList<LetterTilePic> rackletters;
-	private LetterTilePic currentTile;
+	private ArrayList<LetterTilePicture> rackletters;
+	private LetterTilePicture currentTile;
 	private BoardTile destinationspot;
 	private DataFormat LetterTilePic;
 	private Player player1;
@@ -106,7 +106,7 @@ public class GamePlay {
 	 */
 
 	public void buildLayout() {
-		LetterTilePic lp;
+		LetterTilePicture lp;
 		Button reset = new Button("Reset");
 		Button endGame = new Button("End Game");
 		Button forfeitTurn = new Button("Forfeit Turn");
@@ -121,7 +121,7 @@ public class GamePlay {
 		letterBag = new LetterBag();
 		bottomPanel = new StackPane();
 		bottomPanel2 = new StackPane();
-		rackletters = new ArrayList<LetterTilePic>();
+		rackletters = new ArrayList<LetterTilePicture>();
 
 		gameRoot.setPrefSize(board_width, board_height);// size of the Pane which ends up being the board
 		gameRoot.setId("playingpage");
@@ -299,7 +299,7 @@ public class GamePlay {
 	 * @param lp
 	 */
 
-	public void moveTile(LetterTilePic lp) {
+	public void moveTile(LetterTilePicture lp) {
 		BoardTile bt = board.getTile();
 		if (bt.holds == null) {
 			bt.holds = lp;
@@ -316,17 +316,17 @@ public class GamePlay {
 
 	public void rackcheck(Player player, LetterBag lb, StackPane bottomPanel) {
 		int num = 0;
-		ArrayList<LetterTilePic> potential;
+		ArrayList<LetterTilePicture> potential;
 		if (player.rackletters.isEmpty()) {
 			num = 7;
 			potential = lb.getLetters(num);
-			for (LetterTilePic lp : potential) {
+			for (LetterTilePicture lp : potential) {
 				player.rackletters.add(lp);
 			}
 		} else if (player.rackletters.size() < 7) {
 			num = 7 - player.rackletters.size();
 			potential = lb.getLetters(num);
-			for (LetterTilePic lp : potential) {
+			for (LetterTilePicture lp : potential) {
 				player.rackletters.add(lp);
 			}
 		}
@@ -339,7 +339,7 @@ public class GamePlay {
 	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
 	 * @param rackletters - the letter tiles on the rack
 	 */
-	public void rackpicture(StackPane bottomPanel, ArrayList<LetterTilePic> rackletters) {
+	public void rackpicture(StackPane bottomPanel, ArrayList<LetterTilePicture> rackletters) {
 		Rectangle bottomBar = new Rectangle(420, 60);
 		bottomBar.setArcWidth(30.0);
 		bottomBar.setArcHeight(30.0);
@@ -348,7 +348,7 @@ public class GamePlay {
 		userBar.setAlignment(Pos.CENTER);
 		bottomPanel.setAlignment(Pos.CENTER);
 		bottomPanel.getChildren().addAll(bottomBar, userBar);
-		for (LetterTilePic letter : rackletters) {
+		for (LetterTilePicture letter : rackletters) {
 			if (!userBar.getChildrenUnmodifiable().contains(letter)) {
 				userBar.getChildren().add(letter);
 			}
@@ -357,8 +357,8 @@ public class GamePlay {
 				public void handle(MouseEvent event) {
 					/* drag was detected, start a drag-and-drop gesture */
 					/* allow any transfer mode */
-					if (letter.isin != null) {
-						letter.isin.holds = null;
+					if (letter.isInBoardTile != null) {
+						letter.isInBoardTile.holds = null;
 					}
 					currentTile = letter;
 					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
@@ -415,7 +415,7 @@ public class GamePlay {
 				boolean success = false;
 				if (userBar.getChildren().size() <= 7) {
 					success = true;
-					userBar.getChildren().add((LetterTilePic) event.getGestureSource());
+					userBar.getChildren().add((LetterTilePicture) event.getGestureSource());
 				}
 				/*
 				 * let the source know whether the string was successfully transferred and used

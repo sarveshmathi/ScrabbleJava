@@ -10,18 +10,18 @@ import java.util.Collections;
  */
 
 public class LetterBag {
-	public ArrayList<LetterTilePic> letterTiles = new ArrayList<LetterTilePic>();
+	public ArrayList<LetterTilePicture> letterTiles = new ArrayList<LetterTilePicture>();
 	private int lettersGivenCounter; // Keeps track of how many letters are given out in a game, also the position in
 										// bag
-	public LetterTilePic lp;
+	public LetterTilePicture letterTilePic;
 
 	public LetterBag() {
 		// this loop goes over the enum and puts the correct quanity of each letter into
 		// the bag
-		for (LetterTilePic.Letters letters : LetterTilePic.Letters.values()) {
+		for (LetterTilePicture.Letters letters : LetterTilePicture.Letters.values()) {
 			int lettersPutCounter = 0;
 			while (lettersPutCounter < letters.quantity) {
-				LetterTilePic addToBag = new LetterTilePic(letters);
+				LetterTilePicture addToBag = new LetterTilePicture(letters);
 				letterTiles.add(addToBag);
 				lettersPutCounter++;
 			}
@@ -39,7 +39,7 @@ public class LetterBag {
 		this.lettersGivenCounter = lettersGivenCounter;
 	}
 
-	public ArrayList<LetterTilePic> getLetterTiles() {
+	public ArrayList<LetterTilePicture> getLetterTiles() {
 		return letterTiles;
 	}
 
@@ -49,8 +49,8 @@ public class LetterBag {
 	 * @param noOfLetters - the number of letters
 	 * @return output - ArrayList of letters
 	 */
-	public ArrayList<LetterTilePic> getLetters(int noOfLetters) {
-		ArrayList<LetterTilePic> output = new ArrayList<LetterTilePic>();
+	public ArrayList<LetterTilePicture> getLetters(int noOfLetters) {
+		ArrayList<LetterTilePicture> output = new ArrayList<LetterTilePicture>();
 		for (int i = 0; i < noOfLetters && lettersGivenCounter < 98; i++) {
 			output.add(letterTiles.get(lettersGivenCounter));
 			lettersGivenCounter++;
@@ -63,7 +63,7 @@ public class LetterBag {
 	 * @param player - the current player.
 	 */
 	public void resetrack(Player player) {
-		for (LetterTilePic lp : player.rackletters) {
+		for (LetterTilePicture lp : player.rackletters) {
 			player.rackletters.remove(lp);
 			letterTiles.add(lp);
 		}

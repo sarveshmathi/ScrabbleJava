@@ -21,7 +21,7 @@ public class Player extends Parent {
 	private int number; // player 0 or 1
 	// private String name; // player name
 	public int score;
-	public ArrayList<LetterTilePic> rackletters = new ArrayList<LetterTilePic>();
+	public ArrayList<LetterTilePicture> rackletters = new ArrayList<LetterTilePicture>();
 
 	/**
 	 * This constructs an object of the type Player.
@@ -47,7 +47,7 @@ public class Player extends Parent {
 	public void genrack(LetterBag lb) {
 		DataFormat LetterTilePic = null;
 		rackletters = lb.getLetters(7);
-		for (LetterTilePic letter : rackletters) {
+		for (LetterTilePicture letter : rackletters) {
 			getChildren().add(letter);
 			// letter.onMouseDragEnteredProperty();
 			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
