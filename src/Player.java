@@ -36,7 +36,7 @@ public class Player extends Parent {
 		ArrayList<LetterTilePic> currentletters;
 	}
 
-	public void genrack(LetterBag2 lb) {
+	public void genrack(LetterBag lb) {
 		DataFormat LetterTilePic = null;
 		rackletters = lb.getLetters(7);
 		for (LetterTilePic letter : rackletters) {

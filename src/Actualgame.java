@@ -63,7 +63,7 @@ public class Actualgame {
 	private Player player1;
 	private Player player2;
 	private Scoring scoring;
-	private LetterBag2 lb;
+	private LetterBag lb;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -119,7 +119,7 @@ public class Actualgame {
 		scoring = new Scoring();
 		player1 = new Player(1);
 		player2 = new Player(2);
-		lb = new LetterBag2();
+		lb = new LetterBag();
 		bottomPanel = new StackPane();
 		bottomPanel2 = new StackPane();
 		rackletters = new ArrayList<LetterTilePic>();
@@ -535,7 +535,7 @@ public class Actualgame {
 	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
 	 */
 
-	public void rackcheck(Player player, LetterBag2 lb, StackPane bottomPanel) {
+	public void rackcheck(Player player, LetterBag lb, StackPane bottomPanel) {
 		int num = 0;
 		ArrayList<LetterTilePic> potential;
 		if (player.rackletters.isEmpty()) {
