@@ -19,7 +19,7 @@ public class AlertBox {
 	private static boolean response;
 
 	/**
-	 * A method that deals with alert events that requires Yes or No from the user.
+	 * A method that deals with alert events that requires Yes or No from the players.
 	 * 
 	 * @param title   - the title of the alert window.
 	 * @param message - the message displayed in the window.
@@ -71,7 +71,7 @@ public class AlertBox {
 
 	/**
 	 * A method that deals with alert events that does not require Yes or No from
-	 * the user.
+	 * the players.
 	 * 
 	 * @param title   - the title of the alert window.
 	 * @param message - the message displayed in the window.
@@ -100,8 +100,17 @@ public class AlertBox {
 		alertWindow.showAndWait();
 
 	}
-
-	public static boolean winnerAlert(String scorePlayerOne, String scorePlayerTwo) {
+	
+	/**
+	 * A method that gives the end game dialogue box showing the winner of the game 
+	 * as well as the end game options - to play the game again or to quit the game
+	 * 
+	 * @param scorePlayerOne   - the final score of Player One
+	 * @param scorePlayerTwo - the final score of Player Two
+	 * @return response - the user's response to whether to play the game again
+	 */
+	
+	public static boolean endGameAlert(String scorePlayerOne, String scorePlayerTwo) {
 		int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
 		int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
 
@@ -177,6 +186,10 @@ public class AlertBox {
 
 		return response;
 	}
+	
+	/**
+	 * This displays the dialogue box of how to play the game.
+	 */
 	
 	public static void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
