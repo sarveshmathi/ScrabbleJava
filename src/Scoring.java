@@ -274,15 +274,15 @@ public class Scoring {
 		TWCounter = 0;// reset counters
 		DWCounter = 0;// reset counters
 		int turnPoints = 0;
-		int searchcol = column;
-		int searchrow = row;
-		boolean allcharfound = true;
+		int searchColumn = column;
+		int searchRow = row;
+		boolean allCharsFound = true;
 		for (int charIndex = 0; charIndex < word.length(); charIndex++) {
 			// checks if it would be out of bounds or if they aren't equal
-			if (searchrow < 0 || searchcol < 0 || searchrow >= board2D.length || searchcol >= board2D[searchrow].length
-					|| board2D[searchrow][searchcol].holds == null || !board2D[searchrow][searchcol].holds.letter
+			if (searchRow < 0 || searchColumn < 0 || searchRow >= board2D.length || searchColumn >= board2D[searchRow].length
+					|| board2D[searchRow][searchColumn].holds == null || !board2D[searchRow][searchColumn].holds.letter
 							.toString().equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
-				allcharfound = false;
+				allCharsFound = false;
 				TWCounter = 0;// reset counters
 				DWCounter = 0;// reset counters
 				mouseOn = false;// checks if the word is made by at least 1 new piece
@@ -290,9 +290,9 @@ public class Scoring {
 				turnPoints = 0; // erase any points that may have been added
 				return turnPoints;
 			} else {
-				turnPoints += pointCall(board2D[searchrow][searchcol]);// get the points
-				searchcol += columnIncrement;
-				searchrow += rowIncrement;
+				turnPoints += pointCall(board2D[searchRow][searchColumn]);// get the points
+				searchColumn += columnIncrement;
+				searchRow += rowIncrement;
 			}
 		}
 		return turnPoints;
