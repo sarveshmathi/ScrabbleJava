@@ -26,7 +26,10 @@ public class BoardDisplay extends Application {
 	public static final int Height = 15;// because we have 15 *15
 	Stage primaryStage;
 
-	// Override the start() method.
+	/**
+	 *  This method overrides the start() method and handles the layout of the 
+	 *  start page.
+	 */
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException {
 		this.primaryStage = primaryStage;

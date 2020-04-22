@@ -12,7 +12,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
 /**
- * This class provides the representation of the 15 x 15 board on which the game is played
+ * This class provides the representation of the 15 x 15 board on which the game is played.
  * 
  * @author Team 51
  *
