@@ -26,7 +26,7 @@ public class Board extends Parent {
 	 * This constructs a new boar.
 	 */
 	public Board() {
-		newboard();
+		newBoard();
 	}
 
 	public BoardTile[] getTiles() {
@@ -89,15 +89,15 @@ public class Board extends Parent {
 	 * This method updates the board after each move.
 	 * 
 	 */
-	public void boardgen() {
+	public void boardGen() {
 		// tiles = new BoardTile[225];
 		int tile_in_row = 15;
 		int tile_in_col = 15;
 		// setTileNumbersAndValues();
 		for (int i = 0; i < tiles.length; i++) {
-			BoardTile bt = tiles[i];
-			if (bt.holds != null) {
-				bt.displayHold();
+			BoardTile boardTile = tiles[i];
+			if (boardTile.holds != null) {
+				boardTile.displayHold();
 			}
 
 		}
@@ -106,7 +106,7 @@ public class Board extends Parent {
 	/**
 	 * This method turns off the mouse drag.
 	 */
-	public void turnoffdrag() {
+	public void turnOffDrag() {
 		for (BoardTile t : tiles) {
 			if (t.holds != null) {
 				t.holds.setMouseTransparent(true);
@@ -116,19 +116,19 @@ public class Board extends Parent {
 	}
 
 	/**
-	 * This method creates a new board display instance.
+	 * This method creates a new board.
 	 */
-	public void newboard() {
+	public void newBoard() {
 		tiles = new BoardTile[225];
 		int tile_in_row = 15;
-		int tile_in_col = 15;
+		//int tile_in_col = 15;
 		setTileNumbersAndValues();
 		for (int i = 0; i < tiles.length; i++) {
-			BoardTile bt = tiles[i];
-			bt.setTranslateX(40 * (i % tile_in_row));
-			bt.setTranslateY(40 * (i / tile_in_row));
-			getChildren().add(bt);
-			bt.setOnDragOver(new EventHandler<DragEvent>() {
+			BoardTile boardTile = tiles[i];
+			boardTile.setTranslateX(40 * (i % tile_in_row));
+			boardTile.setTranslateY(40 * (i / tile_in_row));
+			getChildren().add(boardTile);
+			boardTile.setOnDragOver(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
 					System.out.println("test");
 					/* data is dragged over the target */
@@ -136,40 +136,40 @@ public class Board extends Parent {
 					 * accept it only if it is not dragged from the same node and if it isn't
 					 * holding a card
 					 */
-					if (!isboardempty()) {
-						if (event.getGestureSource() != bt && bt.getholds() == null) {
+					if (!isBoardEmpty()) {
+						if (event.getGestureSource() != boardTile && boardTile.getholds() == null) {
 							/* allow for both copying and moving, whatever user chooses */
 							event.acceptTransferModes(TransferMode.MOVE);
-							bt.displayHold();
+							boardTile.displayHold();
 						}
-					} else if (isboardempty()) {
-						if (bt.getTileType().equals("C")) {
+					} else if (isBoardEmpty()) {
+						if (boardTile.getTileType().equals("C")) {
 							event.acceptTransferModes(TransferMode.MOVE);
-							bt.displayHold();
+							boardTile.displayHold();
 						}
 					}
 					event.consume();
 				}
 			});
-			bt.setOnDragDropped(new EventHandler<DragEvent>() {
+			boardTile.setOnDragDropped(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
 					/* data dropped */
 					/* if there is a string data on dragboard, read it and use it */
-					Dragboard db = event.getDragboard();
-					Object j = db.getContent(LetterTilePic);
-					bt.holds = (LetterTilePic) event.getGestureSource();
-					bt.holds.isin = bt;
-					for (BoardTile t : tiles) {
-						if (t.holds == bt.holds && bt != t) {
-							t.holds = null;
+					Dragboard dragBoard = event.getDragboard();
+					Object object = dragBoard.getContent(LetterTilePic);
+					boardTile.holds = (LetterTilePic) event.getGestureSource();
+					boardTile.holds.isin = boardTile;
+					for (BoardTile aBoardTile : tiles) {
+						if (aBoardTile.holds == boardTile.holds && boardTile != aBoardTile) {
+							aBoardTile.holds = null;
 						}
 					}
 					// bt.holds = (LetterTilePic) event.getAcceptingObject();
 					boolean success = false;
-					if (bt.getholds() != null) {
+					if (boardTile.getholds() != null) {
 						success = true;
-						getChildren().add(bt.holds);
-						bt.displayHold();
+						getChildren().add(boardTile.holds);
+						boardTile.displayHold();
 						// boardgen();
 						// bt.setMouseTransparent(true);
 					}
@@ -177,29 +177,29 @@ public class Board extends Parent {
 					event.consume();
 				}
 			});
-			if (bt.holds != null) {
-				bt.holds.setOnDragDetected(new EventHandler<MouseEvent>() {
+			if (boardTile.holds != null) {
+				boardTile.holds.setOnDragDetected(new EventHandler<MouseEvent>() {
 					public void handle(MouseEvent event) {
 						/* drag was detected, start a drag-and-drop gesture */
 						/* allow any transfer mode */
-						Dragboard db = bt.holds.startDragAndDrop(TransferMode.MOVE);
+						Dragboard db = boardTile.holds.startDragAndDrop(TransferMode.MOVE);
 						/* Put a string on a dragboard */
 						ClipboardContent content = new ClipboardContent();
 						// content.putString(letter.toString());
-						content.put(LetterTilePic, bt.holds);
+						content.put(LetterTilePic, boardTile.holds);
 						db.setContent(content);
 						System.out.println("I'm busy");
-						bt.holds = null;
+						boardTile.holds = null;
 						event.consume();
 					}
 				});
 
-				bt.setOnDragDone(new EventHandler<DragEvent>() {
+				boardTile.setOnDragDone(new EventHandler<DragEvent>() {
 					public void handle(DragEvent event) {
 						/* the drag and drop gesture ended */
 						/* if the data was successfully moved, clear it */
 						if (event.getTransferMode() == TransferMode.MOVE) {
-							bt.holds = null;
+							boardTile.holds = null;
 						}
 						event.consume();
 					}
@@ -217,30 +217,30 @@ public class Board extends Parent {
 	 *  This method checks if the board is empty.
 	 * @return booleanValue - true or false
 	 */
-	public boolean isboardempty() {
-		boolean booleanValue = true;
-		for (BoardTile bt : tiles) {
-			if (bt.holds != null) {
-				booleanValue = false;
+	public boolean isBoardEmpty() {
+		boolean emptyBoard = true;
+		for (BoardTile boardTile : tiles) {
+			if (boardTile.holds != null) {
+				emptyBoard = false;
 			}
 		}
-		return booleanValue;
+		return emptyBoard;
 	}
 
 	/**
 	 * This method creates a two dimensional 15x15 board.
 	 * @return board2d - the two dimensional board
 	 */
-	public BoardTile[][] turnto2d() {
-		BoardTile[][] board2d = new BoardTile[15][15];
+	public BoardTile[][] turnTo2D() {
+		BoardTile[][] board2D = new BoardTile[15][15];
 		int x = 0;
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 15; j++) {
-				board2d[i][j] = tiles[x];
+				board2D[i][j] = tiles[x];
 				x++;
 			}
 		}
-		return board2d;
+		return board2D;
 	}
 
 //	/**
@@ -322,115 +322,115 @@ public class Board extends Parent {
 	 * This method checks if the tiles are together.
 	 * @return booleanValue - true or false
 	 */
-	public boolean checktogether2() {
-		boolean boo = true;
+	public boolean checkTogether() {
+		boolean ifTogether = true;
 		int i = 0; // index
-		int[] toprow = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
-		int[] bottomrow = { 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223 };
-		int[] rightrow = { 29, 44, 59, 74, 89, 104, 119, 134, 149, 164, 179, 194, 209 };
-		int[] leftrow = { 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195 };
-		ArrayList<Integer> tilelist = new ArrayList<Integer>();
-		for (BoardTile bt : tiles) {
-			if (bt.getholds() != null && !bt.holds.isMouseTransparent()) {
-				tilelist.add(bt.getTileNumber());
-				System.out.println(bt.getTileNumber());
+		int[] topRow = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
+		int[] bottomRow = { 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223 };
+		int[] rightRow = { 29, 44, 59, 74, 89, 104, 119, 134, 149, 164, 179, 194, 209 };
+		int[] leftRow = { 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165, 180, 195 };
+		ArrayList<Integer> tileList = new ArrayList<Integer>();
+		for (BoardTile boardTiles : tiles) {
+			if (boardTiles.getholds() != null && !boardTiles.holds.isMouseTransparent()) {
+				tileList.add(boardTiles.getTileNumber());
+				System.out.println(boardTiles.getTileNumber());
 			}
 		}
-		int[] tileno = new int[tilelist.size()];
-		for (Integer j : tilelist) {
-			tileno[i] = j;
+		int[] tileNumber = new int[tileList.size()];
+		for (Integer j : tileList) {
+			tileNumber[i] = j;
 			i++;
 		}
-		for (int k = 0; k < tileno.length; k++) {
-			if (k < tileno.length - 1) {
-				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
+		for (int k = 0; k < tileNumber.length; k++) {
+			if (k < tileNumber.length - 1) {
+				int dif = Math.abs((tileNumber[k + 1]) - tileNumber[k]);
 				if (dif % 15 != 0) {
 					if (dif != 1) {
-						System.out.println(tileno[k]);
+						System.out.println(tileNumber[k]);
 						// top left corner
 						if (k == 0) {
-							if (tiles[tileno[k] + 1].holds == null && tiles[tileno[k] + 15].holds == null) {
-								boo = false;
+							if (tiles[tileNumber[k] + 1].holds == null && tiles[tileNumber[k] + 15].holds == null) {
+								ifTogether = false;
 								break;
 							}
 						}
 						// top right corner
-						else if (tileno[k] == 14) {
-							if (tiles[tileno[k] - 1].holds == null && tiles[tileno[k] - 15].holds == null) {
-								boo = false;
+						else if (tileNumber[k] == 14) {
+							if (tiles[tileNumber[k] - 1].holds == null && tiles[tileNumber[k] - 15].holds == null) {
+								ifTogether = false;
 								break;
 							}
 						}
 						// if you are at bottom right corner
-						else if (tileno[k] == (tiles.length - 1)) {
-							if (tiles[tileno[k] - 1].holds == null && tiles[tileno[k] - 15].holds == null) {
-								boo = false;
+						else if (tileNumber[k] == (tiles.length - 1)) {
+							if (tiles[tileNumber[k] - 1].holds == null && tiles[tileNumber[k] - 15].holds == null) {
+								ifTogether = false;
 								break;
 							}
 
 						}
 						// if you are at bottom left corner
 
-						else if (tileno[k] == 210) {
+						else if (tileNumber[k] == 210) {
 							if (tiles[k - 15].holds == null && tiles[k + 1].holds == null) {
-								boo = false;
+								ifTogether = false;
 								break;
 							}
 						}
 						// in top row
-						else if (isinlist(toprow, tileno[k]) == true) {
-							if (tiles[tileno[k] + 15].holds == null && tiles[tileno[k] + 1].holds == null
-									&& tiles[tileno[k] - 1].holds == null) {
-								boo = false;
+						else if (isInList(topRow, tileNumber[k]) == true) {
+							if (tiles[tileNumber[k] + 15].holds == null && tiles[tileNumber[k] + 1].holds == null
+									&& tiles[tileNumber[k] - 1].holds == null) {
+								ifTogether = false;
 								break;
 							}
 						}
 						// in bottom row
-						else if (isinlist(bottomrow, tileno[k]) == true) {
-							if (tiles[tileno[k] - 15].holds == null && tiles[tileno[k] + 1].holds == null
-									&& tiles[tileno[k] - 1].holds == null) {
-								boo = false;
+						else if (isInList(bottomRow, tileNumber[k]) == true) {
+							if (tiles[tileNumber[k] - 15].holds == null && tiles[tileNumber[k] + 1].holds == null
+									&& tiles[tileNumber[k] - 1].holds == null) {
+								ifTogether = false;
 								break;
 							}
 						}
 						// in right row
-						else if (isinlist(rightrow, tileno[k]) == true) {
-							if (tiles[tileno[k] + 15].holds == null && tiles[tileno[k] - 15].holds == null
-									&& tiles[tileno[k] - 1].holds == null) {
-								boo = false;
+						else if (isInList(rightRow, tileNumber[k]) == true) {
+							if (tiles[tileNumber[k] + 15].holds == null && tiles[tileNumber[k] - 15].holds == null
+									&& tiles[tileNumber[k] - 1].holds == null) {
+								ifTogether = false;
 								break;
 							}
 						}
 						// in right row
-						else if (isinlist(leftrow, tileno[k]) == true) {
-							if (tiles[tileno[k] + 15].holds == null && tiles[tileno[k] - 15].holds == null
-									&& tiles[tileno[k] + 1].holds == null) {
-								boo = false;
+						else if (isInList(leftRow, tileNumber[k]) == true) {
+							if (tiles[tileNumber[k] + 15].holds == null && tiles[tileNumber[k] - 15].holds == null
+									&& tiles[tileNumber[k] + 1].holds == null) {
+								ifTogether = false;
 								break;
 							}
 						}
 						// if it has 4 neighbors
-						else if (tiles[tileno[k] + 1].holds == null && tiles[tileno[k] - 1].holds == null
-								&& tiles[tileno[k] + 15].holds == null && tiles[tileno[k] - 15].holds == null) {
-							boo = false;
+						else if (tiles[tileNumber[k] + 1].holds == null && tiles[tileNumber[k] - 1].holds == null
+								&& tiles[tileNumber[k] + 15].holds == null && tiles[tileNumber[k] - 15].holds == null) {
+							ifTogether = false;
 							break;
 						}
 
 					} else if (dif == 1) {
-						boo = true;
+						ifTogether = true;
 					}
 
 				}
 
 			}
 		}
-		return boo;
+		return ifTogether;
 	}
 	
 	/**
 	 * This method removes tiles from the board.
 	 */
-	public void removetiles() {
+	public void removeTiles() {
 		for (BoardTile bt : tiles) {
 			if (bt.holds != null && !bt.holds.isMouseTransparent()) {
 				System.out.println("yes null");
@@ -448,15 +448,15 @@ public class Board extends Parent {
 	 * @return
 	 */
 
-	public boolean isinlist(int[] list, int no) {
-		boolean bool = false;
+	public boolean isInList(int[] list, int no) {
+		boolean ifInList = false;
 		for (int i = 0; i < list.length; i++) {
 			if (no == list[i]) {
-				bool = true;
+				ifInList = true;
 				break;
 			}
 		}
-		return bool;
+		return ifInList;
 	}
 
 }

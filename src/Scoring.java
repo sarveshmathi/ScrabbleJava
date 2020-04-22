@@ -111,7 +111,7 @@ public class Scoring {
 
 				else {
 					finalPoints = tempTotalScore;
-					board.turnoffdrag();
+					board.turnOffDrag();
 					counterCall++;
 				}
 			}
@@ -142,7 +142,7 @@ public class Scoring {
 		int turnPoints = 0;
 		boolean present = false;
 
-		if (board.isboardempty() == true) {
+		if (board.isBoardEmpty()) {
 			firstTurn = true;
 		}
 

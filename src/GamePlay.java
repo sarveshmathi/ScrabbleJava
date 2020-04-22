@@ -148,7 +148,7 @@ public class GamePlay {
 				gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
 
 			}
-			board.removetiles();
+			board.removeTiles();
 			rackcheck(player1, letterBag, bottomPanel);
 			rackcheck(player2, letterBag, bottomPanel2);
 			// board.turnoffdrag();
@@ -241,7 +241,7 @@ public class GamePlay {
 		 */
 
 		confirmWord.setOnAction(e -> {
-			if (board.checktogether2() == true) {
+			if (board.checkTogether() == true) {
 				this.confirmWord();
 			} else {
 				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.");
@@ -682,7 +682,7 @@ public class GamePlay {
 
 	private void resetSequence() {
 		this.buildLayout();
-		board.newboard();
+		board.newBoard();
 		inputWord.clear();
 		lastPlayedWord.setText("");
 		player1.score = 0;
