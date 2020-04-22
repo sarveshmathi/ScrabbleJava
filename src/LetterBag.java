@@ -13,7 +13,7 @@ public class LetterBag {
 	public ArrayList<LetterTilePicture> letterTiles = new ArrayList<LetterTilePicture>();
 	private int lettersGivenCounter; // Keeps track of how many letters are given out in a game, also the position in
 										// bag
-	public LetterTilePicture letterTilePic;
+	public LetterTilePicture letterTilePicture;
 
 	public LetterBag() {
 		// this loop goes over the enum and puts the correct quanity of each letter into
@@ -44,30 +44,30 @@ public class LetterBag {
 	}
 
 	/**
-	 * Returns an ArrayList of random LetterTiles of size noOfLetters
+	 * Returns an ArrayList of random LetterTiles of size numberOfLetters
 	 * 
-	 * @param noOfLetters - the number of letters
+	 * @param numberOfLetters - the number of letters
 	 * @return output - ArrayList of letters
 	 */
-	public ArrayList<LetterTilePicture> getLetters(int noOfLetters) {
+	public ArrayList<LetterTilePicture> getLetters(int numberOfLetters) {
 		ArrayList<LetterTilePicture> output = new ArrayList<LetterTilePicture>();
-		for (int i = 0; i < noOfLetters && lettersGivenCounter < 98; i++) {
+		for (int i = 0; i < numberOfLetters && lettersGivenCounter < 98; i++) {
 			output.add(letterTiles.get(lettersGivenCounter));
 			lettersGivenCounter++;
 		}
 		return output;
 	}
 	
-	/**
-	 * This method resets the player's rack.
-	 * @param player - the current player.
-	 */
-	public void resetrack(Player player) {
-		for (LetterTilePicture lp : player.rackletters) {
-			player.rackletters.remove(lp);
-			letterTiles.add(lp);
-		}
-	}
+//	/**
+//	 * This method resets the player's rack.
+//	 * @param player - the current player.
+//	 */
+//	public void resetRack(Player player) {
+//		for (LetterTilePicture lp : player.rackletters) {
+//			player.rackletters.remove(lp);
+//			letterTiles.add(lp);
+//		}
+//	}
 
 	// public LetterTilePic deal() {
 

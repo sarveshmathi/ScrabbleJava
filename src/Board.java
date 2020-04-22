@@ -85,23 +85,23 @@ public class Board extends Parent {
 //		}
 //	}
 
-	/**
-	 * This method updates the board after each move.
-	 * 
-	 */
-	public void boardGen() {
-		// tiles = new BoardTile[225];
-		int tile_in_row = 15;
-		int tile_in_col = 15;
-		// setTileNumbersAndValues();
-		for (int i = 0; i < tiles.length; i++) {
-			BoardTile boardTile = tiles[i];
-			if (boardTile.holds != null) {
-				boardTile.displayHold();
-			}
-
-		}
-	}
+//	/**
+//	 * This method updates the board after each move.
+//	 * 
+//	 */
+//	public void boardGen() {
+//		// tiles = new BoardTile[225];
+//		int tile_in_row = 15;
+//		int tile_in_col = 15;
+//		// setTileNumbersAndValues();
+//		for (int i = 0; i < tiles.length; i++) {
+//			BoardTile boardTile = tiles[i];
+//			if (boardTile.holds != null) {
+//				boardTile.displayHold();
+//			}
+//
+//		}
+//	}
 	
 	/**
 	 * This method turns off the mouse drag.
