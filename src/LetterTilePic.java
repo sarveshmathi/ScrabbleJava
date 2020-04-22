@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
- * Represents a standard letter tile
+ * This class represents a standard letter tile.
  * 
  * @author Team 51
  *

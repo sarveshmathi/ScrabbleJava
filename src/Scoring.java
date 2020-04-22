@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /**
- * Carries out scoring for the game
+ * This class carries out scoring for the game.
  *
  * @author Team 51
  *

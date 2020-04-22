@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 /**
- * Represents one tile in the 15 x 15 board
+ * This class represents one tile in the 15 x 15 board.
  * 
  * @author Team 51
  *
