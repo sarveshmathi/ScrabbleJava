@@ -62,10 +62,21 @@ public class Scoring {
 ////		System.out.println(Scoring.checkInput(words));
 ////
 ////	}
-	/** fix player points based on accepted word) */
+	/**
+	 * This method receives the word input by the player
+	 * and determines if it is a valid dictionary word and fixes the final score for the player.
+	 * 
+	 * @param inputArray - the word played by the player
+	 * @param board - the current board
+	 * @param player - the current player
+	 * @return finalPoints - if valid word: the actual final score
+	 * 						if invalid word : error codes (-1 Incorrect Word
+	 * 													   -2 Words Mismatch
+	 * 													   -888 Current Tile Not Used)
+	 */
 	public int checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
 		System.out.println("Checking words . . . ");
-		int totalScore = 0;
+		int finalPoints = 0;
 		for (String word : inputArray) {
 
 			int tempTotalScore = wordptb(word, board, player);
@@ -73,7 +84,7 @@ public class Scoring {
 				AlertBox.alertWithoutUserAction("Words Mismatch",
 						"The word that you typed is different from the word you played.");
 				// if (response) {
-				totalScore = -2;
+				finalPoints = -2;
 				// } else {
 				// totalScore = -2;
 				// }
@@ -83,7 +94,7 @@ public class Scoring {
 				AlertBox.alertWithoutUserAction("Current Tile Not Used",
 						"A new word made must use at least a tile from existing board.");
 				// if (response) {
-				totalScore = -888;
+				finalPoints = -888;
 				// } else {
 				// totalScore = -2;
 				// }
@@ -95,11 +106,11 @@ public class Scoring {
 					AlertBox.alertWithoutUserAction("Incorrect Word",
 							word.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 					player.score -= tempTotalScore;
-					totalScore = -1;
+					finalPoints = -1;
 				}
 
 				else {
-					totalScore = tempTotalScore;
+					finalPoints = tempTotalScore;
 					board.turnoffdrag();
 					countercall++;
 				}
@@ -108,8 +119,19 @@ public class Scoring {
 			// }
 		}
 		System.out.println("Checking words complete");
-		return totalScore;
+		return finalPoints;
 	}
+	
+	/**
+	 * This method calculates the score of a word by considering all the factors (points of a tile
+	 * and placement on the board) except the dictionary validity of the word.
+	 * 
+	 * @param word - the word played by the player
+	 * @param board - the current board
+	 * @param player - the current player
+	 * @return turnPoints - the points scored by the player in current turn before considering dictionary validity
+	 * 
+	 */
 
 	public int wordptb(String word, Board board, Player player) {
 		// TWcounter = 0;// reset
@@ -193,7 +215,11 @@ public class Scoring {
 		return turnpoints;
 	}
 
-	/** gets points per letter */
+	/**
+	 * This method increases points for each tile based on their particular loaction on the board.
+	 * @param bt - the board tile
+	 * @return points - the points for each tile
+	 */
 	public int pointcal(BoardTile bt) {
 		// check if it is a new letter by seeing the mouse
 		if (bt.holds.isMouseTransparent() != true) {
@@ -221,7 +247,11 @@ public class Scoring {
 		return points;
 	}
 
-	/** this makes the tw or dw switch turn on if off if on */
+	/**
+	 * This method increases the counter of TWCounter (Triple Word) or DWCounter (Double Words)
+	 * based on where the tile is.
+	 * @param bt - the board tile
+	 */
 	public void incrementwordspecial(BoardTile bt) {
 		if (bt.getTileType().equals("TW")) {
 			TWcounter++;
@@ -230,7 +260,16 @@ public class Scoring {
 		}
 	}
 
-	/** inner method to help find words in any direction(repeated method) */
+	/**
+	 * This inner method helps to find words in any direction(repeated method).
+	 * @param board2d
+	 * @param word - the word played by the player
+	 * @param row -
+	 * @param col -
+	 * @param rowIncrement -
+	 * @param colIncrement -
+	 * @return turnPoints -
+	 */
 	public int isWordPresent(BoardTile[][] board2d, String word, int row, int col, int rowIncrement, int colIncrement) {
 		TWcounter = 0;// reset counters
 		DWcounter = 0;// reset counters
