@@ -262,7 +262,7 @@ public class Scoring {
 
 	/**
 	 * This inner method helps to find words in any direction(repeated method).
-	 * @param board2d
+	 * @param board2d - the two dimensional 15x15 board
 	 * @param word - the word played by the player
 	 * @param row -
 	 * @param col -

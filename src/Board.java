@@ -12,19 +12,19 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
 /**
- * Represents a 15 x 15 board
+ * This class provides the representation of the 15 x 15 board on which the game is played
  * 
  * @author Team 51
  *
  */
 public class Board extends Parent {
-	/**
-	 * 
-	 */
 	private BoardTile[] tiles;
 	private BoardTile tile;
 	DataFormat LetterTilePic = new DataFormat("hello");
-
+	
+	/**
+	 * This constructs a new boar.
+	 */
 	public Board() {
 		newboard();
 	}
@@ -32,10 +32,14 @@ public class Board extends Parent {
 	public BoardTile[] getTiles() {
 		return tiles;
 	}
+	
+	public BoardTile getTile() {
+		return tile;
+	}
 
 	/**
-	 * Sets tile numbers from 0 to 224 and values none(N), double letter (DL),
-	 * double word (DW), triple letter (TL), triple word (TW), center tile (C)
+	 * This method sets tile numbers from 0 to 224 and values none(N), double letter (DL),
+	 * double word (DW), triple letter (TL), triple word (TW), center tile (C).
 	 */
 
 	public void setTileNumbersAndValues() {
@@ -82,8 +86,7 @@ public class Board extends Parent {
 //	}
 
 	/**
-	 * this method only updates the board after each move (we should update scoring
-	 * here too maybe
+	 * this method updates the board after each move.
 	 * 
 	 */
 	public void boardgen() {
@@ -99,11 +102,10 @@ public class Board extends Parent {
 
 		}
 	}
-
-	public BoardTile getTile() {
-		return tile;
-	}
-
+	
+	/**
+	 * This method turns off the mouse drag.
+	 */
 	public void turnoffdrag() {
 		for (BoardTile t : tiles) {
 			if (t.holds != null) {
@@ -114,7 +116,7 @@ public class Board extends Parent {
 	}
 
 	/**
-	 * this method creates a new board display instance
+	 * This method creates a new board display instance.
 	 */
 	public void newboard() {
 		tiles = new BoardTile[225];
@@ -211,17 +213,24 @@ public class Board extends Parent {
 		}
 	}
 
-	/** checks to see if the board is empty */
+	/**
+	 *  This method checks if the board is empty.
+	 * @return booleanValue - true or false
+	 */
 	public boolean isboardempty() {
-		boolean val = true;
+		boolean booleanValue = true;
 		for (BoardTile bt : tiles) {
 			if (bt.holds != null) {
-				val = false;
+				booleanValue = false;
 			}
 		}
-		return val;
+		return booleanValue;
 	}
 
+	/**
+	 * This method creates a two dimensional 15x15 board.
+	 * @return board2d - the two dimensional board
+	 */
 	public BoardTile[][] turnto2d() {
 		BoardTile[][] board2d = new BoardTile[15][15];
 		int x = 0;
@@ -234,79 +243,85 @@ public class Board extends Parent {
 		return board2d;
 	}
 
-//checks if the tiles are together 
-	public boolean checktogether() {
-		boolean boo = true;
-		int i = 0; // index
-		ArrayList<Integer> tilelist = new ArrayList<Integer>();
-		for (BoardTile bt : tiles) {
-			if (bt.getholds() != null && !bt.holds.isMouseTransparent()) {
-				tilelist.add(bt.getTileNumber());
-				System.out.println(bt.getTileNumber());
-			}
-		}
-		int[] tileno = new int[tilelist.size()];
-		for (Integer j : tilelist) {
-			tileno[i] = j;
-			i++;
-		}
-		for (int k = 0; k < tileno.length; k++) {
-			if (k < tileno.length - 1) {
-				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
-				if (dif % 15 != 0) {
-					if (dif != 1) {
-						System.out.println(i);
-						// if you are at top right corner check down and to right
-						if (i == 0) {
-							if (tiles[i + 1].holds == null && tiles[i + 15].holds == null) {
-								boo = false;
-								break;
-							}
-						}
-						// if you are at rightmost check
-						else if (i == (tiles.length - 1)) {
-							if (tiles[i - 1].holds == null) {
-								boo = false;
-								break;
-							}
+//	/**
+//	 * This method checks if the tiles are together.
+//	 * @return booleanValue - true or false
+//	 */
+//	public boolean checktogether() {
+//		boolean booleanValue = true;
+//		int i = 0; // index
+//		ArrayList<Integer> tilelist = new ArrayList<Integer>();
+//		for (BoardTile bt : tiles) {
+//			if (bt.getholds() != null && !bt.holds.isMouseTransparent()) {
+//				tilelist.add(bt.getTileNumber());
+//				System.out.println(bt.getTileNumber());
+//			}
+//		}
+//		int[] tileno = new int[tilelist.size()];
+//		for (Integer j : tilelist) {
+//			tileno[i] = j;
+//			i++;
+//		}
+//		for (int k = 0; k < tileno.length; k++) {
+//			if (k < tileno.length - 1) {
+//				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
+//				if (dif % 15 != 0) {
+//					if (dif != 1) {
+//						System.out.println(i);
+//						// if you are at top right corner check down and to right
+//						if (i == 0) {
+//							if (tiles[i + 1].holds == null && tiles[i + 15].holds == null) {
+//								booleanValue = false;
+//								break;
+//							}
+//						}
+//						// if you are at rightmost check
+//						else if (i == (tiles.length - 1)) {
+//							if (tiles[i - 1].holds == null) {
+//								booleanValue = false;
+//								break;
+//							}
+//
+//						}
+//						// check top
+//
+//						else if (i >= 209) {
+//							if (tiles[i - 15].holds == null) {
+//								booleanValue = false;
+//								break;
+//							}
+//						}
+//
+//						// check bottom
+//						// if you are not at the right or left extreme
+//						else if (i <= 14 && i != 0) {
+//							if (tiles[i + 15].holds == null) {
+//								booleanValue = false;
+//								break;
+//							}
+//						}
+//
+//						else if (tiles[i + 1].holds == null && tiles[i - 1].holds == null && tiles[i + 15].holds == null
+//								&& tiles[i - 15].holds == null) {
+//							booleanValue = false;
+//							break;
+//						}
+//
+//					} else if (dif == 1) {
+//						booleanValue = true;
+//					}
+//
+//				}
+//
+//			}
+//		}
+//		return booleanValue;
+//	}
 
-						}
-						// check top
-
-						else if (i >= 209) {
-							if (tiles[i - 15].holds == null) {
-								boo = false;
-								break;
-							}
-						}
-
-						// check bottom
-						// if you are not at the right or left extreme
-						else if (i <= 14 && i != 0) {
-							if (tiles[i + 15].holds == null) {
-								boo = false;
-								break;
-							}
-						}
-
-						else if (tiles[i + 1].holds == null && tiles[i - 1].holds == null && tiles[i + 15].holds == null
-								&& tiles[i - 15].holds == null) {
-							boo = false;
-							break;
-						}
-
-					} else if (dif == 1) {
-						boo = true;
-					}
-
-				}
-
-			}
-		}
-		return boo;
-	}
-
-	// checks if the tiles are together
+	/**
+	 * This method checks if the tiles are together.
+	 * @return booleanValue - true or false
+	 */
 	public boolean checktogether2() {
 		boolean boo = true;
 		int i = 0; // index
@@ -411,7 +426,10 @@ public class Board extends Parent {
 		}
 		return boo;
 	}
-
+	
+	/**
+	 * This method removes tiles from the board.
+	 */
 	public void removetiles() {
 		for (BoardTile bt : tiles) {
 			if (bt.holds != null && !bt.holds.isMouseTransparent()) {
@@ -422,6 +440,13 @@ public class Board extends Parent {
 			System.out.println(bt.getChildrenUnmodifiable().toString());
 		}
 	}
+	
+	/**
+	 * 
+	 * @param list
+	 * @param no
+	 * @return
+	 */
 
 	public boolean isinlist(int[] list, int no) {
 		boolean bool = false;
