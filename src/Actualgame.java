@@ -413,7 +413,7 @@ public class Actualgame {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					playerTwo.fire();
+					//playerTwo.fire();
 				}
 
 				else {
@@ -462,7 +462,7 @@ public class Actualgame {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					playerOne.fire();
+					//playerOne.fire();
 
 				}
 
@@ -654,7 +654,7 @@ public class Actualgame {
 	public void endGame() {
 		boolean response = AlertBox.alertWithUserAction("End Game", "End the game now?");
 		if (response) {
-			boolean nextResponse = AlertBox.winnerAlert(totalScorePlayerOne, totalScorePlayerTwo);
+			boolean nextResponse = AlertBox.endGameAlert(totalScorePlayerOne, totalScorePlayerTwo);
 			if (nextResponse) {
 				this.resetSequence();
 			}
