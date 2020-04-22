@@ -68,7 +68,6 @@ public class Actualgame {
 	/**
 	 * This gets the actual game screen when you click start running.
 	 * 
-	 * @author Team 51
 	 *
 	 */
 
@@ -102,6 +101,10 @@ public class Actualgame {
 
 		this.buildLayout();
 	}
+	
+	/**
+	 * This method builds the layout for the actual game.
+	 */
 
 	public void buildLayout() {
 		LetterTilePic lp;
@@ -291,17 +294,22 @@ public class Actualgame {
 	public Pane getRootPane() {
 		return gameRoot;
 	}
+	
+	/**
+	 * This method moves tiles to a spot in the board if it's empty.
+	 * @param lp
+	 */
 
 	public void moveTile(LetterTilePic lp) {
 		BoardTile bt = board.getTile();
 		if (bt.holds == null) {
 			bt.holds = lp;
 		}
-		// else {
-		// ab.alert("Error", "Spot taken.");
-		// }
 	}
-
+	
+	/**
+	 * This method lets a player forfeit their turn.
+	 */
 	public void forfeitTurn() {
 		boolean response;
 		String tempCurrentPlayer = "";
@@ -323,6 +331,10 @@ public class Actualgame {
 			}
 		}
 	}
+	
+	/**
+	 * This method lets players reset the game.
+	 */
 
 	public void resetGame() {
 		boolean response;
@@ -331,6 +343,10 @@ public class Actualgame {
 			this.resetSequence();
 		}
 	}
+	
+	/**
+	 * This method lets a player confirm the word that they typed on the text box after playing their turn.
+	 */
 
 	public void confirmWord() {
 		String playedWord = inputWord.getText().trim();
@@ -467,12 +483,23 @@ public class Actualgame {
 		}
 
 	}
-
+	
+	/**
+	 * This method shows the status and points of the last played word.
+	 * 
+	 * @param wordToTest - the word played by the player
+	 * @param status - if the word passed or failed
+	 * @param points - the points earned by the word
+	 */
 	public void showStatus(String wordToTest, String status, String points) {
 		lastPlayedWord.setText("Last played word:\n" + wordToTest.toUpperCase() + "\nBy: " + currentPlayer
 				+ "\nStatus: " + status + "\nPoints: " + points);
 
 	}
+	
+	/**
+	 * This method shows message to the user as they are interacting with the text box.
+	 */
 
 	public void displayTextField() {
 		String playedWord = inputWord.getText();
@@ -500,7 +527,13 @@ public class Actualgame {
 		AlertBox.howToPlay();
 	}
 
-	/* will create and refill player racks */
+	/**
+	 * This method will create and refill players' tile-racks.
+	 * 
+	 * @param player - the current player
+	 * @param lb - the current instance of the letter bag
+	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
+	 */
 
 	public void rackcheck(Player player, LetterBag2 lb, StackPane bottomPanel) {
 		int num = 0;
@@ -521,7 +554,12 @@ public class Actualgame {
 		rackpicture(bottomPanel, player.rackletters);
 	}
 
-	/** makes the images for the rack tiles */
+	/**
+	 * This method makes images for the rack tiles.
+	 * 
+	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
+	 * @param rackletters - the letter tiles on the rack
+	 */
 	public void rackpicture(StackPane bottomPanel, ArrayList<LetterTilePic> rackletters) {
 		Rectangle bottomBar = new Rectangle(420, 60);
 		bottomBar.setArcWidth(30.0);
@@ -608,6 +646,10 @@ public class Actualgame {
 			}
 		});
 	}
+	
+	/**
+	 * This method lets players end the game with end game options and the winner of the last played game.
+	 */
 
 	public void endGame() {
 		boolean response = AlertBox.alertWithUserAction("End Game", "End the game now?");
@@ -618,8 +660,12 @@ public class Actualgame {
 			}
 		}
 	}
+	
+	/**
+	 * This method determines the sequence of events that occur when a game is restarted.
+	 */
 
-	public void resetSequence() {
+	private void resetSequence() {
 		this.buildLayout();
 		board.newboard();
 		inputWord.clear();
@@ -631,6 +677,10 @@ public class Actualgame {
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
 	}
+	
+	/**
+	 * This method removes tiles from the board.
+	 */
 
 	public void removetiles() {
 		for (BoardTile bt : tiles) {
