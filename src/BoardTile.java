@@ -78,6 +78,9 @@ public class BoardTile extends Parent implements Serializable {
 		this.tileType = tileType;
 	}
 
+	/**
+	 * 
+	 */
 	public void displayHold() {
 		if (this.holds != null) {
 			StackPane sp = new StackPane(this.holds);
@@ -86,7 +89,10 @@ public class BoardTile extends Parent implements Serializable {
 			// getChildren().add(new StackPane(this.holds));
 		}
 	}
-
+	
+	/**
+	 * 
+	 */
 	public void remove() {
 		getChildren().remove(1, getChildren().size());
 		// getChildren().remove(1);
