@@ -30,7 +30,7 @@ public class LetterBag2 {
 		Collections.shuffle(letterTiles); // shuffles the bag
 		lettersGivenCounter = 0;
 	}
-
+	
 	public int getLettersGivenCounter() {
 		return lettersGivenCounter;
 	}
@@ -46,8 +46,8 @@ public class LetterBag2 {
 	/**
 	 * Returns an ArrayList of random LetterTiles of size noOfLetters
 	 * 
-	 * @param noOfLetters
-	 * @return ArrayList of letters
+	 * @param noOfLetters - the number of letters
+	 * @return output - ArrayList of letters
 	 */
 	public ArrayList<LetterTilePic> getLetters(int noOfLetters) {
 		ArrayList<LetterTilePic> output = new ArrayList<LetterTilePic>();
@@ -57,7 +57,11 @@ public class LetterBag2 {
 		}
 		return output;
 	}
-
+	
+	/**
+	 * This method resets the player's rack.
+	 * @param player - the current player.
+	 */
 	public void resetrack(Player player) {
 		for (LetterTilePic lp : player.rackletters) {
 			player.rackletters.remove(lp);
