@@ -9,11 +9,11 @@ import java.util.ArrayList;
 
 
 public class Scoring {
-	int TWcounter = 0;// number of TW
-	int DWcounter = 0;// number of DW
-	boolean mouseon = false;// checks if the word is made by at least 1 new piece
-	boolean mouseoff = false; // at least one letter has to be on board already
-	int countercall = 0;
+	int TWCounter = 0;// number of TW
+	int DWCounter = 0;// number of DW
+	boolean mouseOn = false;// checks if the word is made by at least 1 new piece
+	boolean mouseOff = false; // at least one letter has to be on board already
+	int counterCall = 0;
 
 //	/**
 //	 * This method takes an ArrayList of words and returns the total score if the
@@ -74,12 +74,12 @@ public class Scoring {
 	 * 													   -2 Words Mismatch
 	 * 													   -888 Current Tile Not Used)
 	 */
-	public int checkInputboard(ArrayList<String> inputArray, Board board, Player player) {
+	public int scoreFinal(ArrayList<String> inputArray, Board board, Player player) {
 		System.out.println("Checking words . . . ");
 		int finalPoints = 0;
 		for (String word : inputArray) {
 
-			int tempTotalScore = wordptb(word, board, player);
+			int tempTotalScore = scoreFaceValue(word, board, player);
 			if (tempTotalScore == 0) {
 				AlertBox.alertWithoutUserAction("Words Mismatch",
 						"The word that you typed is different from the word you played.");
@@ -112,7 +112,7 @@ public class Scoring {
 				else {
 					finalPoints = tempTotalScore;
 					board.turnoffdrag();
-					countercall++;
+					counterCall++;
 				}
 			}
 
@@ -133,17 +133,17 @@ public class Scoring {
 	 * 
 	 */
 
-	public int wordptb(String word, Board board, Player player) {
+	public int scoreFaceValue(String word, Board board, Player player) {
 		// TWcounter = 0;// reset
 		// DWcounter = 0;// reset
-		boolean firstturn = false;
-		mouseon = false;// reset
-		mouseoff = false;// reset
-		int turnpoints = 0;
+		boolean firstTurn = false;
+		mouseOn = false;// reset
+		mouseOff = false;// reset
+		int turnPoints = 0;
 		boolean present = false;
 
 		if (board.isboardempty() == true) {
-			firstturn = true;
+			firstTurn = true;
 		}
 
 		BoardTile[][] board2d = new BoardTile[15][15];
@@ -168,9 +168,9 @@ public class Scoring {
 								|| isWordPresent(board2d, word, row, col, 0, -1) != 0) {
 							// see which is the non zero one
 							if (isWordPresent(board2d, word, row, col, 0, 1) != 0) {
-								turnpoints = isWordPresent(board2d, word, row, col, 0, 1);
+								turnPoints = isWordPresent(board2d, word, row, col, 0, 1);
 							} else if (isWordPresent(board2d, word, row, col, 0, -1) != 0) {
-								turnpoints = isWordPresent(board2d, word, row, col, 0, -1);
+								turnPoints = isWordPresent(board2d, word, row, col, 0, -1);
 							}
 							present = true;
 							break outer;
@@ -182,9 +182,9 @@ public class Scoring {
 								|| isWordPresent(board2d, word, row, col, -1, 0) != 0) {
 
 							if (isWordPresent(board2d, word, row, col, 1, 0) != 0) {
-								turnpoints = isWordPresent(board2d, word, row, col, 1, 0);
+								turnPoints = isWordPresent(board2d, word, row, col, 1, 0);
 							} else if (isWordPresent(board2d, word, row, col, -1, 0) != 0) {
-								turnpoints = isWordPresent(board2d, word, row, col, -1, 0);
+								turnPoints = isWordPresent(board2d, word, row, col, -1, 0);
 							}
 							present = true;
 							break outer;
@@ -195,54 +195,54 @@ public class Scoring {
 			}
 		}
 		// this checks if it was made by at least 1 new letter
-		System.out.println(mouseoff);
-		if (mouseon == true && mouseoff == true && firstturn == false) {
+		System.out.println(mouseOff);
+		if (mouseOn == true && mouseOff == true && firstTurn == false) {
 			// takes into account triple of double word scores
-			turnpoints = (int) (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
-			player.score += turnpoints;
-		} else if (mouseon == true && mouseoff == false && countercall == 0) {
-			turnpoints = (int) (turnpoints * (Math.pow(3, TWcounter)) * (Math.pow(2, DWcounter)));
-			player.score += turnpoints;
-		} else if (mouseon == true && mouseoff == false && countercall != 0) {
+			turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+			player.score += turnPoints;
+		} else if (mouseOn == true && mouseOff == false && counterCall == 0) {
+			turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+			player.score += turnPoints;
+		} else if (mouseOn == true && mouseOff == false && counterCall != 0) {
 			player.score += 0;
-			turnpoints = -888;// false value used for detecting that they didn;t use tile on board
+			turnPoints = -888;// false value used for detecting that they didn;t use tile on board
 			// alert user must use tile on board
 		} else {
 			player.score += 0;
 		}
-		System.out.println("Turnpoints: " + turnpoints);
+		System.out.println("Turnpoints: " + turnPoints);
 		System.out.println("points before anything: " + player.score);
-		return turnpoints;
+		return turnPoints;
 	}
 
 	/**
-	 * This method increases points for each tile based on their particular loaction on the board.
+	 * This method increases points for each tile based on their particular location on the board.
 	 * @param bt - the board tile
 	 * @return points - the points for each tile
 	 */
-	public int pointcal(BoardTile bt) {
+	public int pointCall(BoardTile boardTile) {
 		// check if it is a new letter by seeing the mouse
-		if (bt.holds.isMouseTransparent() != true) {
-			mouseon = true;
+		if (boardTile.holds.isMouseTransparent() != true) {
+			mouseOn = true;
 		}
-		if (bt.holds.isMouseTransparent() == true) {
-			mouseoff = true;
+		if (boardTile.holds.isMouseTransparent() == true) {
+			mouseOff = true;
 		}
 		int points = 0;
-		if (bt.getTileType().equals("TL")) {
-			points = 3 * (bt.holds.letter.points);
-		} else if (bt.getTileType().equals("DL")) {
-			points = 2 * (bt.holds.letter.points);
-		} else if (bt.getTileType().equals("TW")) {
-			points = bt.holds.letter.points;
-			incrementwordspecial(bt);
-		} else if (bt.getTileType().equals("DW")) {
-			incrementwordspecial(bt);
-			points = bt.holds.letter.points;
-		} else if (bt.getTileType().equals("C")) {
-			points = 2 * (bt.holds.letter.points);
+		if (boardTile.getTileType().equals("TL")) {
+			points = 3 * (boardTile.holds.letter.points);
+		} else if (boardTile.getTileType().equals("DL")) {
+			points = 2 * (boardTile.holds.letter.points);
+		} else if (boardTile.getTileType().equals("TW")) {
+			points = boardTile.holds.letter.points;
+			incrementWordSpecial(boardTile);
+		} else if (boardTile.getTileType().equals("DW")) {
+			incrementWordSpecial(boardTile);
+			points = boardTile.holds.letter.points;
+		} else if (boardTile.getTileType().equals("C")) {
+			points = 2 * (boardTile.holds.letter.points);
 		} else {
-			points = bt.holds.letter.points;
+			points = boardTile.holds.letter.points;
 		}
 		return points;
 	}
@@ -252,17 +252,17 @@ public class Scoring {
 	 * based on where the tile is.
 	 * @param bt - the board tile
 	 */
-	public void incrementwordspecial(BoardTile bt) {
-		if (bt.getTileType().equals("TW")) {
-			TWcounter++;
-		} else if (bt.getTileType().equals("DW")) {
-			DWcounter++;
+	public void incrementWordSpecial(BoardTile boardTile) {
+		if (boardTile.getTileType().equals("TW")) {
+			TWCounter++;
+		} else if (boardTile.getTileType().equals("DW")) {
+			DWCounter++;
 		}
 	}
 
 	/**
 	 * This inner method helps to find words in any direction(repeated method).
-	 * @param board2d - the two dimensional 15x15 board
+	 * @param board2D - the two dimensional 15x15 board
 	 * @param word - the word played by the player
 	 * @param row -
 	 * @param col -
@@ -270,28 +270,28 @@ public class Scoring {
 	 * @param colIncrement -
 	 * @return turnPoints -
 	 */
-	public int isWordPresent(BoardTile[][] board2d, String word, int row, int col, int rowIncrement, int colIncrement) {
-		TWcounter = 0;// reset counters
-		DWcounter = 0;// reset counters
+	public int isWordPresent(BoardTile[][] board2D, String word, int row, int column, int rowIncrement, int columnIncrement) {
+		TWCounter = 0;// reset counters
+		DWCounter = 0;// reset counters
 		int turnPoints = 0;
-		int searchcol = col;
+		int searchcol = column;
 		int searchrow = row;
 		boolean allcharfound = true;
 		for (int charIndex = 0; charIndex < word.length(); charIndex++) {
 			// checks if it would be out of bounds or if they aren't equal
-			if (searchrow < 0 || searchcol < 0 || searchrow >= board2d.length || searchcol >= board2d[searchrow].length
-					|| board2d[searchrow][searchcol].holds == null || !board2d[searchrow][searchcol].holds.letter
+			if (searchrow < 0 || searchcol < 0 || searchrow >= board2D.length || searchcol >= board2D[searchrow].length
+					|| board2D[searchrow][searchcol].holds == null || !board2D[searchrow][searchcol].holds.letter
 							.toString().equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
 				allcharfound = false;
-				TWcounter = 0;// reset counters
-				DWcounter = 0;// reset counters
-				mouseon = false;// checks if the word is made by at least 1 new piece
-				mouseoff = false; // at least one letter has to be on board already
+				TWCounter = 0;// reset counters
+				DWCounter = 0;// reset counters
+				mouseOn = false;// checks if the word is made by at least 1 new piece
+				mouseOff = false; // at least one letter has to be on board already
 				turnPoints = 0; // erase any points that may have been added
 				return turnPoints;
 			} else {
-				turnPoints += pointcal(board2d[searchrow][searchcol]);// get the points
-				searchcol += colIncrement;
+				turnPoints += pointCall(board2D[searchrow][searchcol]);// get the points
+				searchcol += columnIncrement;
 				searchrow += rowIncrement;
 			}
 		}

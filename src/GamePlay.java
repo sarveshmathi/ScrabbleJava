@@ -475,7 +475,7 @@ public class GamePlay {
 			wordToTestArray.add(wordToTest);
 
 			if (playerOne.isSelected()) {
-				int currentScore = scoring.checkInputboard(wordToTestArray, board, player1);
+				int currentScore = scoring.scoreFinal(wordToTestArray, board, player1);
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
@@ -526,7 +526,7 @@ public class GamePlay {
 				}
 				System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
-				int currentScore = scoring.checkInputboard(wordToTestArray, board, player2);
+				int currentScore = scoring.scoreFinal(wordToTestArray, board, player2);
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
