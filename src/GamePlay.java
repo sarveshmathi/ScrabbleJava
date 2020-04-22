@@ -32,7 +32,7 @@ public class GamePlay {
 	private String currentPlayer;
 
 	private int tile_in_row;
-	private int tile_in_col;
+	private int tile_in_column;
 	private int board_width;
 	private int board_height;
 	private int tile_width;
@@ -63,7 +63,7 @@ public class GamePlay {
 	private Player player1;
 	private Player player2;
 	private Scoring scoring;
-	private LetterBag lb;
+	private LetterBag letterBag;
 
 	/**
 	 * This gets the actual game screen when you click start running.
@@ -72,14 +72,14 @@ public class GamePlay {
 
 	public GamePlay() {
 		tile_in_row = 15;// board spaces per row
-		tile_in_col = 15;// board spaces per col
+		tile_in_column = 15;// board spaces per col
 		board_width = 800;// board size
 		board_height = 800;
 
 		gameRoot = new BorderPane();
 		board = new Board();
 		tile_width = board_width / tile_in_row;
-		tile_height = board_height / tile_in_col;
+		tile_height = board_height / tile_in_column;
 		border = new Rectangle(tile_width - 2, tile_height - 2);
 
 		LetterTilePic = new DataFormat("some string that identifies your object");
@@ -118,7 +118,7 @@ public class GamePlay {
 		scoring = new Scoring();
 		player1 = new Player(1);
 		player2 = new Player(2);
-		lb = new LetterBag();
+		letterBag = new LetterBag();
 		bottomPanel = new StackPane();
 		bottomPanel2 = new StackPane();
 		rackletters = new ArrayList<LetterTilePic>();
@@ -149,8 +149,8 @@ public class GamePlay {
 
 			}
 			board.removetiles();
-			rackcheck(player1, lb, bottomPanel);
-			rackcheck(player2, lb, bottomPanel2);
+			rackcheck(player1, letterBag, bottomPanel);
+			rackcheck(player2, letterBag, bottomPanel2);
 			// board.turnoffdrag();
 		});
 		// Select Player One to start off with
@@ -217,8 +217,8 @@ public class GamePlay {
 		endGame.setTooltip(new Tooltip("Press to end current game."));
 
 		// this makes rack for each player
-		rackcheck(player1, lb, bottomPanel);
-		rackcheck(player2, lb, bottomPanel2);
+		rackcheck(player1, letterBag, bottomPanel);
+		rackcheck(player2, letterBag, bottomPanel2);
 
 		/*
 		 * This is to let the player forfeit their turn.
@@ -307,44 +307,141 @@ public class GamePlay {
 	}
 	
 	/**
-	 * This method lets a player forfeit their turn.
+	 * This method will create and refill players' tile-racks.
+	 * 
+	 * @param player - the current player
+	 * @param lb - the current instance of the letter bag
+	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
 	 */
-	public void forfeitTurn() {
-		boolean response;
-		String tempCurrentPlayer = "";
 
-		if (currentPlayer.equals("Player One")) {
-			tempCurrentPlayer = "Player Two";
-		} else if (currentPlayer.equals("Player Two")) {
-			tempCurrentPlayer = "Player One";
+	public void rackcheck(Player player, LetterBag lb, StackPane bottomPanel) {
+		int num = 0;
+		ArrayList<LetterTilePic> potential;
+		if (player.rackletters.isEmpty()) {
+			num = 7;
+			potential = lb.getLetters(num);
+			for (LetterTilePic lp : potential) {
+				player.rackletters.add(lp);
+			}
+		} else if (player.rackletters.size() < 7) {
+			num = 7 - player.rackletters.size();
+			potential = lb.getLetters(num);
+			for (LetterTilePic lp : potential) {
+				player.rackletters.add(lp);
+			}
 		}
+		rackpicture(bottomPanel, player.rackletters);
+	}
 
-		response = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
+	/**
+	 * This method makes images for the rack tiles.
+	 * 
+	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
+	 * @param rackletters - the letter tiles on the rack
+	 */
+	public void rackpicture(StackPane bottomPanel, ArrayList<LetterTilePic> rackletters) {
+		Rectangle bottomBar = new Rectangle(420, 60);
+		bottomBar.setArcWidth(30.0);
+		bottomBar.setArcHeight(30.0);
+		bottomBar.setFill(Color.SIENNA);
+		HBox userBar = new HBox(2);
+		userBar.setAlignment(Pos.CENTER);
+		bottomPanel.setAlignment(Pos.CENTER);
+		bottomPanel.getChildren().addAll(bottomBar, userBar);
+		for (LetterTilePic letter : rackletters) {
+			if (!userBar.getChildrenUnmodifiable().contains(letter)) {
+				userBar.getChildren().add(letter);
+			}
+			// letter.onMouseDragEnteredProperty();
+			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
+				public void handle(MouseEvent event) {
+					/* drag was detected, start a drag-and-drop gesture */
+					/* allow any transfer mode */
+					if (letter.isin != null) {
+						letter.isin.holds = null;
+					}
+					currentTile = letter;
+					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
+					/* Put a string on a dragboard */
+					ClipboardContent content = new ClipboardContent();
+					content.putString(letter.toString());
+					content.put(LetterTilePic, currentTile);
+					// content.getFiles();
+					currentTile.getClass();
+					db.setContent(content);
+					userBar.getChildren().remove(letter);
+					rackletters.remove(letter);
 
-		if (response) {
-			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
-			if (playerOne.isSelected()) {
-				playerTwo.fire();
-			} else if (playerTwo.isSelected()) {
-				playerOne.fire();
+					event.consume();
+					System.out.println("i'm being touched");
+				}
+			});
+
+			letter.setOnDragDone(new EventHandler<DragEvent>() {
+				public void handle(DragEvent event) {
+					/* the drag and drop gesture ended */
+					/* if the data was successfully moved, clear it */
+					if (event.getTransferMode() != TransferMode.MOVE) {
+						userBar.getChildren().add(letter);
+						rackletters.add(letter);
+					}
+					event.consume();
+				}
+			});
+		}
+		userBar.setOnDragOver(new EventHandler<DragEvent>() {
+
+			public void handle(DragEvent event) {
+
+				/* data is dragged over the target */
+				/*
+				 * accept it only if it is not dragged from the same node and if it isn't
+				 * holding a card
+				 */
+				if (event.getGestureSource() != userBar) {
+					/* allow for both copying and moving, whatever user chooses */
+					event.acceptTransferModes(TransferMode.MOVE);
+				}
+				event.consume();
+			}
+		});
+		userBar.setOnDragDropped(new EventHandler<DragEvent>() {
+			public void handle(DragEvent event) {
+				/* data dropped */
+				/* if there is a string data on dragboard, read it and use it */
+				Dragboard db = event.getDragboard();
+				Object j = db.getContent(LetterTilePic);
+				// bt.holds = (LetterTilePic) event.getGestureSource();
+				boolean success = false;
+				if (userBar.getChildren().size() <= 7) {
+					success = true;
+					userBar.getChildren().add((LetterTilePic) event.getGestureSource());
+				}
+				/*
+				 * let the source know whether the string was successfully transferred and used
+				 */
+				event.setDropCompleted(success);
+				event.consume();
+			}
+		});
+	}
+	
+	/**
+	 * This method removes tiles from the board.
+	 */
+
+	public void removetiles() {
+		for (BoardTile bt : tiles) {
+			if (bt.holds == null && board.getChildrenUnmodifiable().contains(bt.holds)) {
+				gameRoot.getChildren().remove(bt.holds);
 			}
 		}
 	}
 	
-	/**
-	 * This method lets players reset the game.
-	 */
-
-	public void resetGame() {
-		boolean response;
-		response = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
-		if (response) {
-			this.resetSequence();
-		}
-	}
 	
 	/**
 	 * This method lets a player confirm the word that they typed on the text box after playing their turn.
+	 * It then updates score for the player.
 	 */
 
 	public void confirmWord() {
@@ -525,126 +622,45 @@ public class GamePlay {
 	public void howToPlay() {
 		AlertBox.howToPlay();
 	}
-
+	
 	/**
-	 * This method will create and refill players' tile-racks.
-	 * 
-	 * @param player - the current player
-	 * @param lb - the current instance of the letter bag
-	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
+	 * This method lets a player forfeit their turn.
 	 */
+	public void forfeitTurn() {
+		boolean response;
+		String tempCurrentPlayer = "";
 
-	public void rackcheck(Player player, LetterBag lb, StackPane bottomPanel) {
-		int num = 0;
-		ArrayList<LetterTilePic> potential;
-		if (player.rackletters.isEmpty()) {
-			num = 7;
-			potential = lb.getLetters(num);
-			for (LetterTilePic lp : potential) {
-				player.rackletters.add(lp);
-			}
-		} else if (player.rackletters.size() < 7) {
-			num = 7 - player.rackletters.size();
-			potential = lb.getLetters(num);
-			for (LetterTilePic lp : potential) {
-				player.rackletters.add(lp);
+		if (currentPlayer.equals("Player One")) {
+			tempCurrentPlayer = "Player Two";
+		} else if (currentPlayer.equals("Player Two")) {
+			tempCurrentPlayer = "Player One";
+		}
+
+		response = AlertBox.alertWithUserAction("Forfeit Turn", "Forfeit " + currentPlayer + "'s turn?");
+
+		if (response) {
+			inputWord.setPromptText(tempCurrentPlayer + "'s Turn");
+			if (playerOne.isSelected()) {
+				playerTwo.fire();
+			} else if (playerTwo.isSelected()) {
+				playerOne.fire();
 			}
 		}
-		rackpicture(bottomPanel, player.rackletters);
 	}
-
+	
+	
 	/**
-	 * This method makes images for the rack tiles.
-	 * 
-	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
-	 * @param rackletters - the letter tiles on the rack
+	 * This method lets players reset the game.
 	 */
-	public void rackpicture(StackPane bottomPanel, ArrayList<LetterTilePic> rackletters) {
-		Rectangle bottomBar = new Rectangle(420, 60);
-		bottomBar.setArcWidth(30.0);
-		bottomBar.setArcHeight(30.0);
-		bottomBar.setFill(Color.SIENNA);
-		HBox userBar = new HBox(2);
-		userBar.setAlignment(Pos.CENTER);
-		bottomPanel.setAlignment(Pos.CENTER);
-		bottomPanel.getChildren().addAll(bottomBar, userBar);
-		for (LetterTilePic letter : rackletters) {
-			if (!userBar.getChildrenUnmodifiable().contains(letter)) {
-				userBar.getChildren().add(letter);
-			}
-			// letter.onMouseDragEnteredProperty();
-			letter.setOnDragDetected(new EventHandler<MouseEvent>() {
-				public void handle(MouseEvent event) {
-					/* drag was detected, start a drag-and-drop gesture */
-					/* allow any transfer mode */
-					if (letter.isin != null) {
-						letter.isin.holds = null;
-					}
-					currentTile = letter;
-					Dragboard db = currentTile.startDragAndDrop(TransferMode.MOVE);
-					/* Put a string on a dragboard */
-					ClipboardContent content = new ClipboardContent();
-					content.putString(letter.toString());
-					content.put(LetterTilePic, currentTile);
-					// content.getFiles();
-					currentTile.getClass();
-					db.setContent(content);
-					userBar.getChildren().remove(letter);
-					rackletters.remove(letter);
 
-					event.consume();
-					System.out.println("i'm being touched");
-				}
-			});
-
-			letter.setOnDragDone(new EventHandler<DragEvent>() {
-				public void handle(DragEvent event) {
-					/* the drag and drop gesture ended */
-					/* if the data was successfully moved, clear it */
-					if (event.getTransferMode() != TransferMode.MOVE) {
-						userBar.getChildren().add(letter);
-						rackletters.add(letter);
-					}
-					event.consume();
-				}
-			});
+	public void resetGame() {
+		boolean response;
+		response = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
+		if (response) {
+			this.resetSequence();
 		}
-		userBar.setOnDragOver(new EventHandler<DragEvent>() {
-
-			public void handle(DragEvent event) {
-
-				/* data is dragged over the target */
-				/*
-				 * accept it only if it is not dragged from the same node and if it isn't
-				 * holding a card
-				 */
-				if (event.getGestureSource() != userBar) {
-					/* allow for both copying and moving, whatever user chooses */
-					event.acceptTransferModes(TransferMode.MOVE);
-				}
-				event.consume();
-			}
-		});
-		userBar.setOnDragDropped(new EventHandler<DragEvent>() {
-			public void handle(DragEvent event) {
-				/* data dropped */
-				/* if there is a string data on dragboard, read it and use it */
-				Dragboard db = event.getDragboard();
-				Object j = db.getContent(LetterTilePic);
-				// bt.holds = (LetterTilePic) event.getGestureSource();
-				boolean success = false;
-				if (userBar.getChildren().size() <= 7) {
-					success = true;
-					userBar.getChildren().add((LetterTilePic) event.getGestureSource());
-				}
-				/*
-				 * let the source know whether the string was successfully transferred and used
-				 */
-				event.setDropCompleted(success);
-				event.consume();
-			}
-		});
 	}
+	
 	
 	/**
 	 * This method lets players end the game with end game options and the winner of the last played game.
@@ -675,18 +691,6 @@ public class GamePlay {
 		scorePlayerTwo.setText("0");
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
-	}
-	
-	/**
-	 * This method removes tiles from the board.
-	 */
-
-	public void removetiles() {
-		for (BoardTile bt : tiles) {
-			if (bt.holds == null && board.getChildrenUnmodifiable().contains(bt.holds)) {
-				gameRoot.getChildren().remove(bt.holds);
-			}
-		}
-	}
+	}	
 
 }
