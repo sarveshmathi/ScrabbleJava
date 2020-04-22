@@ -43,7 +43,7 @@ public class BoardDisplay extends Application {
 
 		// Handle action events for "Start" button.
 		startButton.setOnAction(e -> {
-			Actualgame game = new Actualgame();
+			GamePlay game = new GamePlay();
 			primaryStage.getScene().setRoot(game.getRootPane());
 		});
 

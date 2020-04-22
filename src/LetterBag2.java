@@ -3,7 +3,7 @@ import java.util.Collections;
 
 /**
  * A letter bag with 98 letters (actual game has 100 but we exclude blank tiles
- * here)
+ * here).
  * 
  * @author Team 51
  *
