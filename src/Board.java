@@ -343,9 +343,9 @@ public class Board extends Parent {
 		}
 		for (int k = 0; k < tileNumber.length; k++) {
 			if (k < tileNumber.length - 1) {
-				int dif = Math.abs((tileNumber[k + 1]) - tileNumber[k]);
-				if (dif % 15 != 0) {
-					if (dif != 1) {
+				int difference = Math.abs((tileNumber[k + 1]) - tileNumber[k]);
+				if (difference % 15 != 0) {
+					if (difference != 1) {
 						System.out.println(tileNumber[k]);
 						// top left corner
 						if (k == 0) {
@@ -416,7 +416,7 @@ public class Board extends Parent {
 							break;
 						}
 
-					} else if (dif == 1) {
+					} else if (difference == 1) {
 						ifTogether = true;
 					}
 
@@ -444,14 +444,14 @@ public class Board extends Parent {
 	/**
 	 * 
 	 * @param list
-	 * @param no
+	 * @param number
 	 * @return
 	 */
 
-	public boolean isInList(int[] list, int no) {
+	public boolean isInList(int[] list, int number) {
 		boolean ifInList = false;
 		for (int i = 0; i < list.length; i++) {
-			if (no == list[i]) {
+			if (number == list[i]) {
 				ifInList = true;
 				break;
 			}
