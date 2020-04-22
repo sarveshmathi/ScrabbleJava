@@ -86,7 +86,7 @@ public class Board extends Parent {
 //	}
 
 	/**
-	 * this method updates the board after each move.
+	 * This method updates the board after each move.
 	 * 
 	 */
 	public void boardgen() {
