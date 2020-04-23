@@ -45,12 +45,10 @@ public class Scoring {
 
 		else {
 			if (!OnlineDictionary.checkWord(word)) {
-				
 				player.score -= tempTotalScore;
-
 				finalPoints = -1;
 			}
-
+			//if a player submits a correct word already on the board
 			else {
 				if (Integer.parseInt(totalCurrentScore) != player.score) {
 				finalPoints = tempTotalScore;

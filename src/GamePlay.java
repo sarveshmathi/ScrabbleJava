@@ -500,6 +500,7 @@ public class GamePlay {
 						this.showStatus(wordToTest, status, points);
 
 						playerTwo.fire();
+						//if a player submits an incorrect word already on the board
 					} else {
 						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
 						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
@@ -526,7 +527,7 @@ public class GamePlay {
 				}
 
 				else if (currentScore == -888) {
-					status = "Words placement error";
+					status = "Words Placement Error";
 					points = "0";
 
 					int playerOneScore = player1.score;
@@ -568,10 +569,10 @@ public class GamePlay {
 						int playerTwoScore = player2.score;
 						scorePlayerTwo.setText("" + playerTwoScore);
 						totalScorePlayerTwo = "" + playerTwoScore;
-						System.out.println("WOO");
 						this.showStatus(wordToTest, status, points);
 
 						playerOne.fire();
+						//if a player submits an incorrect word already on the board
 					} else {
 						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
 						int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
@@ -580,8 +581,6 @@ public class GamePlay {
 						int playerTwoScore = player2.score;
 						scorePlayerTwo.setText("" + playerTwoScore);
 						totalScorePlayerTwo = "" + playerTwoScore;
-						System.out.println("TOO");
-
 						playerOne.fire();
 
 					}
@@ -597,7 +596,7 @@ public class GamePlay {
 				}
 
 				else if (currentScore == -888) {
-					status = "Words placement error";
+					status = "Words Placement Error";
 					points = "0";
 
 					int playerOneScore = player1.score;
