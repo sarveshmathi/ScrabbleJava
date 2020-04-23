@@ -70,24 +70,6 @@ public class Board extends Parent {
 	}
 
 	/**
-	 * This method prints board on the console.
-	 */
-//	public void printBoard() {
-//		for (int i = 0; i < tiles.length; i++) {
-//			BoardTile bt = tiles[i];
-//			if (i % 15 == 0) {
-//				System.out.println();
-//			}
-//			if (!bt.getTileType().equals("N")) {
-//				System.out.format("%7s", tiles[i].getTileType());
-//			} else {
-//				System.out.format("%7s", tiles[i].getTileNumber());
-//			}
-//
-//		}
-//	}
-
-	/**
 	 * This method turns off the mouse drag.
 	 */
 	public void turnOffDrag() {
@@ -114,7 +96,7 @@ public class Board extends Parent {
 			getChildren().add(boardTile);
 			boardTile.setOnDragOver(new EventHandler<DragEvent>() {
 				public void handle(DragEvent event) {
-					System.out.println("test");
+				//	System.out.println("test");
 					/* data is dragged over the target */
 					/*
 					 * accept it only if it is not dragged from the same node and if it isn't
@@ -170,7 +152,7 @@ public class Board extends Parent {
 						// content.putString(letter.toString());
 						content.put(LetterTilePic, boardTile.holds);
 						db.setContent(content);
-						System.out.println("I'm busy");
+					//	System.out.println("I'm busy");
 						boardTile.holds = null;
 						event.consume();
 					}
@@ -243,7 +225,7 @@ public class Board extends Parent {
 		for (BoardTile boardTiles : tiles) {
 			if (boardTiles.getholds() != null && !boardTiles.holds.isMouseTransparent()) {
 				tileList.add(boardTiles.getTileNumber());
-				System.out.println(boardTiles.getTileNumber());
+				//System.out.println(boardTiles.getTileNumber());
 			}
 		}
 		int[] tileNumber = new int[tileList.size()];
@@ -256,7 +238,7 @@ public class Board extends Parent {
 				int difference = Math.abs((tileNumber[k + 1]) - tileNumber[k]);
 				if (difference % 15 != 0) {
 					if (difference != 1) {
-						System.out.println(tileNumber[k]);
+						//System.out.println(tileNumber[k]);
 						// top left corner
 						if (k == 0) {
 							if (tiles[tileNumber[k] + 1].holds == null && tiles[tileNumber[k] + 15].holds == null) {
@@ -343,11 +325,11 @@ public class Board extends Parent {
 	public void removeTiles() {
 		for (BoardTile bt : tiles) {
 			if (bt.holds != null && !bt.holds.isMouseTransparent()) {
-				System.out.println("yes null");
+				//System.out.println("yes null");
 				bt.remove();
 				bt.holds = null;
 			}
-			System.out.println(bt.getChildrenUnmodifiable().toString());
+			//System.out.println(bt.getChildrenUnmodifiable().toString());
 		}
 	}
 

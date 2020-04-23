@@ -25,7 +25,6 @@ public class Scoring {
 	 *         Not Used)
 	 */
 	public int scoreFinal(String word, Board board, Player player) {
-		System.out.println("Checking words . . . ");
 		int finalPoints = 0;
 
 		int tempTotalScore = scoreFaceValue(word, board, player);
@@ -46,7 +45,6 @@ public class Scoring {
 
 		else {
 			if (!OnlineDictionary.checkWord(word)) {
-				System.out.println("Checking words complete");
 				AlertBox.alertWithoutUserAction("Incorrect Word",
 						word.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 				player.score -= tempTotalScore;
@@ -59,8 +57,6 @@ public class Scoring {
 				counterCall++;
 			}
 		}
-
-		System.out.println("Checking words complete");
 		return finalPoints;
 	}
 
@@ -137,7 +133,7 @@ public class Scoring {
 			}
 		}
 		// this checks if it was made by at least 1 new letter
-		System.out.println(mouseOff);
+		//System.out.println(mouseOff);
 		if (mouseOn == true && mouseOff == true && firstTurn == false) {
 			// takes into account triple of double word scores
 			turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
@@ -152,8 +148,8 @@ public class Scoring {
 		} else {
 			player.score += 0;
 		}
-		System.out.println("Turnpoints: " + turnPoints);
-		System.out.println("points before anything: " + player.score);
+		//System.out.println("Turnpoints: " + turnPoints);
+		//System.out.println("points before anything: " + player.score);
 		return turnPoints;
 	}
 

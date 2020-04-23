@@ -371,9 +371,7 @@ public class GamePlay {
 					db.setContent(content);
 					userBar.getChildren().remove(letter);
 					rackletters.remove(letter);
-
 					event.consume();
-					System.out.println("i'm being touched");
 				}
 			});
 
@@ -520,7 +518,7 @@ public class GamePlay {
 					playerTwo.fire();
 
 				}
-				System.out.println(player1.score);
+				//System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
@@ -569,7 +567,7 @@ public class GamePlay {
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();
 				}
-				System.out.println(player2.score);
+				//System.out.println(player2.score);
 			}
 			inputWord.setPromptText(currentPlayer + "'s Turn");
 		}
