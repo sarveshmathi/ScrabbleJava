@@ -2,7 +2,7 @@ Our project is a two-player Scrabble game with GUI. We adopted the official rule
 here (https://scrabble.hasbro.com/en-us/rules), but slightly modified it to reduce the project
 complexity. 
 
-Game play instructions are provided once you start the game. 
+Game play instructions are provided in the README and once you start the game in the "How to play?" section. 
 
 To build the GUI we used JavaFX. 
 
