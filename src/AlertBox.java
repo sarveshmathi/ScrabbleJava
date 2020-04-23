@@ -201,7 +201,16 @@ public class AlertBox {
 						+ "Players decide to end the game at any moment by clicking \"End Game\" button.\n\n"
 						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
 						+ "Press Reset button to reset the game."
+						+ "\n\n\nRules:\n\n"
+						+ "1. This game only accepts one word, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertantly forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it’s valid.\n\n"
+						+ "2. There are only 98 tiles, we have removed the two blank tiles.\n\n"
+						+ "3. First turn must start from the center tile and can be in any direction.\n\n"
+						+ "4. Playing an incorrect word will result in the player losing the played tiles and his/her chance.\n\n"
+						+ "5. Playing a word which is not connected to another word in the board will also result in the player losing the played tiles and his/her chance.\n\n"
+						+ "6. Maximum two players or two groups can play the game at a time.\n\n"
+						+ "7. Players will have to end the game themselves whenever they want to or when their racks are empty and don’t refill.\n\n"
+						+ "8. There are no extra points if a player uses all the letters in the rack in one turn."
+						
 						);
-		
 	}
 }

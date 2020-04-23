@@ -23,7 +23,7 @@ public class Board extends Parent {
 	DataFormat LetterTilePic = new DataFormat("hello");
 	
 	/**
-	 * This constructs a new boar.
+	 * This constructs a new board.
 	 */
 	public Board() {
 		newBoard();

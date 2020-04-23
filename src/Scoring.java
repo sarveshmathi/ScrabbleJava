@@ -80,21 +80,16 @@ public class Scoring {
 			if (tempTotalScore == 0) {
 				AlertBox.alertWithoutUserAction("Words Mismatch",
 						"The word that you typed is different from the word you played.");
-				// if (response) {
+				
 				finalPoints = -2;
-				// } else {
-				// totalScore = -2;
-				// }
 			}
 
 			else if (tempTotalScore == -888) {
 				AlertBox.alertWithoutUserAction("Current Tile Not Used",
 						"A new word made must use at least a tile from existing board.");
-				// if (response) {
+				
 				finalPoints = -888;
-				// } else {
-				// totalScore = -2;
-				// }
+				
 			}
 
 			else {
@@ -113,7 +108,6 @@ public class Scoring {
 				}
 			}
 
-			// }
 		
 		System.out.println("Checking words complete");
 		return finalPoints;
