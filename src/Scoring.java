@@ -24,7 +24,7 @@ public class Scoring {
 	 *         error codes (-1 Incorrect Word -2 Words Mismatch -888 Current Tile
 	 *         Not Used)
 	 */
-	public int scoreFinal(String word, Board board, Player player) {
+	public int scoreFinal(String word, Board board, Player player, String totalCurrentScore) {
 		int finalPoints = 0;
 
 		int tempTotalScore = scoreFaceValue(word, board, player);
@@ -52,9 +52,16 @@ public class Scoring {
 			}
 
 			else {
+				if (Integer.parseInt(totalCurrentScore) != player.score) {
 				finalPoints = tempTotalScore;
 				board.turnOffDrag();
 				counterCall++;
+					
+				}else {
+					finalPoints = -3;
+					AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+					
+				}
 			}
 		}
 		return finalPoints;

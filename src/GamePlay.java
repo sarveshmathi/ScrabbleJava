@@ -103,6 +103,7 @@ public class GamePlay {
 		this.buildLayout();
 	}
 
+
 	/**
 	 * This method builds the layout for the actual game.
 	 */
@@ -486,7 +487,7 @@ public class GamePlay {
 			String points = "";
 
 			if (playerOne.isSelected()) {
-				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
+				int currentScore = scoring.scoreFinal(wordToTest, board, player1, totalScorePlayerOne);
 				if (currentScore == -1) {
 					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
 						AlertBox.alertWithoutUserAction("Incorrect Word",
@@ -497,7 +498,6 @@ public class GamePlay {
 						int playerOneScore = player1.score;
 						scorePlayerOne.setText("" + playerOneScore);
 						totalScorePlayerOne = "" + playerOneScore;
-						System.out.println("WOO");
 						this.showStatus(wordToTest, status, points);
 
 						playerTwo.fire();
@@ -509,7 +509,6 @@ public class GamePlay {
 						int playerOneScore = player1.score;
 						scorePlayerOne.setText("" + playerOneScore);
 						totalScorePlayerOne = "" + playerOneScore;
-						System.out.println("TOO");
 						
 						playerTwo.fire();
 
@@ -538,9 +537,13 @@ public class GamePlay {
 					this.showStatus(wordToTest, status, points);
 					playerTwo.fire();
 				}
+				
+				else if (currentScore == -3) {
+					playerTwo.fire();
+				}
 
 				else {
-					if (Integer.parseInt(totalScorePlayerOne) != player1.score) {
+					
 						status = "Accepted";
 						points = "" + currentScore;
 
@@ -550,15 +553,13 @@ public class GamePlay {
 
 						this.showStatus(wordToTest, status, points);
 						playerTwo.fire();
-					} else {
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
-						playerTwo.fire();
-					}
+					
+					
 				}
 				// System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
 
-				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
+				int currentScore = scoring.scoreFinal(wordToTest, board, player2, totalScorePlayerTwo);
 				if (currentScore == -1) {
 					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
 						AlertBox.alertWithoutUserAction("Incorrect Word",
@@ -609,9 +610,13 @@ public class GamePlay {
 					playerOne.fire();
 
 				}
+				
+				else if (currentScore == -3) {
+					playerOne.fire();
+				}
 
 				else {
-					if (Integer.parseInt(totalScorePlayerTwo) != player2.score) {
+					
 						status = "Accepted";
 						points = "" + currentScore;
 
@@ -621,10 +626,7 @@ public class GamePlay {
 
 						this.showStatus(wordToTest, status, points);
 						playerOne.fire();
-					} else {
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
-						playerOne.fire();
-					}
+					 
 				}
 				// System.out.println(player2.score);
 			}
@@ -748,6 +750,16 @@ public class GamePlay {
 		scorePlayerTwo.setText("0");
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
+	}
+	
+	public int getScorePlayerOne () {
+		int scorePlayerOne = Integer.parseInt(totalScorePlayerOne);
+		return scorePlayerOne;
+	}
+	
+	public int getScorePlayerTwo () {
+		int scorePlayerTwo = Integer.parseInt(totalScorePlayerTwo);
+		return scorePlayerTwo;
 	}
 
 }
