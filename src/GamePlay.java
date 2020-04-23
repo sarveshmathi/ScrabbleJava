@@ -510,7 +510,8 @@ public class GamePlay {
 						scorePlayerOne.setText("" + playerOneScore);
 						totalScorePlayerOne = "" + playerOneScore;
 						System.out.println("TOO");
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+						playerTwo.fire();
 
 					}
 
@@ -550,7 +551,8 @@ public class GamePlay {
 						this.showStatus(wordToTest, status, points);
 						playerTwo.fire();
 					} else {
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+						playerTwo.fire();
 					}
 				}
 				// System.out.println(player1.score);
@@ -581,7 +583,8 @@ public class GamePlay {
 						scorePlayerTwo.setText("" + playerTwoScore);
 						totalScorePlayerTwo = "" + playerTwoScore;
 						System.out.println("TOO");
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+						playerOne.fire();
 
 					}
 				} else if (currentScore == -2) {
@@ -620,7 +623,8 @@ public class GamePlay {
 						this.showStatus(wordToTest, status, points);
 						playerOne.fire();
 					} else {
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+						playerOne.fire();
 					}
 				}
 				// System.out.println(player2.score);
