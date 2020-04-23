@@ -21,20 +21,31 @@ which should bring up the game window.
 After this, it's a simple two-player game of Scrabble, which is played according to a modified version*
 of the [official rules](https://scrabble.hasbro.com/en-us/rules):
 
-1. Player One starts by default and makes a word using any of the letters in his/her rack. 
-2. Player One enters the word made into the text box provided on the right pane. 
+1. Player One starts by default and makes a word using any of the letters in his/her rack.
+2. Player One enters the word made into the text box provided on the right pane.
 3. The computer checks with an online dictionary and if the word is an accepted word.
 Player One is given the points and his/her rack is refilled. Turn changes to Player Two.
 4. If the word is not accepted, Player One does not get any points, the tiles are removed from the board and turn changes.
 5. If the word entered by Player One mismatches with the word played by them, an alert is given and the player is allowed to reenter the word and Steps 3-5 are repeated.
-6. The game ends when the players decide to end the game by pressing the "End Game" button, for example: when no more words can be made, and the player with the highest score wins.
+6. The following situations are considered cheating and the current player doing them lose their turn with the tiles they put on the board in that move removed from the board:
+  - playing a word without including at-least one current tile present on the board,
+  - submitting in the text field an already played word on the board and not the one they actually played.
+7. The game ends when the players decide to end the game by pressing the "End Game" button, for example: when no more words can be made, and the player with the highest score wins.
 
-*Deviations from offical rules to simplfy the game: 
-1. This game only accepts one word, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertantly forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it's valid. Only submit the one word you intended to make.
-2. There are only 98 tiles, we have removed the two blank tiles. 
+*Deviations from official rules to simplify the gam:
+1. Only submit the one word you intended to make by actually playing the word on the board. The game only accepts one word- the one you played, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertently forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it's valid.
+2. There are only 98 tiles, we have removed the two blank tiles.
 3. First turn must start from the center tile and can be in any direction.
 4. Playing an incorrect word will result in the player losing the played tiles and his/her chance.
 5. Playing a word which is not connected to another word in the board will also result in the player losing the played tiles and his/her chance.
-6. Maximum two players or two groups can play the game at a time. 
-7. Players will have to end the game themselves whenever they want to or when their racks are empty and don't refill. 
-8. There are no extra points if a player uses all the letters in the rack in one turn. 
+6. Maximum two players or two groups can play the game at a time.
+7. Players will have to end the game themselves whenever they want to or when their racks are empty and don't refill.
+8. There are no extra points if a player uses all the letters in the rack in one turn.
+
+These are the situations where the turn changes to the next player:
+  a. If the current player plays a correct word.
+  b. If the current player plays an incorrect word.
+  b. If the current player forfeits their turn.
+  c. If the current player tries to cheat, which is defined by:
+    - playing a word without including at-least one current tile present on the board,
+    - submitting in the text field an already played word on the board and not the one they actually played.

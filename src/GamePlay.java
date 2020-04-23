@@ -103,7 +103,6 @@ public class GamePlay {
 		this.buildLayout();
 	}
 
-
 	/**
 	 * This method builds the layout for the actual game.
 	 */
@@ -509,7 +508,7 @@ public class GamePlay {
 						int playerOneScore = player1.score;
 						scorePlayerOne.setText("" + playerOneScore);
 						totalScorePlayerOne = "" + playerOneScore;
-						
+
 						playerTwo.fire();
 
 					}
@@ -537,24 +536,23 @@ public class GamePlay {
 					this.showStatus(wordToTest, status, points);
 					playerTwo.fire();
 				}
-				
+
 				else if (currentScore == -3) {
 					playerTwo.fire();
 				}
 
 				else {
-					
-						status = "Accepted";
-						points = "" + currentScore;
 
-						int playerOneScore = player1.score;
-						scorePlayerOne.setText("" + playerOneScore);
-						totalScorePlayerOne = "" + playerOneScore;
+					status = "Accepted";
+					points = "" + currentScore;
 
-						this.showStatus(wordToTest, status, points);
-						playerTwo.fire();
-					
-					
+					int playerOneScore = player1.score;
+					scorePlayerOne.setText("" + playerOneScore);
+					totalScorePlayerOne = "" + playerOneScore;
+
+					this.showStatus(wordToTest, status, points);
+					playerTwo.fire();
+
 				}
 				// System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
@@ -583,7 +581,7 @@ public class GamePlay {
 						scorePlayerTwo.setText("" + playerTwoScore);
 						totalScorePlayerTwo = "" + playerTwoScore;
 						System.out.println("TOO");
-						
+
 						playerOne.fire();
 
 					}
@@ -610,23 +608,23 @@ public class GamePlay {
 					playerOne.fire();
 
 				}
-				
+
 				else if (currentScore == -3) {
 					playerOne.fire();
 				}
 
 				else {
-					
-						status = "Accepted";
-						points = "" + currentScore;
 
-						int playerTwoScore = player2.score;
-						scorePlayerTwo.setText("" + playerTwoScore);
-						totalScorePlayerTwo = "" + playerTwoScore;
+					status = "Accepted";
+					points = "" + currentScore;
 
-						this.showStatus(wordToTest, status, points);
-						playerOne.fire();
-					 
+					int playerTwoScore = player2.score;
+					scorePlayerTwo.setText("" + playerTwoScore);
+					totalScorePlayerTwo = "" + playerTwoScore;
+
+					this.showStatus(wordToTest, status, points);
+					playerOne.fire();
+
 				}
 				// System.out.println(player2.score);
 			}
@@ -751,13 +749,13 @@ public class GamePlay {
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
 	}
-	
-	public int getScorePlayerOne () {
+
+	public int getScorePlayerOne() {
 		int scorePlayerOne = Integer.parseInt(totalScorePlayerOne);
 		return scorePlayerOne;
 	}
-	
-	public int getScorePlayerTwo () {
+
+	public int getScorePlayerTwo() {
 		int scorePlayerTwo = Integer.parseInt(totalScorePlayerTwo);
 		return scorePlayerTwo;
 	}
