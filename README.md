@@ -18,7 +18,7 @@ Make sure you add the right VM arguments to run the main method found in BoardDi
 Once you've followed these steps you should be able to run the project from BoardDisplay class,
 which should bring up the game window.
 
-After this, it's a simple two-player game of Scrabble, which is played according to a slightly modified version*
+After this, it's a simple two-player game of Scrabble, which is played according to a modified version*
 of the [official rules](https://scrabble.hasbro.com/en-us/rules):
 
 1. Player One starts by default and makes a word using any of the letters in his/her rack. 
