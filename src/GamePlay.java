@@ -3,10 +3,12 @@ import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
@@ -157,9 +159,10 @@ public class GamePlay {
 		playerOne.setSelected(true);
 
 		// Right Layout Starts
+		
 		VBox howToPlayLayout = new VBox();
 		howToPlayLayout.setAlignment(Pos.CENTER);
-		howToPlayLayout.getChildren().add(howToPlay);
+		howToPlayLayout.getChildren().addAll(howToPlay);
 
 		VBox confirmLayout = new VBox(5);
 		confirmLayout.setAlignment(Pos.CENTER);
@@ -179,23 +182,40 @@ public class GamePlay {
 		// Right Layout Ends
 
 		// Left Layout Starts
+		Label legends = new Label();
+		legends.setText("C: Center\n"
+				+ "DL: Double Letter Score\n"
+				+ "TL: Triple Letter Score\n"
+				+ "DW: Double Word Score\n"
+				+ "TW: Triple Word Score");
 		HBox playerOnePanel = new HBox(10);
 		playerOnePanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
 
 		HBox playerTwoPanel = new HBox(10);
 		playerTwoPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
-
+		
+		Separator separator1 = new Separator();
+		Separator separator2 = new Separator();
+		Separator separator3 = new Separator();
+		separator1.setOrientation(Orientation.HORIZONTAL);
+		separator2.setOrientation(Orientation.HORIZONTAL);
+		separator3.setOrientation(Orientation.HORIZONTAL);
+		
+		VBox legendsPanel = new VBox(20);
+		legendsPanel.getChildren().addAll(separator3, legends);
+		
 		VBox playerPanel = new VBox(20);
 		playerPanel.setAlignment(Pos.BOTTOM_CENTER);
-		playerPanel.getChildren().addAll(playerOnePanel, playerTwoPanel);
+		playerPanel.getChildren().addAll(separator1, playerOnePanel, playerTwoPanel, separator2);
 
-		VBox lastPlayedWordPanel = new VBox();
-		lastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
-		lastPlayedWordPanel.getChildren().add(lastPlayedWord);
+		VBox playerLastPlayedWordPanel = new VBox(20);
+		//playerLastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
+		playerLastPlayedWordPanel.getChildren().addAll(playerPanel, lastPlayedWord);
 
-		VBox leftPanel = new VBox(400);
-		leftPanel.setAlignment(Pos.CENTER);
-		leftPanel.getChildren().addAll(lastPlayedWordPanel, playerPanel);
+		BorderPane leftPanel = new BorderPane();
+		leftPanel.setPadding(new Insets(50, 10, 50, 10));
+		leftPanel.setTop (playerLastPlayedWordPanel);
+		leftPanel.setBottom (legendsPanel);
 		// Left Layout Ends
 
 		// Top Layout Starts
