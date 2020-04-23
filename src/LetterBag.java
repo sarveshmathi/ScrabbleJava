@@ -2,8 +2,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- * This class represents a letter bag with 98 letters (actual game has 100 but we exclude blank tiles
- * here).
+ * This class represents a letter bag with 98 letters (actual game has 100 but
+ * we exclude blank tiles here).
  * 
  * @author Team 51
  *
@@ -30,7 +30,7 @@ public class LetterBag {
 		Collections.shuffle(letterTiles); // shuffles the bag
 		lettersGivenCounter = 0;
 	}
-	
+
 	public int getLettersGivenCounter() {
 		return lettersGivenCounter;
 	}
@@ -57,26 +57,5 @@ public class LetterBag {
 		}
 		return output;
 	}
-	
-//	/**
-//	 * This method resets the player's rack.
-//	 * @param player - the current player.
-//	 */
-//	public void resetRack(Player player) {
-//		for (LetterTilePicture lp : player.rackletters) {
-//			player.rackletters.remove(lp);
-//			letterTiles.add(lp);
-//		}
-//	}
-
-	// public LetterTilePic deal() {
-
-	// LetterTilePic upnext = letter[0];// begins dealing the 1st card
-	// for (int i = 1; i < cardStorer.length; i++) {
-	// cardStorer[i - 1] = cardStorer[i];// moves every character up one place in
-	// the array
-	// }
-	// return upnext;
-	// }
 
 }

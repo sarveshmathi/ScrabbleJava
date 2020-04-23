@@ -12,7 +12,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 
 /**
- * This class provides the representation of the 15 x 15 board on which the game is played.
+ * This class provides the representation of the 15 x 15 board on which the game
+ * is played.
  * 
  * @author Team 51
  *
@@ -21,7 +22,7 @@ public class Board extends Parent {
 	private BoardTile[] tiles;
 	private BoardTile tile;
 	DataFormat LetterTilePic = new DataFormat("hello");
-	
+
 	/**
 	 * This constructs a new board.
 	 */
@@ -32,14 +33,15 @@ public class Board extends Parent {
 	public BoardTile[] getTiles() {
 		return tiles;
 	}
-	
+
 	public BoardTile getTile() {
 		return tile;
 	}
 
 	/**
-	 * This method sets tile numbers from 0 to 224 and values none(N), double letter (DL),
-	 * double word (DW), triple letter (TL), triple word (TW), center tile (C).
+	 * This method sets tile numbers from 0 to 224 and values none(N), double letter
+	 * (DL), double word (DW), triple letter (TL), triple word (TW), center tile
+	 * (C).
 	 */
 
 	public void setTileNumbersAndValues() {
@@ -85,24 +87,6 @@ public class Board extends Parent {
 //		}
 //	}
 
-//	/**
-//	 * This method updates the board after each move.
-//	 * 
-//	 */
-//	public void boardGen() {
-//		// tiles = new BoardTile[225];
-//		int tile_in_row = 15;
-//		int tile_in_col = 15;
-//		// setTileNumbersAndValues();
-//		for (int i = 0; i < tiles.length; i++) {
-//			BoardTile boardTile = tiles[i];
-//			if (boardTile.holds != null) {
-//				boardTile.displayHold();
-//			}
-//
-//		}
-//	}
-	
 	/**
 	 * This method turns off the mouse drag.
 	 */
@@ -121,7 +105,7 @@ public class Board extends Parent {
 	public void newBoard() {
 		tiles = new BoardTile[225];
 		int tile_in_row = 15;
-		//int tile_in_col = 15;
+		// int tile_in_col = 15;
 		setTileNumbersAndValues();
 		for (int i = 0; i < tiles.length; i++) {
 			BoardTile boardTile = tiles[i];
@@ -164,14 +148,12 @@ public class Board extends Parent {
 							aBoardTile.holds = null;
 						}
 					}
-					// bt.holds = (LetterTilePic) event.getAcceptingObject();
+
 					boolean success = false;
 					if (boardTile.getholds() != null) {
 						success = true;
 						getChildren().add(boardTile.holds);
 						boardTile.displayHold();
-						// boardgen();
-						// bt.setMouseTransparent(true);
 					}
 					event.setDropCompleted(success);
 					event.consume();
@@ -214,7 +196,8 @@ public class Board extends Parent {
 	}
 
 	/**
-	 *  This method checks if the board is empty.
+	 * This method checks if the board is empty.
+	 * 
 	 * @return booleanValue - true or false
 	 */
 	public boolean isBoardEmpty() {
@@ -229,6 +212,7 @@ public class Board extends Parent {
 
 	/**
 	 * This method creates a two dimensional 15x15 board.
+	 * 
 	 * @return board2d - the two dimensional board
 	 */
 	public BoardTile[][] turnTo2D() {
@@ -243,83 +227,9 @@ public class Board extends Parent {
 		return board2D;
 	}
 
-//	/**
-//	 * This method checks if the tiles are together.
-//	 * @return booleanValue - true or false
-//	 */
-//	public boolean checktogether() {
-//		boolean booleanValue = true;
-//		int i = 0; // index
-//		ArrayList<Integer> tilelist = new ArrayList<Integer>();
-//		for (BoardTile bt : tiles) {
-//			if (bt.getholds() != null && !bt.holds.isMouseTransparent()) {
-//				tilelist.add(bt.getTileNumber());
-//				System.out.println(bt.getTileNumber());
-//			}
-//		}
-//		int[] tileno = new int[tilelist.size()];
-//		for (Integer j : tilelist) {
-//			tileno[i] = j;
-//			i++;
-//		}
-//		for (int k = 0; k < tileno.length; k++) {
-//			if (k < tileno.length - 1) {
-//				int dif = Math.abs((tileno[k + 1]) - tileno[k]);
-//				if (dif % 15 != 0) {
-//					if (dif != 1) {
-//						System.out.println(i);
-//						// if you are at top right corner check down and to right
-//						if (i == 0) {
-//							if (tiles[i + 1].holds == null && tiles[i + 15].holds == null) {
-//								booleanValue = false;
-//								break;
-//							}
-//						}
-//						// if you are at rightmost check
-//						else if (i == (tiles.length - 1)) {
-//							if (tiles[i - 1].holds == null) {
-//								booleanValue = false;
-//								break;
-//							}
-//
-//						}
-//						// check top
-//
-//						else if (i >= 209) {
-//							if (tiles[i - 15].holds == null) {
-//								booleanValue = false;
-//								break;
-//							}
-//						}
-//
-//						// check bottom
-//						// if you are not at the right or left extreme
-//						else if (i <= 14 && i != 0) {
-//							if (tiles[i + 15].holds == null) {
-//								booleanValue = false;
-//								break;
-//							}
-//						}
-//
-//						else if (tiles[i + 1].holds == null && tiles[i - 1].holds == null && tiles[i + 15].holds == null
-//								&& tiles[i - 15].holds == null) {
-//							booleanValue = false;
-//							break;
-//						}
-//
-//					} else if (dif == 1) {
-//						booleanValue = true;
-//					}
-//
-//				}
-//
-//			}
-//		}
-//		return booleanValue;
-//	}
-
 	/**
 	 * This method checks if the tiles are together.
+	 * 
 	 * @return booleanValue - true or false
 	 */
 	public boolean checkTogether() {
@@ -426,7 +336,7 @@ public class Board extends Parent {
 		}
 		return ifTogether;
 	}
-	
+
 	/**
 	 * This method removes tiles from the board.
 	 */
@@ -440,7 +350,7 @@ public class Board extends Parent {
 			System.out.println(bt.getChildrenUnmodifiable().toString());
 		}
 	}
-	
+
 	/**
 	 * 
 	 * @param list

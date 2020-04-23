@@ -66,7 +66,6 @@ public class LetterTilePicture extends Parent implements Serializable {
 		getChildren().add(st);
 		// getChildren().add(new StackPane(piece, text1));
 	}
-	
 
 	/**
 	 * This method casts objects of Letters to string.
@@ -97,5 +96,4 @@ public class LetterTilePicture extends Parent implements Serializable {
 		db.setContent(content);
 
 	}
-
 }

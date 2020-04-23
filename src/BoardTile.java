@@ -89,7 +89,7 @@ public class BoardTile extends Parent implements Serializable {
 			// getChildren().add(new StackPane(this.holds));
 		}
 	}
-	
+
 	/**
 	 * 
 	 */

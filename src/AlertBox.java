@@ -19,7 +19,8 @@ public class AlertBox {
 	private static boolean response;
 
 	/**
-	 * A method that deals with alert events that requires Yes or No from the players.
+	 * A method that deals with alert events that requires Yes or No from the
+	 * players.
 	 * 
 	 * @param title   - the title of the alert window.
 	 * @param message - the message displayed in the window.
@@ -100,16 +101,16 @@ public class AlertBox {
 		alertWindow.showAndWait();
 
 	}
-	
+
 	/**
-	 * A method that gives the end game dialogue box showing the winner of the game 
+	 * A method that gives the end game dialogue box showing the winner of the game
 	 * as well as the end game options - to play the game again or to quit the game
 	 * 
-	 * @param scorePlayerOne   - the final score of Player One
+	 * @param scorePlayerOne - the final score of Player One
 	 * @param scorePlayerTwo - the final score of Player Two
 	 * @return response - the user's response to whether to play the game again
 	 */
-	
+
 	public static boolean endGameAlert(String scorePlayerOne, String scorePlayerTwo) {
 		int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
 		int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
@@ -167,14 +168,13 @@ public class AlertBox {
 				System.exit(0);
 			}
 		});
-		
+
 		alertWindow.setOnCloseRequest(e -> {
 			// Consumes the system close event
 			e.consume();
 			alertWithoutUserAction("Play Again or Quit", "Please click \"Play Again\" or \"Quit Game\".");
-			
-		});
 
+		});
 
 		VBox finalLayout = new VBox(50);
 		finalLayout.setAlignment(Pos.CENTER);
@@ -186,11 +186,11 @@ public class AlertBox {
 
 		return response;
 	}
-	
+
 	/**
 	 * This displays the dialogue box of how to play the game.
 	 */
-	
+
 	public static void howToPlay() {
 		AlertBox.alertWithoutUserAction("How To Play",
 
@@ -200,8 +200,7 @@ public class AlertBox {
 						+ "Confirm Word button automatically changes turn.\n\n"
 						+ "Players decide to end the game at any moment by clicking \"End Game\" button.\n\n"
 						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
-						+ "Press Reset button to reset the game."
-						+ "\n\n\nRules:\n\n"
+						+ "Press Reset button to reset the game." + "\n\n\nRules:\n\n"
 						+ "1. This game only accepts one word, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertantly forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it’s valid.\n\n"
 						+ "2. There are only 98 tiles, we have removed the two blank tiles.\n\n"
 						+ "3. First turn must start from the center tile and can be in any direction.\n\n"
@@ -210,7 +209,7 @@ public class AlertBox {
 						+ "6. Maximum two players or two groups can play the game at a time.\n\n"
 						+ "7. Players will have to end the game themselves whenever they want to or when their racks are empty and don’t refill.\n\n"
 						+ "8. There are no extra points if a player uses all the letters in the rack in one turn."
-						
-						);
+
+		);
 	}
 }

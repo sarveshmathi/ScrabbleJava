@@ -27,8 +27,8 @@ public class BoardDisplay extends Application {
 	Stage primaryStage;
 
 	/**
-	 *  This method overrides the start() method and handles the layout of the 
-	 *  start page.
+	 * This method overrides the start() method and handles the layout of the start
+	 * page.
 	 */
 	@Override
 	public void start(Stage primaryStage) throws FileNotFoundException {
@@ -77,10 +77,6 @@ public class BoardDisplay extends Application {
 		instructionButton.setOnAction(e -> {
 			{
 				AlertBox.howToPlay();
-				// final Hyperlink hyperlink = new
-				// Hyperlink("https://scrabble.hasbro.com/en-us/rules");
-				// getHostServices().showDocument(hyperlink.getText());
-
 			}
 		});
 		;
