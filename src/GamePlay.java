@@ -523,7 +523,7 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					// playerTwo.fire();
+					playerTwo.fire();
 				}
 
 				else {
@@ -572,7 +572,7 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					// playerOne.fire();
+					playerOne.fire();
 
 				}
 
