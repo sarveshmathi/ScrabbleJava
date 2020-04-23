@@ -7,7 +7,6 @@ import java.util.ArrayList;
  *
  */
 
-
 public class Scoring {
 	int TWCounter = 0;// number of TW
 	int DWCounter = 0;// number of DW
@@ -63,16 +62,15 @@ public class Scoring {
 ////
 ////	}
 	/**
-	 * This method receives the word input by the player
-	 * and determines if it is a valid dictionary word and fixes the final score for the player.
+	 * This method receives the word input by the player and determines if it is a
+	 * valid dictionary word and fixes the final score for the player.
 	 * 
 	 * @param inputArray - the word played by the player
-	 * @param board - the current board
-	 * @param player - the current player
-	 * @return finalPoints - if valid word: the actual final score
-	 * 						if invalid word : error codes (-1 Incorrect Word
-	 * 													   -2 Words Mismatch
-	 * 													   -888 Current Tile Not Used)
+	 * @param board      - the current board
+	 * @param player     - the current player
+	 * @return finalPoints - if valid word: the actual final score if invalid word :
+	 *         error codes (-1 Incorrect Word -2 Words Mismatch -888 Current Tile
+	 *         Not Used)
 	 */
 	public int scoreFinal(ArrayList<String> inputArray, Board board, Player player) {
 		System.out.println("Checking words . . . ");
@@ -121,15 +119,17 @@ public class Scoring {
 		System.out.println("Checking words complete");
 		return finalPoints;
 	}
-	
+
 	/**
-	 * This method calculates the score of a word by considering all the factors (points of a tile
-	 * and placement on the board) except the dictionary validity of the word.
+	 * This method calculates the score of a word by considering all the factors
+	 * (points of a tile and placement on the board) except the dictionary validity
+	 * of the word.
 	 * 
-	 * @param word - the word played by the player
-	 * @param board - the current board
+	 * @param word   - the word played by the player
+	 * @param board  - the current board
 	 * @param player - the current player
-	 * @return turnPoints - the points scored by the player in current turn before considering dictionary validity
+	 * @return turnPoints - the points scored by the player in current turn before
+	 *         considering dictionary validity
 	 * 
 	 */
 
@@ -216,7 +216,9 @@ public class Scoring {
 	}
 
 	/**
-	 * This method increases points for each tile based on their particular location on the board.
+	 * This method increases points for each tile based on their particular location
+	 * on the board.
+	 * 
 	 * @param bt - the board tile
 	 * @return points - the points for each tile
 	 */
@@ -248,8 +250,9 @@ public class Scoring {
 	}
 
 	/**
-	 * This method increases the counter of TWCounter (Triple Word) or DWCounter (Double Words)
-	 * based on where the tile is.
+	 * This method increases the counter of TWCounter (Triple Word) or DWCounter
+	 * (Double Words) based on where the tile is.
+	 * 
 	 * @param bt - the board tile
 	 */
 	public void incrementWordSpecial(BoardTile boardTile) {
@@ -261,32 +264,43 @@ public class Scoring {
 	}
 
 	/**
-	 * This inner method helps to find words in any direction(repeated method).
-	 * @param board2D - the two dimensional 15x15 board
-	 * @param word - the word played by the player
-	 * @param row -
-	 * @param col -
-	 * @param rowIncrement -
-	 * @param colIncrement -
-	 * @return turnPoints -
+	 * This inner method helps to find words in horizontal(left to right and right
+	 * to left) and vertical (left to right and right to left). and tallys the
+	 * number of Triple and double words
+	 * 
+	 * @param board2D      - the two dimensional 15x15 board
+	 * @param word         - the word played by the player
+	 * @param row          -row of where the 1st letter of the word you are looking
+	 *                     for was found
+	 * @param col          -column of where the 1st letter of the word you are
+	 *                     looking for was found
+	 * @param rowIncrement - used to determine which row direction to go in and by
+	 *                     how much to increase our position on the board by that
+	 *                     amount, for example 1 for right and -1 for left
+	 * @param colIncrement -used to determine which column direction to go in and by
+	 *                     how much to increase our position on the board by that
+	 *                     amount, for example 1 for right and -1 for left
+	 * @return turnPoints -how many points the player gets in the turn taking into
+	 *         account DL, TL but NOT DW or TW
 	 */
-	public int isWordPresent(BoardTile[][] board2D, String word, int row, int column, int rowIncrement, int columnIncrement) {
-		TWCounter = 0;// reset counters
+	public int isWordPresent(BoardTile[][] board2D, String word, int row, int column, int rowIncrement,
+			int columnIncrement) {
+		TWCounter = 0;// reset counters for how many triple words
 		DWCounter = 0;// reset counters
-		int turnPoints = 0;
-		int searchColumn = column;
-		int searchRow = row;
-		boolean allCharsFound = true;
+		int turnPoints = 0;// points for this player's turn
+		int searchColumn = column;// starting column
+		int searchRow = row;// starting row
 		for (int charIndex = 0; charIndex < word.length(); charIndex++) {
 			// checks if it would be out of bounds or if they aren't equal
-			if (searchRow < 0 || searchColumn < 0 || searchRow >= board2D.length || searchColumn >= board2D[searchRow].length
-					|| board2D[searchRow][searchColumn].holds == null || !board2D[searchRow][searchColumn].holds.letter
-							.toString().equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
-				allCharsFound = false;
+			if (searchRow < 0 || searchColumn < 0 || searchRow >= board2D.length
+					|| searchColumn >= board2D[searchRow].length || board2D[searchRow][searchColumn].holds == null
+					|| !board2D[searchRow][searchColumn].holds.letter.toString()
+							.equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
+				// if you got here it is because you did NOT find the word
 				TWCounter = 0;// reset counters
 				DWCounter = 0;// reset counters
-				mouseOn = false;// checks if the word is made by at least 1 new piece
-				mouseOff = false; // at least one letter has to be on board already
+				mouseOn = false;// reset
+				mouseOff = false; // reset
 				turnPoints = 0; // erase any points that may have been added
 				return turnPoints;
 			} else {
@@ -295,6 +309,7 @@ public class Scoring {
 				searchRow += rowIncrement;
 			}
 		}
+		// if you got here you found the word, return the number of points
 		return turnPoints;
 	}
 
