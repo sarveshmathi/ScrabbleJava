@@ -1,6 +1,6 @@
 /* JavaFX CSS - Leave this comment until you have at least create one rule which uses -fx-Property */
 #mainpage{
-    -fx-background-image:url("Scrabble_MainPage1.png");
+    -fx-background-image:url("Scrabble_MainPage.png");
     -fx-background-repeat: stretch;   
     -fx-background-size: 1200 800;
     -fx-background-position: center top;
