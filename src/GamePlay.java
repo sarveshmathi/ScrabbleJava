@@ -489,6 +489,8 @@ public class GamePlay {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
 					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
+						AlertBox.alertWithoutUserAction("Incorrect Word",
+								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 						status = "Incorrect Word";
 						points = "0";
 
@@ -498,11 +500,9 @@ public class GamePlay {
 						System.out.println("WOO");
 						this.showStatus(wordToTest, status, points);
 
-						AlertBox.alertWithoutUserAction("Incorrect Word",
-								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-
 						playerTwo.fire();
 					} else {
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
 						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
 						player1.score = player1.score + differene;
 
@@ -510,7 +510,7 @@ public class GamePlay {
 						scorePlayerOne.setText("" + playerOneScore);
 						totalScorePlayerOne = "" + playerOneScore;
 						System.out.println("TOO");
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+						
 						playerTwo.fire();
 
 					}
@@ -561,6 +561,8 @@ public class GamePlay {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
 					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
+						AlertBox.alertWithoutUserAction("Incorrect Word",
+								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 						status = "Incorrect Word";
 						points = "0";
 
@@ -570,20 +572,17 @@ public class GamePlay {
 						System.out.println("WOO");
 						this.showStatus(wordToTest, status, points);
 
-						AlertBox.alertWithoutUserAction("Incorrect Word",
-								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-
 						playerOne.fire();
 					} else {
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
 						int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
 						System.out.println(difference);
 						player2.score = player2.score + difference;
-
 						int playerTwoScore = player2.score;
 						scorePlayerTwo.setText("" + playerTwoScore);
 						totalScorePlayerTwo = "" + playerTwoScore;
 						System.out.println("TOO");
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
+						
 						playerOne.fire();
 
 					}

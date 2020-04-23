@@ -37,7 +37,7 @@ public class Scoring {
 
 		else if (tempTotalScore == -888) {
 			AlertBox.alertWithoutUserAction("Current Tile Not Used",
-					"A new word made must use at least a tile from existing board.");
+					"A new word made must use at least a tile from existing board. You lose your turn.");
 
 			finalPoints = -888;
 
