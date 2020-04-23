@@ -2,6 +2,8 @@
 
 This project is a Scrabble game with GUI implemented in Java.
 
+![Game Screenshot](https://github.com/UPenn-CIT599/final-project-team-51-scrabble/blob/master/game_screenshot.png)
+
 To be able to run this on your computer, you will need to clone the repo and
 add the following libraries to the project once you open it on Eclipse:
 
