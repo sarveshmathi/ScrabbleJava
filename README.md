@@ -27,9 +27,12 @@ Player One is given the points and his/her rack is refilled. Turn changes to Pla
 5. If the word entered by Player One mismatches with the word played by them, an alert is given and the player is allowed to reenter the word and Steps 3-5 are repeated.
 6. The game ends when the players decide to end the game by pressing the "End Game" button, for example: when no more words can be made, and the player with the highest score wins.
 
-* Deviations from offical rules to simplfy the game: 
-1. This game only accepts one word, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvently forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it's valid. 
+*Deviations from offical rules to simplfy the game: 
+1. This game only accepts one word, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertantly forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it's valid. 
 2. There are only 98 tiles, we have removed the two blank tiles. 
 3. First turn must start from the center tile and can be in any direction.
 4. Playing an incorrect word will result in the player losing the played tiles and his/her chance.
 5. Playing a word which is not connected to another word in the board will also result in the player losing the played tiles and his/her chance.
+6. Maximum two players or two groups can play the game at a time. 
+7. Players will have to end the game themselves whenever they want to or when their racks are empty and don't refill. 
+8. There are no extra points if a player uses all the letters in the rack in one turn. 
