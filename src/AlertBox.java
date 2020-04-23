@@ -95,6 +95,9 @@ public class AlertBox {
 
 		layoutVBox.getChildren().addAll(label, buttonCancel);
 		layoutVBox.setAlignment(Pos.CENTER);
+		
+		layoutVBox.prefWidthProperty().bind(label.widthProperty());
+		layoutVBox.prefHeightProperty().bind(label.heightProperty());
 
 		Scene scene = new Scene(layoutVBox, 440, 325);
 		alertWindow.setScene(scene);
@@ -192,24 +195,61 @@ public class AlertBox {
 	 */
 
 	public static void howToPlay() {
-		AlertBox.alertWithoutUserAction("How To Play",
-
-				"Player One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
+		Stage howToPlayWindow = new Stage ();
+		howToPlayWindow.setTitle("How To Play");
+		Label howToPlay = new Label();
+		ScrollPane howToPlayPane = new ScrollPane();
+		Button cancelButton = new Button ("Cancel");
+		howToPlayPane.setPadding(new Insets (10, 10, 10, 10));
+		howToPlay.setText(
+						"HOW TO PLAY:"
+						+ "\n\nPlayer One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
 						+ "When you are finished, type the word in the text box.\n\n"
 						+ "Press Confirm Word button to play the word.\n\n"
 						+ "Confirm Word button automatically changes turn.\n\n"
 						+ "Players decide to end the game at any moment by clicking \"End Game\" button.\n\n"
 						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
-						+ "Press Reset button to reset the game." + "\n\n\nRules:\n\n"
-						+ "1. This game only accepts one word, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertantly forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it’s valid.\n\n"
+						+ "Press Reset button to reset the game.\n\n\n"
+						
+						+ "RULES:\n\n"
+						+ "1. Only submit the one word you intended to make by actually playing \n"
+						+ "the word on the board. The game only accepts one word- the one you played.\n\n"
 						+ "2. There are only 98 tiles, we have removed the two blank tiles.\n\n"
 						+ "3. First turn must start from the center tile and can be in any direction.\n\n"
-						+ "4. Playing an incorrect word will result in the player losing the played tiles and his/her chance.\n\n"
-						+ "5. Playing a word which is not connected to another word in the board will also result in the player losing the played tiles and his/her chance.\n\n"
+						+ "4. Playing an incorrect word will result in the player losing \n"
+						+ "the played tiles and his/her chance.\n\n"
+						+ "5. Playing a word which is not connected to another word in the board will also \n"
+						+ "result in the player losing the played tiles and his/her chance.\n\n"
 						+ "6. Maximum two players or two groups can play the game at a time.\n\n"
-						+ "7. Players will have to end the game themselves whenever they want to or when their racks are empty and don’t refill.\n\n"
-						+ "8. There are no extra points if a player uses all the letters in the rack in one turn."
-
+						+ "7. Players will have to end the game themselves whenever they want \n"
+						+ "to or when their racks are empty and don’t refill.\n\n"
+						+ "8. There are no extra points if a player uses all the letters \n"
+						+ "in the rack in one turn.\n\n"
+						+ "These are the situations where the turn changes to the next player:\n" + 
+						"  a. If the current player plays a correct word.\n" + 
+						"  b. If the current player plays an incorrect word.\n" + 
+						"  b. If the current player forfeits their turn.\n" + 
+						"  c. If the current player tries to cheat, which is defined by:\n" + 
+						"    - playing a word without including at-least one current tile present on the board,\n" + 
+						"    - submitting in the text field an already played word on the board and not the one \n"
+						+ "they actually played."
 		);
+		
+		cancelButton.setOnAction(e -> {
+			howToPlayWindow.close();
+		});
+		
+		howToPlayPane.setContent(howToPlay);
+		HBox cancelPane = new HBox();
+		cancelPane.setAlignment(Pos.CENTER);
+		cancelPane.setPadding(new Insets (0, 10, 20, 10));
+		cancelPane.getChildren().add(cancelButton);
+		
+		VBox finalPane = new VBox (20);
+		finalPane.getChildren().addAll(howToPlayPane, cancelPane);
+		
+		Scene howToPlayScene = new Scene (finalPane, 500, 500);
+		howToPlayWindow.setScene(howToPlayScene);
+		howToPlayWindow.show();
 	}
 }
