@@ -41,9 +41,9 @@ class JUnitTests {
 	 */
 	@Test
 	public void testLetterPointsAndQuanity() {
-		int sLetterPoints = LetterTilePic.Letters.valueOf("S").points;
+		int sLetterPoints = LetterTilePicture.Letters.valueOf("S").points;
 		assertEquals(1,sLetterPoints);
-		int zLetterPoints = LetterTilePic.Letters.valueOf("Z").points;
+		int zLetterPoints = LetterTilePicture.Letters.valueOf("Z").points;
 		assertEquals(10,zLetterPoints);
 
 	}
@@ -53,9 +53,9 @@ class JUnitTests {
 	 */
 	@Test
 	public void testLetterQuantity() {
-		int sLetterQuantity = LetterTilePic.Letters.valueOf("S").quantity;
+		int sLetterQuantity = LetterTilePicture.Letters.valueOf("S").quantity;
 		assertEquals(4,sLetterQuantity);
-		int zLetterQuantity = LetterTilePic.Letters.valueOf("Z").quantity;
+		int zLetterQuantity = LetterTilePicture.Letters.valueOf("Z").quantity;
 		assertEquals(1,zLetterQuantity);
 	
 	}
@@ -70,8 +70,8 @@ class JUnitTests {
 		lb.setLettersGivenCounter(25);
 		ArrayList<LetterTilePicture> ltp1 = lb.getLetters(7);
 		assertEquals(7, ltp1.size()); //checks if 7 letters were returned
-//		ArrayList<LetterTilePicture> ltp2 = lb.getLetters(3);
-//		assertEquals(10, lb.getLettersGivenCounter()); //checks if counter knows that 10 letters were given in total
+		ArrayList<LetterTilePicture> ltp2 = lb.getLetters(3);
+		assertEquals(10, lb.getLettersGivenCounter()); //checks if counter knows that 10 letters were given in total
 		
 	}
 	
