@@ -159,7 +159,7 @@ public class GamePlay {
 		playerOne.setSelected(true);
 
 		// Right Layout Starts
-		
+
 		VBox howToPlayLayout = new VBox();
 		howToPlayLayout.setAlignment(Pos.CENTER);
 		howToPlayLayout.getChildren().addAll(howToPlay);
@@ -183,39 +183,36 @@ public class GamePlay {
 
 		// Left Layout Starts
 		Label legends = new Label();
-		legends.setText("C: Center\n"
-				+ "DL: Double Letter Score\n"
-				+ "TL: Triple Letter Score\n"
-				+ "DW: Double Word Score\n"
-				+ "TW: Triple Word Score");
+		legends.setText("C: Center\n" + "DL: Double Letter Score\n" + "TL: Triple Letter Score\n"
+				+ "DW: Double Word Score\n" + "TW: Triple Word Score");
 		HBox playerOnePanel = new HBox(10);
 		playerOnePanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
 
 		HBox playerTwoPanel = new HBox(10);
 		playerTwoPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
-		
+
 		Separator separator1 = new Separator();
 		Separator separator2 = new Separator();
 		Separator separator3 = new Separator();
 		separator1.setOrientation(Orientation.HORIZONTAL);
 		separator2.setOrientation(Orientation.HORIZONTAL);
 		separator3.setOrientation(Orientation.HORIZONTAL);
-		
+
 		VBox legendsPanel = new VBox(20);
 		legendsPanel.getChildren().addAll(separator3, legends);
-		
+
 		VBox playerPanel = new VBox(20);
 		playerPanel.setAlignment(Pos.BOTTOM_CENTER);
 		playerPanel.getChildren().addAll(separator1, playerOnePanel, playerTwoPanel, separator2);
 
 		VBox playerLastPlayedWordPanel = new VBox(20);
-		//playerLastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
+		// playerLastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
 		playerLastPlayedWordPanel.getChildren().addAll(playerPanel, lastPlayedWord);
 
 		BorderPane leftPanel = new BorderPane();
 		leftPanel.setPadding(new Insets(50, 10, 50, 10));
-		leftPanel.setTop (playerLastPlayedWordPanel);
-		leftPanel.setBottom (legendsPanel);
+		leftPanel.setTop(playerLastPlayedWordPanel);
+		leftPanel.setBottom(legendsPanel);
 		// Left Layout Ends
 
 		// Top Layout Starts
@@ -491,16 +488,31 @@ public class GamePlay {
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
-					status = "Incorrect Word";
-					points = "0";
+					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
+						status = "Incorrect Word";
+						points = "0";
 
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
+						int playerOneScore = player1.score;
+						scorePlayerOne.setText("" + playerOneScore);
+						totalScorePlayerOne = "" + playerOneScore;
+						System.out.println("WOO");
+						this.showStatus(wordToTest, status, points);
 
-					this.showStatus(wordToTest, status, points);
+						AlertBox.alertWithoutUserAction("Incorrect Word",
+								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 
-					playerTwo.fire();
+						playerTwo.fire();
+					} else {
+						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
+						player1.score = player1.score + differene;
+
+						int playerOneScore = player1.score;
+						scorePlayerOne.setText("" + playerOneScore);
+						totalScorePlayerOne = "" + playerOneScore;
+						System.out.println("TOO");
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+
+					}
 
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
@@ -527,31 +539,51 @@ public class GamePlay {
 				}
 
 				else {
-					status = "Accepted";
-					points = "" + currentScore;
+					if (Integer.parseInt(totalScorePlayerOne) != player1.score) {
+						status = "Accepted";
+						points = "" + currentScore;
 
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
+						int playerOneScore = player1.score;
+						scorePlayerOne.setText("" + playerOneScore);
+						totalScorePlayerOne = "" + playerOneScore;
 
-					this.showStatus(wordToTest, status, points);
-					playerTwo.fire();
-
+						this.showStatus(wordToTest, status, points);
+						playerTwo.fire();
+					} else {
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+					}
 				}
-				//System.out.println(player1.score);
+				// System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
+
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
-					status = "Incorrect Word";
-					points = "0";
+					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
+						status = "Incorrect Word";
+						points = "0";
 
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
+						int playerTwoScore = player2.score;
+						scorePlayerTwo.setText("" + playerTwoScore);
+						totalScorePlayerTwo = "" + playerTwoScore;
+						System.out.println("WOO");
+						this.showStatus(wordToTest, status, points);
 
-					this.showStatus(wordToTest, status, points);
+						AlertBox.alertWithoutUserAction("Incorrect Word",
+								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 
-					playerOne.fire();
+						playerOne.fire();
+					} else {
+						int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
+						System.out.println(difference);
+						player2.score = player2.score + difference;
+
+						int playerTwoScore = player2.score;
+						scorePlayerTwo.setText("" + playerTwoScore);
+						totalScorePlayerTwo = "" + playerTwoScore;
+						System.out.println("TOO");
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+
+					}
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";
@@ -577,21 +609,24 @@ public class GamePlay {
 				}
 
 				else {
-					status = "Accepted";
-					points = "" + currentScore;
+					if (Integer.parseInt(totalScorePlayerTwo) != player2.score) {
+						status = "Accepted";
+						points = "" + currentScore;
 
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
+						int playerTwoScore = player2.score;
+						scorePlayerTwo.setText("" + playerTwoScore);
+						totalScorePlayerTwo = "" + playerTwoScore;
 
-					this.showStatus(wordToTest, status, points);
-					playerOne.fire();
+						this.showStatus(wordToTest, status, points);
+						playerOne.fire();
+					} else {
+						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired.");
+					}
 				}
-				//System.out.println(player2.score);
+				// System.out.println(player2.score);
 			}
 			inputWord.setPromptText(currentPlayer + "'s Turn");
 		}
-
 	}
 
 	/**
