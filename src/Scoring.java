@@ -72,11 +72,10 @@ public class Scoring {
 	 *         error codes (-1 Incorrect Word -2 Words Mismatch -888 Current Tile
 	 *         Not Used)
 	 */
-	public int scoreFinal(ArrayList<String> inputArray, Board board, Player player) {
+	public int scoreFinal(String word, Board board, Player player) {
 		System.out.println("Checking words . . . ");
 		int finalPoints = 0;
-		for (String word : inputArray) {
-
+		
 			int tempTotalScore = scoreFaceValue(word, board, player);
 			if (tempTotalScore == 0) {
 				AlertBox.alertWithoutUserAction("Words Mismatch",
@@ -115,7 +114,7 @@ public class Scoring {
 			}
 
 			// }
-		}
+		
 		System.out.println("Checking words complete");
 		return finalPoints;
 	}

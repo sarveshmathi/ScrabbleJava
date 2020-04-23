@@ -471,11 +471,8 @@ public class GamePlay {
 			String status = "";
 			String points = "";
 
-			ArrayList<String> wordToTestArray = new ArrayList<String>();
-			wordToTestArray.add(wordToTest);
-
 			if (playerOne.isSelected()) {
-				int currentScore = scoring.scoreFinal(wordToTestArray, board, player1);
+				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
@@ -526,7 +523,7 @@ public class GamePlay {
 				}
 				System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
-				int currentScore = scoring.scoreFinal(wordToTestArray, board, player2);
+				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
 					status = "Incorrect Word";
 					points = "0";
@@ -618,7 +615,11 @@ public class GamePlay {
 			enteredWord.setText("Press " + confirmButton + ".");
 		}
 	}
-
+	
+	/**
+	 * This method displays "how to play" dialogue box.
+	 */
+	
 	public void howToPlay() {
 		AlertBox.howToPlay();
 	}
