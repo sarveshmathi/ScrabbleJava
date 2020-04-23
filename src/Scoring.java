@@ -127,8 +127,6 @@ public class Scoring {
 	 */
 
 	public int scoreFaceValue(String word, Board board, Player player) {
-		// TWcounter = 0;// reset
-		// DWcounter = 0;// reset
 		boolean firstTurn = false;
 		mouseOn = false;// reset
 		mouseOff = false;// reset
@@ -212,7 +210,7 @@ public class Scoring {
 	 * This method increases points for each tile based on their particular location
 	 * on the board.
 	 * 
-	 * @param bt - the board tile
+	 * @param boardTile - the board tile
 	 * @return points - the points for each tile
 	 */
 	public int pointCall(BoardTile boardTile) {
@@ -243,10 +241,10 @@ public class Scoring {
 	}
 
 	/**
-	 * This method increases the counter of TWCounter (Triple Word) or DWCounter
+	 * This method increases the counter of TWCounter (Triple Words) or DWCounter
 	 * (Double Words) based on where the tile is.
 	 * 
-	 * @param bt - the board tile
+	 * @param boardTile - the board tile
 	 */
 	public void incrementWordSpecial(BoardTile boardTile) {
 		if (boardTile.getTileType().equals("TW")) {
@@ -258,14 +256,14 @@ public class Scoring {
 
 	/**
 	 * This inner method helps to find words in horizontal(left to right and right
-	 * to left) and vertical (left to right and right to left). and tallys the
+	 * to left) and vertical (left to right and right to left) and tallys the
 	 * number of Triple and double words
 	 * 
 	 * @param board2D      - the two dimensional 15x15 board
 	 * @param word         - the word played by the player
 	 * @param row          -row of where the 1st letter of the word you are looking
 	 *                     for was found
-	 * @param col          -column of where the 1st letter of the word you are
+	 * @param column          -column of where the 1st letter of the word you are
 	 *                     looking for was found
 	 * @param rowIncrement - used to determine which row direction to go in and by
 	 *                     how much to increase our position on the board by that
