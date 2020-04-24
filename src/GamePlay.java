@@ -100,7 +100,7 @@ public class GamePlay {
 
 		this.buildLayout();
 	}
-	
+
 	/**
 	 * This method builds the layout for the actual game.
 	 */
@@ -242,7 +242,20 @@ public class GamePlay {
 
 		confirmWord.setOnAction(e -> {
 			if (board.checkTogether() == true) {
-				this.confirmWord();
+				if (playerOne.isSelected()) {
+					if (player1.rackletters.size() == 7) {
+						AlertBox.alertWithoutUserAction("Must use rack letters", "Must use rack");
+					} else {
+						this.confirmWord();
+					}
+				} else if (playerTwo.isSelected()) {
+					if (player2.rackletters.size() == 7) {
+						AlertBox.alertWithoutUserAction("Must use rack letters", "Must use rack");
+					} else {
+						this.confirmWord();
+					}
+				}
+				// this.confirmWord();
 			} else {
 				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.");
 			}
@@ -293,9 +306,10 @@ public class GamePlay {
 	public Pane getRootPane() {
 		return gameRoot;
 	}
-	
+
 	/**
 	 * This method moves tiles to a spot in the board if it's empty.
+	 * 
 	 * @param lp
 	 */
 
@@ -305,12 +319,12 @@ public class GamePlay {
 			bt.holds = lp;
 		}
 	}
-	
+
 	/**
 	 * This method will create and refill players' tile-racks.
 	 * 
-	 * @param player - the current player
-	 * @param lb - the current instance of the letter bag
+	 * @param player      - the current player
+	 * @param lb          - the current instance of the letter bag
 	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
 	 */
 
@@ -425,7 +439,7 @@ public class GamePlay {
 			}
 		});
 	}
-	
+
 	/**
 	 * This method removes tiles from the board.
 	 */
@@ -437,11 +451,10 @@ public class GamePlay {
 			}
 		}
 	}
-	
-	
+
 	/**
-	 * This method lets a player confirm the word that they typed on the text box after playing their turn.
-	 * It then updates score for the player.
+	 * This method lets a player confirm the word that they typed on the text box
+	 * after playing their turn. It then updates score for the player.
 	 */
 
 	public void confirmWord() {
@@ -506,7 +519,7 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					//playerTwo.fire();
+					// playerTwo.fire();
 				}
 
 				else {
@@ -555,7 +568,7 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					//playerOne.fire();
+					// playerOne.fire();
 
 				}
 
@@ -576,22 +589,23 @@ public class GamePlay {
 		}
 
 	}
-	
+
 	/**
 	 * This method shows the status and points of the last played word.
 	 * 
 	 * @param wordToTest - the word played by the player
-	 * @param status - if the word passed or failed
-	 * @param points - the points earned by the word
+	 * @param status     - if the word passed or failed
+	 * @param points     - the points earned by the word
 	 */
 	public void showStatus(String wordToTest, String status, String points) {
 		lastPlayedWord.setText("Last played word:\n" + wordToTest.toUpperCase() + "\nBy: " + currentPlayer
 				+ "\nStatus: " + status + "\nPoints: " + points);
 
 	}
-	
+
 	/**
-	 * This method shows message to the user as they are interacting with the text box.
+	 * This method shows message to the user as they are interacting with the text
+	 * box.
 	 */
 
 	public void displayTextField() {
@@ -615,15 +629,15 @@ public class GamePlay {
 			enteredWord.setText("Press " + confirmButton + ".");
 		}
 	}
-	
+
 	/**
 	 * This method displays "how to play" dialogue box.
 	 */
-	
+
 	public void howToPlay() {
 		AlertBox.howToPlay();
 	}
-	
+
 	/**
 	 * This method lets a player forfeit their turn.
 	 */
@@ -648,8 +662,7 @@ public class GamePlay {
 			}
 		}
 	}
-	
-	
+
 	/**
 	 * This method lets players reset the game.
 	 */
@@ -661,10 +674,10 @@ public class GamePlay {
 			this.resetSequence();
 		}
 	}
-	
-	
+
 	/**
-	 * This method lets players end the game with end game options and the winner of the last played game.
+	 * This method lets players end the game with end game options and the winner of
+	 * the last played game.
 	 */
 
 	public void endGame() {
@@ -676,9 +689,10 @@ public class GamePlay {
 			}
 		}
 	}
-	
+
 	/**
-	 * This method determines the sequence of events that occur when a game is restarted.
+	 * This method determines the sequence of events that occur when a game is
+	 * restarted.
 	 */
 
 	private void resetSequence() {
@@ -692,6 +706,6 @@ public class GamePlay {
 		scorePlayerTwo.setText("0");
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
-	}	
+	}
 
 }
