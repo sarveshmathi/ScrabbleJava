@@ -9,7 +9,7 @@ add the following libraries to the project once you open it on Eclipse:
 
 1. JavaFX for Eclipse - Download e(fx)clipse 3.6.0 from Eclipse Marketplace and then follow the instructions outlined
 [here](https://openjfx.io/openjfx-docs/#install-javafx) under the section "Non-modular from IDE" to add JavaFX to your project.
-Make sure you add the right VM arguments to run the main method found in BoardDisplay class.
+Make sure you add the right VM arguments to the Run Configurations of the BoardDisplay class and the JUnit class.
 
 2. Download jsoup from [here](https://jsoup.org/download) and drag the jar into your project, adding it to your classpath.
 
