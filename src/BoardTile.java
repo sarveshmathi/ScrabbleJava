@@ -79,6 +79,8 @@ public class BoardTile extends Parent implements Serializable {
 	}
 
 	/**
+	 * This makes what appears on the screen to be the tile that the place on the
+	 * board is holding IF it is holding any tile.
 	 * 
 	 */
 	public void displayHold() {
@@ -86,17 +88,17 @@ public class BoardTile extends Parent implements Serializable {
 			StackPane sp = new StackPane(this.holds);
 			sp.setId("holdpic");
 			getChildren().add(sp);
-			// getChildren().add(new StackPane(this.holds));
 		}
 	}
 
 	/**
+	 * This method will remove any tile it is holding. It will only keep on its
+	 * stack pane the default tile image which is either blank of DW DL etc if it is
+	 * special.
 	 * 
 	 */
 	public void remove() {
 		getChildren().remove(1, getChildren().size());
-		// getChildren().remove(1);
-		// getChildren().remove(this.holdpic);
 
 	}
 

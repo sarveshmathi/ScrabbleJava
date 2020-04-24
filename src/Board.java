@@ -217,6 +217,8 @@ public class Board extends Parent {
 	public boolean checkTogether() {
 		boolean ifTogether = true;
 		int i = 0; // index
+		// these are here to signify special checking processes for the border columns
+		// and rows
 		int[] topRow = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13 };
 		int[] bottomRow = { 211, 212, 213, 214, 215, 216, 217, 218, 219, 220, 221, 222, 223 };
 		int[] rightRow = { 29, 44, 59, 74, 89, 104, 119, 134, 149, 164, 179, 194, 209 };
@@ -238,7 +240,6 @@ public class Board extends Parent {
 				int difference = Math.abs((tileNumber[k + 1]) - tileNumber[k]);
 				if (difference % 15 != 0) {
 					if (difference != 1) {
-						// System.out.println(tileNumber[k]);
 						// top left corner
 						if (k == 0) {
 							if (tiles[tileNumber[k] + 1].holds == null && tiles[tileNumber[k] + 15].holds == null) {
@@ -320,7 +321,10 @@ public class Board extends Parent {
 	}
 
 	/**
-	 * This method removes tiles from the board.
+	 * This method removes tiles from the board.It checks all the board places
+	 * whether the place on the board holds a letter tile AND is still moveable
+	 * (meaning the letter was just played). If so we will set their holds to null
+	 * and call the board tile's remove method.
 	 */
 	public void removeTiles() {
 		for (BoardTile bt : tiles) {
