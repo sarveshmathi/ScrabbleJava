@@ -53,6 +53,8 @@ public class Scoring {
 			}
 
 			else {
+				
+				
 				finalPoints = tempTotalScore;
 				board.turnOffDrag();
 				counterCall++;

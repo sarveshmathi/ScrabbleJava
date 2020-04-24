@@ -122,9 +122,7 @@ public class AlertBox {
 	 */
 
 	public static boolean endGameAlert(String scorePlayerOne, String scorePlayerTwo, String outcome) {
-		//int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
-		//int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
-
+		
 		Stage alertWindow = new Stage();
 		alertWindow.setTitle("Final Scores");
 		alertWindow.setMinWidth(250);
@@ -139,14 +137,6 @@ public class AlertBox {
 		Button buttonQuitGame = new Button("Quit Game");
 		
 		winner.setText(outcome);
-
-//		if (finalScorePlayerOne > finalScorePlayerTwo) {
-//			winner.setText("Player One wins!");
-//		} else if (finalScorePlayerTwo > finalScorePlayerOne) {
-//			winner.setText("Player Two wins!");
-//		} else {
-//			winner.setText("Tie!");
-//		}
 
 		HBox playerOneLayout = new HBox(10);
 		playerOneLayout.setAlignment(Pos.CENTER);

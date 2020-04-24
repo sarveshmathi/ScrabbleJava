@@ -515,8 +515,8 @@ public class GamePlay {
 
 						playerTwo.fire();
 					} else {
-						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
-						player1.score = player1.score + differene;
+						int difference = Integer.parseInt(totalScorePlayerOne) - player1.score;
+						player1.score = player1.score + difference;
 
 						int playerOneScore = player1.score;
 						scorePlayerOne.setText("" + playerOneScore);
@@ -547,7 +547,8 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					// playerTwo.fire();
+					playerTwo.fire();
+					
 				}
 
 				else {
@@ -605,12 +606,12 @@ public class GamePlay {
 					status = "Words placement error";
 					points = "0";
 
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
+					int playerTwoScore = player2.score;
+					scorePlayerTwo.setText("" + playerTwoScore);
+					totalScorePlayerTwo = "" + playerTwoScore;
 
 					this.showStatus(wordToTest, status, points);
-					// playerOne.fire();
+					playerOne.fire();
 
 				}
 
@@ -711,7 +712,7 @@ public class GamePlay {
 
 	public void resetGame() {
 		boolean response;
-		response = AlertBox.alertWithUserAction("New Game", "Reset and play again?");
+		response = AlertBox.alertWithUserAction("Reset Game", "Reset and play again?");
 		if (response) {
 			this.resetSequence();
 		}
