@@ -27,39 +27,39 @@ public class Scoring {
 	public int scoreFinal(String word, Board board, Player player) {
 		System.out.println("Checking words . . . ");
 		int finalPoints = 0;
-		
-			int tempTotalScore = scoreFaceValue(word, board, player);
-			if (tempTotalScore == 0) {
-				AlertBox.alertWithoutUserAction("Words Mismatch",
-						"The word that you typed is different from the word you played.");
-				
-				finalPoints = -2;
-			}
 
-			else if (tempTotalScore == -888) {
-				AlertBox.alertWithoutUserAction("Current Tile Not Used",
-						"A new word made must use at least a tile from existing board.");
-				
-				finalPoints = -888;
-				
+		int tempTotalScore = scoreFaceValue(word, board, player);
+		if (tempTotalScore == 0) {
+			AlertBox.alertWithoutUserAction("Words Mismatch",
+					"The word that you typed is different from the word you played.");
+
+			finalPoints = -2;
+		}
+
+		else if (tempTotalScore == -888) {
+			AlertBox.alertWithoutUserAction("Current Tile Not Used",
+					"A new word made must use at least a tile from existing board.");
+
+			finalPoints = -888;
+
+		}
+
+		else {
+			if (!OnlineDictionary.checkWord(word)) {
+
+
+				player.score -= tempTotalScore;
+				finalPoints = -1;
 			}
 
 			else {
-				if (!OnlineDictionary.checkWord(word)) {
-					
-					
-					player.score -= tempTotalScore;
-					finalPoints = -1;
-				}
-
-				else {
-					finalPoints = tempTotalScore;
-					board.turnOffDrag();
-					counterCall++;
-				}
+				finalPoints = tempTotalScore;
+				board.turnOffDrag();
+				counterCall++;
 			}
+		}
 
-		
+
 		System.out.println("Checking words complete");
 		return finalPoints;
 	}
@@ -237,7 +237,7 @@ public class Scoring {
 			if (searchRow < 0 || searchColumn < 0 || searchRow >= board2D.length
 					|| searchColumn >= board2D[searchRow].length || board2D[searchRow][searchColumn].holds == null
 					|| !board2D[searchRow][searchColumn].holds.letter.toString()
-							.equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
+					.equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
 				// if you got here it is because you did NOT find the word
 				TWCounter = 0;// reset counters
 				DWCounter = 0;// reset counters

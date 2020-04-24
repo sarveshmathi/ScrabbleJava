@@ -21,7 +21,7 @@ import javafx.scene.input.TransferMode;
 public class Board extends Parent {
 	private BoardTile[] tiles;
 	private BoardTile tile;
-	DataFormat LetterTilePic = new DataFormat("hello");
+	static DataFormat LetterTilePic = new DataFormat("hello");
 
 	/**
 	 * This constructs a new board.
