@@ -501,6 +501,9 @@ public class GamePlay {
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
+					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
+						AlertBox.alertWithoutUserAction("Incorrect Word",
+								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 					status = "Incorrect Word";
 					points = "0";
 
@@ -511,6 +514,17 @@ public class GamePlay {
 					this.showStatus(wordToTest, status, points);
 
 					playerTwo.fire();
+					} else {
+						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
+						player1.score = player1.score + differene;
+
+						int playerOneScore = player1.score;
+						scorePlayerOne.setText("" + playerOneScore);
+						totalScorePlayerOne = "" + playerOneScore;
+						
+						playerTwo.fire();
+
+					}
 
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
@@ -550,8 +564,12 @@ public class GamePlay {
 				}
 				System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
+				
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
+					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
+						AlertBox.alertWithoutUserAction("Incorrect Word",
+								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
 					status = "Incorrect Word";
 					points = "0";
 
@@ -562,6 +580,16 @@ public class GamePlay {
 					this.showStatus(wordToTest, status, points);
 
 					playerOne.fire();
+				} else {
+					int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
+					System.out.println(difference);
+					player2.score = player2.score + difference;
+					int playerTwoScore = player2.score;
+					scorePlayerTwo.setText("" + playerTwoScore);
+					totalScorePlayerTwo = "" + playerTwoScore;
+					
+					playerOne.fire();
+				}
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";

@@ -46,9 +46,8 @@ public class Scoring {
 
 			else {
 				if (!OnlineDictionary.checkWord(word)) {
-					System.out.println("Checking words complete");
-					AlertBox.alertWithoutUserAction("Incorrect Word",
-							word.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
+					
+					
 					player.score -= tempTotalScore;
 					finalPoints = -1;
 				}
