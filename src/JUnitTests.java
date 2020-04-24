@@ -27,14 +27,12 @@ import javafx.stage.Stage;
 
 class JUnitTests {	
 	
-	//private static Board b = new Board();
-	
 	/**
 	 * This test checks if the the right number of letters 
 	 * are returned from the letter bag when asked for.
 	 */
 	@Test
-	@Order(1)
+	@Order(1) //this test runs first to start a JavaFX thread that other tests rely on
 	public void testGetLetters() {
 		Application.launch(BoardDisplay.class, new String[0]);
 		LetterBag lb = new LetterBag();
@@ -90,6 +88,15 @@ class JUnitTests {
 
 	}
 	
+	/**
+	 * The tests checks if the game outcome is computed correctly
+	 */
+	
+	@Test
+	public void testGameOutcome() {
+		GamePlay gp = new GamePlay();
+		assertEquals("Player One wins!", gp.determineOutcome("154", "128"));
+	}
 	
 
 	/**
