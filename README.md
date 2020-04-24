@@ -9,7 +9,7 @@ add the following libraries to the project once you open it on Eclipse:
 
 1. JavaFX for Eclipse - Download e(fx)clipse 3.6.0 from Eclipse Marketplace and then follow the instructions outlined
 [here](https://openjfx.io/openjfx-docs/#install-javafx) under the section "Non-modular from IDE" to add JavaFX to your project.
-Make sure you add the right VM arguments to the Run Configurations of the BoardDisplay class and the JUnit class.
+Make sure you add the right VM arguments to run the main method found in BoardDisplay class.
 
 2. Download jsoup from [here](https://jsoup.org/download) and drag the jar into your project, adding it to your classpath.
 
@@ -27,10 +27,7 @@ of the [official rules](https://scrabble.hasbro.com/en-us/rules):
 Player One is given the points and his/her rack is refilled. Turn changes to Player Two.
 4. If the word is not accepted, Player One does not get any points, the tiles are removed from the board and turn changes.
 5. If the word entered by Player One mismatches with the word played by them, an alert is given and the player is allowed to reenter the word and Steps 3-5 are repeated.
-6. The following situations are considered cheating and the current player doing them lose their turn with the tiles they put on the board in that move removed from the board:
-  - playing a word without including at-least one current tile present on the board,
-  - submitting in the text field an already played word on the board and not the one they actually played.
-7. The game ends when the players decide to end the game by pressing the "End Game" button, for example: when no more words can be made, and the player with the highest score wins.
+6. The game ends when the players decide to end the game by pressing the "End Game" button, for example: when no more words can be made, and the player with the highest score wins.
 
 *Deviations from official rules to simplify the gam:
 1. Only submit the one word you intended to make by actually playing the word on the board. The game only accepts one word- the one you played, unlike the official version in which you get points for every word formed by the move. This also means that if you form a word that inadvertently forms another word with existing letters on the board, and the latter is incorrect, you will still get points for the word you intended to play, assuming it's valid.
@@ -46,6 +43,3 @@ These are the situations where the turn changes to the next player:
   a. If the current player plays a correct word.
   b. If the current player plays an incorrect word.
   b. If the current player forfeits their turn.
-  c. If the current player tries to cheat, which is defined by:
-    - playing a word without including at-least one current tile present on the board,
-    - submitting in the text field an already played word on the board and not the one they actually played.

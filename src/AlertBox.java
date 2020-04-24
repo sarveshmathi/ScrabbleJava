@@ -121,9 +121,9 @@ public class AlertBox {
 	 * @return response - the user's response to whether to play the game again
 	 */
 
-	public static boolean endGameAlert(String scorePlayerOne, String scorePlayerTwo) {
-		int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
-		int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
+	public static boolean endGameAlert(String scorePlayerOne, String scorePlayerTwo, String outcome) {
+		//int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
+		//int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
 
 		Stage alertWindow = new Stage();
 		alertWindow.setTitle("Final Scores");
@@ -137,14 +137,16 @@ public class AlertBox {
 		Label playerTwoScore = new Label(scorePlayerTwo);
 		Button buttonPlayAgain = new Button("Play Again");
 		Button buttonQuitGame = new Button("Quit Game");
+		
+		winner.setText(outcome);
 
-		if (finalScorePlayerOne > finalScorePlayerTwo) {
-			winner.setText("Player One wins!");
-		} else if (finalScorePlayerTwo > finalScorePlayerOne) {
-			winner.setText("Player Two wins!");
-		} else {
-			winner.setText("Tie!");
-		}
+//		if (finalScorePlayerOne > finalScorePlayerTwo) {
+//			winner.setText("Player One wins!");
+//		} else if (finalScorePlayerTwo > finalScorePlayerOne) {
+//			winner.setText("Player Two wins!");
+//		} else {
+//			winner.setText("Tie!");
+//		}
 
 		HBox playerOneLayout = new HBox(10);
 		playerOneLayout.setAlignment(Pos.CENTER);

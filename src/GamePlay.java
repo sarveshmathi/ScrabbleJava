@@ -504,16 +504,16 @@ public class GamePlay {
 					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
 						AlertBox.alertWithoutUserAction("Incorrect Word",
 								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-					status = "Incorrect Word";
-					points = "0";
+						status = "Incorrect Word";
+						points = "0";
 
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
+						int playerOneScore = player1.score;
+						scorePlayerOne.setText("" + playerOneScore);
+						totalScorePlayerOne = "" + playerOneScore;
 
-					this.showStatus(wordToTest, status, points);
+						this.showStatus(wordToTest, status, points);
 
-					playerTwo.fire();
+						playerTwo.fire();
 					} else {
 						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
 						player1.score = player1.score + differene;
@@ -521,7 +521,7 @@ public class GamePlay {
 						int playerOneScore = player1.score;
 						scorePlayerOne.setText("" + playerOneScore);
 						totalScorePlayerOne = "" + playerOneScore;
-						
+
 						playerTwo.fire();
 
 					}
@@ -564,32 +564,32 @@ public class GamePlay {
 				}
 				System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
-				
+
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
 					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
 						AlertBox.alertWithoutUserAction("Incorrect Word",
 								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-					status = "Incorrect Word";
-					points = "0";
+						status = "Incorrect Word";
+						points = "0";
 
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
+						int playerTwoScore = player2.score;
+						scorePlayerTwo.setText("" + playerTwoScore);
+						totalScorePlayerTwo = "" + playerTwoScore;
 
-					this.showStatus(wordToTest, status, points);
+						this.showStatus(wordToTest, status, points);
 
-					playerOne.fire();
-				} else {
-					int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
-					System.out.println(difference);
-					player2.score = player2.score + difference;
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
-					
-					playerOne.fire();
-				}
+						playerOne.fire();
+					} else {
+						int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
+						System.out.println(difference);
+						player2.score = player2.score + difference;
+						int playerTwoScore = player2.score;
+						scorePlayerTwo.setText("" + playerTwoScore);
+						totalScorePlayerTwo = "" + playerTwoScore;
+
+						playerOne.fire();
+					}
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";
@@ -631,7 +631,6 @@ public class GamePlay {
 		}
 
 	}
-
 
 	/**
 	 * This method shows the status and points of the last played word.
@@ -719,6 +718,28 @@ public class GamePlay {
 	}
 
 	/**
+	 * This method determines the outcome of the game
+	 * @param scorePlayerOne - the score of player one 
+	 * @param scorePlayerTwo - the score of player two
+	 * @return - result - the result of the game
+	 */
+
+	public String determineOutcome(String scorePlayerOne, String scorePlayerTwo) {
+		String outcome = "Tie!";
+
+		int finalScorePlayerOne = Integer.parseInt(scorePlayerOne);
+		int finalScorePlayerTwo = Integer.parseInt(scorePlayerTwo);
+
+		if (finalScorePlayerOne > finalScorePlayerTwo) {
+			outcome = "Player One wins!";
+		} else if (finalScorePlayerTwo > finalScorePlayerOne) {
+			outcome = "Player Two wins!";
+		}
+		
+		return outcome;
+	}
+
+	/**
 	 * This method lets players end the game with end game options and the winner of
 	 * the last played game.
 	 */
@@ -726,7 +747,8 @@ public class GamePlay {
 	public void endGame() {
 		boolean response = AlertBox.alertWithUserAction("End Game", "End the game now?");
 		if (response) {
-			boolean nextResponse = AlertBox.endGameAlert(totalScorePlayerOne, totalScorePlayerTwo);
+			String outcome = this.determineOutcome(totalScorePlayerOne, totalScorePlayerTwo);
+			boolean nextResponse = AlertBox.endGameAlert(totalScorePlayerOne, totalScorePlayerTwo, outcome);
 			if (nextResponse) {
 				this.resetSequence();
 			}
