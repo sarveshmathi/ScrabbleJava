@@ -35,7 +35,6 @@ public class AlertBox {
 
 		Label label = new Label(message);
 		Button buttonYes = new Button("Yes");
-		Button buttonNo = new Button("No");
 		Button buttonCancel = new Button("Cancel");
 
 		buttonYes.setOnAction(e -> {
@@ -44,26 +43,27 @@ public class AlertBox {
 
 		});
 
-		buttonNo.setOnAction(e -> {
-			response = false;
-			alertWindow.close();
-		});
 
 		buttonCancel.setOnAction(e -> {
 			response = false;
 			alertWindow.close();
 		});
 
-		VBox layoutVBox = new VBox(20); // the final layout
-		HBox layoutHBox = new HBox(20); // the layout for Yes and No buttons
+		HBox layoutButtons = new HBox(20); // the layout for Yes and No buttons
 
-		layoutHBox.getChildren().addAll(buttonYes, buttonNo);
-		layoutHBox.setAlignment(Pos.CENTER);
+		layoutButtons.getChildren().addAll(buttonYes, buttonCancel);
+		layoutButtons.setAlignment(Pos.CENTER);
+		
+		HBox labelLayout = new HBox();
+		labelLayout.setAlignment(Pos.CENTER);
+		labelLayout.getChildren().add(label);
+		
+		BorderPane finalLayout = new BorderPane();
+		finalLayout.setPadding(new Insets(10, 10, 40, 10));
+		finalLayout.setCenter(labelLayout);
+		finalLayout.setBottom(layoutButtons);
 
-		layoutVBox.getChildren().addAll(label, layoutHBox, buttonCancel);
-		layoutVBox.setAlignment(Pos.CENTER);
-
-		Scene scene = new Scene(layoutVBox, 350, 350);
+		Scene scene = new Scene(finalLayout, 250, 250);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
 
@@ -91,17 +91,24 @@ public class AlertBox {
 			alertWindow.close();
 		});
 
-		VBox layoutVBox = new VBox(20); // the final layout
+		HBox layoutButtons = new HBox(); // the layout for Yes and No buttons
 
-		layoutVBox.getChildren().addAll(label, buttonCancel);
-		layoutVBox.setAlignment(Pos.CENTER);
+		layoutButtons.getChildren().addAll(buttonCancel);
+		layoutButtons.setAlignment(Pos.CENTER);
 		
-		layoutVBox.prefWidthProperty().bind(label.widthProperty());
-		layoutVBox.prefHeightProperty().bind(label.heightProperty());
+		HBox labelLayout = new HBox();
+		labelLayout.setAlignment(Pos.CENTER);
+		labelLayout.getChildren().add(label);
+		
+		BorderPane finalLayout = new BorderPane();
+		finalLayout.setPadding(new Insets(10, 10, 40, 10));
+		finalLayout.setCenter(labelLayout);
+		finalLayout.setBottom(layoutButtons);
 
-		Scene scene = new Scene(layoutVBox, 440, 325);
+		Scene scene = new Scene(finalLayout, 400, 300);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
+
 
 	}
 
@@ -240,13 +247,13 @@ public class AlertBox {
 		});
 		
 		howToPlayPane.setContent(howToPlay);
-		HBox cancelPane = new HBox();
-		cancelPane.setAlignment(Pos.CENTER);
-		cancelPane.setPadding(new Insets (0, 10, 20, 10));
-		cancelPane.getChildren().add(cancelButton);
+		HBox cancelLayout = new HBox();
+		cancelLayout.setAlignment(Pos.CENTER);
+		cancelLayout.setPadding(new Insets (0, 10, 20, 10));
+		cancelLayout.getChildren().add(cancelButton);
 		
 		VBox finalPane = new VBox (20);
-		finalPane.getChildren().addAll(howToPlayPane, cancelPane);
+		finalPane.getChildren().addAll(howToPlayPane, cancelLayout);
 		
 		Scene howToPlayScene = new Scene (finalPane, 500, 500);
 		howToPlayWindow.setScene(howToPlayScene);

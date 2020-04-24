@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * This class carries out scoring for the game.
@@ -13,6 +14,53 @@ public class Scoring {
 	boolean mouseOff = false; // at least one letter has to be on board already
 	int counterCall = 0;
 
+//	/**
+//	 * This method takes an ArrayList of words and returns the total score if the
+//	 * words are acceptable or -1
+//	 *
+//	 * @param inputArray
+//	 * @return returns total score or -1
+//	 */
+//
+//	public static int checkInput(ArrayList<String> inputArray) {
+//		System.out.println("Checking words . . . ");
+//		int totalScore = 0;
+//		for (String word : inputArray) {
+//			if (!OnlineDictionary.checkWord(word)) {
+//				System.out.println("Checking words complete");
+//				return -1;
+//			} else {
+//				totalScore += wordPoints(word);
+//			}
+//		}
+//		System.out.println("Checking words  complete");
+//		return totalScore;
+//	}
+//
+//	/**
+//	 * Calculates the total points for an accepted word
+//	 * 
+//	 * @param word
+//	 * @return total points for a word
+//	 */
+//	private static int wordPoints(String word) {
+//		int wordPoints = 0;
+//		for (int i = 0; i < word.length(); i++) {
+//			String letter = Character.toString(word.charAt(i)).toUpperCase();
+//			int letterPoints = LetterTilePic.Letters.valueOf(letter).points;
+//			wordPoints += letterPoints;
+//		}
+//		return wordPoints;
+//	}
+//
+////	public static void main(String[] args) {
+////		ArrayList<String> words = new ArrayList<String>();
+////		words.add("hello");
+////		words.add("bye");
+////		words.add("z");
+////		System.out.println(Scoring.checkInput(words));
+////
+////	}
 	/**
 	 * This method receives the word input by the player and determines if it is a
 	 * valid dictionary word and fixes the final score for the player.
@@ -24,44 +72,44 @@ public class Scoring {
 	 *         error codes (-1 Incorrect Word -2 Words Mismatch -888 Current Tile
 	 *         Not Used)
 	 */
-	public int scoreFinal(String word, Board board, Player player, String totalCurrentScore) {
+	public int scoreFinal(String word, Board board, Player player) {
+		System.out.println("Checking words . . . ");
 		int finalPoints = 0;
-
-		int tempTotalScore = scoreFaceValue(word, board, player);
-		if (tempTotalScore == 0) {
-			AlertBox.alertWithoutUserAction("Words Mismatch",
-					"The word that you typed is different from the word you played.");
-
-			finalPoints = -2;
-		}
-
-		else if (tempTotalScore == -888) {
-			AlertBox.alertWithoutUserAction("Current Tile Not Used",
-					"A new word made must use at least a tile from existing board. You lose your turn.");
-
-			finalPoints = -888;
-
-		}
-
-		else {
-			if (!OnlineDictionary.checkWord(word)) {
-				player.score -= tempTotalScore;
-				finalPoints = -1;
+		
+			int tempTotalScore = scoreFaceValue(word, board, player);
+			if (tempTotalScore == 0) {
+				AlertBox.alertWithoutUserAction("Words Mismatch",
+						"The word that you typed is different from the word you played.");
+				
+				finalPoints = -2;
 			}
-			//if a player submits a correct word already on the board
+
+			else if (tempTotalScore == -888) {
+				AlertBox.alertWithoutUserAction("Current Tile Not Used",
+						"A new word made must use at least a tile from existing board.");
+				
+				finalPoints = -888;
+				
+			}
+
 			else {
-				if (Integer.parseInt(totalCurrentScore) != player.score) {
-				finalPoints = tempTotalScore;
-				board.turnOffDrag();
-				counterCall++;
-					
-				}else {
-					finalPoints = -3;
-					AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
-					
+				if (!OnlineDictionary.checkWord(word)) {
+					System.out.println("Checking words complete");
+					AlertBox.alertWithoutUserAction("Incorrect Word",
+							word.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
+					player.score -= tempTotalScore;
+					finalPoints = -1;
+				}
+
+				else {
+					finalPoints = tempTotalScore;
+					board.turnOffDrag();
+					counterCall++;
 				}
 			}
-		}
+
+		
+		System.out.println("Checking words complete");
 		return finalPoints;
 	}
 
@@ -138,7 +186,7 @@ public class Scoring {
 			}
 		}
 		// this checks if it was made by at least 1 new letter
-		//System.out.println(mouseOff);
+		System.out.println(mouseOff);
 		if (mouseOn == true && mouseOff == true && firstTurn == false) {
 			// takes into account triple of double word scores
 			turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
@@ -153,8 +201,8 @@ public class Scoring {
 		} else {
 			player.score += 0;
 		}
-		//System.out.println("Turnpoints: " + turnPoints);
-		//System.out.println("points before anything: " + player.score);
+		System.out.println("Turnpoints: " + turnPoints);
+		System.out.println("points before anything: " + player.score);
 		return turnPoints;
 	}
 
@@ -208,14 +256,14 @@ public class Scoring {
 
 	/**
 	 * This inner method helps to find words in horizontal(left to right and right
-	 * to left) and vertical (left to right and right to left) and tallys the number
-	 * of Triple and double words
+	 * to left) and vertical (left to right and right to left) and tallys the
+	 * number of Triple and double words
 	 * 
 	 * @param board2D      - the two dimensional 15x15 board
 	 * @param word         - the word played by the player
 	 * @param row          -row of where the 1st letter of the word you are looking
 	 *                     for was found
-	 * @param column       -column of where the 1st letter of the word you are
+	 * @param column          -column of where the 1st letter of the word you are
 	 *                     looking for was found
 	 * @param rowIncrement - used to determine which row direction to go in and by
 	 *                     how much to increase our position on the board by that

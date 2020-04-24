@@ -3,12 +3,10 @@ import java.util.ArrayList;
 
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Separator;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Tooltip;
@@ -102,7 +100,7 @@ public class GamePlay {
 
 		this.buildLayout();
 	}
-
+	
 	/**
 	 * This method builds the layout for the actual game.
 	 */
@@ -159,10 +157,9 @@ public class GamePlay {
 		playerOne.setSelected(true);
 
 		// Right Layout Starts
-
 		VBox howToPlayLayout = new VBox();
 		howToPlayLayout.setAlignment(Pos.CENTER);
-		howToPlayLayout.getChildren().addAll(howToPlay);
+		howToPlayLayout.getChildren().add(howToPlay);
 
 		VBox confirmLayout = new VBox(5);
 		confirmLayout.setAlignment(Pos.CENTER);
@@ -182,37 +179,23 @@ public class GamePlay {
 		// Right Layout Ends
 
 		// Left Layout Starts
-		Label legends = new Label();
-		legends.setText("C: Center\n" + "DL: Double Letter Score\n" + "TL: Triple Letter Score\n"
-				+ "DW: Double Word Score\n" + "TW: Triple Word Score");
 		HBox playerOnePanel = new HBox(10);
 		playerOnePanel.getChildren().addAll(playerOneLabel, scorePlayerOne);
 
 		HBox playerTwoPanel = new HBox(10);
 		playerTwoPanel.getChildren().addAll(playerTwoLabel, scorePlayerTwo);
 
-		Separator separator1 = new Separator();
-		Separator separator2 = new Separator();
-		Separator separator3 = new Separator();
-		separator1.setOrientation(Orientation.HORIZONTAL);
-		separator2.setOrientation(Orientation.HORIZONTAL);
-		separator3.setOrientation(Orientation.HORIZONTAL);
-
-		VBox legendsPanel = new VBox(20);
-		legendsPanel.getChildren().addAll(separator3, legends);
-
 		VBox playerPanel = new VBox(20);
 		playerPanel.setAlignment(Pos.BOTTOM_CENTER);
-		playerPanel.getChildren().addAll(separator1, playerOnePanel, playerTwoPanel, separator2);
+		playerPanel.getChildren().addAll(playerOnePanel, playerTwoPanel);
 
-		VBox playerLastPlayedWordPanel = new VBox(20);
-		// playerLastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
-		playerLastPlayedWordPanel.getChildren().addAll(playerPanel, lastPlayedWord);
+		VBox lastPlayedWordPanel = new VBox();
+		lastPlayedWordPanel.setAlignment(Pos.TOP_CENTER);
+		lastPlayedWordPanel.getChildren().add(lastPlayedWord);
 
-		BorderPane leftPanel = new BorderPane();
-		leftPanel.setPadding(new Insets(50, 10, 50, 10));
-		leftPanel.setTop(playerLastPlayedWordPanel);
-		leftPanel.setBottom(legendsPanel);
+		VBox leftPanel = new VBox(400);
+		leftPanel.setAlignment(Pos.CENTER);
+		leftPanel.getChildren().addAll(lastPlayedWordPanel, playerPanel);
 		// Left Layout Ends
 
 		// Top Layout Starts
@@ -294,7 +277,8 @@ public class GamePlay {
 		} else if (playerTwo.isSelected() == true) {
 			gameRoot.setBottom(bottomPanel2);// put the letter rack in the bottom of screen
 		}
-
+		// gameRoot.setBottom(bottomPanel);// put the letter rack in the bottom of
+		// screen
 		gameRoot.setLeft(leftPanel);
 		gameRoot.setRight(rightPanel);
 		gameRoot.setTop(topPanel);
@@ -309,10 +293,9 @@ public class GamePlay {
 	public Pane getRootPane() {
 		return gameRoot;
 	}
-
+	
 	/**
 	 * This method moves tiles to a spot in the board if it's empty.
-	 * 
 	 * @param lp
 	 */
 
@@ -322,12 +305,12 @@ public class GamePlay {
 			bt.holds = lp;
 		}
 	}
-
+	
 	/**
 	 * This method will create and refill players' tile-racks.
 	 * 
-	 * @param player      - the current player
-	 * @param lb          - the current instance of the letter bag
+	 * @param player - the current player
+	 * @param lb - the current instance of the letter bag
 	 * @param bottomPanel - the bottom panel on which the tile-rack is displayed
 	 */
 
@@ -388,7 +371,9 @@ public class GamePlay {
 					db.setContent(content);
 					userBar.getChildren().remove(letter);
 					rackletters.remove(letter);
+
 					event.consume();
+					System.out.println("i'm being touched");
 				}
 			});
 
@@ -440,7 +425,7 @@ public class GamePlay {
 			}
 		});
 	}
-
+	
 	/**
 	 * This method removes tiles from the board.
 	 */
@@ -452,10 +437,11 @@ public class GamePlay {
 			}
 		}
 	}
-
+	
+	
 	/**
-	 * This method lets a player confirm the word that they typed on the text box
-	 * after playing their turn. It then updates score for the player.
+	 * This method lets a player confirm the word that they typed on the text box after playing their turn.
+	 * It then updates score for the player.
 	 */
 
 	public void confirmWord() {
@@ -486,33 +472,18 @@ public class GamePlay {
 			String points = "";
 
 			if (playerOne.isSelected()) {
-				int currentScore = scoring.scoreFinal(wordToTest, board, player1, totalScorePlayerOne);
+				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
-					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
-						AlertBox.alertWithoutUserAction("Incorrect Word",
-								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-						status = "Incorrect Word";
-						points = "0";
+					status = "Incorrect Word";
+					points = "0";
 
-						int playerOneScore = player1.score;
-						scorePlayerOne.setText("" + playerOneScore);
-						totalScorePlayerOne = "" + playerOneScore;
-						this.showStatus(wordToTest, status, points);
+					int playerOneScore = player1.score;
+					scorePlayerOne.setText("" + playerOneScore);
+					totalScorePlayerOne = "" + playerOneScore;
 
-						playerTwo.fire();
-						//if a player submits an incorrect word already on the board
-					} else {
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
-						int differene = Integer.parseInt(totalScorePlayerOne) - player1.score;
-						player1.score = player1.score + differene;
+					this.showStatus(wordToTest, status, points);
 
-						int playerOneScore = player1.score;
-						scorePlayerOne.setText("" + playerOneScore);
-						totalScorePlayerOne = "" + playerOneScore;
-
-						playerTwo.fire();
-
-					}
+					playerTwo.fire();
 
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
@@ -527,7 +498,7 @@ public class GamePlay {
 				}
 
 				else if (currentScore == -888) {
-					status = "Words Placement Error";
+					status = "Words placement error";
 					points = "0";
 
 					int playerOneScore = player1.score;
@@ -535,15 +506,10 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					playerTwo.fire();
-				}
-
-				else if (currentScore == -3) {
-					playerTwo.fire();
+					//playerTwo.fire();
 				}
 
 				else {
-
 					status = "Accepted";
 					points = "" + currentScore;
 
@@ -555,35 +521,20 @@ public class GamePlay {
 					playerTwo.fire();
 
 				}
-				// System.out.println(player1.score);
+				System.out.println(player1.score);
 			} else if (playerTwo.isSelected()) {
-
-				int currentScore = scoring.scoreFinal(wordToTest, board, player2, totalScorePlayerTwo);
+				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
-					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
-						AlertBox.alertWithoutUserAction("Incorrect Word",
-								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-						status = "Incorrect Word";
-						points = "0";
+					status = "Incorrect Word";
+					points = "0";
 
-						int playerTwoScore = player2.score;
-						scorePlayerTwo.setText("" + playerTwoScore);
-						totalScorePlayerTwo = "" + playerTwoScore;
-						this.showStatus(wordToTest, status, points);
+					int playerTwoScore = player2.score;
+					scorePlayerTwo.setText("" + playerTwoScore);
+					totalScorePlayerTwo = "" + playerTwoScore;
 
-						playerOne.fire();
-						//if a player submits an incorrect word already on the board
-					} else {
-						AlertBox.alertWithoutUserAction("Expired Play", "That play is expired. You lose your turn.");
-						int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
-						System.out.println(difference);
-						player2.score = player2.score + difference;
-						int playerTwoScore = player2.score;
-						scorePlayerTwo.setText("" + playerTwoScore);
-						totalScorePlayerTwo = "" + playerTwoScore;
-						playerOne.fire();
+					this.showStatus(wordToTest, status, points);
 
-					}
+					playerOne.fire();
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";
@@ -596,7 +547,7 @@ public class GamePlay {
 				}
 
 				else if (currentScore == -888) {
-					status = "Words Placement Error";
+					status = "Words placement error";
 					points = "0";
 
 					int playerOneScore = player1.score;
@@ -604,16 +555,11 @@ public class GamePlay {
 					totalScorePlayerOne = "" + playerOneScore;
 
 					this.showStatus(wordToTest, status, points);
-					playerOne.fire();
+					//playerOne.fire();
 
-				}
-
-				else if (currentScore == -3) {
-					playerOne.fire();
 				}
 
 				else {
-
 					status = "Accepted";
 					points = "" + currentScore;
 
@@ -623,30 +569,29 @@ public class GamePlay {
 
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();
-
 				}
-				// System.out.println(player2.score);
+				System.out.println(player2.score);
 			}
 			inputWord.setPromptText(currentPlayer + "'s Turn");
 		}
-	}
 
+	}
+	
 	/**
 	 * This method shows the status and points of the last played word.
 	 * 
 	 * @param wordToTest - the word played by the player
-	 * @param status     - if the word passed or failed
-	 * @param points     - the points earned by the word
+	 * @param status - if the word passed or failed
+	 * @param points - the points earned by the word
 	 */
 	public void showStatus(String wordToTest, String status, String points) {
 		lastPlayedWord.setText("Last played word:\n" + wordToTest.toUpperCase() + "\nBy: " + currentPlayer
 				+ "\nStatus: " + status + "\nPoints: " + points);
 
 	}
-
+	
 	/**
-	 * This method shows message to the user as they are interacting with the text
-	 * box.
+	 * This method shows message to the user as they are interacting with the text box.
 	 */
 
 	public void displayTextField() {
@@ -670,15 +615,15 @@ public class GamePlay {
 			enteredWord.setText("Press " + confirmButton + ".");
 		}
 	}
-
+	
 	/**
 	 * This method displays "how to play" dialogue box.
 	 */
-
+	
 	public void howToPlay() {
 		AlertBox.howToPlay();
 	}
-
+	
 	/**
 	 * This method lets a player forfeit their turn.
 	 */
@@ -703,7 +648,8 @@ public class GamePlay {
 			}
 		}
 	}
-
+	
+	
 	/**
 	 * This method lets players reset the game.
 	 */
@@ -715,10 +661,10 @@ public class GamePlay {
 			this.resetSequence();
 		}
 	}
-
+	
+	
 	/**
-	 * This method lets players end the game with end game options and the winner of
-	 * the last played game.
+	 * This method lets players end the game with end game options and the winner of the last played game.
 	 */
 
 	public void endGame() {
@@ -730,10 +676,9 @@ public class GamePlay {
 			}
 		}
 	}
-
+	
 	/**
-	 * This method determines the sequence of events that occur when a game is
-	 * restarted.
+	 * This method determines the sequence of events that occur when a game is restarted.
 	 */
 
 	private void resetSequence() {
@@ -747,16 +692,6 @@ public class GamePlay {
 		scorePlayerTwo.setText("0");
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
-	}
-
-	public int getScorePlayerOne() {
-		int scorePlayerOne = Integer.parseInt(totalScorePlayerOne);
-		return scorePlayerOne;
-	}
-
-	public int getScorePlayerTwo() {
-		int scorePlayerTwo = Integer.parseInt(totalScorePlayerTwo);
-		return scorePlayerTwo;
-	}
+	}	
 
 }
