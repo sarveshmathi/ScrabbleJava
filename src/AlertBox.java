@@ -8,7 +8,8 @@ import javafx.geometry.*;
 /**
  * 
  * This class deals with alert events such as when the user tries to close the
- * program.
+ * program, reset or end the game, forfeit their turn, or when they get gameplay alert
+ * such as when they make an invalid move.
  * 
  * @author Team 51
  * 
