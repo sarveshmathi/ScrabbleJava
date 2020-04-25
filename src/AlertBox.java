@@ -43,7 +43,6 @@ public class AlertBox {
 
 		});
 
-
 		buttonCancel.setOnAction(e -> {
 			response = false;
 			alertWindow.close();
@@ -53,11 +52,11 @@ public class AlertBox {
 
 		layoutButtons.getChildren().addAll(buttonYes, buttonCancel);
 		layoutButtons.setAlignment(Pos.CENTER);
-		
+
 		HBox labelLayout = new HBox();
 		labelLayout.setAlignment(Pos.CENTER);
 		labelLayout.getChildren().add(label);
-		
+
 		BorderPane finalLayout = new BorderPane();
 		finalLayout.setPadding(new Insets(10, 10, 40, 10));
 		finalLayout.setCenter(labelLayout);
@@ -95,11 +94,11 @@ public class AlertBox {
 
 		layoutButtons.getChildren().addAll(buttonCancel);
 		layoutButtons.setAlignment(Pos.CENTER);
-		
+
 		HBox labelLayout = new HBox();
 		labelLayout.setAlignment(Pos.CENTER);
 		labelLayout.getChildren().add(label);
-		
+
 		BorderPane finalLayout = new BorderPane();
 		finalLayout.setPadding(new Insets(10, 10, 40, 10));
 		finalLayout.setCenter(labelLayout);
@@ -108,7 +107,6 @@ public class AlertBox {
 		Scene scene = new Scene(finalLayout, 400, 300);
 		alertWindow.setScene(scene);
 		alertWindow.showAndWait();
-
 
 	}
 
@@ -122,7 +120,7 @@ public class AlertBox {
 	 */
 
 	public static boolean endGameAlert(String scorePlayerOne, String scorePlayerTwo, String outcome) {
-		
+
 		Stage alertWindow = new Stage();
 		alertWindow.setTitle("Final Scores");
 		alertWindow.setMinWidth(250);
@@ -135,7 +133,7 @@ public class AlertBox {
 		Label playerTwoScore = new Label(scorePlayerTwo);
 		Button buttonPlayAgain = new Button("Play Again");
 		Button buttonQuitGame = new Button("Quit Game");
-		
+
 		winner.setText(outcome);
 
 		HBox playerOneLayout = new HBox(10);
@@ -194,60 +192,49 @@ public class AlertBox {
 	 */
 
 	public static void howToPlay() {
-		Stage howToPlayWindow = new Stage ();
+		Stage howToPlayWindow = new Stage();
 		howToPlayWindow.setTitle("How To Play");
 		Label howToPlay = new Label();
 		ScrollPane howToPlayPane = new ScrollPane();
-		Button cancelButton = new Button ("Cancel");
-		howToPlayPane.setPadding(new Insets (10, 10, 10, 10));
-		howToPlay.setText(
-						"HOW TO PLAY:"
-						+ "\n\nPlayer One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
-						+ "When you are finished, type the word in the text box.\n\n"
-						+ "Press Confirm Word button to play the word.\n\n"
-						+ "Confirm Word button automatically changes turn.\n\n"
-						+ "Players decide to end the game at any moment by clicking \"End Game\" button.\n\n"
-						+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
-						+ "Press Reset button to reset the game.\n\n\n"
-						
-						+ "RULES:\n\n"
-						+ "1. Only submit the one word you intended to make by actually playing \n"
-						+ "the word on the board. The game only accepts one word- the one you played.\n\n"
-						+ "2. There are only 98 tiles, we have removed the two blank tiles.\n\n"
-						+ "3. First turn must start from the center tile and can be in any direction.\n\n"
-						+ "4. Playing an incorrect word will result in the player losing \n"
-						+ "the played tiles and his/her chance.\n\n"
-						+ "5. Playing a word which is not connected to another word in the board will also \n"
-						+ "result in the player losing the played tiles and his/her chance.\n\n"
-						+ "6. Maximum two players or two groups can play the game at a time.\n\n"
-						+ "7. Players will have to end the game themselves whenever they want \n"
-						+ "to or when their racks are empty and don’t refill.\n\n"
-						+ "8. There are no extra points if a player uses all the letters \n"
-						+ "in the rack in one turn.\n\n"
-						+ "These are the situations where the turn changes to the next player:\n" + 
-						"  a. If the current player plays a correct word.\n" + 
-						"  b. If the current player plays an incorrect word.\n" + 
-						"  b. If the current player forfeits their turn.\n" + 
-						"  c. If the current player tries to cheat, which is defined by:\n" + 
-						"    - playing a word without including at-least one current tile present on the board,\n" + 
-						"    - submitting in the text field an already played word on the board and not the one \n"
-						+ "they actually played."
+		Button cancelButton = new Button("Cancel");
+		howToPlayPane.setPadding(new Insets(10, 10, 10, 10));
+		howToPlay.setText("HOW TO PLAY:" + "\n\nPlayer One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
+				+ "When you are finished, type the word in the text box.\n\n"
+				+ "Press Confirm Word button to play the word.\n\n"
+				+ "Confirm Word button automatically changes turn.\n\n"
+				+ "Players decide to end the game at any moment by clicking \"End Game\" button.\n\n"
+				+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
+				+ "Press Reset button to reset the game.\n\n\n"
+
+				+ "RULES:\n\n" + "1. Only submit the one word you intended to make by actually playing \n"
+				+ "the word on the board. The game only accepts one word- the one you played.\n\n"
+				+ "2. There are only 98 tiles, we have removed the two blank tiles.\n\n"
+				+ "3. First turn must start from the center tile and can be in any direction.\n\n"
+				+ "4. Playing an incorrect word will result in the player losing \n"
+				+ "the played tiles and his/her chance.\n\n"
+				+ "5. Playing a word which is not connected to another word in the board will also \n"
+				+ "result in the player losing the played tiles and his/her chance.\n\n"
+				+ "6. Maximum two players or two groups can play the game at a time.\n\n"
+				+ "7. Players will have to end the game themselves whenever they want \n"
+				+ "to or when their racks are empty and don’t refill.\n\n"
+				+ "8. There are no extra points if a player uses all the letters \n" + "in the rack in one turn.\n\n"
+
 		);
-		
+
 		cancelButton.setOnAction(e -> {
 			howToPlayWindow.close();
 		});
-		
+
 		howToPlayPane.setContent(howToPlay);
 		HBox cancelLayout = new HBox();
 		cancelLayout.setAlignment(Pos.CENTER);
-		cancelLayout.setPadding(new Insets (0, 10, 20, 10));
+		cancelLayout.setPadding(new Insets(0, 10, 20, 10));
 		cancelLayout.getChildren().add(cancelButton);
-		
-		VBox finalPane = new VBox (20);
+
+		VBox finalPane = new VBox(20);
 		finalPane.getChildren().addAll(howToPlayPane, cancelLayout);
-		
-		Scene howToPlayScene = new Scene (finalPane, 500, 500);
+
+		Scene howToPlayScene = new Scene(finalPane, 500, 500);
 		howToPlayWindow.setScene(howToPlayScene);
 		howToPlayWindow.show();
 	}

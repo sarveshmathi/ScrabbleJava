@@ -505,10 +505,6 @@ public class GamePlay {
 					status = "Incorrect Word";
 					points = "0";
 
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
-
 					this.showStatus(wordToTest, status, points);
 
 					playerTwo.fire();
@@ -517,10 +513,6 @@ public class GamePlay {
 					status = "Words Mismatch";
 					points = "0";
 
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
-
 					this.showStatus(wordToTest, status, points);
 
 				}
@@ -528,11 +520,7 @@ public class GamePlay {
 				else if (currentScore == -888) {
 					status = "Words placement error";
 					points = "0";
-
-					int playerOneScore = player1.score;
-					scorePlayerOne.setText("" + playerOneScore);
-					totalScorePlayerOne = "" + playerOneScore;
-
+					
 					this.showStatus(wordToTest, status, points);
 					playerTwo.fire();
 				}
@@ -559,9 +547,9 @@ public class GamePlay {
 					status = "Incorrect Word";
 					points = "0";
 
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
+//					int playerTwoScore = player2.score;
+//					scorePlayerTwo.setText("" + playerTwoScore);
+//					totalScorePlayerTwo = "" + playerTwoScore;
 
 					this.showStatus(wordToTest, status, points);
 
@@ -571,9 +559,9 @@ public class GamePlay {
 					status = "Words Mismatch";
 					points = "0";
 
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
+//					int playerTwoScore = player2.score;
+//					scorePlayerTwo.setText("" + playerTwoScore);
+//					totalScorePlayerTwo = "" + playerTwoScore;
 
 					this.showStatus(wordToTest, status, points);
 				}
@@ -582,9 +570,9 @@ public class GamePlay {
 					status = "Words placement error";
 					points = "0";
 
-					int playerTwoScore = player2.score;
-					scorePlayerTwo.setText("" + playerTwoScore);
-					totalScorePlayerTwo = "" + playerTwoScore;
+//					int playerTwoScore = player2.score;
+//					scorePlayerTwo.setText("" + playerTwoScore);
+//					totalScorePlayerTwo = "" + playerTwoScore;
 
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();

@@ -96,6 +96,9 @@ class JUnitTests {
 	public void testGameOutcome() {
 		GamePlay gp = new GamePlay();
 		assertEquals("Player One wins!", gp.determineOutcome("154", "128"));
+		assertEquals("Player Two wins!", gp.determineOutcome("128", "154"));
+		assertEquals("Tie!", gp.determineOutcome("128", "128"));
+		
 	}
 	
 
