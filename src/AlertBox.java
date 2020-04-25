@@ -226,7 +226,7 @@ public class AlertBox {
 				+ "  b. If the current player plays an incorrect word.\n\n"
 				+ "  b. If the current player forfeits their turn.\n\n"
 				+ "  c. If the current player plays a word without using atleast a tile for their rack.\n\n"
-				+ "  d. If the current player plays a word without using atleast a tile from existing rack.\n\n\n"
+				+ "  d. If the current player plays a word without using atleast a tile from existing board.\n\n\n"
 				
 				+ "DISCLAIMER:\n\n "
 				+ "This is a two persons game. We have considered many situations where a player\n"
