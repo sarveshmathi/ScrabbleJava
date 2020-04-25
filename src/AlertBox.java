@@ -164,7 +164,7 @@ public class AlertBox {
 
 		buttonQuitGame.setOnAction(e -> {
 			response = false;
-			boolean nextResponse = AlertBox.alertWithUserAction("Exit", "Exit Scrabble");
+			boolean nextResponse = AlertBox.alertWithUserAction("Exit", "Exit Scrabble?");
 			if (nextResponse) {
 				System.exit(0);
 			}
