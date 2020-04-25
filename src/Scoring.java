@@ -1,4 +1,3 @@
-
 /**
  * This class carries out scoring for the game.
  *
@@ -54,14 +53,12 @@ public class Scoring {
 			}
 
 			else {
-				
-				
+
 				finalPoints = tempTotalScore;
 				board.turnOffDrag();
 				counterCall++;
 			}
 		}
-
 
 		System.out.println("Checking words complete");
 		return finalPoints;
@@ -111,52 +108,106 @@ public class Scoring {
 						// if you found the word
 						if (isWordPresent(board2d, word, row, col, 0, 1) != 0
 								|| isWordPresent(board2d, word, row, col, 0, -1) != 0) {
-							// see which is the non zero one
-							if (isWordPresent(board2d, word, row, col, 0, 1) != 0) {
-								turnPoints = isWordPresent(board2d, word, row, col, 0, 1);
-							} else if (isWordPresent(board2d, word, row, col, 0, -1) != 0) {
-								turnPoints = isWordPresent(board2d, word, row, col, 0, -1);
-							}
 							present = true;
-							break outer;
+							// see which is the non zero one
+							if (isWordPresent(board2d, word, row, col, 0, 1) != 0 && mouseOn == true
+									&& mouseOff == false && counterCall == 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, 0, 1);
+								present = true;
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+							} else if (isWordPresent(board2d, word, row, col, 0, 1) != 0 && mouseOn == true
+									&& mouseOff == true && counterCall != 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, 0, 1);
+								present = true;
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+							}
+
+							else if (isWordPresent(board2d, word, row, col, 0, -1) != 0 && mouseOn == true
+									&& mouseOff == true && counterCall != 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, 0, -1);
+								present = true;
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+							} else if (isWordPresent(board2d, word, row, col, 0, -1) != 0 && mouseOn == true
+									&& mouseOff == false && counterCall == 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, 0, -1);
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								return turnPoints;
+							}
 						}
 
 						// SEARCH VERTICAL both ways
 						// if you found the word
 						else if (isWordPresent(board2d, word, row, col, 1, 0) != 0
 								|| isWordPresent(board2d, word, row, col, -1, 0) != 0) {
-
-							if (isWordPresent(board2d, word, row, col, 1, 0) != 0) {
-								turnPoints = isWordPresent(board2d, word, row, col, 1, 0);
-							} else if (isWordPresent(board2d, word, row, col, -1, 0) != 0) {
-								turnPoints = isWordPresent(board2d, word, row, col, -1, 0);
-							}
 							present = true;
-							break outer;
-						}
+							if (isWordPresent(board2d, word, row, col, 1, 0) != 0 && mouseOn == true
+									&& mouseOff == false && counterCall == 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, 1, 0);
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+							}
 
+							else if (isWordPresent(board2d, word, row, col, 1, 0) != 0 && mouseOn == true
+									&& mouseOff == true && counterCall != 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, 1, 0);
+								present = true;
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+							}
+
+							else if (isWordPresent(board2d, word, row, col, -1, 0) != 0 && mouseOn == true
+									&& mouseOff == true && counterCall != 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, -1, 0);
+								present = true;
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+							}
+
+							else if (isWordPresent(board2d, word, row, col, -1, 0) != 0 && mouseOn == true
+									&& mouseOff == false && counterCall == 0) {
+								turnPoints = isWordPresent(board2d, word, row, col, -1, 0);
+								turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
+								player.score += turnPoints;
+								present = true;
+								return turnPoints;
+
+							}
+						}
 					}
 				}
 			}
 		}
+
 		// this checks if it was made by at least 1 new letter
-		//System.out.println(mouseOff);
-		if (mouseOn == true && mouseOff == true && firstTurn == false) {
-			// takes into account triple of double word scores
-			turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
-			player.score += turnPoints;
-		} else if (mouseOn == true && mouseOff == false && counterCall == 0) {
-			turnPoints = (int) (turnPoints * (Math.pow(3, TWCounter)) * (Math.pow(2, DWCounter)));
-			player.score += turnPoints;
-		} else if (mouseOn == true && mouseOff == false && counterCall != 0) {
+		// System.out.println(mouseOff);
+		// word was found but didn't meet conditions to be given points
+		if (present == true) {
 			player.score += 0;
 			turnPoints = -888;// false value used for detecting that they didn;t use tile on board
 			// alert user must use tile on board
 		} else {
 			player.score += 0;
+			turnPoints = 0;
+			// word was never found
 		}
-		//System.out.println("Turnpoints: " + turnPoints);
-		//System.out.println("points before anything: " + player.score);
+		// System.out.println("Turnpoints: " + turnPoints);
+		// System.out.println("points before anything: " + player.score);
 		return turnPoints;
 	}
 
@@ -240,7 +291,7 @@ public class Scoring {
 			if (searchRow < 0 || searchColumn < 0 || searchRow >= board2D.length
 					|| searchColumn >= board2D[searchRow].length || board2D[searchRow][searchColumn].holds == null
 					|| !board2D[searchRow][searchColumn].holds.letter.toString()
-					.equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
+							.equals(Character.toString(word.charAt(charIndex)).toUpperCase())) {
 				// if you got here it is because you did NOT find the word
 				TWCounter = 0;// reset counters
 				DWCounter = 0;// reset counters
