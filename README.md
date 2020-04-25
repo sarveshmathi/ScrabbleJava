@@ -43,3 +43,5 @@ These are the situations where the turn changes to the next player:
   a. If the current player plays a correct word.
   b. If the current player plays an incorrect word.
   b. If the current player forfeits their turn.
+  c. If the current player plays a word without using atleast a tile for their rack.
+  d. If the current player plays a word without using atleast a tile from existing rack.

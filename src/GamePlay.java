@@ -744,7 +744,4 @@ public class GamePlay {
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
 	}
-	
-	
-
 }

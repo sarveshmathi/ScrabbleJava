@@ -218,6 +218,12 @@ public class AlertBox {
 				+ "7. Players will have to end the game themselves whenever they want \n"
 				+ "to or when their racks are empty and don’t refill.\n\n"
 				+ "8. There are no extra points if a player uses all the letters \n" + "in the rack in one turn.\n\n"
+				+ "9. These are the situations where the turn changes to the next player:\n\n"
+				+ "  a. If the current player plays a correct word.\n\n"
+				+ "  b. If the current player plays an incorrect word.\n\n"
+				+ "  b. If the current player forfeits their turn.\n\n"
+				+ "  c. If the current player plays a word without using atleast a tile for their rack.\n\n"
+				+ "  d. If the current player plays a word without using atleast a tile from existing rack."
 
 		);
 
