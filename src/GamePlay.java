@@ -501,30 +501,17 @@ public class GamePlay {
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
-					if (Integer.parseInt(totalScorePlayerOne) == player1.score) {
-						AlertBox.alertWithoutUserAction("Incorrect Word",
-								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-						status = "Incorrect Word";
-						points = "0";
 
-						int playerOneScore = player1.score;
-						scorePlayerOne.setText("" + playerOneScore);
-						totalScorePlayerOne = "" + playerOneScore;
+					status = "Incorrect Word";
+					points = "0";
 
-						this.showStatus(wordToTest, status, points);
+					int playerOneScore = player1.score;
+					scorePlayerOne.setText("" + playerOneScore);
+					totalScorePlayerOne = "" + playerOneScore;
 
-						playerTwo.fire();
-					} else {
-						int difference = Integer.parseInt(totalScorePlayerOne) - player1.score;
-						player1.score = player1.score + difference;
+					this.showStatus(wordToTest, status, points);
 
-						int playerOneScore = player1.score;
-						scorePlayerOne.setText("" + playerOneScore);
-						totalScorePlayerOne = "" + playerOneScore;
-
-						playerTwo.fire();
-
-					}
+					playerTwo.fire();
 
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
@@ -548,7 +535,6 @@ public class GamePlay {
 
 					this.showStatus(wordToTest, status, points);
 					playerTwo.fire();
-					
 				}
 
 				else {
@@ -564,33 +550,23 @@ public class GamePlay {
 
 				}
 				System.out.println(player1.score);
+				
 			} else if (playerTwo.isSelected()) {
 
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
 				if (currentScore == -1) {
-					if (Integer.parseInt(totalScorePlayerTwo) == player2.score) {
-						AlertBox.alertWithoutUserAction("Incorrect Word",
-								wordToTest.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
-						status = "Incorrect Word";
-						points = "0";
 
-						int playerTwoScore = player2.score;
-						scorePlayerTwo.setText("" + playerTwoScore);
-						totalScorePlayerTwo = "" + playerTwoScore;
+					status = "Incorrect Word";
+					points = "0";
 
-						this.showStatus(wordToTest, status, points);
+					int playerTwoScore = player2.score;
+					scorePlayerTwo.setText("" + playerTwoScore);
+					totalScorePlayerTwo = "" + playerTwoScore;
 
-						playerOne.fire();
-					} else {
-						int difference = Integer.parseInt(totalScorePlayerTwo) - player2.score;
-						System.out.println(difference);
-						player2.score = player2.score + difference;
-						int playerTwoScore = player2.score;
-						scorePlayerTwo.setText("" + playerTwoScore);
-						totalScorePlayerTwo = "" + playerTwoScore;
+					this.showStatus(wordToTest, status, points);
 
-						playerOne.fire();
-					}
+					playerOne.fire();
+
 				} else if (currentScore == -2) {
 					status = "Words Mismatch";
 					points = "0";
@@ -720,7 +696,8 @@ public class GamePlay {
 
 	/**
 	 * This method determines the outcome of the game
-	 * @param scorePlayerOne - the score of player one 
+	 * 
+	 * @param scorePlayerOne - the score of player one
 	 * @param scorePlayerTwo - the score of player two
 	 * @return - result - the result of the game
 	 */
@@ -736,7 +713,7 @@ public class GamePlay {
 		} else if (finalScorePlayerTwo > finalScorePlayerOne) {
 			outcome = "Player Two wins!";
 		}
-		
+
 		return outcome;
 	}
 
