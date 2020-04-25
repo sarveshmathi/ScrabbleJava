@@ -27,9 +27,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 /**
- * This class coordinates the actual play of the game. It builds the layout and UI for the gameplay.
- * It also handles the player's actions such as confirming the played word, forfeiting their turn,
- * resetting the game and ending the game.
+ * This class coordinates the actual play of the game. It builds the layout and
+ * UI for the gameplay. It also handles the player's actions such as confirming
+ * the played word, forfeiting their turn, resetting the game and ending the
+ * game.
  * 
  * @author Team 51
  *
@@ -110,7 +111,7 @@ public class GamePlay {
 
 		this.buildLayout();
 	}
-	
+
 	/**
 	 * This returns score of Player One.
 	 * 
@@ -121,7 +122,7 @@ public class GamePlay {
 		int scorePlayerOne = Integer.parseInt(totalScorePlayerOne);
 		return scorePlayerOne;
 	}
-	
+
 	/**
 	 * This returns score of Player Two.
 	 * 
@@ -291,23 +292,22 @@ public class GamePlay {
 			if (board.checkTogether() == true) {
 				if (playerOne.isSelected()) {
 					if (player1.rackletters.size() == 7) {
-						AlertBox.alertWithoutUserAction("Rack Not Used", "You must use atleast a tile from your rack.\n"
-								+ "You lose your turn.");
+						AlertBox.alertWithoutUserAction("Rack Not Used",
+								"You must use atleast a tile from your rack.\n" + "You lose your turn.");
 					} else {
 						this.confirmWord();
 					}
 				} else if (playerTwo.isSelected()) {
 					if (player2.rackletters.size() == 7) {
-						AlertBox.alertWithoutUserAction("Rack Not Used", "You must use atleast a tile from your rack.\n"
-								+ "You lose your turn.");
+						AlertBox.alertWithoutUserAction("Rack Not Used",
+								"You must use atleast a tile from your rack.\n" + "You lose your turn.");
 					} else {
 						this.confirmWord();
 					}
 				}
 				// this.confirmWord();
 			} else {
-				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.\n"
-						+ "Try again.");
+				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.\n" + "Try again.");
 			}
 
 			// this.confirmWord();
@@ -552,7 +552,7 @@ public class GamePlay {
 				else if (currentScore == -888) {
 					status = "Words placement error";
 					points = "0";
-					
+
 					this.showStatus(wordToTest, status, points);
 					playerTwo.fire();
 				}
@@ -569,7 +569,7 @@ public class GamePlay {
 					playerTwo.fire();
 
 				}
-				
+
 			} else if (playerTwo.isSelected()) {
 
 				int currentScore = scoring.scoreFinal(wordToTest, board, player2);
