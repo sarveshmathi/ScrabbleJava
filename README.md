@@ -38,8 +38,7 @@ Player One is given the points and his/her rack is refilled. Turn changes to Pla
 6. Maximum two players or two groups can play the game at a time.
 7. Players will have to end the game themselves whenever they want to or when their racks are empty and don't refill.
 8. There are no extra points if a player uses all the letters in the rack in one turn.
-
-These are the situations where the turn changes to the next player:
+9. These are the situations where the turn changes to the next player:
   a. If the current player plays a correct word.
   b. If the current player plays an incorrect word.
   b. If the current player forfeits their turn.
