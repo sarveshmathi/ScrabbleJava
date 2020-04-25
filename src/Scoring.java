@@ -24,7 +24,6 @@ public class Scoring {
 	 *         Not Used)
 	 */
 	public int scoreFinal(String word, Board board, Player player) {
-		System.out.println("Checking words . . . ");
 		int finalPoints = 0;
 
 		int tempTotalScore = scoreFaceValue(word, board, player);
@@ -60,7 +59,6 @@ public class Scoring {
 			}
 		}
 
-		System.out.println("Checking words complete");
 		return finalPoints;
 	}
 

@@ -20,10 +20,8 @@ import javafx.stage.Stage;
  */
 
 public class BoardDisplay extends Application {
-	public static final int TileSize = 100;
-	public static final int Width = 15;
-	public static final int Height = 15;// because we have 15 *15
-	Stage primaryStage;
+
+	private Stage primaryStage;
 
 	/**
 	 * This method overrides the start() method and handles the layout of the start
@@ -99,7 +97,6 @@ public class BoardDisplay extends Application {
 		primaryStage.setTitle("SCRABBLE");
 		primaryStage.setScene(scene);
 		primaryStage.show();
-
 	}
 
 	/**

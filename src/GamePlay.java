@@ -501,7 +501,6 @@ public class GamePlay {
 			if (playerOne.isSelected()) {
 				int currentScore = scoring.scoreFinal(wordToTest, board, player1);
 				if (currentScore == -1) {
-
 					status = "Incorrect Word";
 					points = "0";
 
@@ -537,7 +536,6 @@ public class GamePlay {
 					playerTwo.fire();
 
 				}
-				System.out.println(player1.score);
 				
 			} else if (playerTwo.isSelected()) {
 
@@ -578,7 +576,6 @@ public class GamePlay {
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();
 				}
-				System.out.println(player2.score);
 			}
 			inputWord.setPromptText(currentPlayer + "'s Turn");
 		}
@@ -613,7 +610,6 @@ public class GamePlay {
 			if (!(ch >= 'a' && ch <= 'z' || ch == ' ')) {
 				onlyEnglishAlphabet = false;
 			}
-
 		}
 		if (playedWord.equals("")) {
 			enteredWord.setText("Enter a word.");
