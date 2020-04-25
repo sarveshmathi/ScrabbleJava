@@ -232,7 +232,7 @@ public class AlertBox {
 				+ "DISCLAIMER:\n\n "
 				+ "This is a two persons game. We have considered many situations where a player\n"
 				+ "may try to cheat. But we expect the actual players to check each other in \n"
-				+ "case an unforseen situation may arise."
+				+ "case an unforseen situation arises."
 
 		);
 

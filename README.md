@@ -46,4 +46,4 @@ Player One is given the points and his/her rack is refilled. Turn changes to Pla
   d. If the current player plays a word without using atleast a tile from existing board.
 
   "DISCLAIMER: This is a two persons game. We have considered many situations where a player may try to cheat.\n"
-				+ "But we expect the actual players to check each other in case an unforseen situation may arise.
+				+ "But we expect the actual players to check each other in case an unforseen situation arises.
