@@ -125,7 +125,7 @@ public class GamePlay {
 	/**
 	 * This returns score of Player Two.
 	 * 
-	 * @return - scorePlayerOne - score of Player Two
+	 * @return - scorePlayernTwo - score of Player Two
 	 */
 
 	public int getScorePlayerTwo() {
