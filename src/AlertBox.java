@@ -198,7 +198,9 @@ public class AlertBox {
 		ScrollPane howToPlayPane = new ScrollPane();
 		Button cancelButton = new Button("Cancel");
 		howToPlayPane.setPadding(new Insets(10, 10, 10, 10));
-		howToPlay.setText("HOW TO PLAY:" + "\n\nPlayer One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
+		howToPlay.setText(
+				"HOW TO PLAY:\n\n" 
+				+ "Player One goes first.\n\n" + "Drag and drop tiles on the board.\n\n"
 				+ "When you are finished, type the word in the text box.\n\n"
 				+ "Press Confirm Word button to play the word.\n\n"
 				+ "Confirm Word button automatically changes turn.\n\n"
@@ -206,7 +208,8 @@ public class AlertBox {
 				+ "Press Fofriet Turn button to forfeit current player's turn.\n\n"
 				+ "Press Reset button to reset the game.\n\n\n"
 
-				+ "RULES:\n\n" + "1. Only submit the one word you intended to make by actually playing \n"
+				+ "RULES:\n\n" 
+				+ "1. Only submit the one word you intended to make by actually playing \n"
 				+ "the word on the board. The game only accepts one word- the one you played.\n\n"
 				+ "2. There are only 98 tiles, we have removed the two blank tiles.\n\n"
 				+ "3. First turn must start from the center tile and can be in any direction.\n\n"
@@ -223,7 +226,12 @@ public class AlertBox {
 				+ "  b. If the current player plays an incorrect word.\n\n"
 				+ "  b. If the current player forfeits their turn.\n\n"
 				+ "  c. If the current player plays a word without using atleast a tile for their rack.\n\n"
-				+ "  d. If the current player plays a word without using atleast a tile from existing rack."
+				+ "  d. If the current player plays a word without using atleast a tile from existing rack.\n\n\n"
+				
+				+ "DISCLAIMER:\n\n "
+				+ "This is a two persons game. We have considered many situations where a player\n"
+				+ "may try to cheat. But we expect the actual players to check each other in \n"
+				+ "case an unforseen situation may arise."
 
 		);
 
