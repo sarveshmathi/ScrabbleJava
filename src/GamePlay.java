@@ -492,7 +492,7 @@ public class GamePlay {
 			enteredWord.setText("Enter a word.");
 		} else if (!onlyEnglishAlphabet) {
 			enteredWord.setText("English alphabets only.");
-		} else // all filters passed
+		} else // basic filters passed
 		{
 			wordToTest = playedWord;
 			String status = "";
@@ -547,10 +547,6 @@ public class GamePlay {
 					status = "Incorrect Word";
 					points = "0";
 
-//					int playerTwoScore = player2.score;
-//					scorePlayerTwo.setText("" + playerTwoScore);
-//					totalScorePlayerTwo = "" + playerTwoScore;
-
 					this.showStatus(wordToTest, status, points);
 
 					playerOne.fire();
@@ -559,20 +555,12 @@ public class GamePlay {
 					status = "Words Mismatch";
 					points = "0";
 
-//					int playerTwoScore = player2.score;
-//					scorePlayerTwo.setText("" + playerTwoScore);
-//					totalScorePlayerTwo = "" + playerTwoScore;
-
 					this.showStatus(wordToTest, status, points);
 				}
 
 				else if (currentScore == -888) {
 					status = "Words placement error";
 					points = "0";
-
-//					int playerTwoScore = player2.score;
-//					scorePlayerTwo.setText("" + playerTwoScore);
-//					totalScorePlayerTwo = "" + playerTwoScore;
 
 					this.showStatus(wordToTest, status, points);
 					playerOne.fire();
