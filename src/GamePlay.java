@@ -102,6 +102,28 @@ public class GamePlay {
 
 		this.buildLayout();
 	}
+	
+	/**
+	 * This returns score of Player One.
+	 * 
+	 * @return - scorePlayerOne - score of Player One
+	 */
+
+	public int getScorePlayerOne() {
+		int scorePlayerOne = Integer.parseInt(totalScorePlayerOne);
+		return scorePlayerOne;
+	}
+	
+	/**
+	 * This returns score of Player Two.
+	 * 
+	 * @return - scorePlayerOne - score of Player Two
+	 */
+
+	public int getScorePlayerTwo() {
+		int scorePlayerTwo = Integer.parseInt(totalScorePlayerTwo);
+		return scorePlayerTwo;
+	}
 
 	/**
 	 * This method builds the layout for the actual game.
@@ -722,15 +744,7 @@ public class GamePlay {
 		totalScorePlayerOne = "0";
 		totalScorePlayerTwo = "0";
 	}
-
-	public int getScorePlayerOne() {
-		int scorePlayerOne = Integer.parseInt(totalScorePlayerOne);
-		return scorePlayerOne;
-	}
-
-	public int getScorePlayerTwo() {
-		int scorePlayerTwo = Integer.parseInt(totalScorePlayerTwo);
-		return scorePlayerTwo;
-	}
+	
+	
 
 }
