@@ -283,20 +283,23 @@ public class GamePlay {
 			if (board.checkTogether() == true) {
 				if (playerOne.isSelected()) {
 					if (player1.rackletters.size() == 7) {
-						AlertBox.alertWithoutUserAction("Rack Not Used", "You must use the tile(s) from your rack.");
+						AlertBox.alertWithoutUserAction("Rack Not Used", "You must use atleast a tile from your rack.\n"
+								+ "You lose your turn.");
 					} else {
 						this.confirmWord();
 					}
 				} else if (playerTwo.isSelected()) {
 					if (player2.rackletters.size() == 7) {
-						AlertBox.alertWithoutUserAction("Rack Not Used", "You must use the tile(s) from your rack.");
+						AlertBox.alertWithoutUserAction("Rack Not Used", "You must use atleast a tile from your rack.\n"
+								+ "You lose your turn.");
 					} else {
 						this.confirmWord();
 					}
 				}
 				// this.confirmWord();
 			} else {
-				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.");
+				AlertBox.alertWithoutUserAction("Tiles Not Together", "The tiles are not together.\n"
+						+ "Try again.");
 			}
 
 			// this.confirmWord();

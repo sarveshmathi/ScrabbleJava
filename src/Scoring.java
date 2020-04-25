@@ -32,14 +32,16 @@ public class Scoring {
 		int tempTotalScore = scoreFaceValue(word, board, player);
 		if (tempTotalScore == 0) {
 			AlertBox.alertWithoutUserAction("Words Mismatch",
-					"The word that you typed is different from the word you played.");
+					"The word that you typed is different from the word you played.\n"
+					+ "Try again.");
 
 			finalPoints = -2;
 		}
 
 		else if (tempTotalScore == -888) {
 			AlertBox.alertWithoutUserAction("Current Tile Not Used",
-					"A new word made must use at least a tile from existing board.");
+					"A new word made must use at least a tile from existing board.\n"
+					+ "You lose the turn.");
 
 			finalPoints = -888;
 
@@ -48,7 +50,8 @@ public class Scoring {
 		else {
 			if (!OnlineDictionary.checkWord(word)) {
 				AlertBox.alertWithoutUserAction("Incorrect Word",
-						word.toUpperCase() + " is not a valid word in Scrabble Dictionary.");
+						word.toUpperCase() + " is not a valid word in Scrabble Dictionary.\n"
+								+ "You lose the turn.");
 
 				player.score -= tempTotalScore;
 				finalPoints = -1;
