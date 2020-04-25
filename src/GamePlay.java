@@ -26,6 +26,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
+/**
+ * This class coordinates the actual play of the game. It builds the layout and UI for the gameplay.
+ * It also handles the player's actions such as confirming the played word, forfeiting their turn,
+ * resetting the game and ending the game.
+ * 
+ * @author Team 51
+ *
+ */
 public class GamePlay {
 
 	private String totalScorePlayerOne;
@@ -68,7 +76,7 @@ public class GamePlay {
 	private LetterBag letterBag;
 
 	/**
-	 * This gets the actual game screen when you click start running.
+	 * This constructs a game.
 	 * 
 	 */
 
