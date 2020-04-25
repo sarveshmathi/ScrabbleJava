@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * This class carries out scoring for the game.
  *
@@ -11,6 +13,7 @@ public class Scoring {
 	boolean mouseOn = false;// checks if the word is made by at least 1 new piece
 	boolean mouseOff = false; // at least one letter has to be on board already
 	int counterCall = 0;
+	ArrayList<LetterTilePicture> usedup = new ArrayList<LetterTilePicture>();
 
 	/**
 	 * This method receives the word input by the player and determines if it is a
@@ -54,7 +57,10 @@ public class Scoring {
 			else {
 
 				finalPoints = tempTotalScore;
-				board.turnOffDrag();
+				for (LetterTilePicture lp : usedup) {
+					lp.setMouseTransparent(true);
+				}
+				// board.turnOffDrag();
 				counterCall++;
 			}
 		}
@@ -279,6 +285,7 @@ public class Scoring {
 	 */
 	public int isWordPresent(BoardTile[][] board2D, String word, int row, int column, int rowIncrement,
 			int columnIncrement) {
+		usedup.clear();
 		TWCounter = 0;// reset counters for how many triple words
 		DWCounter = 0;// reset counters
 		int turnPoints = 0;// points for this player's turn
@@ -299,6 +306,7 @@ public class Scoring {
 				return turnPoints;
 			} else {
 				turnPoints += pointCall(board2D[searchRow][searchColumn]);// get the points
+				usedup.add(board2D[searchRow][searchColumn].holds);
 				searchColumn += columnIncrement;
 				searchRow += rowIncrement;
 			}
