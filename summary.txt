@@ -10,5 +10,5 @@ Work breakdown summary:
 
 Lourdes M Torrejon - Learning JavaFX, building the display board, writing the game play logic, scoring methods for parsing the board,user mouse control actions
 Aayush Rijal - Learning JavaFX, writing game play logic, UI modifications, cleaning up code, bug checking, error handling, user alert boxes, game display, main menu page
-Sarvesh Mathi - Base game logic, online dictionary checking using jsoup, JUnit tests
+Sarvesh Mathi - Base game logic, online dictionary checking using jsoup, README, distribution/creation of the classes, JUnit tests
 
